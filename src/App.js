@@ -5,6 +5,10 @@ function App() {
   return (
     <div className="App">
       <Signup2 />
+      <Signup />
+      <SignIn />
+    
+    
     </div>
   );
 }
