@@ -1,31 +1,31 @@
 * {
-    /* margin: 0; */
+    margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
 }
 
 main {
     display: flex;
     width: 100%;
     justify-content: center;
-    /* align-items: center; */
-    /* border: red 5px solid; */
-
+    min-height: 100vh;
+    /* border: solid green 5px; */
 }
 
 #main {
-    width: 45%;
-    border: 1px solid #ccc;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    width: 50%;
     background-color: #fff;
-    margin-top: 1rem;
-    margin-left: 2rem;
-    /* border: red 5px solid; */
+    margin-top: 0;
 
 }
 
 section {
-    border: red 5px blue;
+
     width: 60%;
     margin-left: 4rem;
 
@@ -36,8 +36,6 @@ section {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    /* margin-left: 2rem; */
-
 }
 
 .form-container>div {
@@ -53,22 +51,20 @@ section {
 
 .company {
     display: block;
-    margin-bottom: 5px;
+    padding-top: 10px;
 }
 
 .company-input[type="text"],
 select {
     display: block;
-    width: 110%;
+    width: 100%;
     padding: 8px;
     border-radius: 5px;
     border: 1px solid #ccc;
     font-size: 17px;
     margin-top: 5px;
-    /* border: red 5px solid; */
 
 }
-
 
 .new-line {
     flex-basis: 100%;
@@ -81,7 +77,7 @@ select {
 
 .new-line input[type="email"] {
     display: block;
-    width: 107%;
+    width: 100%;
     padding: 8px;
     border-radius: 5px;
     border: 1px solid #ccc;
@@ -98,7 +94,7 @@ select {
     justify-content: flex-start;
     align-items: center;
     margin: 0;
-    /* border: solid 5px red; */
+
 }
 
 .third-container label {
@@ -111,23 +107,17 @@ select {
     padding: 9.4px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    width: 179px;
-    /* max-width: 100px; */
+    width: 185px;
     font-size: 16px;
-    /* border: solid 5px red; */
 
 }
 
 .state {
     margin-left: 20px;
-    /* border: solid 5px red; */
-
 }
 
 .select-state {
     margin-left: 0;
-    /* border: solid 5px yellow; */
-
 }
 
 
@@ -136,7 +126,6 @@ select {
     justify-content: flex-start;
     align-items: center;
     margin-top: 20px;
-    /* border: solid 5px red; */
 }
 
 .third-container label {
@@ -149,29 +138,18 @@ select {
     padding: 9.4px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    width: 179px;
-    /* max-width: 100px; */
+    width: 185px;
     font-size: 16px;
-    /* border: solid 5px red; */
-
 }
 
 .state2 {
     margin-left: 20px;
-    /* border: solid 5px red; */
 
 }
 
 .select-state2 {
     margin-left: 0;
-
-    /* border: solid 5px yellow; */
-
 }
-
-
-
-
 
 .back-Button {
     background-color: #b3b3b3;
@@ -235,7 +213,6 @@ select {
 
 }
 
-
 .submit-Button {
     background: #3E45EB;
 }
@@ -278,18 +255,14 @@ h2 {
     font-weight: 700;
     font-size: 20px;
     line-height: 32px;
-    margin: 0;
-
+    margin-bottom: 11px;
 }
 
 .signup-image {
-    width: 40%;
+    width: 50%;
     margin-left: 0.01rem;
-    margin-top: 1em;
+    margin-top: 0;
     background-image: url('./images/Image-holder.svg');
-    background-size: contain;
-    background-repeat: no-repeat;
-
-
-
+    background-size: cover;
+    background-position: bottom;
 }

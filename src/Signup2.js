@@ -7,25 +7,27 @@ function Signup2() {
       <main>
         <div id="main">
           <section>
+            <h3>This part contains the Logic</h3>
             <h2>Create an account</h2>
             <p>Welcome to view</p>
-
             <div className="form-container">
               <div>
-                <label className="company" htmlFor="hello-input">
+                <label className="company" For="company-input">
                   Company Name
                 </label>
                 <input
                   className="company-input"
                   type="text"
-                  id="hello-input"
+                  id="company-input"
                   name="Company name"
                 />
               </div>
               <div>
-                <label htmlFor="fruit-input">Business Type</label>
-                <select id="fruit-input" name="Business Type">
-                  <option value="select">select option</option>
+                <label className="company" htmlFor="Business-input">
+                  Business Type
+                </label>
+                <select id="Business-input" name="Business Type">
+                  <option value="select">--select option--</option>
                   <option value="Software engineer">Software Engineer</option>
                   <option value="farmer">Farmer</option>
                   <option value="entrepreneur">Entrepreneur</option>
@@ -42,15 +44,15 @@ function Signup2() {
               <div id="country">
                 <label htmlFor="country">Country:</label>
                 <select name="country" id="country">
-                  <option value="usa">select option</option>
+                  <option value="usa">--select option--</option>
                   <option value="canada">Nigeria</option>
                   <option value="mexico">Mexico</option>
                 </select>
               </div>
               <div className="state">
-                <label htmlFor="state">State:</label>
+                <label htmlFor="state">State</label>
                 <select className="select-state" name="state" id="state">
-                  <option value="ny">select option</option>
+                  <option value="ny">--select option--</option>
                   <option value="ca">Edo</option>
                   <option value="tx">TX</option>
                 </select>
