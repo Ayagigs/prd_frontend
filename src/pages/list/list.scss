@@ -1,0 +1,45 @@
+.list {
+  display: flex;
+  margin-top: 12px;
+  width: 100%;
+
+  .listContainer {
+    flex: 6;
+    background-color:#F5F5F5;
+    
+  }
+  
+}
+
+.searchemp {
+  margin: 10px 10px;
+  display: flex;
+  padding: 14px 16px;
+  gap: 10px;
+  width: 307px;
+  height: 10px;
+  left: 0px;
+  top: 0px;
+  
+  background: #FFFFFF;
+  border: 0.5px solid #999999;
+  border-radius: 8px;
+}
+
+
+input {
+  border: none;
+  outline: none;
+  background: transparent;
+  width: 308px;
+  height: 22px;
+  font-family: 'Satoshi';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+
+  &::placeholder {
+    font-size: 16px;
+  }
+}
