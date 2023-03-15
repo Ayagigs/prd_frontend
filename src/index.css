@@ -1,0 +1,203 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+*{
+  padding: 0px;
+  margin: 0px;
+  font-family: 'Poppins', sans-serif;
+  box-sizing: border-box;
+  overflow-y: hidden;
+
+}
+.wrapper{
+  display: flex;
+  height: 100vh;
+}
+.leftWrapper{
+  width: 55%;
+  height: 100%;
+  padding: 60px 200px;
+  padding-left: 100px;
+}
+
+.stepperWrapper{
+  display: flex;
+  flex-direction: column;
+  row-gap: 30px;
+}
+.stepperCardWrapper{
+  display: flex;
+  align-items: center;
+  column-gap: 20px;
+}
+.formWrapper h1{
+  font-size: 30px;
+}
+.formWrapper p{
+  font-size: 15px;
+}
+.stepperCard{
+  display: flex;
+  column-gap: 5px;
+  align-items: center;
+}
+.number{
+  display: flex;
+  align-items: center;
+}
+.line{
+  width: 25px;
+  height: 2px;
+  background-color: gray;
+}
+.number p{
+  background-color: white;
+  color: gray;
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border-radius: 100%;
+  font-size: 13px;
+  border: 1.5px solid gray;
+}
+
+.active .number p{
+  border: 1.5px solid #3E45EB;
+  background-color: #3E45EB;
+  color: white;
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border-radius: 100%;
+}
+.active .line{
+  width: 20px;
+  height: 2px;
+  background-color: #3E45EB;
+}
+.active p{
+  color: #3E45EB;
+}
+.stepperCard p{
+  font-size: 13px;
+}
+.formWrapper{
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+}
+form{
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+}
+.inputWrapper{
+  display: flex;
+  flex-direction: column;
+  row-gap: 3px;
+  width: 100%;
+}
+.inputWrapper label{
+  font-size: 13px;
+}
+.inputWrapper input{
+  padding: 8px 10px;
+  border-radius: 7px;
+  border:  1px solid gray;
+  outline: none;
+}
+.inputWrapper input:focus{
+  border: 1.5px solid #3E45EB;
+}
+.inputWrapper select{
+  padding: 8px 10px;
+  border-radius: 7px;
+  border:  1px solid gray;
+  outline: none;
+}
+.inputWrapper select:focus{
+  border: 1.5px solid #3E45EB;
+}
+.buttonWrapper{
+  display: flex;
+  justify-content: right;
+  column-gap: 10px;
+}
+.buttonWrapper button{
+  cursor: pointer;
+}
+.buttonWrapper button:nth-child(1){
+  padding: 12px 24px;
+  color: #3E45EB;
+  font-size: 14px;
+  width: 120px;
+  height: 43px;
+  background: #E7E8FF;
+  border-radius: 8px;
+  border: 0px;
+
+}
+.buttonWrapper button:nth-child(2){
+  width: 120px;
+  height: 43px;
+  background: #3E45EB;
+  border-radius: 8px;
+  color: white;
+  font-size: 14px;
+  border: 0px;
+}
+.signin{
+  text-align: center;
+  font-size: 13px;
+}
+.signin a{
+  text-decoration: none;
+  font-size: 13.5px;
+  color: #3E45EB;
+}
+.backhome{
+  text-decoration: none;
+  font-size: 14px;
+  color: #3E45EB;
+  display: flex;
+  align-items: center;
+}
+.backhome svg{
+  font-size: 20px;
+}
+.rightWrapper{
+  width: 45%;
+  background-color: #3E45EB;
+}
+.rightWrapper img{
+  width: 100%;
+  height: 100%;
+}
+.hide{
+  display: none;
+}
+.inputHolder{
+  display: flex;
+  column-gap: 8px;
+}
+.inputHolder .inputWrapper{
+  width: 50%;
+}
+.formWrapper .terms{
+  margin-bottom: 40px;
+}
+.formWrapper .terms{
+  font-size: 14px;
+}
+.terms a{
+  text-decoration: none;
+  color: #3E45EB;
+}
+
+form .checkboxWrapper{
+  display: flex;
+  column-gap: 5px;
+  font-size: 14px;
+  margin-bottom: 108px;
+}
