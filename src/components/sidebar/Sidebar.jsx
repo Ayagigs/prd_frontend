@@ -9,7 +9,7 @@ import { EmptyWallet } from 'iconsax-react';
 import { Link } from "react-router-dom";
 // import { DarkModeContext } from "../../context/darkModeContext";
 // import { useContext } from "react";
-import Image from "./logo.png"
+// import Image from "./logo.png"
 
 const Sidebar = () => {
   // const { dispatch } = useContext(DarkModeContext);
@@ -17,23 +17,23 @@ const Sidebar = () => {
     <div className="sidebar">
       <div className="top">
       <span className="logo">View</span>
-      <img
+      {/* <img
               src="src\components\sidebar\logo.png"
               alt=""
               className="avatar"
-            />
+            /> */}
       </div>
       <hr />
       <div className="center">
         <ul>
           <li>
           <Link to="/" style={{ textDecoration: "none" }}>
-          <span className="logo"></span>
           <Home className="icon" variant="Outline" />
+          <span className="logo"></span>
             <span>Home</span>
-        </Link>
-            
+        </Link> 
           </li>
+
           <Link to="/employee" style={{ textDecoration: "none" }}>
             <li>
               <Profile2User className="icon" variant="Outline" />

@@ -7,6 +7,7 @@
   font-size: 14px;
   color: #555;
   background-color: #FFFFFF;
+  z-index: 1;
 
   .wrapper {
     width: 100%;
@@ -60,6 +61,10 @@
         align-items: center;
         margin-right: 80px;
         position: relative;
+
+        .profile {
+          padding-left: 10px;
+        }
 
         .icon {
           font-size: 20px;

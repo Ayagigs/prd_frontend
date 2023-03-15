@@ -13,6 +13,7 @@ border-left: 0;
     display: flex;
     align-items: center;
     justify-content: center;
+    
 
     .logo {
       width: 59px;
@@ -53,7 +54,7 @@ border-left: 0;
 
       li {
         flex-direction: row;
-        align-items: center;
+        align-items: flex-start;
         padding: 14px 24px;
         gap: 16px;
         width: 180px;
