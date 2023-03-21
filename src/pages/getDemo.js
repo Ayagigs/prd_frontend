@@ -37,7 +37,7 @@ function GetDemo() {
             <div className="policy">
               {" "}
               Before you submit this form submitting check if you agree with the
-              company’s <a href="#">Privacy Policy</a>{" "}
+              company’s <a href="/demo">Privacy Policy</a>{" "}
             </div>{" "}
             <button className="btn">Request a demo</button>{" "}
             <p className="demo_last_text">
