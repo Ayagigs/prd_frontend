@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
-.wrapper{
+.wrapper {
     padding: 0px;
     margin: 0px;
     box-sizing: border-box;
@@ -9,44 +9,44 @@
   display: flex;
   height: 100vh;
 }
-.leftWrapper{
+.wrapper .leftWrapper{
   width: 55%;
   height: 100%;
   padding: 60px 200px;
   padding-left: 100px;
 }
 
-.stepperWrapper{
+.wrapper .stepperWrapper{
   display: flex;
   flex-direction: column;
   row-gap: 30px;
 }
-.stepperCardWrapper{
+.wrapper .stepperCardWrapper{
   display: flex;
   align-items: center;
   column-gap: 20px;
 }
-.formWrapper h1{
+.wrapper .formWrapper h1{
   font-size: 30px;
 }
-.formWrapper p{
+.wrapper .formWrapper p{
   font-size: 15px;
 }
-.stepperCard{
+.wrapper .stepperCard{
   display: flex;
   column-gap: 5px;
   align-items: center;
 }
-.number{
+.wrapper .number{
   display: flex;
   align-items: center;
 }
-.line{
+.wrapper .line{
   width: 25px;
   height: 2px;
   background-color: gray;
 }
-.number p{
+.wrapper .number p{
   background-color: white;
   color: gray;
   width: 28px;
@@ -58,7 +58,7 @@
   border: 1.5px solid gray;
 }
 
-.active .number p{
+.wrapper .active .number p{
   border: 1.5px solid #3E45EB;
   background-color: #3E45EB;
   color: white;
@@ -68,63 +68,63 @@
   place-items: center;
   border-radius: 100%;
 }
-.active .line{
+.wrapper .active .line{
   width: 20px;
   height: 2px;
   background-color: #3E45EB;
 }
-.active p{
+.wrapper .active p{
   color: #3E45EB;
 }
-.stepperCard p{
+.wrapper .stepperCard p{
   font-size: 13px;
 }
-.formWrapper{
+.wrapper .formWrapper{
   display: flex;
   flex-direction: column;
   row-gap: 20px;
 }
-.formWrapper form{
+.wrapper .formWrapper form{
   display: flex;
   flex-direction: column;
   row-gap: 10px;
 }
-.inputWrapper{
+.wrapper .inputWrapper{
   display: flex;
   flex-direction: column;
   row-gap: 3px;
   width: 100%;
 }
-.inputWrapper label{
+.wrapper .inputWrapper label{
   font-size: 13px;
 }
-.inputWrapper input{
+.wrapper .inputWrapper input{
   padding: 8px 10px;
   border-radius: 7px;
   border:  1px solid gray;
   outline: none;
 }
-.inputWrapper input:focus{
+.wrapper .inputWrapper input:focus{
   border: 1.5px solid #3E45EB;
 }
-.inputWrapper select{
+.wrapper .inputWrapper select{
   padding: 8px 10px;
   border-radius: 7px;
   border:  1px solid gray;
   outline: none;
 }
-.inputWrapper select:focus{
+.wrapper .inputWrapper select:focus{
   border: 1.5px solid #3E45EB;
 }
-.buttonWrapper{
+.wrapper .buttonWrapper{
   display: flex;
   justify-content: right;
   column-gap: 10px;
 }
-.buttonWrapper button{
+.wrapper .buttonWrapper button{
   cursor: pointer;
 }
-.buttonWrapper button:nth-child(1){
+.wrapper .buttonWrapper button:nth-child(1){
   padding: 12px 24px;
   color: #3E45EB;
   font-size: 14px;
@@ -135,7 +135,7 @@
   border: 0px;
 
 }
-.buttonWrapper button:nth-child(2){
+.wrapper .buttonWrapper button:nth-child(2){
   width: 120px;
   height: 43px;
   background: #3E45EB;
@@ -144,62 +144,62 @@
   font-size: 14px;
   border: 0px;
 }
-.signin{
+.wrapper .signin{
   text-align: center;
   font-size: 13px;
 }
-.signin a{
+.wrapper .signin a{
   text-decoration: none;
   font-size: 13.5px;
   color: #3E45EB;
 }
-.backhome{
+.wrapper .backhome{
   text-decoration: none;
   font-size: 14px;
   color: #3E45EB;
   display: flex;
   align-items: center;
 }
-.backhome svg{
+.wrapper .backhome svg{
   font-size: 20px;
 }
-.rightWrapper{
+.wrapper .rightWrapper{
   width: 45%;
   background-color: #3E45EB;
 }
-.rightWrapper img{
+.wrapper .rightWrapper img{
   width: 100%;
   height: 100%;
 }
-.hide{
+.wrapper .hide{
   display: none;
 }
-.inputHolder{
+.wrapper .inputHolder{
   display: flex;
   column-gap: 8px;
 }
-.inputHolder .inputWrapper{
+.wrapper .inputHolder .inputWrapper{
   width: 50%;
 }
-.formWrapper .terms{
+.wrapper .formWrapper .terms{
   margin-bottom: 40px;
 }
-.formWrapper .terms{
+.wrapper .formWrapper .terms{
   font-size: 14px;
 }
-.terms a{
+.wrapper .terms a{
   text-decoration: none;
   color: #3E45EB;
 }
 
-form .checkboxWrapper{
+.wrapper form .checkboxWrapper{
   display: flex;
   column-gap: 5px;
   font-size: 14px;
   margin-bottom: 108px;
 }
 
-.signinDiv{
+.wrapper .signinDiv{
     position: fixed;
     width: 100%;
     top: 0px;
@@ -211,6 +211,6 @@ form .checkboxWrapper{
     align-items: center;
     z-index: 20;
   }
-  .hide{
+  .wrapper   .hide{
     display: none;
   }

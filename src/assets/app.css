@@ -331,7 +331,7 @@ nav.scrolled{
   width: 100%;
 }
 
-aside.hero-dashboard-sidebar{
+.aside.hero-dashboard-sidebar{
   position: sticky;
   top: 0;
   left: 0;
