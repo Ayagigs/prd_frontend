@@ -18,7 +18,7 @@ const Hero = () => {
                 <h3>We assist businesses scale positive, and increase employee engagement, output, and retention.</h3>
             </header>
             <div className="hero-links-container">
-                <Link className="get-started-link">Get started</Link>
+                <Link className="get-started-link" to={'/register'}>Get started</Link>
                 <Link className='login-link'>Request a demo</Link>
             </div>
             <img src={heroUserProfileImg} alt="" className="heroUserProfileImg" />
