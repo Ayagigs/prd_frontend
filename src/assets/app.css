@@ -375,7 +375,21 @@ aside.hero-dashboard-sidebar{
 .hero-dashboard-sidebar .sidebar-link.active h2{
   color: #3E45EB;
 }
-
+.signinDiv{
+  position: fixed;
+  width: 100%;
+  top: 0px;
+  height: 100vh;
+  background-color: rgba(173, 173, 173, 0.611);
+  backdrop-filter: blur(2px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 20;
+}
+.hide{
+  display: none;
+}
 .clients-section{
   margin-top: calc(var(--hero-dashboard-height)/2);
   background-color: #F9F9F9;

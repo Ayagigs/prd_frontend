@@ -1,14 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
-*{
-  padding: 0px;
-  margin: 0px;
-  font-family: 'Poppins', sans-serif;
-  box-sizing: border-box;
-  overflow-y: hidden;
-
-}
 .wrapper{
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+    overflow-y: hidden;
+    font-family: 'Poppins', sans-serif;
   display: flex;
   height: 100vh;
 }
@@ -87,7 +84,7 @@
   flex-direction: column;
   row-gap: 20px;
 }
-form{
+.formWrapper form{
   display: flex;
   flex-direction: column;
   row-gap: 10px;
@@ -201,3 +198,19 @@ form .checkboxWrapper{
   font-size: 14px;
   margin-bottom: 108px;
 }
+
+.signinDiv{
+    position: fixed;
+    width: 100%;
+    top: 0px;
+    height: 100vh;
+    background-color: rgba(173, 173, 173, 0.611);
+    backdrop-filter: blur(2px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 20;
+  }
+  .hide{
+    display: none;
+  }

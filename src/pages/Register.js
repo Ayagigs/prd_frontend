@@ -4,8 +4,11 @@ import { useState } from "react"
 import {BsCheck} from "react-icons/bs"
 import '../assets/register.css'
 import { NavLink } from "react-router-dom"
+import SignIn from "./SignIn"
+
 const Register = () => {
     const [currentpage, setCurrentPage] = useState(1)
+    const [popup, setPopup] = useState(false)
     
     return<>
         <div className="wrapper">
@@ -144,7 +147,7 @@ const Register = () => {
                         <button onClick = {() => setCurrentPage(currentpage < 3 ? currentpage + 1 : 3)}>Next</button>
                     </div>
 
-                    <p className="signin">I would rather <a href="/">Sign In</a></p>
+                    <p className="signin" onClick={()=> setPopup(true)}>I would rather <NavLink>Sign In</NavLink></p>
 
                     <NavLink to="/" className="backhome"><BiChevronLeft/> Back home</NavLink>
                     
@@ -155,6 +158,13 @@ const Register = () => {
             <div className="rightWrapper">
                 <img src={image} alt="" />
             </div>
+
+            
+            <div className={popup ? "signinDiv" : "hide"} onClick={() => setPopup(false)}>
+            </div>
+            {
+                popup ? <SignIn className="signinpopup"/> : undefined
+            }
         </div>
     </>
 

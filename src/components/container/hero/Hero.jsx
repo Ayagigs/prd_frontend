@@ -9,6 +9,7 @@ import herodashboard from '../../../assets/img/landing-image-1.png'
 
 
 const Hero = () => {
+
     return (
         <section className='hero-section'>
             <img src={heroDashboardImg} alt="" className="heroDashboardImg" />
@@ -19,12 +20,13 @@ const Hero = () => {
             </header>
             <div className="hero-links-container">
                 <Link className="get-started-link" to={'/register'}>Get started</Link>
-                <Link className='login-link'>Request a demo</Link>
+                <Link className='login-link' to={'/demo'}>Request a demo</Link>
             </div>
             <img src={heroUserProfileImg} alt="" className="heroUserProfileImg" />
             <img src={heroGraphImg} alt="" className="heroGraphImg" />
             <img src={herodashboard} alt="" className="hero-dashboard-img"/>
         </section>
+
     );
 }
 
