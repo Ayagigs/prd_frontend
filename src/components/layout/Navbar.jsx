@@ -3,9 +3,12 @@ import logo from '../../assets/img/logo.svg'
 import viewLogo from '../../assets/img/blue view logo.svg'
 import navbarLinks from '../../data/navbarLinks';
 import UseScroll from '../../useScroll';
+import SignIn from '../../pages/SignIn';
+import { useState } from 'react';
 
 const Navbar = () => {
     const { scrollPosition } = UseScroll()
+    const [popup, setPopup] = useState(false)
     return (
         <nav className={`navbar ${scrollPosition >= 600 ? 'scrolled' : ''}`}>
             <div className="navbar-container">
@@ -31,10 +34,17 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className='login-links-container'>
-                    <Link to={'/'} className={`login-link ${scrollPosition >= 600 ? 'scrolled' : ''}`}>Login</Link>
-                    <Link to={'/'} className={`demo-link ${scrollPosition >= 600 ? 'scrolled' : ''}`}>Request a demo</Link>
+                    <Link onClick={()=> setPopup(true)} className={`login-link ${scrollPosition >= 600 ? 'scrolled' : ''}`}>Login</Link>
+                    <Link to={'/demo'} className={`demo-link ${scrollPosition >= 600 ? 'scrolled' : ''}`}>Request a demo</Link>
                 </div>  
             </div>
+            
+
+            <div className={popup ? "signinDiv" : "hide"} onClick={() => setPopup(false)}>
+            </div>
+            {
+                popup ? <SignIn className="signinpopup"/> : undefined
+            }
         </nav>
     );
 }
