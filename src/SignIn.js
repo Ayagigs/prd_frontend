@@ -1,5 +1,20 @@
 import React, { useState } from "react";
 import "./SignIn.css";
+import firebase from "firebase/compat/app";
+import "firebase/compat/auth";
+
+// Replace the following with Aya-Pms Firebase config
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_AUTH_DOMAIN",
+  projectId: "YOUR_PROJECT_ID",
+  storageBucket: "YOUR_STORAGE_BUCKET",
+  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+  appId: "YOUR_APP_ID",
+};
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
 
 function SignIn() {
   const [companyId, setCompanyId] = useState("");
@@ -19,7 +34,18 @@ function SignIn() {
   };
 
   const handleGoogleSignIn = () => {
-    // Your sign-in with Google logic here
+    const provider = new firebase.auth.GoogleAuthProvider();
+    firebase
+      .auth()
+      .signInWithPopup(provider)
+      .then((result) => {
+        // Handle successful sign-in here
+        console.log(result);
+      })
+      .catch((error) => {
+        // Handle sign-in error here
+        console.log(error);
+      });
   };
 
   return (
