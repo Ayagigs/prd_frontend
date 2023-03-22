@@ -1,5 +1,7 @@
 import React from 'react';
 import './assets/app.css';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 import { Home1 } from './pages';
 import { MainContent } from './components';
 import Register from './pages/Register';
@@ -27,6 +29,7 @@ function App() {
   return (
     <div className={darkMode ? 'app dark' : 'app'}>
       <BrowserRouter>
+        <ToastContainer />
         <Routes>
           <Route path="/" element={<Home1 />}>
             <Route index element={<MainContent />} />
