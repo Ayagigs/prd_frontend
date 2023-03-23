@@ -32,7 +32,7 @@
 }
 
 .code-input input {
-    width: 50px;
+    width: 50px !important;
     height: 50px;
     font-size: 24px;
     text-align: center;

@@ -1,12 +1,22 @@
 import React, { useState } from "react";
 import "../style/Email.css";
+import OtpInput from 'react-otp-input';
 
 function Form() {
-  const [code, setCode] = useState("");
+  const [code, setCode] = useState({
+    code1: '',
+    code2: '',
+    code3: '',
+    code4: '',
+    code5: ''
+  });
+  
+  const [otp, setOtp] = useState('');
   const email = "adebisi@gmail.com"; // this email will be replaced with the actual email address
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    console.log(otp)
     // this is the send OTP verification request to API service
   };
 
@@ -20,46 +30,14 @@ function Form() {
       <div className="instructions">Please enter the code sent to {email}</div>
       <form onSubmit={handleSubmit}>
         <div className="code-input">
-          <input
-            type="text"
-            value={code}
-            onChange={(event) => setCode(event.target.value)}
-            maxLength="1"
-            pattern="[0-9]*"
-            required
-          />
-          <input
-            type="text"
-            value={code}
-            onChange={(event) => setCode(event.target.value)}
-            maxLength="1"
-            pattern="[0-9]*"
-            required
-          />
-          <input
-            type="text"
-            value={code}
-            onChange={(event) => setCode(event.target.value)}
-            maxLength="1"
-            pattern="[0-9]*"
-            required
-          />
-          <input
-            type="text"
-            value={code}
-            onChange={(event) => setCode(event.target.value)}
-            maxLength="1"
-            pattern="[0-9]*"
-            required
-          />
-          <input
-            type="text"
-            value={code}
-            onChange={(event) => setCode(event.target.value)}
-            maxLength="1"
-            pattern="[0-9]*"
-            required
-          />
+        <OtpInput
+          value={otp}
+          onChange={setOtp}
+          numInputs={5}
+          renderSeparator={<span>&nbsp; &nbsp;</span>}
+          renderInput={(props) => <input {...props} />}
+          className="otp"
+        />
         </div>
         <button type="submit">Verify</button>
       </form>
