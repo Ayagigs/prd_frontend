@@ -1,6 +1,8 @@
 .navbar1 {
-  height: 81px;
+  position: fixed;
+  height: 93px;
   width: 1440px;
+  top: 0px;
   border-bottom: 0.5px solid rgb(231, 228, 228);
   display: flex;
   align-items: center;
@@ -9,7 +11,7 @@
   background-color: #FFFFFF;
   z-index: 1;
 
-  .wrapper {
+  .wrap {
     width: 100%;
     padding: 20px;
     display: flex;

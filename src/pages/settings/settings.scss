@@ -1,10 +1,14 @@
-.home1 .settings {
+.home1{
+  margin-top:100px;
+  margin-left: 250px;
     display: flex;
     margin-top: 12px;
     width: 100%;
-  
-    .settingsContainer {
+    // margin-left: 250px;
+
+    .homeContainer {
       flex: 6;
+      
     }
 }
 

@@ -1,7 +1,9 @@
 .list {
   display: flex;
-  margin-top: 12px;
+  margin-top: 92px;
+  margin-left: 250px;
   width: 100%;
+  z-index: 0;
 
   .listContainer {
     flex: 6;

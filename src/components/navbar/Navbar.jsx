@@ -8,7 +8,7 @@ const Navbar = () => {
 
   return (
     <div className="navbar1">
-      <div className="wrapper">
+      <div className="wrap">
         <div className="search">
         <SearchOutlinedIcon />
           <input type="text" 
