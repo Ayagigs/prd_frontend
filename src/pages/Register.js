@@ -7,10 +7,12 @@ import '../assets/register.css';
 import { NavLink } from 'react-router-dom';
 import SignIn from './SignIn';
 import { toast } from 'react-toastify';
+import Form from './Email';
 
 const Register = () => {
   const [currentpage, setCurrentPage] = useState(1);
   const [popup, setPopup] = useState(false);
+  const [otpScreen, setOtpScreen] = useState(false);
 
   const [formData, setFormData] = useState({
     firstName: '',
@@ -25,6 +27,7 @@ const Register = () => {
     state: '',
     numOfEmployees: '',
   });
+
 
   const handleInputChange = event => {
     const { name, value } = event.target;
@@ -48,8 +51,11 @@ const Register = () => {
       toast.error(error);
     }
   };
+
+  console.log(otpScreen)
   return (
     <>
+    
       <div className="wrapper">
         <div className="leftWrapper">
           <div className="stepperWrapper">
@@ -313,7 +319,7 @@ const Register = () => {
                     Next
                   </button>
                 ) : (
-                  <button type="submit">Submit</button>
+                  <button type="submit" onClick={() => setOtpScreen(true)}>Submit</button>
                 )}
               </div>
 
@@ -332,9 +338,13 @@ const Register = () => {
           <img src={image} alt="" />
         </div>
 
+        {
+          otpScreen ? <Form/> : undefined
+        }
         <div
-          className={popup ? 'signinDiv' : 'hide'}
-          onClick={() => setPopup(false)}
+          className={popup || otpScreen ? 'signinDiv' : 'hide'}
+          onClick={() => {setPopup(false) 
+          setOtpScreen(false)}}
         ></div>
         {popup ? <SignIn className="signinpopup" /> : undefined}
       </div>
