@@ -1,9 +1,11 @@
 import React from 'react';
-import './assets/app.css'
-import { Home1 } from './pages'
+import './assets/app.css';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
+import { Home1 } from './pages';
 import { MainContent } from './components';
-import Register from "./pages/Register";
-import SignIn from "./pages/SignIn";
+import Register from './pages/Register';
+import SignIn from './pages/SignIn';
 import GetDemo from './pages/getDemo';
 import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
@@ -26,20 +28,26 @@ import Trial from './pages/trial/Trial';
 import Verify from './pages/verify/Verify';
 
 
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { productInputs, userInputs } from './formSource';
+import './style/dark.scss';
+import { useContext } from 'react';
+import { DarkModeContext } from './context/darkModeContext';
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
 
   return (
-    <div  className={darkMode ? "app dark" : "app"}>
+    <div className={darkMode ? 'app dark' : 'app'}>
       <BrowserRouter>
+        <ToastContainer />
         <Routes>
-          <Route path='/' element={<Home1 />}>
-              <Route index element={<MainContent />}/>
+          <Route path="/" element={<Home1 />}>
+            <Route index element={<MainContent />} />
           </Route>
-          <Route path='register' element={<Register/>}/>
-          <Route path='signin' element={<SignIn />}/>
-          <Route path='demo' element={<GetDemo />}/>
+          <Route path="register" element={<Register />} />
+          <Route path="signin" element={<SignIn />} />
+          <Route path="demo" element={<GetDemo />} />
           <Route path="/">
             <Route path="login" element={<Login />} />
             <Route path="dashboard" element={<Home />} />
@@ -62,13 +70,12 @@ function App() {
             </Route>
             <Route path="performance">
               <Route index element={<Performance />} />
-              
             </Route>
             <Route path="settings">
               <Route index element={<Settings />} />
             </Route>
             <Route path="wallet">
-            <Route index element={<Wallet />} />
+              <Route index element={<Wallet />} />
             </Route>
           </Route>
         </Routes>
@@ -77,4 +84,4 @@ function App() {
   );
 }
 
-export default App
+export default App;
