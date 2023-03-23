@@ -18,15 +18,8 @@ import Settings from "./pages/settings/Settings";
 import Wallet from "./pages/wallet/Wallet";
 import Bulk from "./pages/bulk/Bulk";
 import Singleadd from "./pages/singleadd/Singleadd";
-
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { productInputs, userInputs } from "./formSource";
-import "./style/dark.scss";
-import { useContext } from "react";
-import { DarkModeContext } from "./context/darkModeContext";
 import Trial from './pages/trial/Trial';
 import Verify from './pages/verify/Verify';
-
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { productInputs, userInputs } from './formSource';
