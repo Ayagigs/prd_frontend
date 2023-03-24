@@ -57,10 +57,9 @@ const Register = () => {
   const handleSubmit = async event => {
     try {
       setIsLoading(true);
-      setOtpScreen(true)
 
       const res = await axios.post(
-        'http://localhost:3030/api/v1/admin/registeration',
+        'https://pms-jq9o.onrender.com/api/v1/admin/registeration',
         formData
       );
       // console.log(res.data.email);
@@ -71,7 +70,7 @@ const Register = () => {
       setOtpScreen(true);
     } catch (error) {
       setIsLoading(false);
-      // toast.error(error.response.data.message);
+      toast.error(error.response.data.message);
     }
   };
 

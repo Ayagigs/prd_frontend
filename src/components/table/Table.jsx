@@ -6,60 +6,33 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import Cookies from "js-cookie"
 
 const List = () => {
-  const rows = [
-    {
-      id: 1143155,
-      product: "Acer Nitro 5",
-      img: "https://m.media-amazon.com/images/I/81bc8mA3nKL._AC_UY327_FMwebp_QL65_.jpg",
-      customer: "John Smith",
-      date: "1 March",
-      amount: 785,
-      method: "Cash on Delivery",
-      status: "inactive",
-    },
-    {
-      id: 2235235,
-      product: "Playstation 5",
-      img: "https://m.media-amazon.com/images/I/31JaiPXYI8L._AC_UY327_FMwebp_QL65_.jpg",
-      customer: "Michael Doe",
-      date: "1 March",
-      amount: 900,
-      method: "Online Payment",
-      status: "inactive",
-    },
-    {
-      id: 2342353,
-      product: "Redragon S101",
-      img: "https://m.media-amazon.com/images/I/71kr3WAj1FL._AC_UY327_FMwebp_QL65_.jpg",
-      customer: "John Smith",
-      date: "1 March",
-      amount: 35,
-      method: "Cash on Delivery",
-      status: "active",
-    },
-    {
-      id: 2357741,
-      product: "Razer Blade 15",
-      img: "https://m.media-amazon.com/images/I/71wF7YDIQkL._AC_UY327_FMwebp_QL65_.jpg",
-      customer: "Jane Smith",
-      date: "1 March",
-      amount: 920,
-      method: "Online",
-      status: "inactive",
-    },
-    {
-      id: 2342355,
-      product: "ASUS ROG Strix",
-      img: "https://m.media-amazon.com/images/I/81hH5vK-MCL._AC_UY327_FMwebp_QL65_.jpg",
-      customer: "Harold Carol",
-      date: "1 March",
-      amount: 2000,
-      method: "Online",
-      status: "active",
-    },
-  ];
+  const [rows, setRows] = useState([])
+  const url = `https://pms-jq9o.onrender.com/api/v1/admin/findme`
+
+  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDA5ZDM5YTk4ODYwNDUzY2EwNzg4MzEiLCJyb2xlIjoiQWRtaW4iLCJjb21wYW55TmFtZSI6IkF5YSBMaW1pdGVkIiwiaWF0IjoxNjc5NjY1NjE0LCJleHAiOjE2Nzk3NTIwMTR9.HmoXpE55bD9vb27OgQ_8S2yYV3Sxoq4_887LKfp7E70'
+
+  
+  useEffect(() => {
+    axios.get(url, {headers: {Authorization: `Bearer ${token}`}})
+    .then(res => {
+      Cookies.set("companyID", res.data.data.adminUser._id)
+    })
+  }, []);
+  
+  const url2 = `https://pms-jq9o.onrender.com/api/v1/employee/employees/${Cookies.get('companyID')}`
+  useEffect(() => {
+    axios.get(url2, {headers: {Authorization: `Bearer ${token}`}})
+    .then(res => {
+      setRows(res.data.data)
+    })
+  }, []);
+
+  
   return (
     <TableContainer component={Paper} className="table">
       <Table sx={{ minWidth: 650, maxWidth: 1400 }} aria-label="simple table">
@@ -68,26 +41,26 @@ const List = () => {
             <TableCell className="tableCell">Employee ID</TableCell>
             <TableCell className="tableCell">Employee Name</TableCell>
             <TableCell className="tableCell">Email Address</TableCell>
-            <TableCell className="tableCell">Date joined</TableCell>
-            <TableCell className="tableCell">Achieved goals</TableCell>
-            <TableCell className="tableCell">Payment Method</TableCell>
+            <TableCell className="tableCell">Role</TableCell>
+            <TableCell className="tableCell">Gender</TableCell>
+            <TableCell className="tableCell">Department</TableCell>
             <TableCell className="tableCell">Status</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {rows.map((row) => (
-            <TableRow key={row.id}>
-              <TableCell className="tableCell">{row.id}</TableCell>
+            <TableRow key={row.employeeID}>
+              <TableCell className="tableCell">{row.employeeID}</TableCell>
               <TableCell className="tableCell">
                 <div className="cellWrapper">
-                  <img src={row.img} alt="" className="image" />
-                  {row.product}
+                  <img src={row.profilePhoto} alt="" className="image" />
+                  {row.firstName + " " + row.lastName}
                 </div>
               </TableCell>
-              <TableCell className="tableCell">{row.customer}</TableCell>
-              <TableCell className="tableCell">{row.date}</TableCell>
-              <TableCell className="tableCell">{row.amount}</TableCell>
-              <TableCell className="tableCell">{row.method}</TableCell>
+              <TableCell className="tableCell">{row.workEmail}</TableCell>
+              <TableCell className="tableCell">{row.role}</TableCell>
+              <TableCell className="tableCell">{row.gender}</TableCell>
+              <TableCell className="tableCell">{row.department}</TableCell>
               <TableCell className="tableCell">
                 <span className={`status ${row.status}`}>{row.status}</span>
               </TableCell>
