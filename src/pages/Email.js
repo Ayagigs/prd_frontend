@@ -4,6 +4,7 @@ import OtpInput from 'react-otp-input';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { FaSpinner } from 'react-icons/fa';
+import { useNavigate } from 'react-router';
 
 function Form(props) {
   const [isLoading, setIsLoading] = useState(false);
@@ -16,6 +17,7 @@ function Form(props) {
   //   code5: '',
   //   code6: '',
   // });
+  const navigate = useNavigate()
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -31,6 +33,7 @@ function Form(props) {
         console.log(response.data);
         toast.success(response.data);
         // handle successful response from the backend
+        navigate('/dashboard')
       })
       .catch(error => {
         setIsLoading(false);
