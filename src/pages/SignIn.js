@@ -111,7 +111,7 @@ function SignIn() {
       <div className="googleSignInButton">
         <GoogleOAuthProvider
           clientId="644468853015-cadrgrgrabl4vacc4evt7g342qiqa2t2.apps.googleusercontent.com"
-          redirectUri="http://localhost:3000/api/v1/admin/googlelogin"
+          redirectUri="http://localhost:3030/api/v1/admin/googlelogin"
         >
           <GoogleLogin
             buttonText="Login with google"
