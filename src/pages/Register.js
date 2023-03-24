@@ -247,7 +247,7 @@ const Register = () => {
                 <div className="inputHolder">
                   <div className="inputWrapper">
                     <label htmlFor="">Country</label>
-                    {/* <input
+                    <input
                       type="text"
                       required
                       name="country"
@@ -255,13 +255,13 @@ const Register = () => {
                       value={formData.country}
                       onChange={handleInputChange}
                       placeholder=" Country"
-                    /> */}
-                    <select name="" id="">
+                    />
+                    {/* <select name="" id="">
                       <option value="">--Select Country--</option>
                       {countries.map(country => (
                         <option value={country.code}>--Select Country--</option>
                       ))}
-                    </select>
+                    </select> */}
                   </div>
                   <div className="inputWrapper">
                     <label htmlFor="">State</label>

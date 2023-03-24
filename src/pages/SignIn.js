@@ -49,33 +49,30 @@ function SignIn() {
   };
 
   const signInWithGoogle = async response => {
-    response = await signInWithPopup(auth, provider);
+    // response = await signInWithPopup(auth, provider);
     // console.log(response._tokenResponse.idToken);
-
-    try {
-      response = await signInWithPopup(auth, provider);
-      setIsLoading(true);
-
-      const res = await axios.post(
-        'http://localhost:3030/api/v1/admin/googlelogin',
-        {
-          tokenId: response._tokenResponse.idToken,
-        }
-      );
-      // console.log(res);
-      if (res) {
-        console.log('submitted');
-      }
-      console.log('submitted');
-      setIsLoading(false);
-      toast.success('Login Successfully');
-      //   setPopup(true);
-    } catch (error) {
-      console.log(error.message);
-      setIsLoading(false);
-      // toast.error(error.response.data.message);
-    }
-
+    // try {
+    //   response = await signInWithPopup(auth, provider);
+    //   setIsLoading(true);
+    //   const res = await axios.post(
+    //     'http://localhost:3030/api/v1/admin/googlelogin',
+    //     {
+    //       tokenId: response._tokenResponse.idToken,
+    //     }
+    //   );
+    //   // console.log(res);
+    //   if (res) {
+    //     console.log('submitted');
+    //   }
+    //   console.log('submitted');
+    //   setIsLoading(false);
+    //   toast.success('Login Successfully');
+    //   //   setPopup(true);
+    // } catch (error) {
+    //   console.log(error.message);
+    //   setIsLoading(false);
+    //   // toast.error(error.response.data.message);
+    // }
     // try {
     //   axios({
     //     method: 'POST',
@@ -91,12 +88,12 @@ function SignIn() {
     //   console.log('ERROR SUBMITTING');
     //   // toast.error(error.response.data.message);
     // }
-
-    const responseSuccessGoogle = response => {
-      console.log(response);
-    };
-    const responseErrorGoogle = response => {};
   };
+
+  const responseSuccessGoogle = response => {
+    console.log(response);
+  };
+  const responseErrorGoogle = response => {};
 
   return (
     <div className="signInContainer">
@@ -114,7 +111,7 @@ function SignIn() {
       <div className="googleSignInButton">
         <GoogleOAuthProvider
           clientId="644468853015-cadrgrgrabl4vacc4evt7g342qiqa2t2.apps.googleusercontent.com"
-          redirectUri="http://localhost:3000"
+          redirectUri="http://localhost:3000/api/v1/admin/googlelogin"
         >
           <GoogleLogin
             buttonText="Login with google"
