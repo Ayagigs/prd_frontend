@@ -23,14 +23,17 @@ const Datatable = () => {
   }, []);
   
   const handleDelete = (id) => {
-    setData(data.filter((item) => item.id !== id));
+    // setData(data.filter((item) => item.id !== id));
 
     const url2 = `https://pms-jq9o.onrender.com/api/v1/admin/deactivate/${id}`
 
-    axios.delete(url2, {headers: {Authorization: `Bearer ${token}`}})
+    axios.patch(url2, {headers: {Authorization: `Bearer ${token}`}})
     .then(res => {
       console.log(data)
       toast.success('Employee Account Deactivated');
+      setTimeout(() => {
+        window.location.reload()
+      }, 1500)
     }).catch (error => {
       toast.error(error.response.data.message);
   })

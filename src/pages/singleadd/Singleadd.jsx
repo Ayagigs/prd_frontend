@@ -33,12 +33,12 @@ const Singleadd = () => {
         `https://pms-jq9o.onrender.com/api/v1/employee/registeration/${Cookies.get('companyID')}`,
         formData,
         {headers: {Authorization: `Bearer ${token}`}}
-      );
-      console.log(res.data);
-      setIsLoading(false);
+        );
+        console.log(res.data);
+        setIsLoading(false);
       toast.success('Registeration Successfull');
       Cookies.set('WorkEmail', formData['workEmail'])
-      navigate('/employee/trial/new/singleadd/verify')
+      // navigate('/employee/trial/new/singleadd/verify')
       setFormData({
         employeeID: "",
         firstName: "",
@@ -150,8 +150,8 @@ const Singleadd = () => {
             
             <div className="fourth-container">
               <div id="department">
-                <label htmlFor="department"   value={formData['department']} onChange={(e) => setFormData({...formData, department: e.target.value})}>Department</label>
-                <select name="department" id="department">
+                <label htmlFor="department">Department</label>
+                <select name="department" id="department" value={formData.department} onChange={(e) => setFormData({...formData, department: e.target.value})}>
                   <option value="">--Select--</option>
                   <option value="Finance">Finance</option>
                   <option value="Audit">Audit</option>
@@ -159,11 +159,11 @@ const Singleadd = () => {
                 </select>
               </div>
               <div className="Gender">
-                <label htmlFor="Reg">Reg no.</label>
+                <label htmlFor="Reg">Gender</label>
                 <select className="select-state2" name="state" id="state" value={formData['gender']} onChange={(e) => setFormData({...formData, gender: e.target.value})}>
                   <option value="">--Select--</option>
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
                 </select>
               </div>
             </div>
@@ -175,7 +175,7 @@ const Singleadd = () => {
           <Link to="/employee/trial/new" style={{ textDecoration: "none" }}>
           <button className='cancelbtn'>Cancel</button>
           </Link>
-          <Link to="/employee/trial/new/singleadd/verify" style={{ textDecoration: "none" }}>
+          <Link style={{ textDecoration: "none" }}>
           <button className='addempbtn' onClick={() => handleSubmit()}>{isLoading ? 'Submitting...' : 'Add Employee'}</button>
           </Link>
           
