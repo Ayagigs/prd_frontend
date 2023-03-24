@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router';
 function Form(props) {
   const [isLoading, setIsLoading] = useState(false);
   const [otp, setOtp] = useState('');
+  
   // const [code, setCode] = useState({
   //   code1: '',
   //   code2: '',
@@ -17,7 +18,6 @@ function Form(props) {
   //   code5: '',
   //   code6: '',
   // });
-  const navigate = useNavigate()
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -33,7 +33,7 @@ function Form(props) {
         console.log(response.data);
         toast.success(response.data);
         // handle successful response from the backend
-        navigate('/dashboard')
+        // setSuccess(true)
       })
       .catch(error => {
         setIsLoading(false);
@@ -64,7 +64,7 @@ function Form(props) {
   };
 
   return (
-    <div className="form-container">
+    <div className={"form-container"}>
       <img src={require('../assets/img/sms.png')} alt="Message Image" />
       <div className="instructions">
         Please enter the code sent to {props.data.email}

@@ -65,3 +65,18 @@
     color: #007aff;
     cursor: pointer;
 }
+.form-container .signinDiv{
+    position: fixed;
+    width: 100%;
+    top: 0px;
+    height: 100vh;
+    background-color: rgba(173, 173, 173, 0.611);
+    backdrop-filter: blur(2px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 20;
+  }
+  .form-container   .hide{
+    display: none;
+  }

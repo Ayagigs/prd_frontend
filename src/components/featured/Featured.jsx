@@ -10,7 +10,6 @@ import Cookies from "js-cookie"
   
 
 const Featured = () => {
-  console.log(Cookies.get('companyID'))
 
 
   
@@ -71,17 +70,6 @@ const Featured = () => {
 //     </div>
 //   );
 // }
-
-  const url = `https://pms-jq9o.onrender.com/api/v1/admin/findme`
-
-  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDA5ZDM5YTk4ODYwNDUzY2EwNzg4MzEiLCJyb2xlIjoiQWRtaW4iLCJjb21wYW55TmFtZSI6IkF5YSBMaW1pdGVkIiwiaWF0IjoxNjc5NjY1NjE0LCJleHAiOjE2Nzk3NTIwMTR9.HmoXpE55bD9vb27OgQ_8S2yYV3Sxoq4_887LKfp7E70'
-    
-  useEffect(() => {
-    axios.get(url, {headers: {Authorization: `Bearer ${token}`}})
-    .then(res => {
-      Cookies.set("companyID", res.data.data.adminUser._id)
-    })
-  }, []);
 
   return (
     <div className="featured">
