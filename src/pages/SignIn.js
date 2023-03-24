@@ -1,65 +1,132 @@
-import React, { useState } from "react";
-import '../assets/SignIn.css'
-import firebase from "firebase/compat/app";
-import "firebase/compat/auth";
-import { NavLink } from "react-router-dom";
-
-// Replace the following with Aya-Pms Firebase config
-const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_AUTH_DOMAIN",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_STORAGE_BUCKET",
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-  appId: "YOUR_APP_ID",
-};
-
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+import React, { useState } from 'react';
+import '../assets/SignIn.css';
+import { signInWithPopup } from 'firebase/auth';
+// import { auth, provider } from '../config';
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import { NavLink } from 'react-router-dom';
+import { auth, provider } from '../config/firebase';
+// import GoogleLogin from 'react-google-login';
+import { GoogleOAuthProvider } from '@react-oauth/google';
+import { GoogleLogin } from '@react-oauth/google';
 
 function SignIn() {
-  const [companyId, setCompanyId] = useState("");
-  const [password, setPassword] = useState("");
+  const responseGoogle = response => {
+    console.log(response);
+  };
+  const [companyId, setCompanyId] = useState('');
+  const [password, setPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleCompanyIdChange = (event) => {
-    setCompanyId(event.target.value);
+  const [formData, setFormData] = useState({
+    password: '',
+    emailOrCompanyName: '',
+  });
+
+  const handleInputChange = event => {
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]: value });
   };
 
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
-  };
-
-  const handleSignIn = (event) => {
+  const handleSignIn = async event => {
     event.preventDefault();
-    // Your sign-in logic here
+    try {
+      setIsLoading(true);
+
+      const res = await axios.post(
+        'https://pms-jq9o.onrender.com/api/v1/admin/login',
+        formData
+      );
+      console.log(res.data);
+      setIsLoading(false);
+      toast.success('Login Successfully');
+      //   setPopup(true);
+    } catch (error) {
+      console.log(error.message);
+      setIsLoading(false);
+      // toast.error(error.response.data.message);
+    }
   };
 
-  const handleGoogleSignIn = () => {
-    const provider = new firebase.auth.GoogleAuthProvider();
-    firebase
-      .auth()
-      .signInWithPopup(provider)
-      .then((result) => {
-        // Handle successful sign-in here
-        console.log(result);
-      })
-      .catch((error) => {
-        // Handle sign-in error here
-        console.log(error);
-      });
+  const signInWithGoogle = async response => {
+    response = await signInWithPopup(auth, provider);
+    // console.log(response._tokenResponse.idToken);
+
+    try {
+      response = await signInWithPopup(auth, provider);
+      setIsLoading(true);
+
+      const res = await axios.post(
+        'http://localhost:3030/api/v1/admin/googlelogin',
+        {
+          tokenId: response._tokenResponse.idToken,
+        }
+      );
+      // console.log(res);
+      if (res) {
+        console.log('submitted');
+      }
+      console.log('submitted');
+      setIsLoading(false);
+      toast.success('Login Successfully');
+      //   setPopup(true);
+    } catch (error) {
+      console.log(error.message);
+      setIsLoading(false);
+      // toast.error(error.response.data.message);
+    }
+
+    // try {
+    //   axios({
+    //     method: 'POST',
+    //     url: 'https://pms-jq9o.onrender.com/api/v1/admin/googlelogin',
+    //     data: { tokenId: response._tokenResponse.idToken },
+    //   }).then(response => {
+    //     if (response) {
+    //       console.log(response);
+    //     }
+    //     console.log(response);
+    //   });
+    // } catch (error) {
+    //   console.log('ERROR SUBMITTING');
+    //   // toast.error(error.response.data.message);
+    // }
+
+    const responseSuccessGoogle = response => {
+      console.log(response);
+    };
+    const responseErrorGoogle = response => {};
   };
 
   return (
     <div className="signInContainer">
       <h1 className="text">Welcome Back</h1>
       <p className="text_2">We’ve missed you so much</p>
-      <button className="googleSignInButton" onClick={handleGoogleSignIn}>
+      {/* <button className="googleSignInButton" onClick={signInWithGoogle}>
         <img
           src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
           alt="Google logo"
         />
         Login with google
-      </button>
+      </button> */}
+      {/* googleSignInButton */}
+
+      <div className="googleSignInButton">
+        <GoogleOAuthProvider
+          clientId="644468853015-cadrgrgrabl4vacc4evt7g342qiqa2t2.apps.googleusercontent.com"
+          redirectUri="http://localhost:3000"
+        >
+          <GoogleLogin
+            buttonText="Login with google"
+            onSuccess={responseSuccessGoogle => {
+              console.log(responseSuccessGoogle);
+            }}
+            onFailure={responseErrorGoogle => {
+              console.log(responseErrorGoogle);
+            }}
+          />
+        </GoogleOAuthProvider>
+      </div>
 
       <div className="box">
         <div className="innerBox">
@@ -70,15 +137,15 @@ function SignIn() {
           </div>
         </div>
       </div>
-
       <form onSubmit={handleSignIn}>
         <label className="inputLabel">
           Company ID:
           <input
             className="inputField"
             type="text"
-            value={companyId}
-            onChange={handleCompanyIdChange}
+            name="emailOrCompanyName"
+            value={formData.emailOrCompanyName}
+            onChange={handleInputChange}
             placeholder="Enter your Name"
           />
         </label>
@@ -87,16 +154,18 @@ function SignIn() {
           <input
             className="inputField"
             type="password"
-            value={password}
-            onChange={handlePasswordChange}
+            name="password"
+            value={formData.password}
+            onChange={handleInputChange}
             placeholder="Enter your password"
           />
         </label>
         <p className="text_3">
           <a href="/">Forgot password?</a>
         </p>
+
         <button className="signInButton" type="submit">
-          Login
+          {isLoading ? 'Submitting...' : 'Login'}
         </button>
         <p className="last_text">
           I would rather
