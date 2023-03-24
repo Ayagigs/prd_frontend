@@ -1,7 +1,7 @@
 import image from '../images/imageholder.png';
 import { BiChevronLeft } from 'react-icons/bi';
 import axios from 'axios';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BsCheck } from 'react-icons/bs';
 import '../assets/register.css';
 import { NavLink } from 'react-router-dom';
@@ -12,6 +12,11 @@ import Form from './Email';
 const Register = () => {
   const [currentpage, setCurrentPage] = useState(1);
   const [popup, setPopup] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [states, setStates] = useState('');
+  const [countries, setCountries] = useState('');
+  const [selectedCountry, setSelectedCountry] = useState('');
+  const [selectedState, setSelectedState] = useState('');
   const [otpScreen, setOtpScreen] = useState(false);
 
   const [formData, setFormData] = useState({
@@ -19,6 +24,7 @@ const Register = () => {
     lastName: '',
     email: '',
     password: '',
+    confirmPassword: '',
     companyName: '',
     businessType: '',
     address: '',
@@ -28,6 +34,19 @@ const Register = () => {
     numOfEmployees: '',
   });
 
+  useEffect(() => {
+    fetch('https://api.example.com/countries')
+      .then(response => response.json())
+      .then(data => setCountries(data));
+  }, []);
+
+  useEffect(() => {
+    if (selectedCountry) {
+      fetch(`https://api.example.com/states?country=${selectedCountry}`)
+        .then(response => response.json())
+        .then(data => setStates(data));
+    }
+  }, [selectedCountry]);
 
   const handleInputChange = event => {
     const { name, value } = event.target;
@@ -35,27 +54,27 @@ const Register = () => {
   };
 
   const handleSubmit = async event => {
-    event.preventDefault();
-    console.log('Submitted');
     try {
-      console.log('Submitted');
+      setIsLoading(true);
+
       const res = await axios.post(
-        'https://pms.cyclic.app/api/v1/admin/registeration',
+        'https://pms-jq9o.onrender.com/api/v1/admin/registeration',
         formData
       );
       console.log(res.data);
+      setIsLoading(false);
+      toast.success('Please Check your email for OTP');
       //   setPopup(true);
     } catch (error) {
-      console.error(error);
-      toast.error('Error');
-      toast.error(error);
+      setIsLoading(false);
+      toast.error(error.response.data.message);
     }
   };
 
-  console.log(otpScreen)
+  console.log(otpScreen);
+
   return (
     <>
-    
       <div className="wrapper">
         <div className="leftWrapper">
           <div className="stepperWrapper">
@@ -152,6 +171,18 @@ const Register = () => {
                     placeholder="Please Enter Your Password"
                   />
                 </div>
+                <div className="inputWrapper">
+                  <label htmlFor="">Password</label>
+                  <input
+                    type="text"
+                    required
+                    name="confirmPassword"
+                    value={formData.confirmPassword}
+                    onChange={handleInputChange}
+                    id="confirmPassword"
+                    placeholder="Please re-type your password"
+                  />
+                </div>
               </div>
 
               <div className={currentpage === 2 ? 'formWrapper' : 'hide'}>
@@ -230,7 +261,10 @@ const Register = () => {
                       placeholder=" Country"
                     />
                     {/* <select name="" id="">
-                      <option value="">--Select option--</option>
+                      <option value="">--Select Country--</option>
+                      {countries.map(country => (
+                        <option value={country.code}>--Select Country--</option>
+                      ))}
                     </select> */}
                   </div>
                   <div className="inputWrapper">
@@ -304,6 +338,8 @@ const Register = () => {
 
               <div className="buttonWrapper">
                 <button
+                  type="button"
+                  // disabled={isSubmitting}
                   onClick={() =>
                     setCurrentPage(currentpage > 1 ? currentpage - 1 : 1)
                   }
@@ -312,14 +348,21 @@ const Register = () => {
                 </button>
                 {currentpage < 3 ? (
                   <button
+                    type="button"
+                    // disabled={isSubmitting}
                     onClick={() =>
                       setCurrentPage(currentpage < 3 ? currentpage + 1 : 3)
                     }
+                    // disabled={Array.from(
+                    //   document.querySelectorAll('input[required]')
+                    // ).some(el => !el.value)}
                   >
                     Next
                   </button>
                 ) : (
-                  <button type="submit" onClick={() => setOtpScreen(true)}>Submit</button>
+                  <button type="button" onClick={() => handleSubmit()}>
+                    {isLoading ? 'Submitting...' : 'Submit'}
+                  </button>
                 )}
               </div>
 
@@ -338,13 +381,13 @@ const Register = () => {
           <img src={image} alt="" />
         </div>
 
-        {
-          otpScreen ? <Form/> : undefined
-        }
+        {otpScreen ? <Form /> : undefined}
         <div
           className={popup || otpScreen ? 'signinDiv' : 'hide'}
-          onClick={() => {setPopup(false) 
-          setOtpScreen(false)}}
+          onClick={() => {
+            setPopup(false);
+            setOtpScreen(false);
+          }}
         ></div>
         {popup ? <SignIn className="signinpopup" /> : undefined}
       </div>
