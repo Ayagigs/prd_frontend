@@ -18,6 +18,7 @@ const Register = () => {
   const [selectedCountry, setSelectedCountry] = useState('');
   const [selectedState, setSelectedState] = useState('');
   const [otpScreen, setOtpScreen] = useState(false);
+  const [otpData, setOtpData] = useState('');
 
   const [formData, setFormData] = useState({
     firstName: '',
@@ -59,20 +60,20 @@ const Register = () => {
       setOtpScreen(true)
 
       const res = await axios.post(
-        'https://pms-jq9o.onrender.com/api/v1/admin/registeration',
+        'http://localhost:3030/api/v1/admin/registeration',
         formData
       );
-      console.log(res.data);
+      // console.log(res.data.email);
       setIsLoading(false);
+      setOtpData(res.data);
+      console.log(res.data);
       toast.success('Please Check your email for OTP');
-      //   setPopup(true);
+      setOtpScreen(true);
     } catch (error) {
       setIsLoading(false);
-      toast.error(error.response.data.message);
+      // toast.error(error.response.data.message);
     }
   };
-
-  console.log(otpScreen);
 
   return (
     <>
@@ -382,7 +383,7 @@ const Register = () => {
           <img src={image} alt="" />
         </div>
 
-        {otpScreen ? <Form /> : undefined}
+        {otpScreen ? <Form data={otpData} /> : undefined}
         <div
           className={popup || otpScreen ? 'signinDiv' : 'hide'}
           onClick={() => {
