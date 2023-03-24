@@ -56,6 +56,7 @@ const Register = () => {
   const handleSubmit = async event => {
     try {
       setIsLoading(true);
+      setOtpScreen(true)
 
       const res = await axios.post(
         'https://pms-jq9o.onrender.com/api/v1/admin/registeration',
