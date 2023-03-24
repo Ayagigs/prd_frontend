@@ -9,6 +9,8 @@ import { auth, provider } from '../config/firebase';
 // import GoogleLogin from 'react-google-login';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { GoogleLogin } from '@react-oauth/google';
+import { useNavigate } from 'react-router';
+import Cookies from "js-cookie"
 
 function SignIn() {
   const responseGoogle = response => {
@@ -17,6 +19,7 @@ function SignIn() {
   const [companyId, setCompanyId] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate()
 
   const [formData, setFormData] = useState({
     password: '',
@@ -37,14 +40,18 @@ function SignIn() {
         'https://pms-jq9o.onrender.com/api/v1/admin/login',
         formData
       );
-      console.log(res.data);
+      console.log(res.data.data);
       setIsLoading(false);
       toast.success('Login Successfully');
+      navigate('/dashboard')
+      
+      Cookies.set("companyID", res.data.data._id)
+      Cookies.set("Token", res.data.token)
       //   setPopup(true);
     } catch (error) {
       console.log(error.message);
       setIsLoading(false);
-      // toast.error(error.response.data.message);
+      toast.error(error.response.data.message);
     }
   };
 

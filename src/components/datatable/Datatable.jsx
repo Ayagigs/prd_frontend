@@ -12,13 +12,10 @@ const Datatable = () => {
 
   const url = `https://pms-jq9o.onrender.com/api/v1/employee/employees/${Cookies.get('companyID')}`
   
-  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDA5ZDM5YTk4ODYwNDUzY2EwNzg4MzEiLCJyb2xlIjoiQWRtaW4iLCJjb21wYW55TmFtZSI6IkF5YSBMaW1pdGVkIiwiaWF0IjoxNjc5NjY1NjE0LCJleHAiOjE2Nzk3NTIwMTR9.HmoXpE55bD9vb27OgQ_8S2yYV3Sxoq4_887LKfp7E70'
-  
   useEffect(() => {
-    axios.get(url, {headers: {Authorization: `Bearer ${token}`}})
+    axios.get(url, {headers: {Authorization: `Bearer ${Cookies.get('Token')}`}})
     .then(res => {
       setData(res.data.data)
-      console.log(data)
     })
   }, []);
   
@@ -27,7 +24,7 @@ const Datatable = () => {
 
     const url2 = `https://pms-jq9o.onrender.com/api/v1/admin/deactivate/${id}`
 
-    axios.patch(url2, {headers: {Authorization: `Bearer ${token}`}})
+    axios.patch(url2, {headers: {Authorization: `Bearer ${Cookies.get('Token')}`}})
     .then(res => {
       console.log(data)
       toast.success('Employee Account Deactivated');

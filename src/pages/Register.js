@@ -66,8 +66,8 @@ const Register = () => {
       setIsLoading(false);
       setOtpData(res.data);
       console.log(res.data);
-      toast.success('Please Check your email for OTP');
       setOtpScreen(true);
+      toast.success('Please Check your email for OTP');
     } catch (error) {
       setIsLoading(false);
       toast.error(error.response.data.message);
