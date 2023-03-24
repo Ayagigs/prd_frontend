@@ -3,8 +3,60 @@ import "./singleadd.scss";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import { Link } from "react-router-dom";
+import { useState } from 'react';
+import axios from "axios";
+import Cookies from "js-cookie"
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router';
 
 const Singleadd = () => {
+  const [formData, setFormData] = useState({
+    employeeID: "",
+    firstName: "",
+    lastName: "",
+    workEmail: "",
+    phoneNo: "",
+    department: "",
+    gender: "",
+    role: ""
+  })
+  const [isLoading, setIsLoading] = useState(false);
+
+  const navigate = useNavigate()
+
+  const handleSubmit = async event => {
+    try {
+      setIsLoading(true);
+      const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDA5ZDM5YTk4ODYwNDUzY2EwNzg4MzEiLCJyb2xlIjoiQWRtaW4iLCJjb21wYW55TmFtZSI6IkF5YSBMaW1pdGVkIiwiaWF0IjoxNjc5NjY1NjE0LCJleHAiOjE2Nzk3NTIwMTR9.HmoXpE55bD9vb27OgQ_8S2yYV3Sxoq4_887LKfp7E70'
+
+      const res = await axios.post(
+        `https://pms-jq9o.onrender.com/api/v1/employee/registeration/${Cookies.get('companyID')}`,
+        formData,
+        {headers: {Authorization: `Bearer ${token}`}}
+      );
+      console.log(res.data);
+      setIsLoading(false);
+      toast.success('Registeration Successfull');
+      Cookies.set('WorkEmail', formData['workEmail'])
+      navigate('/employee/trial/new/singleadd/verify')
+      setFormData({
+        employeeID: "",
+        firstName: "",
+        lastName: "",
+        workEmail: "",
+        phoneNo: "",
+        department: "",
+        gender: "",
+        role: ""
+      })
+      //   setPopup(true);
+    } catch (error) {
+      setIsLoading(false);
+      toast.error(error.response.data.message);
+    }
+  };
+
+
   return (
     <div className='singleaddcontainer'>
       <Sidebar />
@@ -29,16 +81,19 @@ const Singleadd = () => {
                   type="text"
                   id="id-input"
                   name="Employee ID"
+                  value={formData['employeeID']}
+                  onChange={(e) => setFormData({...formData, employeeID: e.target.value})}
                 />
               </div>
               <div>
                 <label className="role" htmlFor="role-input">
                   Role
                 </label>
-                <select id="role-input" name="Role">
-                  <option value="select">Admin</option>
-                  <option value="Admin">Admin</option>
-                  <option value="Employee">Employee</option>
+                <select id="role-input" name="Role"  value={formData['role']} onChange={(e) => setFormData({...formData, role: e.target.value})}>
+                  <option value="">--Select--</option>
+                  <option value="HR Manager">HR Manager</option>
+                  <option value="Performance Manager">Performance Manager</option>
+                  <option value="Staff">Staff</option>
                 </select>
               </div>
             </div>
@@ -51,6 +106,8 @@ const Singleadd = () => {
                   type="text"
                   id="id-input"
                   name="First name"
+                  value={formData['firstName']}
+                  onChange={(e) => setFormData({...formData, firstName: e.target.value})}
                 />
             </div>
             <div className="last">
@@ -60,6 +117,8 @@ const Singleadd = () => {
                   type="text"
                   id="id-input"
                   name="Last name"
+                  value={formData['lastName']}
+                  onChange={(e) => setFormData({...formData, lastName: e.target.value})}
                 />
             </div>
             </div>
@@ -72,6 +131,8 @@ const Singleadd = () => {
                   type="text"
                   id="email-input"
                   name="Work email"
+                  value={formData['workEmail']}
+                  onChange={(e) => setFormData({...formData, workEmail: e.target.value})}
                 />
               </div>
               <div className="phone">
@@ -81,24 +142,26 @@ const Singleadd = () => {
                   type="text"
                   id="phone-input"
                   name="Phone number"
+                  value={formData['phoneNo']}
+                  onChange={(e) => setFormData({...formData, phoneNo: e.target.value})}
                 />
               </div>
             </div>
             
             <div className="fourth-container">
               <div id="department">
-                <label htmlFor="department">Department</label>
+                <label htmlFor="department"   value={formData['department']} onChange={(e) => setFormData({...formData, department: e.target.value})}>Department</label>
                 <select name="department" id="department">
-                  <option value="1">Finance</option>
-                  <option value="2">Finance</option>
-                  <option value="3">Audit</option>
-                  <option value="3">Human Resource</option>
+                  <option value="">--Select--</option>
+                  <option value="Finance">Finance</option>
+                  <option value="Audit">Audit</option>
+                  <option value="Human Resources">Human Resource</option>
                 </select>
               </div>
               <div className="Gender">
                 <label htmlFor="Reg">Reg no.</label>
-                <select className="select-state2" name="state" id="state">
-                  <option value="select">Male</option>
+                <select className="select-state2" name="state" id="state" value={formData['gender']} onChange={(e) => setFormData({...formData, gender: e.target.value})}>
+                  <option value="">--Select--</option>
                   <option value="male">Male</option>
                   <option value="female">Female</option>
                 </select>
@@ -113,7 +176,7 @@ const Singleadd = () => {
           <button className='cancelbtn'>Cancel</button>
           </Link>
           <Link to="/employee/trial/new/singleadd/verify" style={{ textDecoration: "none" }}>
-          <button className='addempbtn' >Add Employee</button>
+          <button className='addempbtn' onClick={() => handleSubmit()}>{isLoading ? 'Submitting...' : 'Add Employee'}</button>
           </Link>
           
         </div>
