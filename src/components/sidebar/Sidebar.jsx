@@ -7,6 +7,7 @@ import { Chart1 } from 'iconsax-react';
 import { Setting2 } from 'iconsax-react';
 import { EmptyWallet } from 'iconsax-react';
 import { Link } from "react-router-dom";
+import Logo from './logo.png';
 // import { DarkModeContext } from "../../context/darkModeContext";
 // import { useContext } from "react";
 // import Image from "./logo.png"
@@ -16,12 +17,7 @@ const Sidebar = () => {
   return (
     <div className="sidebar1">
       <div className="top">
-      <span className="logo">View</span>
-      {/* <img
-              src="src\components\sidebar\logo.png"
-              alt=""
-              className="avatar"
-            /> */}
+      <img width="120px" src={Logo} alt="view logo" />
       </div>
       <hr />
       <div className="center">

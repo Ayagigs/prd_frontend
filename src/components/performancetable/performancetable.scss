@@ -1,4 +1,5 @@
 .table {
+
   font-family: 'Satoshi';
       font-style: normal;
       font-weight: 400;
@@ -8,6 +9,7 @@
     .cellWrapper {
       display: flex;
       align-items: center;
+      flex-wrap: wrap;
       
       .image {
         width: 32px;

@@ -7,15 +7,19 @@ import { MainContent } from './components';
 import Register from './pages/Register';
 import SignIn from './pages/SignIn';
 import GetDemo from './pages/getDemo';
-import Home from './pages/home/Home';
-import Login from './pages/login/Login';
-import List from './pages/list/List';
-import Single from './pages/single/Single';
-import New from './pages/new/New';
-import Goals from './pages/goals/Goals';
-import Performance from './pages/performance/Performance';
-import Settings from './pages/settings/Settings';
-import Wallet from './pages/wallet/Wallet';
+import Home from "./pages/home/Home";
+import Login from "./pages/login/Login";
+import List from "./pages/list/List";
+import Single from "./pages/single/Single";
+import New from "./pages/new/New";
+import Goals from "./pages/goals/Goals";
+import Performance from "./pages/performance/Performance";
+import Settings from "./pages/settings/Settings";
+import Wallet from "./pages/wallet/Wallet";
+import Bulk from "./pages/bulk/Bulk";
+import Singleadd from "./pages/singleadd/Singleadd";
+import Trial from './pages/trial/Trial';
+import Verify from './pages/verify/Verify';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { productInputs, userInputs } from './formSource';
@@ -43,10 +47,11 @@ function App() {
             <Route path="employee">
               <Route index element={<List />} />
               <Route path=":userId" element={<Single />} />
-              <Route
-                path="new"
-                element={<New inputs={userInputs} title="Add New User" />}
-              />
+              <Route path="/employee/trial/new/" element={<New inputs={userInputs} title="Add Employee" />}/>
+              <Route path="/employee/trial/new/bulk" element={<Bulk />}/>
+              <Route path="/employee/trial" element={<Trial />}/>
+              <Route path="/employee/trial/new/singleadd" element={<Singleadd />}/>
+              <Route path="/employee/trial/new/singleadd/verify" element={<Verify />}/>
             </Route>
             <Route path="goals">
               <Route index element={<Goals />} />

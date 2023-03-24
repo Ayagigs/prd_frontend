@@ -7,6 +7,7 @@ import '../assets/register.css';
 import { NavLink } from 'react-router-dom';
 import SignIn from './SignIn';
 import { toast } from 'react-toastify';
+import Form from './Email';
 
 const Register = () => {
   const [currentpage, setCurrentPage] = useState(1);
@@ -16,6 +17,7 @@ const Register = () => {
   const [countries, setCountries] = useState('');
   const [selectedCountry, setSelectedCountry] = useState('');
   const [selectedState, setSelectedState] = useState('');
+  const [otpScreen, setOtpScreen] = useState(false);
 
   const [formData, setFormData] = useState({
     firstName: '',
@@ -68,6 +70,8 @@ const Register = () => {
       toast.error(error.response.data.message);
     }
   };
+
+  console.log(otpScreen);
 
   return (
     <>
@@ -377,9 +381,13 @@ const Register = () => {
           <img src={image} alt="" />
         </div>
 
+        {otpScreen ? <Form /> : undefined}
         <div
-          className={popup ? 'signinDiv' : 'hide'}
-          onClick={() => setPopup(false)}
+          className={popup || otpScreen ? 'signinDiv' : 'hide'}
+          onClick={() => {
+            setPopup(false);
+            setOtpScreen(false);
+          }}
         ></div>
         {popup ? <SignIn className="signinpopup" /> : undefined}
       </div>
