@@ -20,6 +20,7 @@ import Bulk from "./pages/bulk/Bulk";
 import Singleadd from "./pages/singleadd/Singleadd";
 import Trial from './pages/trial/Trial';
 import Verify from './pages/verify/Verify';
+import ReviewDetails from './pages/ReviewDetails';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { productInputs, userInputs } from './formSource';
@@ -63,6 +64,7 @@ function App() {
             </Route>
             <Route path="performance">
               <Route index element={<Performance />} />
+              <Route path="details" element={<ReviewDetails/>}/>
             </Route>
             <Route path="settings">
               <Route index element={<Settings />} />
