@@ -1,14 +1,39 @@
 import "./datatable.scss";
 import { DataGrid } from "@mui/x-data-grid";
-import { userColumns, userRows } from "../../datatablesource";
+import { userColumns } from "../../datatablesource";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState ,  useEffect} from "react";
+import axios from "axios";
+import Cookies from "js-cookie"
+import { toast } from 'react-toastify';
 
 const Datatable = () => {
-  const [data, setData] = useState(userRows);
+  const [data, setData] = useState([]);
 
+  const url = `https://pms-jq9o.onrender.com/api/v1/employee/employees/${Cookies.get('companyID')}`
+  
+  useEffect(() => {
+    axios.get(url, {headers: {Authorization: `Bearer ${Cookies.get('Token')}`}})
+    .then(res => {
+      setData(res.data.data)
+    })
+  }, []);
+  
   const handleDelete = (id) => {
-    setData(data.filter((item) => item.id !== id));
+    // setData(data.filter((item) => item.id !== id));
+
+    const url2 = `https://pms-jq9o.onrender.com/api/v1/admin/deactivate/${id}`
+
+    axios.patch(url2, {headers: {Authorization: `Bearer ${Cookies.get('Token')}`}})
+    .then(res => {
+      console.log(data)
+      toast.success('Employee Account Deactivated');
+      setTimeout(() => {
+        window.location.reload()
+      }, 1500)
+    }).catch (error => {
+      toast.error(error.response.data.message);
+  })
   };
 
   const handleArchive = (id) => {

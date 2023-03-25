@@ -5,11 +5,38 @@ import Navbar from "../../components/navbar/Navbar";
 import { DocumentUpload } from 'iconsax-react';
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import axios from "axios";
+import Cookies from "js-cookie"
+import { toast } from 'react-toastify';
 
 
 const Bulk = ({ inputs, title }) => {
 
     const [file, setFile] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
+
+    const handleSubmit = async event => {
+      try {
+        setIsLoading(true);
+
+        
+        const formdata = new FormData()
+        formdata.append("file", file)
+  
+        const res = await axios.post(
+          `https://pms-jq9o.onrender.com/api/v1/employee/csvupload/${Cookies.get('companyID')}`,
+          formdata,
+          {headers: {Authorization: `Bearer ${Cookies.get('Token')}`}}
+        );
+        setIsLoading(false);
+        toast.success('Email has been sent to all employees');
+        setFile('')
+        //   setPopup(true);
+      } catch (error) {
+        setIsLoading(false);
+        toast.error(error.response.data.message);
+      }
+    };
 
   return (
     <div className='bulkaddcont'>

@@ -2,6 +2,9 @@ import "./featured.scss";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import Cookies from "js-cookie"
 // import "./styles.css";
 //   import DonutChart from "react-donut-chart";
   
