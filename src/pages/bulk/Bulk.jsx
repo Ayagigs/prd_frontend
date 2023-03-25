@@ -47,7 +47,9 @@ const Bulk = ({ inputs, title }) => {
         <Link to="/employee/trial/new" style={{ textDecoration: "none" }}>
           <button className='cancelbtn'>Cancel</button>
         </Link>
+        <Link to="/employee/trial/new/bulk/verifybulk" style={{ textDecoration: "none" }}>
           <button className='addempbtn' >Add Employee</button>
+        </Link> 
         </div>
         
         </div>

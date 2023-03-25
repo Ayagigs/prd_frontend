@@ -1,4 +1,6 @@
 import React from 'react';
+
+// Import for Admin Dashboard
 import './assets/app.css';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
@@ -20,12 +22,23 @@ import Bulk from "./pages/bulk/Bulk";
 import Singleadd from "./pages/singleadd/Singleadd";
 import Trial from './pages/trial/Trial';
 import Verify from './pages/verify/Verify';
+import Verifybulk from './pages/verifybulk/Verifybulk';
+
+// imports for Employee Dashboard
+import Emphome from './empdashboard/pages/home/Emphome';
+import Goalreview from './empdashboard/pages/goalreview/Goalreview';
+import Empperformance from './empdashboard/pages/performance/Empperformance';
+import Empgoals from './empdashboard/pages/goals/Empgoals';
+
+
+
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { productInputs, userInputs } from './formSource';
 import './style/dark.scss';
 import { useContext } from 'react';
 import { DarkModeContext } from './context/darkModeContext';
+
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
@@ -41,6 +54,8 @@ function App() {
           <Route path="register" element={<Register />} />
           <Route path="signin" element={<SignIn />} />
           <Route path="demo" element={<GetDemo />} />
+          
+          {/* Admin Dashboard */}
           <Route path="/">
             <Route path="login" element={<Login />} />
             <Route path="dashboard" element={<Home />} />
@@ -49,6 +64,7 @@ function App() {
               <Route path=":userId" element={<Single />} />
               <Route path="/employee/trial/new/" element={<New inputs={userInputs} title="Add Employee" />}/>
               <Route path="/employee/trial/new/bulk" element={<Bulk />}/>
+              <Route path="/employee/trial/new/bulk/verifybulk" element={<Verifybulk />}/>
               <Route path="/employee/trial" element={<Trial />}/>
               <Route path="/employee/trial/new/singleadd" element={<Singleadd />}/>
               <Route path="/employee/trial/new/singleadd/verify" element={<Verify />}/>
@@ -70,7 +86,34 @@ function App() {
             <Route path="wallet">
               <Route index element={<Wallet />} />
             </Route>
+
+
+        {/* Employee Dashboard */}
+
+            <Route path="emp-dashboard">
+              <Route index element={<Emphome />} />
+                <Route path="/emp-dashboard/appraisal" element={<Emphome />}/>
+                <Route path="/emp-dashboard/goalreview" element={<Goalreview />}/>
+            </Route>
+            <Route path="empgoals">
+              <Route index element={<Empgoals />} />
+              {/* <Route path=":productId" element={<Single />} /> */}
+              <Route
+                path="new"
+                element={<New inputs={productInputs} title="Add New Product" />}
+              />
+            </Route>
+            <Route path="empperformance">
+              <Route index element={<Empperformance />} />
+            </Route>
+
           </Route>
+
+          
+          {/* <Route path="/emp-dashboard" index element={<Emphome  />}></Route> */}
+          {/* <Route path="/emp-dashboard/goalreview" element={<Goalreview  />}></Route> */}
+          
+          
         </Routes>
       </BrowserRouter>
     </div>

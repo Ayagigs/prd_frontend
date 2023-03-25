@@ -17,7 +17,7 @@ const Sidebar = () => {
   return (
     <div className="sidebar1">
       <div className="top">
-      <img width="120px" src={Logo} alt="view logo" />
+      <img width="100px" src={Logo} alt="view logo" />
       </div>
       <hr />
       <div className="center">
