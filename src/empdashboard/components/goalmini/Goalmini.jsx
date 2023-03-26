@@ -8,46 +8,22 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { TickCircle } from 'iconsax-react';
 import { CalendarAdd } from 'iconsax-react';
+import { useState, useEffect } from "react";
+import axios from "axios";
+import Cookies from "js-cookie";
 
 const Goalmini = () => {
-  const rows = [
-    {
-      goaltitle: "Foster and grow a new or existing relationship",
-      due: "today",
-    },
-    {
-        goaltitle: "Gain and Understand a new or existing relationship",
-        due: "11/06/23",
-      },
-      {
-        goaltitle: "Learn and practice a new or existing relationship",
-        due: "21/04/23",
-      },
-      {
-        goaltitle: "Write a powerful new or existing relationship",
-        due: "04/04/23",
-      },
-      {
-        goaltitle: "Unnderstand and grow a new or existing relationship",
-        due: "18/06/23",
-      },
-      {
-        goaltitle: "Understand how powerful and grow a new or existing relationship",
-        due: "12/07/23",
-      },
-      {
-        goaltitle: "Maintain and grow a new or existing relationship",
-        due: "03/11/23",
-      },
-      {
-        goaltitle: "Reduce and grow a new or existing relationship",
-        due: "04/04/23",
-      },
-      {
-        goaltitle: "Improve and grow a new or existing relationship",
-        due: "today",
-      },
-  ];
+  
+  const [rows, setRows] = useState([])
+
+  const url = `https://pms-jq9o.onrender.com/api/v1/goal/goals`
+  useEffect(() => {
+    axios.get(url, {headers: {Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDFlMDNhNzU1YTdlOWE0M2IyNGFhNmMiLCJyb2xlIjoiSFIgTWFuYWdlciIsIndvcmtFbWFpbCI6InNvcGhpYW9rb3NvZG9AZ21haWwuY29tIiwiZmlyc3ROYW1lIjoiU29waGlhIiwiY29tcGFueUlEIjoiNjQxZGY1MzE1NWE3ZTlhNDNiMjRhOWY2IiwiaWF0IjoxNjc5ODUxODA5LCJleHAiOjE2Nzk5MzgyMDl9.yzTTmiqzNpCLQfjzEy2TVh-CoQVDet5AQFctzU00eCU`}})
+    .then(res => {
+      setRows(res.data.data.reverse())
+    })
+  }, []);
+ 
   return (
     <TableContainer component={Paper} className="minitable">
       <Table className="minitab" sx={{ minWidth: 300}} aria-label="simple table">
@@ -59,13 +35,13 @@ const Goalmini = () => {
         </TableHead>
         <TableBody>
           {rows.map((row) => (
-            <TableRow key={row.goaltitle}>
+            <TableRow key={row._id}>
               <TableCell className="tableCell">
                   <TickCircle size="22" color="#474750d6"/> 
                   {row.goaltitle}</TableCell>
               <TableCell className="dateCell">
                   <CalendarAdd size="22" color="#474750d6"/> 
-                  {row.due}</TableCell>
+                  {new Date(Date.now()) === new Date(row.enddate) ? 'today' : new Date(row.enddate).toLocaleDateString()}</TableCell>
             </TableRow>
           ))}
         </TableBody>
