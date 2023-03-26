@@ -230,6 +230,7 @@ const Register = () => {
                     <select
                       name="businessType"
                       value={formData.businessType}
+                      onChange={handleInputChange}
                       id="businessType"
                     >
                       <option>--Select option--</option>

@@ -20,15 +20,13 @@ function Form(props) {
         OTP: otp,
       })
       .then(response => {
-        // if (response.data.status === 'Success') {
-        //   navigate('/dashboard');
-        // }
+        if (response.data.status === 'Success') {
+          setIsLoading(false);
+          toast.success(response.data.message);
+          navigate('/dashboard');
+        }
 
-        setIsLoading(false);
         console.log(response.data);
-        toast.success(response.data.message);
-        // handle successful response from the backend
-        // setSuccess(true)
       })
       .catch(error => {
         setIsLoading(false);
