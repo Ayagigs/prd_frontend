@@ -5,7 +5,7 @@
      flex-direction: column;
      margin: 40px auto;
      max-width: 320px;
-     height: 500px;
+     height: fit-content;
      padding: 20px;
      border-radius: 6px;
      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -118,6 +118,7 @@ height: 32px; */
      align-items: center;
      column-gap: 5px;
      margin-top: -20px;
+     margin-top: -10px;
      /* border: 5px solid blue; */
  }
 
@@ -135,8 +136,24 @@ height: 32px; */
      font-weight: bold;
      text-align: left;
      box-sizing: content-box;
+     width: 100%;
  }
-
+.choice{
+    display: flex;
+    column-gap: 10px;
+}
+.choice span{
+    cursor: pointer;
+}
+.choice span:hover{
+    color: dodgerblue;
+}
+.show{
+    display: contents;
+}
+.hide{
+    display: none;
+}
  .signInContainer  .inputField {
      display: block;
      width: 92%;

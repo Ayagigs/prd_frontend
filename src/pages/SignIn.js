@@ -5,12 +5,13 @@ import { signInWithPopup } from 'firebase/auth';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { NavLink } from 'react-router-dom';
-import { auth, provider } from '../config/firebase';
+// import { auth, provider } from '../config/firebase';
 // import GoogleLogin from 'react-google-login';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { GoogleLogin } from '@react-oauth/google';
 import { useNavigate } from 'react-router';
-import Cookies from "js-cookie"
+import Cookies from 'js-cookie';
+import jwt_decode from 'jwt-decode';
 
 function SignIn() {
   const responseGoogle = response => {
@@ -19,7 +20,8 @@ function SignIn() {
   const [companyId, setCompanyId] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const navigate = useNavigate()
+  const [choice, setChoice] = useState('')
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     password: '',
@@ -42,94 +44,75 @@ function SignIn() {
       );
       setIsLoading(false);
       toast.success('Login Successfully');
-      navigate('/dashboard')
-      
-      Cookies.set("Token", res.data.token)
-      //   setPopup(true);
-    } catch (error) {
-      setIsLoading(false);
-      toast.error(error.response.data.message);
-    }
-    
-    axios.get('https://pms-jq9o.onrender.com/api/v1/admin/findme', {headers: {Authorization: `Bearer ${Cookies.get('Token')}`}})
-    .then(res => {
-      Cookies.set("companyID", res.data.data.company[0].companyID)
-    })
-  };
+      navigate('/dashboard');
+      console.log(res.data.data);
 
-  const signInWithGoogle = async response => {
-    // response = await signInWithPopup(auth, provider);
-    // console.log(response._tokenResponse.idToken);
-    // try {
-    //   response = await signInWithPopup(auth, provider);
-    //   setIsLoading(true);
-    //   const res = await axios.post(
-    //     'http://localhost:3030/api/v1/admin/googlelogin',
-    //     {
-    //       tokenId: response._tokenResponse.idToken,
-    //     }
-    //   );
-    //   // console.log(res);
-    //   if (res) {
-    //     console.log('submitted');
-    //   }
-    //   console.log('submitted');
-    //   setIsLoading(false);
-    //   toast.success('Login Successfully');
-    //   //   setPopup(true);
-    // } catch (error) {
-    //   console.log(error.message);
-    //   setIsLoading(false);
-    //   // toast.error(error.response.data.message);
-    // }
-    // try {
-    //   axios({
-    //     method: 'POST',
-    //     url: 'https://pms-jq9o.onrender.com/api/v1/admin/googlelogin',
-    //     data: { tokenId: response._tokenResponse.idToken },
-    //   }).then(response => {
-    //     if (response) {
-    //       console.log(response);
-    //     }
-    //     console.log(response);
-    //   });
-    // } catch (error) {
-    //   console.log('ERROR SUBMITTING');
-    //   // toast.error(error.response.data.message);
-    // }
+      Cookies.set('companyID', res.data.data._id);
+      Cookies.set('Token', res.data.token);
+    } catch (error) {
+      try{
+        
+          const res = await axios.post(
+          'https://pms-jq9o.onrender.com/api/v1/employee/login',
+          {employeeID: formData.emailOrCompanyName, password: formData.password}
+          );
+          setIsLoading(false);
+          toast.success('Login Successfully');
+          navigate('/emp-dashboard')
+          console.log(res.data)
+          
+          Cookies.set("EmpToken", res.data.token)
+          console.log(res.data.token)
+          console.log(res.data)
+        
+      }catch(error){
+        setIsLoading(false)
+        toast.error('No Crendentials Found')
+      }
+    }
+
+    axios
+      .get('https://pms-jq9o.onrender.com/api/v1/admin/findme', {
+        headers: { Authorization: `Bearer ${Cookies.get('Token')}` },
+      })
+      .then(res => {
+        Cookies.set('companyID', res.data.data.company[0].companyID);
+      });
   };
 
   const responseSuccessGoogle = response => {
-    console.log(response);
-  };
-  const responseErrorGoogle = response => {};
+    // var decoded = jwt_decode(response.credential);
 
+    axios({
+      method: 'POST',
+      url: 'https://pms-jq9o.onrender.com/auth/google/callback',
+      data: { tokenId: response.credential },
+    }).then(response => {
+      if (response) {
+        console.log(response);
+      }
+      console.log(response);
+    });
+  };
+  const responseErrorGoogle = response => {
+    console.log('Login failed:', response);
+  };
+  const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
+  console.log(clientId);
   return (
     <div className="signInContainer">
       <h1 className="text">Welcome Back</h1>
       <p className="text_2">We’ve missed you so much</p>
-      {/* <button className="googleSignInButton" onClick={signInWithGoogle}>
-        <img
-          src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
-          alt="Google logo"
-        />
-        Login with google
-      </button> */}
-      {/* googleSignInButton */}
 
       <div className="googleSignInButton">
         <GoogleOAuthProvider
           clientId="644468853015-cadrgrgrabl4vacc4evt7g342qiqa2t2.apps.googleusercontent.com"
-          redirectUri="http://localhost:3030/api/v1/admin/googlelogin"
+          redirectUri="https://pms-jq9o.onrender.com/auth/google/callback"
         >
           <GoogleLogin
             buttonText="Login with google"
-            onSuccess={responseSuccessGoogle => {
-              console.log(responseSuccessGoogle);
-            }}
-            onFailure={responseErrorGoogle => {
-              console.log(responseErrorGoogle);
-            }}
+            onSuccess={responseSuccessGoogle}
+            onFailure={responseErrorGoogle}
           />
         </GoogleOAuthProvider>
       </div>
@@ -138,14 +121,14 @@ function SignIn() {
         <div className="innerBox">
           <div className="or">
             <div></div>
-            <p>or</p>
+            <p className='choice'><span onClick={() => setChoice('Employee')}>Employee</span> or <span onClick={() => setChoice('Admin')}>Admin</span></p>
             <div></div>
           </div>
         </div>
       </div>
-      <form onSubmit={handleSignIn}>
+      <form onSubmit={handleSignIn} className={choice !== '' ? 'show' : 'hide'}>
         <label className="inputLabel">
-          Company ID:
+          {choice === 'Employee' ? 'Employee ID' : 'Company Name or Email'}:
           <input
             className="inputField"
             type="text"
@@ -167,7 +150,7 @@ function SignIn() {
           />
         </label>
         <p className="text_3">
-          <a href="/">Forgot password?</a>
+          <a href="/forgotpassword">Forgot password?</a>
         </p>
 
         <button className="signInButton" type="submit">
