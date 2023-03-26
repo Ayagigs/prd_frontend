@@ -100,7 +100,7 @@ function App() {
             </Route>
             <Route path="empgoals">
               <Route index element={<Empgoals />} />
-              {/* <Route path="/emp-dashboard/empgoals/addgoal" element={<Addgoal />}/> */}
+              <Route path="/empgoals/addgoal" element={<Addgoal />}/>
             <Route
                 path="new"
                 element={<New inputs={productInputs} title="Add New Product" />}

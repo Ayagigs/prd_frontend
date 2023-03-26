@@ -23,7 +23,7 @@
   .trialcont{
     width: 809px;
     height: 577px;
-    padding:30px;
+    padding:10px 30px;
     flex-wrap: wrap;
     display: flex;
     flex-direction: row;
@@ -137,16 +137,34 @@ color: #3E45EB;
     justify-content:space-between;
     margin-top: 70px;
   }
-  
-  .startbtn{
+  .closetrial-btn{
+    z-index: 1;
+    position: relative;
+    border-color: transparent;
+    width: 30px;
+    height: 30px;
+  //   left: -20px;
+    display: flex;
+    background-color: #EEEFF7;
+  //   flex-direction: row-reverse;
+  //   justify-content: flex-end;
+    align-items: center;
+  //   right: 80px;
+  padding: 10px;
+  cursor: pointer;
+    margin-left:810px;
+    border-radius: 1e+08px;
+  }
+
+  .starttrialbtn{
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     padding: 12px 20px;
     gap: 10px;
-    
-    width: 360px;
+    cursor: pointer;
+    width: 200px;
     height: 46px;
     
     /* Primary/main 500
@@ -158,6 +176,10 @@ color: #3E45EB;
     color: #E7E8FF ;
     border-radius: 8px;
   }
+  .starttrialbtn:hover{
+    color: rgb(237, 238, 243);
+    background: #00010e;
+  }
 
   .skipbtn{
         display: flex;
@@ -165,13 +187,14 @@ color: #3E45EB;
         justify-content: center;
         align-items: center;
         padding: 12px 20px;
+        margin-left: 10px;
         gap: 10px;
-        
+        cursor: pointer;
         width: 360px;
         height: 46px;
         
         /* Primary/main 500
-        
+        color: #E7E8FF ;
         Color
         */
         border-color: transparent;
@@ -179,4 +202,7 @@ color: #3E45EB;
         background: transparent ;
         border-radius: 8px;
     }
- 
+    .skipbtn:hover{
+      color: rgb(237, 238, 243);
+      background: #00010e;
+    }

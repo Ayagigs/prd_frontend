@@ -1,0 +1,108 @@
+.addgoalbox{
+        width: 550px;
+        height: 577px;
+        padding:30px;
+        display: flex;
+        flex-direction: column;
+    
+        -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+        box-shadow: 3px 6px 28px rgba(0, 0, 0, 0.25);
+        
+        margin: 0px 10px;
+        background: #FFFFFF;
+        border-radius: 4px;
+}
+
+.goaltopbox{
+  // position: absolute;
+    display: flex;
+    flex-direction: row;
+}
+
+.closegoalbtn{
+    border-color: transparent;
+    width: 30px;
+    height: 30px;
+    margin-bottom: 10px;
+    display: flex;
+    background-color: #EEEFF7;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+    margin-left:385px;
+    border-radius: 1e+08px;
+    
+  }
+
+  .goaltitle{
+    margin: 10px 0px ;
+  }
+
+  .goalschedule{
+    display: flex;
+    justify-content: space-between;
+    width: 400px;
+    margin: 10px 0px;
+  }
+  .dmy{
+    font-size:14px;
+  }
+
+  .category{
+    font-size: 14px;
+    margin-bottom: 20px;
+    margin-top: 10px;
+  }
+  .selcat{
+    font-size: 16px;
+    background-color: #E7E8FF;
+    height: 44px;
+  }
+
+  .desbox{
+    margin-top: 10px;
+    height: 100px;
+    width: 480px;
+    border-style: dashed;
+    border-radius: 4px;
+    padding: 10px;
+    text-align: start;
+  }
+  .desboxcont{
+    margin-bottom: 10px;
+  }
+  .obj{
+    margin:10px
+  }
+
+  .footnote{
+    width: 400px;
+    background-color: #e7e8ffbd;
+    color: black;
+    margin: 15px 0px;
+  }
+
+
+
+  .addgoal-btn{
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-color: transparent;
+    padding: 12px 24px;
+    gap: 10px;
+    margin-top: 0px;
+    margin-left: 320px;
+    
+    width: 170px;
+    height: 43px;
+    color: #E7E8FF;
+    background: #030BC3;
+    border-radius: 8px;
+  }
+  .addgoal-btn:hover{
+    color: rgb(237, 238, 243);
+    background: #00010e;
+  }
