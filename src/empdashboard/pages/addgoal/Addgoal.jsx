@@ -30,7 +30,7 @@ const Addgoal = () => {
 
   const url = `https://pms-jq9o.onrender.com/api/v1/goal/addgoal`
   const handleSubmit = () => {
-    axios.post(url, formData,  {headers: {Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDFlMDNhNzU1YTdlOWE0M2IyNGFhNmMiLCJyb2xlIjoiSFIgTWFuYWdlciIsIndvcmtFbWFpbCI6InNvcGhpYW9rb3NvZG9AZ21haWwuY29tIiwiZmlyc3ROYW1lIjoiU29waGlhIiwiY29tcGFueUlEIjoiNjQxZGY1MzE1NWE3ZTlhNDNiMjRhOWY2IiwiaWF0IjoxNjc5ODUxODA5LCJleHAiOjE2Nzk5MzgyMDl9.yzTTmiqzNpCLQfjzEy2TVh-CoQVDet5AQFctzU00eCU`}})
+    axios.post(url, formData,  {headers: {Authorization: `${Cookies.get('EmpToken')}`}})
     .then((res) => {
       console.log(res.data)
       toast.success("Goal Added Successfully")

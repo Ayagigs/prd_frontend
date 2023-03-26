@@ -45,7 +45,6 @@ function SignIn() {
       setIsLoading(false);
       toast.success('Login Successfully');
       navigate('/dashboard');
-      console.log(res.data.data);
 
       Cookies.set('companyID', res.data.data._id);
       Cookies.set('Token', res.data.token);
@@ -59,11 +58,8 @@ function SignIn() {
           setIsLoading(false);
           toast.success('Login Successfully');
           navigate('/emp-dashboard')
-          console.log(res.data)
           
           Cookies.set("EmpToken", res.data.token)
-          console.log(res.data.token)
-          console.log(res.data)
         
       }catch(error){
         setIsLoading(false)
