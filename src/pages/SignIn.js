@@ -54,50 +54,22 @@ function SignIn() {
       Cookies.set('Token', res.data.token);
       //   setPopup(true);
     } catch (error) {
-      console.log(error.message);
       setIsLoading(false);
       toast.error(error.response.data.message);
     }
-  };
 
-  const signInWithGoogle = async response => {
-    // response = await signInWithPopup(auth, provider);
-    // console.log(response._tokenResponse.idToken);
-    // try {
-    //   response = await signInWithPopup(auth, provider);
-    //   setIsLoading(true);
-    //   const res = await axios.post(
-    //     'http://localhost:3030/api/v1/admin/googlelogin',
-    //     {
-    //       tokenId: response._tokenResponse.idToken,
-    //     }
-    //   );
-    //   // console.log(res);
-    //   if (res) {
-    //     console.log('submitted');
-    //   }
-    //   console.log('submitted');
-    //   setIsLoading(false);
-    //   toast.success('Login Successfully');
-    //   //   setPopup(true);
-    // } catch (error) {
-    //   console.log(error.message);
-    //   setIsLoading(false);
-    //   // toast.error(error.response.data.message);
-    // }
-    try {
-    } catch (error) {
-      console.log('ERROR SUBMITTING');
-      // toast.error(error.response.data.message);
-    }
+    axios
+      .get('https://pms-jq9o.onrender.com/api/v1/admin/findme', {
+        headers: { Authorization: `Bearer ${Cookies.get('Token')}` },
+      })
+      .then(res => {
+        Cookies.set('companyID', res.data.data.company[0].companyID);
+      });
   };
 
   const responseSuccessGoogle = response => {
-    // console.log('Login successfull:', response.credential);
     // var decoded = jwt_decode(response.credential);
-    // console.log(decoded);
-    // console.log(response.credential.accessToken);
-    // console.log(response.credential);
+
     axios({
       method: 'POST',
       url: 'https://pms-jq9o.onrender.com/auth/google/callback',
@@ -165,7 +137,7 @@ function SignIn() {
           />
         </label>
         <p className="text_3">
-          <a href="/">Forgot password?</a>
+          <a href="/forgotpassword">Forgot password?</a>
         </p>
 
         <button className="signInButton" type="submit">

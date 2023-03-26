@@ -4,7 +4,7 @@ import Navbar from "../../components/navbar/Navbar";
 // import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
 import { useState } from "react";
 import { Profile2User } from 'iconsax-react';
-// import { ProfileUser } from 'iconsax-react';
+import { Profile } from 'iconsax-react';
 
 
 import { Link } from "react-router-dom";
@@ -37,7 +37,7 @@ const New = ({ inputs, title }) => {
           </Link>
           <Link to="/employee/trial/new/singleadd" style={{ textDecoration: "none" }}>
             <li className="singleadd">
-            <Profile2User size="32" color="#030BC3"/>
+            <Profile size="32" color="#030BC3"/>
               <div className='wrapword2'>
               <h2>Single Add</h2>
               <span>Add one employee at a time</span>

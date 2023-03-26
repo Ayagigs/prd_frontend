@@ -6,6 +6,14 @@ import { useState ,  useEffect} from "react";
 import axios from "axios";
 import Cookies from "js-cookie"
 import { toast } from 'react-toastify';
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import {RiDeleteBin6Line} from "react-icons/ri"
+import Paper from "@mui/material/Paper";
 
 const Datatable = () => {
   const [data, setData] = useState([]);
@@ -19,55 +27,13 @@ const Datatable = () => {
     })
   }, []);
   
+  
   const handleDelete = (id) => {
-    // setData(data.filter((item) => item.id !== id));
-
-    const url2 = `https://pms-jq9o.onrender.com/api/v1/admin/deactivate/${id}`
-
-    axios.patch(url2, {headers: {Authorization: `Bearer ${Cookies.get('Token')}`}})
-    .then(res => {
-      console.log(data)
-      toast.success('Employee Account Deactivated');
-      setTimeout(() => {
-        window.location.reload()
-      }, 1500)
-    }).catch (error => {
-      toast.error(error.response.data.message);
-  })
-  };
-
-  const handleArchive = (id) => {
     setData(data.filter((item) => item.id !== id));
   };
+  const handleView = (id) => {
+  };
 
-  const actionColumn = [
-    {
-      field: "action",
-      headerName: "Action",
-      width: 200,
-      renderCell: (params) => {
-        return (
-          <div className="cellAction">
-            <Link to="/users/test" style={{ textDecoration: "none" }}>
-              <div className="viewButton">View</div>
-            </Link>
-            <div
-              className="deleteButton"
-              onClick={() => handleDelete(params.row.id)}
-            >
-              Delete
-            </div>
-            <div
-              className="archiveButton"
-              onClick={() => handleArchive(params.row.id)}
-            >
-              Archive
-            </div>
-          </div>
-        );
-      },
-    },
-  ];
   return (
     <div className="datatable">
       <div className="datatableTitle">
@@ -76,14 +42,43 @@ const Datatable = () => {
           Add Employee 
         </Link>
       </div>
-      <DataGrid
-        className="datagrid"
-        rows={data}
-        columns={userColumns.concat(actionColumn)}
-        pageSize={9}
-        rowsPerPageOptions={[9]}
-        checkboxSelection
-      />
+      <TableContainer component={Paper} className="table">
+      <Table sx={{ maxWidth: 1380, minWidth: 600  }} aria-label="simple table">
+        <TableHead className="tablehead">
+          <TableRow className="rowtitle">
+            <TableCell className="tableCell">Employee Name</TableCell>
+            <TableCell className="tableCell">Employee ID</TableCell>
+            <TableCell className="tableCell">Email Address</TableCell>
+            <TableCell className="tableCell">Role</TableCell>
+            <TableCell className="tableCell">Gender</TableCell>
+            <TableCell className="tableCell">Status</TableCell>
+            <TableCell className="tableCell"></TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {data.map((row) => (
+            <TableRow key={row._id}>
+              <TableCell className="tableCell">
+                <div className="cellWrapper" onClick={() => handleView(row._id)}>
+                  <img src={row.profilePhoto} alt="" className="image" />
+                  {row.firstName + " " + row.lastName}
+                </div>
+              </TableCell>
+              <TableCell className="tableCell">{row.employeeID}</TableCell>
+              <TableCell className="tableCell">{row.workEmail}</TableCell>
+              <TableCell className="tableCell">{row.role}</TableCell>
+              <TableCell className="tableCell">{row.gender}</TableCell>
+              <TableCell className="tableCell">
+                <span className={row.status === 'Active' ? 'active' : 'inactive'}>{row.status}</span>
+              </TableCell>
+              <TableCell className="tableCell">
+                <span className='delete' onClick={() => handleDelete(row._id)}><RiDeleteBin6Line/></span>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
     </div>
   );
 };

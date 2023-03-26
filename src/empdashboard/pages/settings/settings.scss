@@ -1,0 +1,67 @@
+.settings {
+    display: flex;
+    margin-top: 12px;
+    width: 100%;
+  
+    .settingsContainer {
+      flex: 6;
+    }
+}
+
+.avatar {
+  width:111px;
+  height: 111px;
+  border-radius: 50%;
+  width: 111px;
+  height: 111px;
+  left: 0px;
+  top: 36px;
+  
+}
+
+.prof{
+  display: flex;
+  margin: 36px 17px 32px 55px;
+  position: absolute;
+  width: 915px;
+  height: 151px;
+  left: 305px;
+  top: 80px;
+}
+
+.org{
+width: 271px;
+height: 44px;
+font-family: 'Satoshi';
+font-style: normal;
+font-weight: 500;
+font-size: 32px;
+line-height: 44px;
+/* identical to box height */
+color: #000000;
+
+}
+
+.name{
+width: 234px;
+height: 33px;
+font-family: 'Satoshi';
+font-style: normal;
+font-weight: 500;
+font-size: 24px;
+line-height: 37px;
+/* identical to box height */
+color: #555555;
+}
+
+.details{
+  padding: 15px 15px;
+}
+
+.moreinfo{
+  margin: 194px 57px;
+  width: 914px;
+  height: 607px;
+  background: #FFFFFF;
+  border-radius: 8px;
+}

@@ -1,6 +1,7 @@
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import { TickCircle } from 'iconsax-react';
+// import { CalendarAdd } from 'iconsax-react';
 import "./trial.scss";
 import Image from './imageholder.png';
 

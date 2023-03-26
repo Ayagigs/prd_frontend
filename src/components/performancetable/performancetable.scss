@@ -1,5 +1,5 @@
-.table {
-
+.perftable {
+margin-top: 15px;
   font-family: 'Satoshi';
       font-style: normal;
       font-weight: 400;
@@ -42,4 +42,22 @@
       }
     }
   }
+
+.closeReview{
+  position: fixed;
+  top: 120px;
+  right: 80px;
+  z-index: 30;
+  padding: 8px 15px;
+  border-radius: 100%;
+  font-size: 18px;
+  background-color: white;
+  cursor: pointer;
+}
+.closeReview:hover{
+  color: rgb(220, 0, 0);
+}
+.hide{
+  display: none;
+}
   

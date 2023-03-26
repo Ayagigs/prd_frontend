@@ -74,7 +74,9 @@ const Bulk = ({ inputs, title }) => {
         <Link to="/employee/trial/new" style={{ textDecoration: "none" }}>
           <button className='cancelbtn'>Cancel</button>
         </Link>
-          <button className='addempbtn'  onClick={() => handleSubmit()}>{isLoading ? 'Submitting...' : 'Add Employee'}</button>
+        <Link to="/employee/trial/new/bulk/verifybulk" style={{ textDecoration: "none" }}>
+          <button className='addempbtn' >Add Employee</button>
+        </Link> 
         </div>
         
         </div>
