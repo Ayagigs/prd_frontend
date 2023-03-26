@@ -40,7 +40,7 @@ const Widget = ({ type }) => {
   }
 
   return (
-    <div className="widget">
+    <div className="widgetbox">
       <div className="left">
         <span className="title">{data.title}</span>
         

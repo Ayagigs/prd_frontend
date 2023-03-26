@@ -1,0 +1,71 @@
+.newContainer {
+    flex: 6;
+  
+  }
+  .verificationcontainer {
+    margin-top:110px;
+    margin-left: 250px;
+  }
+  
+  
+  .verifycont{
+
+    position: relative;
+    width: 432px;
+    height: 293px;
+    background: #FFFFFF;
+    border-radius: 4px;
+    flex-direction: column;
+    display: flex;
+    padding: 30px;
+    margin: 100px;
+    display: flex;
+    box-shadow: 3px 6px 28px rgba(0, 0, 0, 0.25);
+  }
+  
+  .closeverify{
+        position: absolute;
+        border-color: transparent;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        background-color: #EEEFF7;
+        align-items: center;
+        padding: 10px;
+        margin-left:350px;
+        border-radius: 1e+08px;
+        cursor: pointer;
+        
+  }
+  
+  .maincont{
+    margin-top: 50px;
+    align-items: center;
+    text-align: center;
+  }
+
+  .verifytext{
+    font-family: 'Satoshi';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    padding: 20px;
+    // display: flex;
+    justify-content:space-between;
+    align-items: center;
+    text-align: center;
+    color: #000000; 
+  }
+
+  .inmail{
+    font-family: 'satoshi';
+font-style: normal;
+font-weight: 600;
+font-size: 20px;
+line-height: 24px;
+  }
+  
+
+  
+  

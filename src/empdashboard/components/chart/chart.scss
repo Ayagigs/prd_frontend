@@ -1,0 +1,40 @@
+.chart {
+  display: flex;
+  flex-direction: row;
+  flex: 4;
+  -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+  box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+  padding: 10px;
+  color: rgb(19, 19, 19);
+  
+box-sizing: border-box;
+
+width: 890px;
+height: 311px;
+
+background: #FFFFFF;
+border: 1px solid #F2F2F2;
+border-radius: 8px;
+
+/* Inside auto layout */
+
+flex: none;
+order: 1;
+flex-grow: 0;
+
+  .title {
+    margin-bottom: 20px;
+    width: 149px;
+height: 22px;
+
+font-family: 'Satoshi';
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+line-height: 22px;
+  }
+
+  .chartGrid {
+    stroke: rgb(228, 225, 225);
+  }
+}
