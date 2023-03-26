@@ -101,6 +101,10 @@ span{
         border-radius: 8px;
         cursor: pointer;
 }
+.bulkadd:hover{
+  color: #E7E8FF;
+  background: #E7E8FF;
+}
 
 .wrapword{
   position: relative;
@@ -122,6 +126,10 @@ span{
   border-radius: 8px;
   cursor:pointer;
 
+}
+.singleadd:hover{
+  color: #E7E8FF;
+  background: #E7E8FF;
 }
 .wrapword2{
   position: relative;
@@ -161,6 +169,10 @@ span{
   background: #E7E8FF;
   border-radius: 8px;
 }
+.cancelbtn:hover{
+  color: rgb(237, 238, 243);
+  background: #00010e;
+}
 
 .addempbtn{
   display: flex;
@@ -176,6 +188,10 @@ span{
   color: #E7E8FF;
   background: #030BC3;
   border-radius: 8px;
+}
+.addempbtn:hover{
+  color: rgb(237, 238, 243);
+  background: #00010e;
 }
 
   .newContainer {

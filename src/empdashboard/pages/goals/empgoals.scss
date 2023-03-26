@@ -6,7 +6,7 @@
   
     .emphomeContainer {
       flex: 6;
-      height: 1500px;
+      height: 1400px;
       background-color: #F5F5F5 ;
     }
 
@@ -67,7 +67,6 @@ top: 22px;
    
 }
 .addgoalbtn{ 
-
     cursor: pointer;
     display: flex;
     flex-direction: row;
@@ -83,17 +82,8 @@ top: 22px;
     background: #030BC3;
     border-radius: 8px;
     cursor: pointer;
-
-    // text
-    // align-items: center;
-    // text-align: center;
-    // color: #FFFFFF;
-    // width: 92px;
-    // height: 19px;
-
-    // font-family: 'Satoshi';
-    // font-style: normal;
-    // font-weight: 500;
-    // font-size: 14px;
-    // line-height: 19px;
+  }
+  .addgoalbtn:hover{
+    color: rgb(237, 238, 243);
+    background: #00010e;
   }

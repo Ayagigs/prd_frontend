@@ -15,7 +15,11 @@ const Appraisal = () => {
         <div className="appraisalbox">
           <div className="apptopbox">
             <h1>360 Appraisal</h1>
-            <button className='closeform-btn'>X</button>
+            <button className='closeform-btn'>
+              <Link to="/emp-dashboard/goalreview" style={{ textDecoration: "none" }}>
+                X
+              </Link>
+            </button>
           </div>
             <hr />
           <div className='appraisalprofile'>

@@ -31,7 +31,7 @@ const Empgoals = () => {
           </h1>
         
 
-        <Link to="/emp-dashboard/empgoals/addgoal" className="">
+        <Link to="/empgoals/addgoal" className="">
           <button className="addgoalbtn"> Add Goals </button>
         </Link>
           </div>

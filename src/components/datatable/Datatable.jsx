@@ -30,6 +30,9 @@ const Datatable = () => {
   
   const handleDelete = (id) => {
     setData(data.filter((item) => item.id !== id));
+    const url2 = `https://pms-jq9o.onrender.com/api/v1/admin/deactivate/${id}`
+
+    axios.patch(url2, {headers: {Authorization: `Bearer ${Cookies.get('Token')}`}})
   };
   const handleView = (id) => {
   };

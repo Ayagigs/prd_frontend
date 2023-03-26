@@ -9,6 +9,7 @@ import SignIn from './SignIn';
 import { toast } from 'react-toastify';
 import Form from './Email';
 import { FaSpinner } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
   const [currentpage, setCurrentPage] = useState(1);
@@ -18,6 +19,8 @@ const Register = () => {
   const [countries, setCountries] = useState([]);
   const [otpScreen, setOtpScreen] = useState(false);
   const [otpData, setOtpData] = useState('');
+  
+  const navigate = useNavigate()
 
   const [formData, setFormData] = useState({
     firstName: '',
@@ -47,6 +50,8 @@ const Register = () => {
       setOtpData(res.data);
       console.log(res.data);
       setOtpScreen(true);
+      Cookies.set('Token', res.data.token)
+      navigate('/emp-dashboard')
       toast.success('Please Check your email for OTP');
     } catch (error) {
       setIsLoading(false);

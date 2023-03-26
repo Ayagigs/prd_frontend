@@ -15,6 +15,13 @@ const Trial = () => {
           <Navbar />
           <div className="trialcont">
            <div className="trialdetails">
+           
+              <button className="closetrial-btn">
+              <Link to="/employee" style={{ textDecoration: "none" }}>
+                X
+              </Link>
+              </button>
+           
            <p className="title">Start your Premium 30-days free trial</p>
             <p className="sub"> Unlock the power of your work force. Very simple pricing, one plan for a monthly fee. </p>
             <div className="charges">
@@ -35,10 +42,14 @@ const Trial = () => {
             <p className="sub">Get access to all features for the next 30 days to bring your teams performance to the best level ever</p>
             <div className="buttons">
             <Link to="/employee/trial/new" style={{ textDecoration: "none" }}>
-            <button className="startbtn"> Start your 30 days free trial</button>
+            <button className="starttrialbtn"> Start your 30 days free trial</button>
             </Link>
             
-            <button className="skipbtn"> Skip free trial</button>         
+            <button className="skipbtn"> 
+              <Link to="/employee" style={{ textDecoration: "none" }}>
+                Skip free trial
+              </Link>
+              </button>         
             </div>
           </div>
         </div>

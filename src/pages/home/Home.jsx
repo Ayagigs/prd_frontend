@@ -23,9 +23,13 @@ const Home = () => {
           <Chart title="Performance Review" aspect={2 / 1} />
         </div>
         <div className="listContainer">
-          <div className="listTitle">Employee Status</div>
+          <div className="listTitle">
+            <h1>Employee Status </h1>
+            </div>
+          <div className="hometablebox">
           <Table />
-        </div>
+          </div>
+          </div>
       </div>
     </div>
   );
