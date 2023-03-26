@@ -6,67 +6,39 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import Cookies from "js-cookie"
+import ReviewDetails from "../../pages/ReviewDetails";
+import { Link } from "react-router-dom";
+
 
 const Performancetable = () => {
-  const rows = [
-    {
-      name: "Christian Apithy",
-      goal: 2.4,
-      img: "https://m.media-amazon.com/images/I/81bc8mA3nKL._AC_UY327_FMwebp_QL65_.jpg",
-      competency: 4.0,
-      ratings: "Excellent",
-      score: 4.2,
-      reviews: "Reviews  >",
-    },
-    {
-      name: "Emmanuel Sissoko",
-      goal: 2.4,
-      img: "https://m.media-amazon.com/images/I/31JaiPXYI8L._AC_UY327_FMwebp_QL65_.jpg",
-      competency: 4.0,
-      ratings: "Satisfactory",
-      score: 4.2,
-      reviews: "Reviews  >",
-    },
-    {
-      name: "Amotekun Adeola",
-      goal: 3.4,
-      img: "https://m.media-amazon.com/images/I/71kr3WAj1FL._AC_UY327_FMwebp_QL65_.jpg",
-      competency: 4.2,
-      ratings: "Excellent",
-      score: 4.2,
-      reviews: "Reviews  >",
-    },{
-      name: "Somogyi Adrian",
-      goal: 4.4,
-      img: "https://m.media-amazon.com/images/I/81bc8mA3nKL._AC_UY327_FMwebp_QL65_.jpg",
-      competency: "-",
-      ratings: "-",
-      score: "--",
-      reviews: "Reviews  >",
-    },
-    {
-      name: "Oscar Kossou",
-      goal: 1.4,
-      img: "https://m.media-amazon.com/images/I/31JaiPXYI8L._AC_UY327_FMwebp_QL65_.jpg",
-      competency: "-",
-      ratings: "-",
-      score: "--",
-      reviews: "Reviews  >",
-    },
-    {
-      name: "Amotekun Adeola",
-      goal: 2.4,
-      img: "https://m.media-amazon.com/images/I/71kr3WAj1FL._AC_UY327_FMwebp_QL65_.jpg",
-      competency: 4.2,
-      ratings: "--",
-      score: "4.2",
-      reviews: "Reviews  >",
-    },
+  const [rows, setRows] = useState([])
+  const [details, setDetails] = useState({})
+  const [reviewPopup, setReviewPopup] = useState(false)
+  const [fullyear, setFullyear] = useState()
+  const [midyear, setMidyear] = useState()
+  const [appraisal, setAppraisal] = useState()
+
+  const url = `https://pms-jq9o.onrender.com/api/v1/review/allreviews/${Cookies.get('companyID')}`
+  useEffect(() => {
+    axios.get(url, {headers: {Authorization: `Bearer ${Cookies.get('Token')}`}})
+    .then(res => {
+      setRows(res.data.data)
+    })
+  }, []);
+
+
+  const Details = (row) => {
+    setReviewPopup(true)
+    setDetails({fullname: row.firstName + " " + row.lastName, photo: row.profilePhoto})
+    setFullyear(row.reviews.filter((el) => el.reviewTime == 'Full-Year'))
+    setMidyear(row.reviews.filter((el) => el.reviewTime == 'Mid-Year'))
+    setAppraisal(row.reviews.filter((el) => el.reviewType == '360 Appraisal'))
     
-    
-    
-  ];
-  return (
+  }
+  return <>
     <TableContainer component={Paper} className="perftable">
       <Table sx={{ maxWidth: 1380, minWidth: 600 }} aria-label="simple table">
         <TableHead className="tablehead">
@@ -81,26 +53,29 @@ const Performancetable = () => {
         </TableHead>
         <TableBody>
           {rows.map((row) => (
-            <TableRow key={row.name}>
+            <TableRow key={row._id}>
               <TableCell className="tableCell">
                 <div className="cellWrapper">
-                  <img src={row.img} alt="" className="image" />
-                  {row.name}
+                  <img src={row.profilePhoto} alt="" className="image" />
+                  {row.firstName + " " + row.lastName}
                 </div>
               </TableCell>
-              <TableCell className="tableCell">{row.goal}</TableCell>
-              <TableCell className="tableCell">{row.competency}</TableCell>
-              <TableCell className="tableCell">{row.ratings}</TableCell>
-              <TableCell className="tableCell">{row.score}</TableCell>
+              <TableCell className="tableCell">{row.score > 0 ? row.score : '--'}</TableCell>
+              <TableCell className="tableCell">{row.competency > 0 ? row.competency : '--'}</TableCell>
+              <TableCell className="tableCell">{row.finalScore > 0 ? row.ratings : '--'}</TableCell>
+              <TableCell className="tableCell">{row.finalScore > 0 ? row.finalScore : '--'}</TableCell>
               <TableCell className="tableCell">
-                <span className={`status ${row.reviews}`}>{row.reviews}</span>
+                <Link className={`status ${row.reviews}`} onClick={() => Details(row)} >reviews {'>'}</Link>
               </TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
     </TableContainer>
-  );
+    <p className={reviewPopup ? "closeReview" : "hide"} onClick={() => setReviewPopup(false)}>X</p>
+    {reviewPopup ? <ReviewDetails user={details} fullyear={fullyear} midyear={midyear} appraisal={appraisal}/> : undefined}
+                  
+  </>;
 };
 
 export default Performancetable;

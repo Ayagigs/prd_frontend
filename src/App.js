@@ -78,9 +78,11 @@ function App() {
                 path="new"
                 element={<New inputs={productInputs} title="Add New Product" />}
               />
+              <Route path="details" element={<GoalDetails/>}/>
             </Route>
             <Route path="performance">
               <Route index element={<Performance />} />
+              <Route path="details" element={<ReviewDetails/>}/>
             </Route>
             <Route path="settings">
               <Route index element={<Settings />} />

@@ -40,19 +40,21 @@ function SignIn() {
         'https://pms-jq9o.onrender.com/api/v1/admin/login',
         formData
       );
-      console.log(res.data.data);
       setIsLoading(false);
       toast.success('Login Successfully');
       navigate('/dashboard')
       
-      Cookies.set("companyID", res.data.data._id)
       Cookies.set("Token", res.data.token)
       //   setPopup(true);
     } catch (error) {
-      console.log(error.message);
       setIsLoading(false);
       toast.error(error.response.data.message);
     }
+    
+    axios.get('https://pms-jq9o.onrender.com/api/v1/admin/findme', {headers: {Authorization: `Bearer ${Cookies.get('Token')}`}})
+    .then(res => {
+      Cookies.set("companyID", res.data.data.company[0].companyID)
+    })
   };
 
   const signInWithGoogle = async response => {

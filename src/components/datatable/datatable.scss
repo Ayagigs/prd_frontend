@@ -1,5 +1,6 @@
 .datatable {
-  width: 1200px;
+  max-width: 1380px;
+  min-width: 1200px;
   height: 600px;
   padding: 20px;
   border: 1px solid #EFEFEF;
@@ -7,7 +8,8 @@ border-radius: 4px;
 // z-index: -22;
   
   .datatableTitle{
-    width: 1133.45px;
+    max-width: 1400px;
+    min-width: 1200px;
     height: 22px;
     font-family: 'Satoshi';
     font-style: normal;
@@ -57,6 +59,25 @@ border-radius: 4px;
       font-size: 14px;
       line-height: 19px;
     }
+  }
+
+  .active{
+    color: green;
+    background-color: rgba(120, 223, 120, 0.251);
+    padding: 5px 10px;
+    border-radius: 25px;
+  }
+  .inactive{
+    color: red;
+    background-color: rgba(223, 144, 120, 0.251);
+    padding: 5px 10px;
+    border-radius: 25px;
+  }
+
+  svg{
+    color: rgb(212, 0, 0);
+    font-size: 16px;
+    cursor: pointer;
   }
 
   .cellWithImg {
