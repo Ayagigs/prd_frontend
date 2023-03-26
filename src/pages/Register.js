@@ -10,7 +10,7 @@ import { toast } from 'react-toastify';
 import Form from './Email';
 import { FaSpinner } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
-
+import Cookies from 'js-cookie';
 const Register = () => {
   const [currentpage, setCurrentPage] = useState(1);
   const [popup, setPopup] = useState(false);
@@ -51,6 +51,7 @@ const Register = () => {
       console.log(res.data);
       setOtpScreen(true);
       Cookies.set('Token', res.data.token)
+      console.log(res.data.token)
       navigate('/emp-dashboard')
       toast.success('Please Check your email for OTP');
     } catch (error) {
