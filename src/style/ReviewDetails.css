@@ -21,7 +21,21 @@
     width: 550px;
     position: relative;
 }
-
+.reviewDetails::-webkit-scrollbar-thumb{
+    width: 5px;
+    border-radius: 25px;
+    background-color: rgb(168, 168, 168);
+}
+.reviewDetails::-webkit-scrollbar{
+    width: 5px;
+    border-radius: 25px;
+    background-color: rgb(232, 232, 232);
+}
+.reviewDetails::-webkit-scrollbar-track{
+    width: 5px;
+    border-radius: 25px;
+    background-color: gray;
+}
 .reviewDetailsHeading{
     display: flex;
     justify-content: space-between;

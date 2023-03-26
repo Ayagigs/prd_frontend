@@ -9,9 +9,12 @@ import Paper from "@mui/material/Paper";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Cookies from "js-cookie"
+import GoalDetails from "../../pages/GoalDetails";
 
 const Goalstable = () => {
   const [rows, setRows] = useState([])
+  const [details, setDetails] = useState({})
+  const [goalPopup, setGoalPopup] = useState(false)
 
   const url = `https://pms-jq9o.onrender.com/api/v1/goal/employeegoals/${Cookies.get('companyID')}`
   useEffect(() => {
@@ -21,7 +24,12 @@ const Goalstable = () => {
     })
   }, []);
 
-  return (
+  const Details = (row) => {
+    setGoalPopup(true)
+    setDetails(row)
+  }
+
+  return <>
     <TableContainer component={Paper} className="table">
       <Table sx={{ maxWidth: 1380, minWidth: 600  }} aria-label="simple table">
         <TableHead className="tablehead">
@@ -38,7 +46,7 @@ const Goalstable = () => {
           {rows.map((row) => (
             <TableRow key={row._id}>
               <TableCell className="tableCell">
-                <div className="cellWrapper">
+                <div className="cellWrapper"  onClick={() => Details(row)}>
                   <img src={row.owner.profilePhoto} alt="" className="image" />
                   {row.owner.firstName + " " + row.owner.lastName}
                 </div>
@@ -55,7 +63,9 @@ const Goalstable = () => {
         </TableBody>
       </Table>
     </TableContainer>
-  );
+    <p className={goalPopup ? "closeGoal" : "hide"} onClick={() => setGoalPopup(false)}>X</p>
+    {goalPopup ? <GoalDetails goal={details}/> : undefined}
+  </>;
 };
 
 export default Goalstable;

@@ -3,6 +3,7 @@
     .cellWrapper {
       display: flex;
       align-items: center;
+      cursor: pointer;
   
       .image {
         width: 32px;
@@ -37,3 +38,21 @@
     }
   }
   
+  .closeGoal{
+    position: fixed;
+    top: 120px;
+    right: 80px;
+    z-index: 30;
+    padding: 8px 15px;
+    border-radius: 100%;
+    font-size: 18px;
+    background-color: white;
+    cursor: pointer;
+  }
+  .closeGoal:hover{
+    color: rgb(220, 0, 0);
+  }
+  .hide{
+    display: none;
+  }
+    
