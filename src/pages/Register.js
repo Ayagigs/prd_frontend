@@ -8,17 +8,19 @@ import { NavLink } from 'react-router-dom';
 import SignIn from './SignIn';
 import { toast } from 'react-toastify';
 import Form from './Email';
+import { FaSpinner } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
   const [currentpage, setCurrentPage] = useState(1);
   const [popup, setPopup] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [states, setStates] = useState('');
-  const [countries, setCountries] = useState('');
-  const [selectedCountry, setSelectedCountry] = useState('');
-  const [selectedState, setSelectedState] = useState('');
+  const [states, setStates] = useState([]);
+  const [countries, setCountries] = useState([]);
   const [otpScreen, setOtpScreen] = useState(false);
   const [otpData, setOtpData] = useState('');
+  
+  const navigate = useNavigate()
 
   const [formData, setFormData] = useState({
     firstName: '',
@@ -35,25 +37,6 @@ const Register = () => {
     numOfEmployees: '',
   });
 
-  useEffect(() => {
-    fetch('https://api.example.com/countries')
-      .then(response => response.json())
-      .then(data => setCountries(data));
-  }, []);
-
-  useEffect(() => {
-    if (selectedCountry) {
-      fetch(`https://api.example.com/states?country=${selectedCountry}`)
-        .then(response => response.json())
-        .then(data => setStates(data));
-    }
-  }, [selectedCountry]);
-
-  const handleInputChange = event => {
-    const { name, value } = event.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
   const handleSubmit = async event => {
     try {
       setIsLoading(true);
@@ -67,6 +50,8 @@ const Register = () => {
       setOtpData(res.data);
       console.log(res.data);
       setOtpScreen(true);
+      Cookies.set('Token', res.data.token)
+      navigate('/emp-dashboard')
       toast.success('Please Check your email for OTP');
     } catch (error) {
       setIsLoading(false);
@@ -74,6 +59,45 @@ const Register = () => {
     }
   };
 
+  const handleInputChange = event => {
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  useEffect(() => {
+    const fetchCountries = async () => {
+      try {
+        const response = await axios.get(
+          'https://countriesnow.space/api/v0.1/countries'
+        );
+
+        setCountries(response.data.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    const fetchStates = async () => {
+      try {
+        setIsLoading(true);
+        const response = await axios.post(
+          'https://countriesnow.space/api/v0.1/countries/states',
+          {
+            country: formData.country,
+          }
+        );
+        setIsLoading(false);
+        setStates(response.data.data.states);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchCountries();
+    if (formData.country !== '') {
+      fetchStates();
+    }
+  }, [formData.country]);
   return (
     <>
       <div className="wrapper">
@@ -207,18 +231,18 @@ const Register = () => {
                   </div>
                   <div className="inputWrapper">
                     <label htmlFor="">Business Type</label>
-                    <input
-                      type="text"
-                      required
+
+                    <select
                       name="businessType"
-                      id="businessType"
                       value={formData.businessType}
-                      onChange={handleInputChange}
-                      placeholder="Sole Proprietorship or Partnership"
-                    />
-                    {/* <select name="" id="">
-                      <option value="">--Select option--</option>
-                    </select> */}
+                      id="businessType"
+                    >
+                      <option>--Select option--</option>
+                      <option>Technology</option>
+                      <option>Marketing</option>
+                      <option>Finance</option>
+                      <option>Film and Entertainment</option>
+                    </select>
                   </div>
                 </div>
 
@@ -252,33 +276,45 @@ const Register = () => {
                 <div className="inputHolder">
                   <div className="inputWrapper">
                     <label htmlFor="">Country</label>
-                    <input
-                      type="text"
-                      required
+
+                    <select
                       name="country"
                       id="country"
                       value={formData.country}
                       onChange={handleInputChange}
-                      placeholder=" Country"
-                    />
-                    {/* <select name="" id="">
-                      <option value="">--Select Country--</option>
+                    >
+                      <option value="">-- Select a country --</option>
                       {countries.map(country => (
-                        <option value={country.code}>--Select Country--</option>
+                        <option
+                          key={country.country_iso2}
+                          value={country.country_iso2}
+                        >
+                          {country.country}
+                        </option>
                       ))}
-                    </select> */}
+                    </select>
                   </div>
                   <div className="inputWrapper">
-                    <label htmlFor="">State</label>
-                    <input
-                      type="text"
-                      required
+                    <label htmlFor="state">State</label>
+                    <select
                       name="state"
                       id="state"
                       value={formData.state}
                       onChange={handleInputChange}
-                      placeholder=" State"
-                    />
+                    >
+                      <option value="">-- Select a state --</option>
+                      {isLoading && (
+                        <option disabled>
+                          Fetching states, please wait...
+                        </option>
+                      )}
+                      {!isLoading &&
+                        states.map(state => (
+                          <option key={state.id} value={state.name}>
+                            {state.name}
+                          </option>
+                        ))}
+                    </select>
                   </div>
                 </div>
 
@@ -362,7 +398,14 @@ const Register = () => {
                   </button>
                 ) : (
                   <button type="button" onClick={() => handleSubmit()}>
-                    {isLoading ? 'Submitting...' : 'Submit'}
+                    {isLoading ? (
+                      <>
+                        <FaSpinner className="fa-spin" />
+                        &nbsp;Submitting...
+                      </>
+                    ) : (
+                      'Submit'
+                    )}
                   </button>
                 )}
               </div>

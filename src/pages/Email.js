@@ -7,17 +7,9 @@ import { FaSpinner } from 'react-icons/fa';
 import { useNavigate } from 'react-router';
 
 function Form(props) {
+  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [otp, setOtp] = useState('');
-  
-  // const [code, setCode] = useState({
-  //   code1: '',
-  //   code2: '',
-  //   code3: '',
-  //   code4: '',
-  //   code5: '',
-  //   code6: '',
-  // });
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -28,10 +20,13 @@ function Form(props) {
         OTP: otp,
       })
       .then(response => {
-        console.log('SUMMITTED');
+        // if (response.data.status === 'Success') {
+        //   navigate('/dashboard');
+        // }
+
         setIsLoading(false);
         console.log(response.data);
-        toast.success(response.data);
+        toast.success(response.data.message);
         // handle successful response from the backend
         // setSuccess(true)
       })
@@ -64,7 +59,7 @@ function Form(props) {
   };
 
   return (
-    <div className={"form-container"}>
+    <div className={'form-container'}>
       <img src={require('../assets/img/sms.png')} alt="Message Image" />
       <div className="instructions">
         Please enter the code sent to {props.data.email}
