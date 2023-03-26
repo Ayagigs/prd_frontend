@@ -5,12 +5,13 @@ import { signInWithPopup } from 'firebase/auth';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { NavLink } from 'react-router-dom';
-import { auth, provider } from '../config/firebase';
+// import { auth, provider } from '../config/firebase';
 // import GoogleLogin from 'react-google-login';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { GoogleLogin } from '@react-oauth/google';
 import { useNavigate } from 'react-router';
-import Cookies from "js-cookie"
+import Cookies from 'js-cookie';
+import jwt_decode from 'jwt-decode';
 
 function SignIn() {
   const responseGoogle = response => {
@@ -19,7 +20,7 @@ function SignIn() {
   const [companyId, setCompanyId] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     password: '',
@@ -40,13 +41,17 @@ function SignIn() {
         'https://pms-jq9o.onrender.com/api/v1/admin/login',
         formData
       );
-      console.log(res.data.data);
       setIsLoading(false);
       toast.success('Login Successfully');
-      navigate('/dashboard')
-      
-      Cookies.set("companyID", res.data.data._id)
-      Cookies.set("Token", res.data.token)
+      if (res.data.data.role === 'Admin') {
+        navigate('/dashboard');
+      } else {
+        navigate('/employee');
+      }
+      console.log(res.data.data);
+
+      Cookies.set('companyID', res.data.data._id);
+      Cookies.set('Token', res.data.token);
       //   setPopup(true);
     } catch (error) {
       console.log(error.message);
@@ -80,54 +85,49 @@ function SignIn() {
     //   setIsLoading(false);
     //   // toast.error(error.response.data.message);
     // }
-    // try {
-    //   axios({
-    //     method: 'POST',
-    //     url: 'https://pms-jq9o.onrender.com/api/v1/admin/googlelogin',
-    //     data: { tokenId: response._tokenResponse.idToken },
-    //   }).then(response => {
-    //     if (response) {
-    //       console.log(response);
-    //     }
-    //     console.log(response);
-    //   });
-    // } catch (error) {
-    //   console.log('ERROR SUBMITTING');
-    //   // toast.error(error.response.data.message);
-    // }
+    try {
+    } catch (error) {
+      console.log('ERROR SUBMITTING');
+      // toast.error(error.response.data.message);
+    }
   };
 
   const responseSuccessGoogle = response => {
-    console.log(response);
+    // console.log('Login successfull:', response.credential);
+    // var decoded = jwt_decode(response.credential);
+    // console.log(decoded);
+    // console.log(response.credential.accessToken);
+    // console.log(response.credential);
+    axios({
+      method: 'POST',
+      url: 'https://pms-jq9o.onrender.com/auth/google/callback',
+      data: { tokenId: response.credential },
+    }).then(response => {
+      if (response) {
+        console.log(response);
+      }
+      console.log(response);
+    });
   };
-  const responseErrorGoogle = response => {};
-
+  const responseErrorGoogle = response => {
+    console.log('Login failed:', response);
+  };
+  const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
+  console.log(clientId);
   return (
     <div className="signInContainer">
       <h1 className="text">Welcome Back</h1>
       <p className="text_2">We’ve missed you so much</p>
-      {/* <button className="googleSignInButton" onClick={signInWithGoogle}>
-        <img
-          src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
-          alt="Google logo"
-        />
-        Login with google
-      </button> */}
-      {/* googleSignInButton */}
 
       <div className="googleSignInButton">
         <GoogleOAuthProvider
           clientId="644468853015-cadrgrgrabl4vacc4evt7g342qiqa2t2.apps.googleusercontent.com"
-          redirectUri="http://localhost:3030/api/v1/admin/googlelogin"
+          redirectUri="https://pms-jq9o.onrender.com/auth/google/callback"
         >
           <GoogleLogin
             buttonText="Login with google"
-            onSuccess={responseSuccessGoogle => {
-              console.log(responseSuccessGoogle);
-            }}
-            onFailure={responseErrorGoogle => {
-              console.log(responseErrorGoogle);
-            }}
+            onSuccess={responseSuccessGoogle}
+            onFailure={responseErrorGoogle}
           />
         </GoogleOAuthProvider>
       </div>
