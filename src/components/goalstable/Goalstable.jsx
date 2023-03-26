@@ -40,8 +40,8 @@ const Goalstable = () => {
     
   ];
   return (
-    <TableContainer component={Paper} className="table">
-      <Table sx={{ maxWidth: 1380, minWidth: 600  }} aria-label="simple table">
+    <TableContainer component={Paper} className="goalsmaintable">
+      <Table sx={{ maxWidth: 1380, minWidth: 1200  }} aria-label="simple table">
         <TableHead className="tablehead">
           <TableRow className="rowtitle">
             <TableCell className="tableCell">Employee Name</TableCell>

@@ -17,8 +17,11 @@ const Empperformance = () => {
           
         </div>
         <div className="empperformanceContainer">
-          <div className="perftitle">Employee Performance</div>
-          <Performancetable />
+          <div className="perfbox">
+            <h1 className="perftitle">Employee Performance</h1>
+            <Performancetable />
+          </div>
+          
         </div>
         </div>
       </div>

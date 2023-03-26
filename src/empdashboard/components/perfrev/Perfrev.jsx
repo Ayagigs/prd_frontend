@@ -8,9 +8,9 @@ import Perfmini from "../perfmini/Perfmini";
 const Perfrev = () => {
   return (
     <div className="perfrev">
-      <div className="top">
+      <div className="minitop">
         <h1 className="title">Performance Review</h1>
-        <h1 className="title pick">Mid-Year Review </h1>
+        <h1 className="picker">Mid-Year Review </h1>
         <select className='select'>
                   <option value="select"></option>
           </select>

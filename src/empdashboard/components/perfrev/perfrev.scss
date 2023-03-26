@@ -7,7 +7,7 @@
   box-sizing: border-box;
   // padding: 10px;
   width: 700px;
-  height: 311px;
+  height: 300px;
   margin-left: 30px;
   background-color: #F5F5F5 ;
   // border: 1px solid #F3F3F3;
@@ -19,25 +19,32 @@
   order: 1;
   flex-grow: 0;
   
-    .top {
+    .minitop {
       display: flex;
       align-items: center;
       justify-content: space-between;
       color: gray;
       padding: 10px;
+      padding-bottom: -10px;
+      margin-bottom: -15px;
       // background-color: #F7F7F9;
   
-      .title {
+      .titles {
+        display: flex;
+        flex-direction: row;
+        width:400px;
         font-size: 16px;
         font-weight: 700;
         color: black;
+        margin-right: 210px;
       }
     }
   
-    .pick{
+    .picker{
+      // width: 140px;
       display: flex;
       flex-direction: row;
-      margin-left: 290px;
+      margin-left: 287px;
     }
   
     .select{

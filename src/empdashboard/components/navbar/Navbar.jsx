@@ -7,8 +7,8 @@ const Navbar = () => {
   // const { dispatch } = useContext(DarkModeContext);
 
   return (
-    <div className="navbar">
-      <div className="wrapper">
+    <div className="empnavbar">
+      <div className="navwrapper">
         <div className="search">
         <SearchOutlinedIcon />
           <input type="text" 

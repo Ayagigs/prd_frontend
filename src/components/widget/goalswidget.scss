@@ -1,4 +1,5 @@
 .goalswidget{
+  margin-left: -10px;
   box-sizing: border-box;
   display: flex;
   flex-direction: row;
@@ -60,6 +61,10 @@ color: #000000;
   
 }
 .widget {
+  background: #FFFFFF;
+  border: 1px solid #F2F2F2;
+  border-radius: 8px;
+  margin: 0 -5px;
     .left,
     .right {
       display: inline-block;

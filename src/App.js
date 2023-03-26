@@ -38,6 +38,8 @@ import { productInputs, userInputs } from './formSource';
 import './style/dark.scss';
 import { useContext } from 'react';
 import { DarkModeContext } from './context/darkModeContext';
+import Appraisal from './empdashboard/pages/appraisalform/Appraisal';
+import Addgoal from './empdashboard/pages/addgoal/Addgoal';
 
 
 function App() {
@@ -94,11 +96,12 @@ function App() {
               <Route index element={<Emphome />} />
                 <Route path="/emp-dashboard/appraisal" element={<Emphome />}/>
                 <Route path="/emp-dashboard/goalreview" element={<Goalreview />}/>
+                <Route path="/emp-dashboard/goalreview/appraisalform" element={<Appraisal />}/>
             </Route>
             <Route path="empgoals">
               <Route index element={<Empgoals />} />
-              {/* <Route path=":productId" element={<Single />} /> */}
-              <Route
+              {/* <Route path="/emp-dashboard/empgoals/addgoal" element={<Addgoal />}/> */}
+            <Route
                 path="new"
                 element={<New inputs={productInputs} title="Add New Product" />}
               />

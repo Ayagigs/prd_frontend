@@ -13,9 +13,13 @@ const Goals = () => {
         <div className="widgets">
           <Goalswidget/>
         </div>
-        <div className="listContainer">
-          <div className="listTitle">Goals</div>
-          <Goalstable/>
+        <div className="goalstablecont">
+          <div className="goaltablebox">
+            <h1 className="goalstitlebox">Goals</h1>
+            <Goalstable/>
+          </div>
+
+          
         </div>
       </div>
     </div>

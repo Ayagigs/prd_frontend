@@ -32,7 +32,7 @@ const Emphome = () => {
 
           <Link to="/emp-dashboard/goalreview" style={{ textDecoration: "none" }}>
           <div className="goalreviewundo">
-          <h1>Goal Review</h1>
+          <h1>Self Appraisal</h1>
           </div>
           </Link>
 

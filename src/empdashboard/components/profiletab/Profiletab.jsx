@@ -1,15 +1,18 @@
 import React from 'react'
 import "./profiletab.scss";
+import { Link } from "react-router-dom";
 
 const Profiletab = () => {
   return (
-    <div className='tabb'> 
-      <div className='proftabs'>
+    <div className='tabb'>
+       <Link to="" style={{ textDecoration: "none" }}>
+       <div className='proftabs'>
       <img 
       className="profimg"
       src="https://m.media-amazon.com/images/I/71kr3WAj1FL._AC_UY327_FMwebp_QL65_.jpg"
       alt='profilepicture'
       />
+     
       <div className="profdetails">
             <p className="duedate"> Due Feb 2023</p>
             <h1 className="emp"> Frank Cortage</h1>
@@ -21,6 +24,9 @@ const Profiletab = () => {
           </button>
         </div>     
       </div>
+      </Link> 
+      
+      <Link to="" style={{ textDecoration: "none" }}>
       <div className='proftabs'>
       <img 
       className="profimg"
@@ -38,6 +44,9 @@ const Profiletab = () => {
           </button>
         </div>     
       </div>
+      </Link>
+      
+      <Link to="" style={{ textDecoration: "none" }}>
       <div className='proftabs'>
       <img 
       className="profimg"
@@ -55,6 +64,9 @@ const Profiletab = () => {
           </button>
         </div>     
       </div>
+      </Link>
+      
+      <Link to="" style={{ textDecoration: "none" }}>
       <div className='proftabs'>
       <img 
       className="profimg"
@@ -72,6 +84,8 @@ const Profiletab = () => {
           </button>
         </div>     
       </div>
+      </Link>
+      
       
     </div>
   )

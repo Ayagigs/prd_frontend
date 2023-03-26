@@ -9,7 +9,7 @@ const Empwidget = () => {
   return (
     
     <div className="empwidgets"> 
-        <div className="widget">
+        <div className="widget"> 
             <div className="left">
                 <span className="title">Goals</span>
             <div sx={{ width: '100%' }}><LinearDeterminate /></div>

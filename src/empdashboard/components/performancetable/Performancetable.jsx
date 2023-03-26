@@ -76,7 +76,7 @@ const Performancetable = () => {
     
   ];
   return (
-    <TableContainer component={Paper} className="table">
+    <TableContainer component={Paper} className="empperftable">
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead className="tablehead">
           <TableRow className="rowtitle">

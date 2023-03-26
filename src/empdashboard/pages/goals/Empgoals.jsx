@@ -7,7 +7,7 @@ import Goalswidget from "../../components/widget/Goalswidget";
 
 const Empgoals = () => {
   return (
-    <div className="emphome">
+    <div className="emphome"> 
       <Side />
       <div className="emphomeContainer">
         <Navbar />
@@ -31,13 +31,10 @@ const Empgoals = () => {
           </h1>
         
 
-        <Link to="/employee/new" className="">
+        <Link to="/emp-dashboard/empgoals/addgoal" className="">
           <button className="addgoalbtn"> Add Goals </button>
         </Link>
           </div>
-
-        
-          
         </div>
         <div className="goaltable">
         <Goalstable/>

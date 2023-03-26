@@ -32,7 +32,7 @@ const Goalreview = () => {
 
           <Link to="/emp-dashboard/goalreview" style={{ textDecoration: "none" }}>
           <div className="goalreview">
-          <h1>Goal Review</h1>
+          <h1>Self Appraisal</h1>
           </div>
           </Link>
 
@@ -48,7 +48,26 @@ const Goalreview = () => {
         
         </div>
         <div className="viewtab">
-            <Profiletab  />
+        <Link to="/emp-dashboard/goalreview/appraisalform" style={{ textDecoration: "none" }}>
+       <div className='appraisalproftab'>
+      <img 
+      className="profimg"
+      src="https://m.media-amazon.com/images/I/71kr3WAj1FL._AC_UY327_FMwebp_QL65_.jpg"
+      alt='profilepicture'
+      />
+     
+      <div className="profdetails">
+            <p className="duedate"> Due Feb 2023</p>
+            <h1 className="emp"> Frank Cortage</h1>
+            <p className="post"> Senior System Analyst</p>
+      </div>
+       <div className='revbutton'>
+          <button>
+          Review Now
+          </button>
+        </div>     
+      </div>
+      </Link> 
          </div>
         
       </div>

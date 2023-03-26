@@ -1,6 +1,6 @@
-.navbar {
+.empnavbar {
   position: fixed;
-  height: 91px;
+  height: 92px;
   width: 1440px;
   top: 0px;
   border-bottom: 0.5px solid rgb(231, 228, 228);
@@ -11,7 +11,7 @@
   background-color: #FFFFFF;
   z-index: 1;
 
-  .wrapper {
+  .navwrapper {
     width: 100%;
     padding: 20px;
     display: flex;
