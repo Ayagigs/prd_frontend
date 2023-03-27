@@ -27,6 +27,7 @@ function Form(props) {
           Cookies.set('companyID', res.data.data._id);
           Cookies.set('Token', res.data.token);
           navigate('/dashboard');
+          console.log(response.data)
         }
 
         console.log(response.data);
