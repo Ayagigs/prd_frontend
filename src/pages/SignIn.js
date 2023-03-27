@@ -40,19 +40,19 @@ function SignIn() {
 
   const handleSignIn = async event => {
     event.preventDefault();
+    setIsLoading(true);
     try {
-      setIsLoading(true);
-
+      
       const res = await axios.post(
         'https://pms-jq9o.onrender.com/api/v1/admin/login',
         formData
-      );
-      setIsLoading(false);
-      toast.success('Login Successfully');
-      navigate('/dashboard');
-
+        );
+        toast.success('Login Successfully');
+        setIsLoading(false);
+      
       Cookies.set('companyID', res.data.data._id);
       Cookies.set('Token', res.data.token);
+      navigate('/dashboard');
     } catch (error) {
       toast.error(error.response.data.message)
       setIsLoading(false)
@@ -61,17 +61,18 @@ function SignIn() {
   
   const handleSubmit = async event => {
     event.preventDefault();
+    setIsLoading(true)
     try{
       
         const res = await axios.post(
         'https://pms-jq9o.onrender.com/api/v1/employee/login',
         empFormData
         );
-        setIsLoading(false);
+        setIsLoading(false)
         toast.success('Login Successfully');
+        Cookies.set("EmpToken", res.data.token)
         navigate('/emp-dashboard')
         
-        Cookies.set("EmpToken", res.data.token)
       
     }catch(error){
       setIsLoading(false)

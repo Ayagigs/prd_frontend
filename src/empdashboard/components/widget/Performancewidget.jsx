@@ -5,7 +5,6 @@ import Cookies from "js-cookie";
 import { useState, useEffect } from "react";
 
 const Performancewidget = () => {
-    const [rows, setRows] = useState()
     const [rating, setRating] = useState()
     const [prBar, setPrBar] = useState({got: 0, total: 0})
     const [appraisalBar, setAppraisalBar] = useState({got: 0, total: 0})
