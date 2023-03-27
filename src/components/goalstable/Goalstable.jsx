@@ -21,6 +21,7 @@ const Goalstable = () => {
     axios.get(url, {headers: {Authorization: `Bearer ${Cookies.get('Token')}`}})
     .then(res => {
       setRows(res.data.data.reverse())
+      console.log(res.data.data)
     })
   }, []);
 

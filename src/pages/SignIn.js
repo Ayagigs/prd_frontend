@@ -27,6 +27,11 @@ function SignIn() {
     password: '',
     emailOrCompanyName: '',
   });
+  const [empFormData, setEmpFormData] = useState({
+    password: '',
+    employeeID: '',
+  });
+  
 
   const handleInputChange = event => {
     const { name, value } = event.target;
@@ -35,46 +40,45 @@ function SignIn() {
 
   const handleSignIn = async event => {
     event.preventDefault();
+    setIsLoading(true);
     try {
-      setIsLoading(true);
-
+      
       const res = await axios.post(
         'https://pms-jq9o.onrender.com/api/v1/admin/login',
         formData
-      );
-      setIsLoading(false);
-      toast.success('Login Successfully');
-      navigate('/dashboard');
-
+        );
+        toast.success('Login Successfully');
+        setIsLoading(false);
+      
       Cookies.set('companyID', res.data.data._id);
       Cookies.set('Token', res.data.token);
+      navigate('/dashboard');
     } catch (error) {
-      try {
-        const res = await axios.post(
-          'https://pms-jq9o.onrender.com/api/v1/employee/login',
-          {
-            employeeID: formData.emailOrCompanyName,
-            password: formData.password,
-          }
-        );
-        setIsLoading(false);
-        toast.success('Login Successfully');
-        navigate('/emp-dashboard');
-
-        Cookies.set('EmpToken', res.data.token);
-      } catch (error) {
-        setIsLoading(false);
-        toast.error('No Crendentials Found');
-      }
+      toast.error(error.response.data.message)
+      setIsLoading(false)
     }
-
-    axios
-      .get('https://pms-jq9o.onrender.com/api/v1/admin/findme', {
-        headers: { Authorization: `Bearer ${Cookies.get('Token')}` },
-      })
-      .then(res => {
-        Cookies.set('companyID', res.data.data.company[0].companyID);
-      });
+  };
+  
+  const handleSubmit = async event => {
+    event.preventDefault();
+    setIsLoading(true)
+    try{
+      
+        const res = await axios.post(
+        'https://pms-jq9o.onrender.com/api/v1/employee/login',
+        empFormData
+        );
+        setIsLoading(false)
+        toast.success('Login Successfully');
+        Cookies.set("EmpToken", res.data.token)
+        navigate('/emp-dashboard')
+        
+      
+    }catch(error){
+      setIsLoading(false)
+      toast.error(error.response.data.message)
+    }
+    
   };
 
   const responseSuccessGoogle = response => {
@@ -126,16 +130,18 @@ function SignIn() {
           </div>
         </div>
       </div>
-      <form onSubmit={handleSignIn} className={choice !== '' ? 'show' : 'hide'}>
+
+      {/* Admin Form */}
+      <form onSubmit={handleSignIn} className={choice === 'Admin' ? 'show' : 'hide'}>
         <label className="inputLabel">
-          {choice === 'Employee' ? 'Employee ID' : 'Company Name or Email'}:
+          Company Name or Company Email:
           <input
             className="inputField"
             type="text"
             name="emailOrCompanyName"
             value={formData.emailOrCompanyName}
             onChange={handleInputChange}
-            placeholder="Enter your Name"
+            placeholder="Enter your Company Name or Email"
           />
         </label>
         <label className="inputLabel">
@@ -146,6 +152,45 @@ function SignIn() {
             name="password"
             value={formData.password}
             onChange={handleInputChange}
+            placeholder="Enter your password"
+          />
+        </label>
+        <p className="text_3">
+          <a href="/forgotpassword">Forgot password?</a>
+        </p>
+
+        <button className="signInButton" type="submit">
+          {isLoading ? 'Submitting...' : 'Login'}
+        </button>
+        <p className="last_text">
+          I would rather
+          <span>
+            <NavLink to={'/register'}>Sign up</NavLink>
+          </span>
+        </p>
+      </form>
+
+      {/* Employee Form */}
+      <form onSubmit={handleSubmit} className={choice === 'Employee' ? 'show' : 'hide'}>
+        <label className="inputLabel">
+          Employee Id:
+          <input
+            className="inputField"
+            type="text"
+            name="emailOrCompanyName"
+            value={empFormData.employeeID}
+            onChange={(e) => setEmpFormData({...empFormData, employeeID: e.target.value})}
+            placeholder="Enter your Id"
+          />
+        </label>
+        <label className="inputLabel">
+          Password:
+          <input
+            className="inputField"
+            type="password"
+            name="password"
+            value={empFormData.password}
+            onChange={(e) => setEmpFormData({...empFormData, password: e.target.value})}
             placeholder="Enter your password"
           />
         </label>

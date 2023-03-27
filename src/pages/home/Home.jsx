@@ -13,10 +13,7 @@ const Home = () => {
       <div className="homeContainer">
         <Navbar />
         <div className="widgets">
-          <Widget type="Goals" />
-          <Widget type="MyReviews" />
-          <Widget type="360Appraisals" />
-          <Widget type="SelfPerformanceReview" />
+          <Widget />
         </div>
         <div className="charts">
           <Featured />

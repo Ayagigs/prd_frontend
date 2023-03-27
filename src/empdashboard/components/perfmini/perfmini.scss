@@ -1,6 +1,6 @@
 .perftable {
-  width: 890px;
-height: 311px;
+    min-height: fit-content;
+    max-height: 311px;
     display: flex;
     // margin-left: 40px;
     justify-content:space-between;

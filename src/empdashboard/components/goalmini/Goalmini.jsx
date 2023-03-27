@@ -18,7 +18,7 @@ const Goalmini = () => {
 
   const url = `https://pms-jq9o.onrender.com/api/v1/goal/goals`
   useEffect(() => {
-    axios.get(url, {headers: {Authorization: `${Cookies.get('EmpToken')}`}})
+    axios.get(url, {headers: {Authorization: `Bearer ${Cookies.get('EmpToken')}`}})
     .then(res => {
       setRows(res.data.data.reverse())
     })
