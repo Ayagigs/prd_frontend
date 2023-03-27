@@ -5,13 +5,31 @@ import "react-circular-progressbar/dist/styles.css";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Cookies from "js-cookie"
+import { RingProgress} from '@mantine/core';
 // import "./styles.css";
 //   import DonutChart from "react-donut-chart";
   
 
 const Featured = () => {
+  const [completed, setCompleted] = useState(0)
+  const [inProgress, setInProgress] = useState(0)
+  const [overdue, setOverdue] = useState(0)
+  const [total, setTotal] = useState(1)
+  const [totalLength, setTotalLength] = useState(0)
+  const [notStarted, setNotStarted] = useState(0)
 
-
+  const url = `https://pms-jq9o.onrender.com/api/v1/goal/employeegoals/${Cookies.get('companyID')}`
+    useEffect(() => {
+      axios.get(url, {headers: {Authorization: `Bearer ${Cookies.get('EmpToken')}`}})
+      .then(res => {
+        setCompleted(res.data.data.filter((el) => el.status === 'Completed').length)
+        setInProgress(res.data.data.filter((el) => el.status === 'In Progress').length)
+        setOverdue(res.data.data.filter((el) => el.status === 'Overdue').length)
+        setNotStarted(res.data.data.filter((el) => el.status === 'Not Started').length)
+        setTotalLength(res.data.data.length)
+        setTotal(res.data.data.length === 0 ? 1 : res.data.data.length)
+      })
+    }, []);
   
   // const reactDonutChartdata = [
   //   {
@@ -79,12 +97,25 @@ const Featured = () => {
       </div>
       <div className="bottom">
         <div className="featuredChart">
-          <CircularProgressbar value={70} text={"70%"} strokeWidth={5} />
+        <RingProgress
+          sections={[
+            { value: (overdue/total)*100, color: 'red' },
+            { value: (completed/total)*100, color: 'green' },
+            { value: (inProgress/total)*100, color: 'blue' },
+            { value: (notStarted/total)*100, color: 'rgb(216, 216, 216)' },
+          ]}
+          size={200}
+          thickness={18}
+        />
+
+        
         </div>
-        <p className="overdue">25% Overdue</p>
-        <p className="completed">25% Completed</p>
-        <p className="inprogress">25% In progress</p>
-        <p className="notstarted">25% Not Started</p>
+        <div className="progressContents">
+        <p className="overdue"><span className="overduering"></span> {(overdue/total)*100}% Overdue </p>
+        <p className="completed"><span className="completedring"></span> {(completed/total)*100}% Completed </p>
+        <p className="inprogress"><span className="inprogressring"></span> {(inProgress/total)*100}% In progress</p>
+        <p className="notstarted"><span className="notstartedring"></span> {(notStarted/total)*100}% Not Started</p>
+        </div>
       </div>
     </div>
   );

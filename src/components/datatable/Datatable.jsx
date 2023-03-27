@@ -32,7 +32,12 @@ const Datatable = () => {
     setData(data.filter((item) => item.id !== id));
     const url2 = `https://pms-jq9o.onrender.com/api/v1/admin/deactivate/${id}`
 
+    // console.log(Cookies.get('companyID'))
+
     axios.patch(url2, {headers: {Authorization: `Bearer ${Cookies.get('Token')}`}})
+    .then(res => {
+      setData(res.data.data)
+    })
   };
   const handleView = (id) => {
   };
