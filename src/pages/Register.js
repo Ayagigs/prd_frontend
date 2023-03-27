@@ -19,8 +19,8 @@ const Register = () => {
   const [countries, setCountries] = useState([]);
   const [otpScreen, setOtpScreen] = useState(false);
   const [otpData, setOtpData] = useState('');
-  
-  const navigate = useNavigate()
+
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     firstName: '',
@@ -50,9 +50,9 @@ const Register = () => {
       setOtpData(res.data);
       console.log(res.data);
       setOtpScreen(true);
-      Cookies.set('Token', res.data.token)
-      console.log(res.data.token)
-      navigate('/emp-dashboard')
+      Cookies.set('Token', res.data.token);
+      console.log(res.data.token);
+      navigate('/emp-dashboard');
       toast.success('Please Check your email for OTP');
     } catch (error) {
       setIsLoading(false);
@@ -236,6 +236,7 @@ const Register = () => {
                     <select
                       name="businessType"
                       value={formData.businessType}
+                      onChange={handleInputChange}
                       id="businessType"
                     >
                       <option>--Select option--</option>
