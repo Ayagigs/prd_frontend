@@ -82,7 +82,8 @@
 .wrapper .formWrapper{
   display: flex;
   flex-direction: column;
-  row-gap: 20px;
+  row-gap: 10px;
+  width: 100%;
 }
 .wrapper .formWrapper form{
   display: flex;
@@ -108,16 +109,20 @@
   border: 1.5px solid #3E45EB;
 }
 .wrapper .inputWrapper select{
-  padding: 8px 10px;
+  padding: 6px 10px !important;
   border-radius: 7px;
   border:  1px solid gray;
   outline: none;
+  width: 100%;
+  height: fit-content;
 }
 .wrapper .inputWrapper select:focus{
   border: 1.5px solid #3E45EB;
 }
 .wrapper .buttonWrapper{
   display: flex;
+  width: 100%;
+  margin-top: 30px;
   justify-content: right;
   column-gap: 10px;
 }
@@ -210,6 +215,9 @@
   justify-content: center;
   align-items: center;
   z-index: 20;
+}
+.wrapper .signin{
+  margin-top: 20px;
 }
 .wrapper   .hide{
   display: none;
