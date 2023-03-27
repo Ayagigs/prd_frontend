@@ -17,14 +17,19 @@ const Navbar = () => {
         </div>
        
         <div className="items">
-           <div className="item profile">
-            <img
-              src="https://images.pexels.com/photos/941693/pexels-photo-941693.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
+        <div className="userconts">
+        <div>
+          <img
+            width={40}
+              src="https://m.media-amazon.com/images/I/81hH5vK-MCL._AC_UY327_FMwebp_QL65_.jpg"
               alt=""
-              className="avatar"
+              className="passport"
             />
-            <p className="owner">Aya and Co</p>
-          </div>
+        </div>
+        <div className="profcontainer">
+          <span className="realnames">Aya & Co. Ltd</span>
+        </div>
+      </div>
         </div>
       </div>
     </div>

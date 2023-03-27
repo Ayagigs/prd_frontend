@@ -1,7 +1,7 @@
 .side {
   position:fixed;
 width: 250px;
-height: 1000px;
+height: 100vh;
 left: 0px;
 top: 10px;
 background: #ffffff;
@@ -99,21 +99,57 @@ z-index: 111;
             color: #888;
             margin-left: 10px;
         }
+
+       
       }
     }
   }
 
-  .bottom{
+  .sidebottom{
     display: flex;
     flex-direction: row;
-    margin: 100px 30px;
-   
+    margin: 255px 10px 0px ;
+    width: 235px;
+    // border: 2px 0 0 0;
+    // border-color: #f80a0a;
+    // border: 0.2px solid rgb(230, 227, 227);
+    // border-width: 1px;
+    border: rgba(179, 166, 166, 0.596)3px;
+    border-style: solid ;
+    // border-top: 0;
+    padding-top: 10px;
+    padding-left: 30px;
+    border-right: 0;
+    border-left: 0;
+    border-bottom: 0;
+  }
+  .usercontainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-left: 0px;
+    align-items: center;
+  }
+
+  .namecontainer{
+    padding-left: 10px;
+  }
+  .realname{
+    color: black;
+    font-size: 14px;
+  }
+  .userrole{
+    color: black;
+    font-weight: 300px;
+    font-size: 18px;
+  }
+  
       .owner{
         color:#333
       }
       .avatar {
-        width: 30px;
-        height: 30px;
+        width: 50px;
+        height: 50px;
         border-radius: 50%;
       }
     
@@ -138,4 +174,4 @@ z-index: 111;
           }
       }
   }
-}
+
