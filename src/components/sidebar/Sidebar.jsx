@@ -8,6 +8,7 @@ import { Setting2 } from 'iconsax-react';
 import { EmptyWallet } from 'iconsax-react';
 import { Link } from "react-router-dom";
 import Logo from './logo.png';
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 // import { DarkModeContext } from "../../context/darkModeContext";
 // import { useContext } from "react";
 // import Image from "./logo.png"
@@ -66,17 +67,25 @@ const Sidebar = () => {
       </ul>
       </div>
       <div className="bottom">
-      <div className="items">
-           <div className="item profile">
-            <img
-              src="https://images.pexels.com/photos/941693/pexels-photo-941693.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
+          <div className="usercontainer">
+        <div>
+          <img
+            width={40}
+              src="https://m.media-amazon.com/images/I/81hH5vK-MCL._AC_UY327_FMwebp_QL65_.jpg"
               alt=""
               className="avatar"
             />
-            <p className="owner">Aya and Co</p>
-          </div>
         </div>
-        
+        <div className="namecontainer">
+          <span className="realname">Aya & Co. Ltd</span>
+          <h1 className="userrole">Admin</h1>
+        </div>
+        <div>
+          <Link to="" style={{ textDecoration: "none" }}>
+            <MoreVertIcon fontSize="small" />
+          </Link >
+        </div>
+      </div>  
         
       </div>
     </div>

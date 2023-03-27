@@ -20,7 +20,7 @@ function SignIn() {
   const [companyId, setCompanyId] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [choice, setChoice] = useState('')
+  const [choice, setChoice] = useState('');
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -122,7 +122,10 @@ function SignIn() {
         <div className="innerBox">
           <div className="or">
             <div></div>
-            <p className='choice'><span onClick={() => setChoice('Employee')}>Employee</span> or <span onClick={() => setChoice('Admin')}>Admin</span></p>
+            <p className="choice">
+              <span onClick={() => setChoice('Employee')}>Employee</span> or{' '}
+              <span onClick={() => setChoice('Admin')}>Admin</span>
+            </p>
             <div></div>
           </div>
         </div>
