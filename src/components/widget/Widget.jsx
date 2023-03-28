@@ -47,6 +47,7 @@ const Widget = () => {
             console.log(res.data.data)
             setSelfAppraised({...selfAppraised, got: res.data.data.got})
             setSelfAppraised({...selfAppraised, total: res.data.data.expected})
+            console.log(res)
         })
     }, []);
   // let data;
