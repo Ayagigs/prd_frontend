@@ -62,8 +62,6 @@ const Sidebar = () => {
           </li>
           </Link>
           
-          
-       <hr />
       </ul>
       </div>
       <div className="bottom">
