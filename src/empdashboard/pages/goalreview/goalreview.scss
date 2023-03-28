@@ -8,7 +8,9 @@
     .goalreviewContainer {
       flex: 6;
       background-color: #F5F5F5 ;
-   
+   .hide{
+    display: none;
+   }
   
       .empwidgets {
         display: flex;

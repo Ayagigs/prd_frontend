@@ -6,10 +6,23 @@ import Perfrev from "../../components/perfrev/Perfrev";
 import Profiletab from "../../components/profiletab/Profiletab";
 import Side from "../../components/sidebar/Side";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { useState, useEffect } from "react";
+import Cookies from "js-cookie";
 // import { Carousel } from '@trendyol-js/react-carousel';
 
 
 const Homeperf = () => {
+  const [data, setData] = useState({})
+
+  useEffect(() => {
+    const url = `https://pms-jq9o.onrender.com/api/v1/review/performanceReview`
+    axios.get(url, {headers: {Authorization: `Bearer ${Cookies.get('EmpToken')}`}})
+    .then(res => {
+      console.log(res.data)
+      setData(res.data)
+    })
+  }, [])
   return (
     <div className="emphome">
       <Side />
@@ -50,7 +63,7 @@ const Homeperf = () => {
         </div>
         <div className="viewtab">
      
-            <Profiletab  />
+            <Profiletab  data = {data}/>
           
          </div>
         

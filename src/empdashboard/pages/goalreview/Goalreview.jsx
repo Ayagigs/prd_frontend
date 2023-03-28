@@ -6,9 +6,37 @@ import Perfrev from "../../components/perfrev/Perfrev";
 // import Profiletab from "../../components/profiletab/Profiletab";
 import Side from "../../components/sidebar/Side";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { useState, useEffect } from "react";
+import Cookies from "js-cookie";
 
 
 const Goalreview = () => {
+  const [firstName, setFirstName] = useState('')
+  const [lastName, setLastName] = useState('')
+  const [jobTitle, setJobTitle] = useState('')
+  const [profile, setProfile] = useState('')
+  const [dataExists, setDataExists] = useState(false)
+  const [due, setDue] = useState('')
+
+  useEffect(() => {
+    const url = `https://pms-jq9o.onrender.com/api/v1/review/selfappraisal`
+    axios.get(url, {headers: {Authorization: `Bearer ${Cookies.get('EmpToken')}`}})
+    .then(res => {
+      console.log(res.data.data)
+      if(res.data.status === 'Success'){
+        setDataExists(true)
+      }
+      console.log(dataExists)
+      setFirstName(res.data.data.firstName)
+      setLastName(res.data.data.lastName)
+      setJobTitle(res.data.data.jobTitle)
+      setProfile(res.data.data.profilePhoto)
+      setDue(res.data.due)
+    })
+  }, [])
+  
+
   return (
     <div className="emphome">
       <Side />
@@ -49,17 +77,17 @@ const Goalreview = () => {
         </div>
         <div className="viewtabs">
         <Link to="/emp-dashboard/goalreview/appraisalform" style={{ textDecoration: "none" }}>
-       <div className='appraisalproftab'>
+       <div className={dataExists ? 'appraisalproftab' : 'hide'}>
       <img 
       className="profimg"
-      src="https://m.media-amazon.com/images/I/71kr3WAj1FL._AC_UY327_FMwebp_QL65_.jpg"
+      src={profile}
       alt='profilepicture'
       />
      
       <div className="profdetails">
-        <p className="duedate"> Due Feb 2023</p>
-        <h1 className="emp"> Frank Cortage</h1>
-        <p className="post"> Senior System Analyst</p>
+        <p className="duedate">{due ? new Date(due).toDateString() : '---'}</p>
+        <h1 className="emp">{firstName + " " + lastName} </h1>
+        <p className="post">{jobTitle ? jobTitle : '---'}</p>
       </div>   
       </div>
       </Link> 
