@@ -1,21 +1,25 @@
 .emphome {
-    display: flex;
-    margin-top: 80px;
-    width: 100%;
-    margin-left: 250px;
+  display: flex;
+  margin-top: 80px;
+  width: 100%;
+  padding-top: 10px;
+  margin-left: 250px;
   
     .goalreviewContainer {
       flex: 6;
       background-color: #F5F5F5 ;
    
   
-      .empwidgets,
+      .empwidgets {
+        display: flex;
+        padding: 10px 20px;
+        gap: 20px;
+      }
       .charts {
         display: flex;
         padding: 20px;
         gap: 20px;
       }
-  
       .leftdiv{
         display: flex;
         flex-direction: row;
@@ -65,13 +69,13 @@
    
   }
   
-  .viewtab{
-  display: flex;
-  // width: 100%;
-  display:flex;
-  flex-direction: column;
-  justify-content:space-between;
-  margin: 10px 40px 20px 40px;
+  .viewtabs{
+    display: flex;
+    // width: 100%;
+    display:flex;
+    flex-direction: column;
+    justify-content:space-between;
+    margin: 23px 40px 20px 30px;
   }
   
 //   .appraisal{

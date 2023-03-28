@@ -6,7 +6,9 @@ import Perfrev from "../../components/perfrev/Perfrev";
 import Profiletab from "../../components/profiletab/Profiletab";
 import Side from "../../components/sidebar/Side";
 import { Link } from "react-router-dom";
-
+import ReactCardSlider from 'react-card-slider-component';
+// import { Carousel } from '@trendyol-js/react-carousel';
+// import slides from "../../components/cardslider/Cardslider";
 
 const Emphome = () => {
   return (
@@ -37,7 +39,7 @@ const Emphome = () => {
           </Link>
 
           <Link to="/emp-dashboard/performancereview" style={{ textDecoration: "none" }}>
-          <div className="perfreview">
+          <div className="undoperfreview">
           <h1>Performance Review</h1>
           </div>
           </Link>
@@ -48,7 +50,9 @@ const Emphome = () => {
         
         </div>
         <div className="viewtab">
+     
             <Profiletab  />
+            {/* <ReactCardSlider slides={slides}/> */}
          </div>
         
       </div>
