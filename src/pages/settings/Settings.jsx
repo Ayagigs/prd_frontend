@@ -1,13 +1,8 @@
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
-import {BsUpload} from "react-icons/bs"
 import { Avatar } from '@mantine/core';
 
 import "./settings.scss";
-import Signup2 from "../../components/companydetails/Companydetails";
-// import Widget from "../../components/widget/Widget";
-// import Chart from "../../components/chart/Chart";
-// import Table from "../../components/table/Table";
 
 const Settings = () => {
     return (
