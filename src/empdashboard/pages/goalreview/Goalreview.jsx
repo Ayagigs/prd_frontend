@@ -57,9 +57,9 @@ const Goalreview = () => {
       />
      
       <div className="profdetails">
-            <p className="duedate"> Due Feb 2023</p>
-            <h1 className="emp"> Frank Cortage</h1>
-            <p className="post"> Senior System Analyst</p>
+        <p className="duedate"> Due Feb 2023</p>
+        <h1 className="emp"> Frank Cortage</h1>
+        <p className="post"> Senior System Analyst</p>
       </div>   
       </div>
       </Link> 
