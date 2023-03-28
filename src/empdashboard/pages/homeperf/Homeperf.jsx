@@ -1,18 +1,19 @@
 import Navbar from "../../components/navbar/Navbar";
-import "./goalreview.scss";
+import "./homeperf.scss";
 import Empwidget from "../../components/widget/Empwidget";
 import Empfeatured from "../../components/featured/Empfeatured";
 import Perfrev from "../../components/perfrev/Perfrev";
-// import Profiletab from "../../components/profiletab/Profiletab";
+import Profiletab from "../../components/profiletab/Profiletab";
 import Side from "../../components/sidebar/Side";
 import { Link } from "react-router-dom";
+// import { Carousel } from '@trendyol-js/react-carousel';
 
 
-const Goalreview = () => {
+const Homeperf = () => {
   return (
     <div className="emphome">
       <Side />
-      <div className="goalreviewContainer">
+      <div className="emphomeContainer">
         <Navbar />
         <div className="empwidgets">
           <Empwidget />
@@ -25,19 +26,19 @@ const Goalreview = () => {
         <div className="emplistContainer">
           <div className="tabs">
           <Link to="/emp-dashboard/appraisal" style={{ textDecoration: "none" }}>
-          <div className="appraisal-undo">
+          <div className="undoappraisaltoo">
           <h1>360 Appraisal</h1>
           </div>
           </Link>
 
           <Link to="/emp-dashboard/goalreview" style={{ textDecoration: "none" }}>
-          <div className="goalreview">
+          <div className="goalreviewundo">
           <h1>Self Appraisal</h1>
           </div>
           </Link>
 
           <Link to="/emp-dashboard/performancereview" style={{ textDecoration: "none" }}>
-          <div className="undoperfreview">
+          <div className="perfreview">
           <h1>Performance Review</h1>
           </div>
           </Link>
@@ -47,22 +48,10 @@ const Goalreview = () => {
           
         
         </div>
-        <div className="viewtabs">
-        <Link to="/emp-dashboard/goalreview/appraisalform" style={{ textDecoration: "none" }}>
-       <div className='appraisalproftab'>
-      <img 
-      className="profimg"
-      src="https://m.media-amazon.com/images/I/71kr3WAj1FL._AC_UY327_FMwebp_QL65_.jpg"
-      alt='profilepicture'
-      />
+        <div className="viewtab">
      
-      <div className="profdetails">
-            <p className="duedate"> Due Feb 2023</p>
-            <h1 className="emp"> Frank Cortage</h1>
-            <p className="post"> Senior System Analyst</p>
-      </div>   
-      </div>
-      </Link> 
+            <Profiletab  />
+          
          </div>
         
       </div>
@@ -70,4 +59,4 @@ const Goalreview = () => {
   );
 };
 
-export default Goalreview;
+export default Homeperf;

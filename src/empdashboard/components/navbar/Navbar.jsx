@@ -1,5 +1,7 @@
 import "./navbar.scss";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
+import { Link } from "react-router-dom";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 // import { DarkModeContext } from "../../context/darkModeContext";
 // import { useContext } from "react";
 
@@ -17,14 +19,19 @@ const Navbar = () => {
         </div>
        
         <div className="items">
-           <div className="item profile">
-            <img
-              src="https://images.pexels.com/photos/941693/pexels-photo-941693.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
+        <div className="usercont">
+        <div>
+          <img
+            width={40}
+              src="https://m.media-amazon.com/images/I/71kr3WAj1FL._AC_UY327_FMwebp_QL65_.jpg"
               alt=""
-              className="avatar"
+              className="passport"
             />
-            <p className="owner">Aya and Co</p>
-          </div>
+        </div>
+        <div className="profcontainer">
+          <span className="realnames">Charles Godfrey</span>
+        </div>
+      </div>
         </div>
       </div>
     </div>

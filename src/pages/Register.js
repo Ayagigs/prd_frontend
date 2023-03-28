@@ -50,10 +50,8 @@ const Register = () => {
       setOtpData(res.data);
       console.log(res.data);
       setOtpScreen(true);
-      Cookies.set('Token', res.data.token);
-      console.log(res.data.token);
-      navigate('/emp-dashboard');
       toast.success('Please Check your email for OTP');
+      console.log(res.data);
     } catch (error) {
       setIsLoading(false);
       toast.error(error.response.data.message);

@@ -1,7 +1,6 @@
 import "./side.scss";
 import React from 'react';
 import { Home } from 'iconsax-react';
-import { Profile2User } from 'iconsax-react';
 import { Cup } from 'iconsax-react';
 import { Chart1 } from 'iconsax-react';
 import { Setting2 } from 'iconsax-react';
@@ -10,6 +9,8 @@ import { Link } from "react-router-dom";
 // import { DarkModeContext } from "../../context/darkModeContext";
 // import { useContext } from "react";
 import Logo from './logo.png';
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+
 
 const Side = () => {
   // const { dispatch } = useContext(DarkModeContext);
@@ -55,22 +56,29 @@ const Side = () => {
           </Link>
           
           
-       <hr />
+     
       </ul>
       </div>
-      <div className="bottom">
-      <div className="items">
-           <div className="item profile">
-            <img
-              src="https://images.pexels.com/photos/941693/pexels-photo-941693.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
+      <div className="sidebottom">  
+      <div className="usercontainer">
+        <div>
+          <img
+            width={40}
+              src="https://m.media-amazon.com/images/I/71kr3WAj1FL._AC_UY327_FMwebp_QL65_.jpg"
               alt=""
               className="avatar"
             />
-            <p className="owner">Aya and Co</p>
-          </div>
         </div>
-        
-        
+        <div className="namecontainer">
+          <span className="realname">Charles Godfrey</span>
+          <h1 className="userrole">Employee</h1>
+        </div>
+        <div>
+          <Link to="" style={{ textDecoration: "none" }}>
+            <MoreVertIcon fontSize="large" />
+          </Link >
+        </div>
+      </div>
       </div>
     </div>
   );

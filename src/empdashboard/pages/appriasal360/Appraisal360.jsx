@@ -1,12 +1,12 @@
 import React from 'react'
-import "./appraisal.scss";
+import "./appraisal360.scss";
 import Navbar from "../../components/navbar/Navbar";
 import Side from "../../components/sidebar/Side";
 import { Link } from "react-router-dom";
 
 
 
-const Appraisal = () => {
+const Appraisal360 = () => {
   return (
     <div className='appraisalhome'>
          <Side />
@@ -14,7 +14,7 @@ const Appraisal = () => {
         <Navbar />
         <div className="appraisalbox">
           <div className="apptopbox">
-            <h1>Self Appraisal</h1>
+            <h1>360 Appraisal</h1>
             <button className='closeform-btn'>
               <Link to="/emp-dashboard/goalreview" style={{ textDecoration: "none" }}>
                 X
@@ -120,4 +120,4 @@ const Appraisal = () => {
   )
 }
 
-export default Appraisal
+export default Appraisal360

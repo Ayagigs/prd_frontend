@@ -29,14 +29,21 @@ import Emphome from './empdashboard/pages/home/Emphome';
 import Goalreview from './empdashboard/pages/goalreview/Goalreview';
 import Empperformance from './empdashboard/pages/performance/Empperformance';
 import Empgoals from './empdashboard/pages/goals/Empgoals';
+import Appraisal from './empdashboard/pages/appraisalform/Appraisal';
+import Addgoal from './empdashboard/pages/addgoal/Addgoal';
+import Empsettings from './empdashboard/pages/settings/Empsettings';
+import Empwallet from './empdashboard/pages/wallet/Empwallet';
+import Homeperf from './empdashboard/pages/homeperf/Homeperf';
+import Appraisal360 from './empdashboard/pages/appriasal360/Appraisal360';
+
+
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { productInputs, userInputs } from './formSource';
 import './style/dark.scss';
 import { useContext } from 'react';
 import { DarkModeContext } from './context/darkModeContext';
-import Appraisal from './empdashboard/pages/appraisalform/Appraisal';
-import Addgoal from './empdashboard/pages/addgoal/Addgoal';
+
 import ForgotPasswordPage from './pages/forgotPassword/ForgotPasswordPage';
 import ResetPasswordPage from './pages/resetPassword/ResetPasswordPage';
 
@@ -109,30 +116,25 @@ function App() {
             <Route path="emp-dashboard">
               <Route index element={<Emphome />} />
               <Route path="/emp-dashboard/appraisal" element={<Emphome />} />
-              <Route
-                path="/emp-dashboard/goalreview"
-                element={<Goalreview />}
-              />
-              <Route
-                path="/emp-dashboard/goalreview/appraisalform"
-                element={<Appraisal />}
-              />
+              <Route path="/emp-dashboard/goalreview" element={<Goalreview />}/>
+              <Route path="/emp-dashboard/performancereview" element={<Homeperf />}/>
+              <Route path="/emp-dashboard/goalreview/appraisalform" element={<Appraisal />}/>
+              <Route path="/emp-dashboard/appraisal/appraisal360" element={<Appraisal360 />}/>              
             </Route>
             <Route path="empgoals">
               <Route index element={<Empgoals />} />
               <Route path="/empgoals/addgoal" element={<Addgoal />}/>
-            <Route
-                path="new"
-                element={<New inputs={productInputs} title="Add New Product" />}
-              />
             </Route>
             <Route path="empperformance">
               <Route index element={<Empperformance />} />
             </Route>
-          </Route>
-
-          {/* <Route path="/emp-dashboard" index element={<Emphome  />}></Route> */}
-          {/* <Route path="/emp-dashboard/goalreview" element={<Goalreview  />}></Route> */}
+            <Route path="empsettings">
+              <Route index element={<Empsettings />} />
+            </Route>
+            <Route path="empwallet">
+              <Route index element={<Empwallet />} />
+            </Route>
+          </Route> 
         </Routes>
       </BrowserRouter>
     </div>
