@@ -1,13 +1,8 @@
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
-import {BsUpload} from "react-icons/bs"
 import { Avatar } from '@mantine/core';
 
 import "./settings.scss";
-import Signup2 from "../../components/companydetails/Companydetails";
-// import Widget from "../../components/widget/Widget";
-// import Chart from "../../components/chart/Chart";
-// import Table from "../../components/table/Table";
 
 const Settings = () => {
     return (
@@ -27,7 +22,7 @@ const Settings = () => {
 
           <div className="settingBottom">
 
-
+            {/* Company Details Settings */}
             <div className="settingsContent">
               <div className="leftSettingsContent">
                 <h2>Company Details</h2>
@@ -43,7 +38,7 @@ const Settings = () => {
                   <div className="inputWrapper">
                     <label htmlFor="">Business Type</label>
                     <select name="" id="">
-                      <option value=""></option>
+                      <option value="">--Select--</option>
                     </select>
                   </div>
                   
@@ -56,13 +51,13 @@ const Settings = () => {
                   <div className="inputWrapper">
                     <label htmlFor="">Country</label>
                     <select name="" id="">
-                      <option value=""></option>
+                      <option value="">--Select--</option>
                     </select>
                   </div>
                   <div className="inputWrapper">
                     <label htmlFor="">State</label>
                     <select name="" id="">
-                      <option value=""></option>
+                      <option value="">--Select--</option>
                     </select>
                   </div>
                 </div>
@@ -89,7 +84,7 @@ const Settings = () => {
               </form>
             </div>
 
-            
+            {/* Personal Info Settings */}
             <div className="settingsContent">
               <div className="leftSettingsContent">
                 <h2>Personal Info</h2>
@@ -120,6 +115,7 @@ const Settings = () => {
               </form>
             </div>
 
+            {/* Profile Photo Settings */}
             <div className="settingsContent">
               <div className="leftSettingsContent">
                 <h2>Profile Photo Upload</h2>
@@ -137,6 +133,8 @@ const Settings = () => {
                 </div>
               </form>
             </div>
+
+            {/* Password Settings */}
             <div className="settingsContent">
               <div className="leftSettingsContent">
                 <h2>Password</h2>
@@ -159,6 +157,7 @@ const Settings = () => {
               </form>
             </div>
 
+            {/* Review Settings */}
             <div className="settingsContent">
               <div className="leftSettingsContent">
                 <h2>Performance Review</h2>
@@ -213,6 +212,287 @@ const Settings = () => {
               </form>
             </div>
 
+
+            {/* Performance Review Questions*/}
+            <div className="settingsContent">
+              <div className="leftSettingsContent">
+                <h2>Performance Review Questions</h2>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quisquam eius sapiente sed deserunt soluta iste molestiae, quibusdam adipisci.</p>
+              </div>
+
+              <form action="">
+              
+                <div className="inputWrapper">
+                  <label htmlFor="">Question 1</label>
+                  <input type="text" />
+                </div>
+                <div className="inputWrapper">
+                  <label htmlFor="">Question 2</label>
+                  <input type="text" name="" id="" />
+                </div>
+                <div className="inputWrapper">
+                  <label htmlFor="">Question 3</label>
+                  <input type="text" />
+                </div>
+                <div className="inputWrapper">
+                  <label htmlFor="">Question 4</label>
+                  <input type="text" name="" id="" />
+                </div>
+                <div className="inputWrapper">
+                  <label htmlFor="">Question 5</label>
+                  <input type="text" name="" id="" />
+                </div>
+
+                <div className="buttonWrapper">
+                  <button>Cancel</button>
+                  <button>Save</button>
+                </div>
+              </form>
+            </div>
+
+            {/* 360 Appraisal Questions*/}
+            <div className="settingsContent">
+              <div className="leftSettingsContent">
+                <h2>360 Appraisal Questions</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere repellat libero facilis, consectetur aspernatur minima est molestias nostrum!</p>
+              </div>
+
+              <form action="">
+              
+                <div className="inputWrapper">
+                  <label htmlFor="">Question 1</label>
+                  <input type="text" />
+                </div>
+                <div className="inputWrapper">
+                  <label htmlFor="">Question 2</label>
+                  <input type="text" name="" id="" />
+                </div>
+                <div className="inputWrapper">
+                  <label htmlFor="">Question 3</label>
+                  <input type="text" />
+                </div>
+                <div className="inputWrapper">
+                  <label htmlFor="">Question 4</label>
+                  <input type="text" name="" id="" />
+                </div>
+                <div className="inputWrapper">
+                  <label htmlFor="">Question 5</label>
+                  <input type="text" name="" id="" />
+                </div>
+
+                <div className="buttonWrapper">
+                  <button>Cancel</button>
+                  <button>Save</button>
+                </div>
+              </form>
+            </div>
+
+            {/* Self Appraisal Questions*/}
+            <div className="settingsContent">
+              <div className="leftSettingsContent">
+                <h2>Self Apraisal Questions</h2>
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sapiente consectetur praesentium numquam expedita debitis. Voluptate unde quam harum.</p>
+              </div>
+
+              <form action="">
+              
+                <div className="inputWrapper">
+                  <label htmlFor="">Question 1</label>
+                  <input type="text" />
+                </div>
+                <div className="inputWrapper">
+                  <label htmlFor="">Question 2</label>
+                  <input type="text" name="" id="" />
+                </div>
+                <div className="inputWrapper">
+                  <label htmlFor="">Question 3</label>
+                  <input type="text" />
+                </div>
+                <div className="inputWrapper">
+                  <label htmlFor="">Question 4</label>
+                  <input type="text" name="" id="" />
+                </div>
+                <div className="inputWrapper">
+                  <label htmlFor="">Question 5</label>
+                  <input type="text" name="" id="" />
+                </div>
+
+                <div className="buttonWrapper">
+                  <button>Cancel</button>
+                  <button>Save</button>
+                </div>
+              </form>
+            </div>
+
+            {/* Competency Questions*/}
+            <div className="settingsContent">
+              <div className="leftSettingsContent">
+                <h2>Competency Questions</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt, perferendis error pariatur dicta iure maiores soluta inventore facilis!</p>
+              </div>
+
+              <form action="">
+              
+                <div className="inputWrapper">
+                  <label htmlFor="">Question 1</label>
+                  <input type="text" />
+                </div>
+                <div className="inputWrapper">
+                  <label htmlFor="">Question 2</label>
+                  <input type="text" name="" id="" />
+                </div>
+                <div className="inputWrapper">
+                  <label htmlFor="">Question 3</label>
+                  <input type="text" />
+                </div>
+                <div className="inputWrapper">
+                  <label htmlFor="">Question 4</label>
+                  <input type="text" name="" id="" />
+                </div>
+                <div className="inputWrapper">
+                  <label htmlFor="">Question 5</label>
+                  <input type="text" name="" id="" />
+                </div>
+
+                <div className="buttonWrapper">
+                  <button>Cancel</button>
+                  <button>Save</button>
+                </div>
+              </form>
+            </div>
+
+
+            {/* Option Type */}
+            <div className="settingsContent">
+              <div className="leftSettingsContent">
+                <h2>Options</h2>
+                <p>Manage the performance review and appraisal of your employees by setting the required dates for each reviews</p>
+              </div>
+
+              <form action="">
+                <div className="inputContainer">
+                  <div className="inputWrapper">
+                    <label htmlFor="">Option 1</label>
+                    <input type="text" />
+                  </div>
+                  <div className="inputWrapper">
+                    <label htmlFor="">Score</label>
+                    <select name="" id="">
+                      <option value="">--Select--</option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                      <option value="9">9</option>
+                      <option value="10">10</option>
+                    </select>
+                  </div>
+                </div>
+
+
+                <div className="inputContainer">
+                  <div className="inputWrapper">
+                    <label htmlFor="">Option 2</label>
+                    <input type="text" />
+                  </div>
+                  <div className="inputWrapper">
+                    <label htmlFor="">Score</label>
+                    <select name="" id="">
+                      <option value="">--Select--</option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                      <option value="9">9</option>
+                      <option value="10">10</option>
+                    </select>
+                  </div>
+                </div>
+
+
+                <div className="inputContainer">
+                  <div className="inputWrapper">
+                    <label htmlFor="">Option 3</label>
+                    <input type="text" />
+                  </div>
+                  <div className="inputWrapper">
+                    <label htmlFor="">Score</label>
+                    <select name="" id="">
+                      <option value="">--Select--</option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                      <option value="9">9</option>
+                      <option value="10">10</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div className="inputContainer">
+                  <div className="inputWrapper">
+                    <label htmlFor="">Option 4</label>
+                    <input type="text" />
+                  </div>
+                  <div className="inputWrapper">
+                    <label htmlFor="">Score</label>
+                    <select name="" id="">
+                      <option value="">--Select--</option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                      <option value="9">9</option>
+                      <option value="10">10</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div className="inputContainer">
+                  <div className="inputWrapper">
+                    <label htmlFor="">Option 5</label>
+                    <input type="text" />
+                  </div>
+                  <div className="inputWrapper">
+                    <label htmlFor="">Score</label>
+                    <select name="" id="">
+                      <option value="">--Select--</option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                      <option value="9">9</option>
+                      <option value="10">10</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div className="buttonWrapper">
+                  <button>Cancel</button>
+                  <button>Save</button>
+                </div>
+              </form>
+            </div>
 
           </div>
 
