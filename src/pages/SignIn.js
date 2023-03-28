@@ -1,17 +1,14 @@
 import React, { useState } from 'react';
 import '../assets/SignIn.css';
-import { signInWithPopup } from 'firebase/auth';
-// import { auth, provider } from '../config';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { NavLink } from 'react-router-dom';
-// import { auth, provider } from '../config/firebase';
-// import GoogleLogin from 'react-google-login';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { GoogleLogin } from '@react-oauth/google';
 import { useNavigate } from 'react-router';
 import Cookies from 'js-cookie';
 import jwt_decode from 'jwt-decode';
+import { useGoogleLogin } from '@react-oauth/google';
 
 function SignIn() {
   const responseGoogle = response => {
@@ -77,41 +74,63 @@ function SignIn() {
       });
   };
 
-  const responseSuccessGoogle = response => {
-    // var decoded = jwt_decode(response.credential);
+  const googleLogin = useGoogleLogin({
+    onSuccess: async tokenResponse => {
+      setIsLoading(true);
+      const userInfo = await axios
+        .get('https://www.googleapis.com/oauth2/v3/userinfo', {
+          headers: { Authorization: `Bearer ${tokenResponse.access_token}` },
+        })
+        .then(res => res.data);
 
-    axios({
-      method: 'POST',
-      url: 'https://pms-jq9o.onrender.com/auth/google/callback',
-      data: { tokenId: response.credential },
-    }).then(response => {
-      if (response) {
-        console.log(response);
+      try {
+        // Check if user is an employee or admin
+        const user = await axios.post(
+          'https://pms-jq9o.onrender.com/auth/google/callback',
+          { email: userInfo.email }
+        );
+        console.log(user.data); // log the user details returned from the server
+        // ... code to redirect to appropriate dashboard ...
+      } catch (error) {
+        console.log('Error logging in with Google:');
+        let errorMessage =
+          'There was an error logging in. Please try again later.';
+        if (
+          error.response &&
+          error.response.data &&
+          error.response.data.message
+        ) {
+          errorMessage = error.response.data.message;
+        }
+        // display an error message to the user
+        toast.error(errorMessage);
+      } finally {
+        // wait for 500ms before setting isLoading to false
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 500);
       }
-      console.log(response);
-    });
-  };
-  const responseErrorGoogle = response => {
-    console.log('Login failed:', response);
-  };
-  const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
-  console.log(clientId);
+    },
+    onError: () => {
+      setIsLoading(true);
+      console.log('Error logging in with Google:');
+      // display an error message to the user
+      alert('There was an error logging in. Please try again later.');
+      // wait for 500ms before setting isLoading to false
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 500);
+    },
+  });
+
   return (
     <div className="signInContainer">
       <h1 className="text">Welcome Back</h1>
       <p className="text_2">We’ve missed you so much</p>
-
       <div className="googleSignInButton">
-        <GoogleOAuthProvider
-          clientId="644468853015-cadrgrgrabl4vacc4evt7g342qiqa2t2.apps.googleusercontent.com"
-          redirectUri="https://pms-jq9o.onrender.com/auth/google/callback"
-        >
-          <GoogleLogin
-            buttonText="Login with google"
-            onSuccess={responseSuccessGoogle}
-            onFailure={responseErrorGoogle}
-          />
-        </GoogleOAuthProvider>
+        <button onClick={googleLogin}>
+          {isLoading ? 'please wait...' : 'Login with Google'}
+        </button>
       </div>
 
       <div className="box">
