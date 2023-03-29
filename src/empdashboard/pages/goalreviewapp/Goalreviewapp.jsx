@@ -1,12 +1,12 @@
 import React from 'react'
-import "./appraisal360.scss";
+// import "./appraisal.scss";
 import Navbar from "../../components/navbar/Navbar";
 import Side from "../../components/sidebar/Side";
 import { Link } from "react-router-dom";
 
 
 
-const Appraisal360 = () => {
+const Goalreviewapp = () => {
   return (
     <div className='appraisalhome'>
          <Side />
@@ -14,7 +14,7 @@ const Appraisal360 = () => {
         <Navbar />
         <div className="appraisalbox">
           <div className="apptopbox">
-            <h1>360 Appraisal</h1>
+            <h1>Goal Review Appraisal</h1>
             <button className='closeform-btn'>
               <Link to="/emp-dashboard/goalreview" style={{ textDecoration: "none" }}>
                 X
@@ -31,9 +31,9 @@ const Appraisal360 = () => {
               />
      
       <div className="profdetails">
-            <h1 className="emp"> Frank Cortage</h1>
-            <p className="post"> Senior System Analyst</p>
-            <p className="appduedate"> Due: Feb 2023 </p>
+            <h1 className="emp"> Ayobami Sanni</h1>
+            <p className="post"> Laboratory Analyst</p>
+            <p className="appduedate"> Due:May 2023 </p>
             <br />
             
       </div>
@@ -42,6 +42,7 @@ const Appraisal360 = () => {
    
           </div>
           
+
           <div className="singleform">
           <p className='bodytext'>This form will assist in preparing the performance evaluation for Frank Cortage. 
             As someone who works with Bob on a regular basis, your feedback regarding his 
@@ -164,6 +165,7 @@ const Appraisal360 = () => {
             <br />
            </div>
 
+
         </div>
         <button className="submitbtn">Submit Appraisal</button>
         
@@ -172,4 +174,4 @@ const Appraisal360 = () => {
   )
 }
 
-export default Appraisal360
+export default Goalreviewapp
