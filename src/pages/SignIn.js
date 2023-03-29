@@ -2,23 +2,20 @@ import React, { useState } from 'react';
 import '../assets/SignIn.css';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import { NavLink } from 'react-router-dom';
-import { GoogleOAuthProvider } from '@react-oauth/google';
-import { GoogleLogin } from '@react-oauth/google';
-import { useNavigate } from 'react-router';
+import { NavLink, useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router';
 import Cookies from 'js-cookie';
-import jwt_decode from 'jwt-decode';
 import { useGoogleLogin } from '@react-oauth/google';
+import { RingLoader } from 'react-spinners';
 
 function SignIn() {
   const responseGoogle = response => {
     console.log(response);
   };
-  const [companyId, setCompanyId] = useState('');
-  const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [choice, setChoice] = useState('');
   const navigate = useNavigate();
+  const [popup, setPopup] = useState(false);
 
   const [formData, setFormData] = useState({
     password: '',
@@ -28,7 +25,6 @@ function SignIn() {
     password: '',
     employeeID: '',
   });
-  
 
   const handleInputChange = event => {
     const { name, value } = event.target;
@@ -39,43 +35,39 @@ function SignIn() {
     event.preventDefault();
     setIsLoading(true);
     try {
-      
       const res = await axios.post(
         'https://pms-jq9o.onrender.com/api/v1/admin/login',
         formData
-        );
-        toast.success('Login Successfully');
-        setIsLoading(false);
-      
+      );
+      toast.success('Login Successfully');
+      setIsLoading(false);
+
       Cookies.set('companyID', res.data.data._id);
       Cookies.set('Token', res.data.token);
       navigate('/dashboard');
     } catch (error) {
-      toast.error(error.response.data.message)
-      setIsLoading(false)
+      toast.error(error.response.data.message);
+      setIsLoading(false);
     }
   };
-  
+
   const handleSubmit = async event => {
     event.preventDefault();
-    setIsLoading(true)
-    try{
-      
-        const res = await axios.post(
+    setIsLoading(true);
+    try {
+      const res = await axios.post(
         'https://pms-jq9o.onrender.com/api/v1/employee/login',
         empFormData
-        );
-        setIsLoading(false)
-        toast.success('Login Successfully');
-        Cookies.set("EmpToken", res.data.token)
-        navigate('/emp-dashboard')
-        
-      
-    }catch(error){
-      setIsLoading(false)
-      toast.error(error.response.data.message)
+      );
+
+      setIsLoading(false);
+      toast.success('Login Successfully');
+      Cookies.set('EmpToken', res.data.token);
+      navigate('/emp-dashboard');
+    } catch (error) {
+      setIsLoading(false);
+      toast.error(error.response.data.message);
     }
-    
   };
 
   const googleLogin = useGoogleLogin({
@@ -93,8 +85,18 @@ function SignIn() {
           'https://pms-jq9o.onrender.com/auth/google/callback',
           { email: userInfo.email }
         );
-        console.log(user.data); // log the user details returned from the server
-        // ... code to redirect to appropriate dashboard ...
+
+        if (user.data.data.admin.role === 'Admin') {
+          Cookies.set('companyID', user.data.data.admin._id);
+          Cookies.set('Token', user.data.data.token);
+          toast.success('Login successful');
+          navigate('/dashboard');
+        } else if (user.data.data.employee) {
+          Cookies.set('EmpToken', user.data.data.token);
+
+          navigate('/emp-dashboard');
+          toast.success('Login successful');
+        }
       } catch (error) {
         console.log('Error logging in with Google:');
         let errorMessage =
@@ -119,7 +121,7 @@ function SignIn() {
       setIsLoading(true);
       console.log('Error logging in with Google:');
       // display an error message to the user
-      alert('There was an error logging in. Please try again later.');
+      toast.error('There was an error logging in. Please try again later.');
       // wait for 500ms before setting isLoading to false
       setTimeout(() => {
         setIsLoading(false);
@@ -133,7 +135,14 @@ function SignIn() {
       <p className="text_2">We’ve missed you so much</p>
       <div className="googleSignInButton">
         <button onClick={googleLogin}>
-          {isLoading ? 'please wait...' : 'Login with Google'}
+          {isLoading ? (
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+              <RingLoader color="#36d7b7" size={24} />
+              <span style={{ marginLeft: '8px' }}>Verifying...</span>
+            </div>
+          ) : (
+            'Login with Google'
+          )}
         </button>
       </div>
 
@@ -151,7 +160,10 @@ function SignIn() {
       </div>
 
       {/* Admin Form */}
-      <form onSubmit={handleSignIn} className={choice === 'Admin' ? 'show' : 'hide'}>
+      <form
+        onSubmit={handleSignIn}
+        className={choice === 'Admin' ? 'show' : 'hide'}
+      >
         <label className="inputLabel">
           Company Name or Company Email:
           <input
@@ -190,7 +202,10 @@ function SignIn() {
       </form>
 
       {/* Employee Form */}
-      <form onSubmit={handleSubmit} className={choice === 'Employee' ? 'show' : 'hide'}>
+      <form
+        onSubmit={handleSubmit}
+        className={choice === 'Employee' ? 'show' : 'hide'}
+      >
         <label className="inputLabel">
           Employee Id:
           <input
@@ -198,7 +213,9 @@ function SignIn() {
             type="text"
             name="emailOrCompanyName"
             value={empFormData.employeeID}
-            onChange={(e) => setEmpFormData({...empFormData, employeeID: e.target.value})}
+            onChange={e =>
+              setEmpFormData({ ...empFormData, employeeID: e.target.value })
+            }
             placeholder="Enter your Id"
           />
         </label>
@@ -209,7 +226,9 @@ function SignIn() {
             type="password"
             name="password"
             value={empFormData.password}
-            onChange={(e) => setEmpFormData({...empFormData, password: e.target.value})}
+            onChange={e =>
+              setEmpFormData({ ...empFormData, password: e.target.value })
+            }
             placeholder="Enter your password"
           />
         </label>
@@ -227,6 +246,7 @@ function SignIn() {
           </span>
         </p>
       </form>
+      {/* {popup ? <SignIn className="signinpopup" /> : undefined} */}
     </div>
   );
 }
