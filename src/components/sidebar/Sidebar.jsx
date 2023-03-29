@@ -5,10 +5,13 @@ import { Profile2User } from 'iconsax-react';
 import { Cup } from 'iconsax-react';
 import { Chart1 } from 'iconsax-react';
 import { Setting2 } from 'iconsax-react';
+import { More2 } from 'iconsax-react';
 import { EmptyWallet } from 'iconsax-react';
 import { Link } from "react-router-dom";
 import Logo from './logo.png';
 import MoreVertIcon from "@mui/icons-material/MoreVert";
+// import Swal from 'sweetalert2'
+
 // import { DarkModeContext } from "../../context/darkModeContext";
 // import { useContext } from "react";
 // import Image from "./logo.png"
@@ -80,8 +83,8 @@ const Sidebar = () => {
         </div>
         <div>
           <Link to="" style={{ textDecoration: "none" }}>
-            <MoreVertIcon fontSize="small" />
-          </Link >
+          <More2 size="32" color="#FF8A65"/>
+            </Link >
         </div>
       </div>  
         
