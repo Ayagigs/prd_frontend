@@ -1,0 +1,29 @@
+.performance {
+    display: flex;
+    margin-top: 12px;
+    width: 100%;
+  
+    .performanceContainer {
+      flex: 6;
+    }
+
+    .perftabletitle{
+      padding-bottom: 20px;
+      width: 169px;
+      height: 29px;
+      color: #171717;
+      font-family: 'Satoshi';
+      font-style: normal;
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 25px;
+      // display: flex;
+      // align-items: center;
+
+      
+    }
+}
+
+.perftablebox{
+  width: 1200px;
+}

@@ -1,0 +1,130 @@
+.datatable {
+  max-width: 1230px;
+  min-width: 1200px;
+  height: 600px;
+  padding: 20px;
+  border: 1px solid #EFEFEF;
+border-radius: 4px;
+// z-index: -22;
+  
+  .datatableTitle{
+    max-width: 1400px;
+    min-width: 1200px;
+    height: 22px;
+    font-family: 'Satoshi';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 22px;;
+    color: rgb(10, 10, 10);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .datagrid{
+      color: rgba(250, 245, 245, 0.055);
+    }
+
+    .link{
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-color: transparent;
+    padding: 12px 14px;
+    gap: 10px;
+    margin-top:-10px;
+    width: 170px;
+    height: 43px;
+    color: #E7E8FF;
+    background: #030BC3;
+    border-radius: 8px;
+    }
+    .link:hover{
+      color: rgb(237, 238, 243);
+      background: #00010e;
+    }
+  }
+
+  .active{
+    color: green;
+    background-color: rgba(120, 223, 120, 0.251);
+    padding: 5px 10px;
+    border-radius: 25px;
+  }
+  .inactive{
+    color: red;
+    background-color: rgba(223, 144, 120, 0.251);
+    padding: 5px 10px;
+    border-radius: 25px;
+  }
+
+  svg{
+    color: rgb(212, 0, 0);
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  .cellWithImg {
+    display: flex;
+    align-items: center;
+
+    .cellImg {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-right: 20px;
+    }
+  }
+
+  .cellWithStatus {
+    padding: 5px;
+    border-radius: 5px;
+
+    &.active {
+      background-color: rgba(0, 128, 0, 0.05);
+      color: green;
+    }
+    &.pending {
+      background-color: rgba(255, 217, 0, 0.05);
+      color: goldenrod;
+    }
+    &.passive {
+      background-color: rgba(255, 0, 0, 0.05);
+      color: crimson;
+    }
+  }
+
+  .cellAction {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    .viewButton {
+      padding: 2px 5px;
+      border-radius: 5px;
+      color: darkblue;
+      border: 1px dotted rgba(0, 0, 139, 0.596);
+      cursor: pointer;
+    }
+    
+    .deleteButton {
+      padding: 2px 5px;
+      border-radius: 5px;
+      color: crimson;
+      border: 1px dotted rgba(220, 20, 60, 0.6);
+      cursor: pointer;
+    }
+
+    .archiveButton {
+      padding: 2px 5px;
+      border-radius: 5px;
+      color: rgb(100, 89, 39);
+      border: 1px dotted rgba(207, 220, 20, 0.712);
+      cursor: pointer;
+    }
+  }
+}

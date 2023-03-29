@@ -1,0 +1,179 @@
+
+.accountbalance{
+
+    padding:20px;
+    display: flex;
+    flex-direction: row;
+    // position: relative;
+    // width: 1173px;
+    height: 149px;
+    font-family: 'Satoshi';
+        font-style: normal;
+    justify-content: left;
+    box-sizing:border-box;
+    line-height: 40px;
+    width: 1173px;
+    height: 149px;
+    
+    background: #F7F7F9;
+    border: 0.5px solid #F0F0F0;
+    border-radius: 8px;
+  }
+
+  .accountdetailsbox{
+ 
+    display: flex;
+    box-sizing:border-box;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    .topdiv{
+        font-family: 'Satoshi';
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+line-height: 22px;
+color: #000000;
+    }
+
+    .currentamount{
+        // width: 400px;
+        display: flex;
+        flex-direction: row;
+        // flex-wrap: wrap;
+        justify-content: space-between;
+        font-family: 'Satoshi';
+font-style: normal;
+font-weight: 500;
+font-size: 32px;
+line-height: 43px;
+display: flex;
+align-items: center;
+
+color: #515151;
+    }
+
+    .selectcurrency{
+        margin-left: 20px;
+        font-family: 'Satoshi';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        display: flex;
+        width: 80px;
+        height: 45px;
+        background-color: transparent;
+    }
+    .fee{
+        margin-top: 15px;
+        font-family: 'Satoshi';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 22px;
+        display: flex;
+        align-items: center;
+
+        color: #515151;
+    }
+  }
+
+  .clickbox{
+    display: flex;
+    width: 350px;
+    height: 129x;
+    margin-left: 500px;
+    justify-content: space-between;
+    
+
+    .sendmoneybtn{
+        margin:10px ;
+        font-size: 16px;
+        border: none;
+        cursor:pointer;
+    }
+    .recievemoneybtn{
+        margin:10px ;
+        font-size: 16px;
+        border: none;
+        cursor:pointer;
+    }
+    .copytransbtn{
+        margin:10px ;
+        font-size: 16px;
+        border: none;
+        cursor:pointer;
+    }
+    .sendbox{
+   width: 100px;
+   justify-content: center;
+   padding: 20px;
+    }
+
+
+    .sendnow{
+        margin-top:0px;
+        justify-content: center;
+        color: #000000;
+        font-family: 'Satoshi';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 15px;
+        line-height: 43px;
+        display: flex;
+        align-items: center;
+
+
+    }
+    
+    .sendicon{
+padding: 15px 0 0 15px;
+width: 59.24px;
+align-items: center;
+justify-content: center;
+padding: #ffffff;;
+height: 59.24px;
+left: 5px;
+top: 5px;
+border-radius: 50%;
+
+background: #EBEDFC;
+
+    }
+    .recievebox{
+        // position: absolute;
+width: 59.24px;
+padding: 15px 0 0 15px;
+height: 59.24px;
+left: 0px;
+top: 0px;
+border-radius: 50%;
+
+background: #ffffff;
+
+    }
+    .copybox{
+        // position: absolute;
+width: 59.24px;
+padding: 15px 0 0 15px;
+height: 59.24px;
+left: 0px;
+top: 0px;
+border-radius: 50%;
+
+background: #ffffff;
+
+    }
+  }
+  
+.sendnow{
+    margin-bottom: -20px;
+}
+.clickname{
+    // padding-left: 15px;
+    font-family: 'Satoshi';
+font-style: normal;
+font-weight: 300;
+font-size: 16px;
+line-height: 22px;
+}

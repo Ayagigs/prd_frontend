@@ -1,0 +1,63 @@
+.perftable {
+margin-top: 15px;
+  font-family: 'Satoshi';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 19px;
+  
+    .cellWrapper {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      
+      .image {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        margin-right: 10px;
+        object-fit: cover;
+      }
+    }
+    
+    .tablehead{
+      background-color: #EBEDFC;
+      // padding: 10px 126px 10px 0px;
+      // gap: 10px;
+      // width: 297px;
+      height: 39px;
+    }
+    .status {
+      padding: 5px;
+      border-radius: 5px;
+  
+      &.active {
+        color: green;
+        background-color: rgba(0, 128, 0, 0.151);
+      }
+      &.inactive {
+        color: #FF0000;
+  
+        background-color: #FEE9E9;
+      }
+    }
+  }
+
+.closeReview{
+  position: fixed;
+  top: 120px;
+  right: 80px;
+  z-index: 30;
+  padding: 8px 15px;
+  border-radius: 100%;
+  font-size: 18px;
+  background-color: white;
+  cursor: pointer;
+}
+.closeReview:hover{
+  color: rgb(220, 0, 0);
+}
+.hide{
+  display: none;
+}
+  

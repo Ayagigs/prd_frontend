@@ -1,0 +1,41 @@
+.adminwallet {
+  // display: flex;
+  // margin-top: 12px;
+  margin-top:110px;
+    margin-left: 250px;
+  // width: 100%;
+
+  .walletContainer {
+    
+    flex: 6;
+    background-color:#FFFFFF;
+    // background-color: #F5F5F5 ;
+    // border-left: 1px solid #E9E9E9;
+    // z-index:-2222
+
+  }
+}
+.balance{
+  margin: 25px 31px;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 16px 14px;
+  gap: 16px;
+  isolation: isolate;
+
+  width: 1123px;
+  height: 149px;
+
+  background: #F7F7F9;
+  border: 0.5px solid #F0F0F0;
+  border-radius: 8px;
+}
+
+.transcontainer{
+  display: flex;
+  margin: 20px 20px 20px 20px;
+}
+
+.transactiontable{
+  width: 1140px;
+}

@@ -1,0 +1,365 @@
+.compdetails{
+    // position:relative;
+    // margin-left: 150px;
+    display: flex;
+    flex-direction: row;
+    width: 914px;
+    height: 607px;
+
+    // margin: 10px 10px;
+    padding: 60px 52px;
+    margin-right: 10px;
+    box-sizing:border-box;
+
+}
+.compdetails .leftcont {
+    padding-right: 100px;
+}
+.compdetails .comp{
+    font-family: 'Satoshi';
+font-style: normal;
+font-weight: 500;
+font-size: 24px;
+line-height: 32px;
+
+color: #404141;
+}
+
+.compdetails .company{
+    font-family: 'Satoshi';
+font-style: normal;
+font-weight: 400;
+font-size: 12px;
+// line-height: 16px;
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+// align-items: center;
+padding: 0px 10px;
+// gap: 10px;
+
+width: 174px;
+// height: 47px;
+
+
+color: #3E3E3E;
+}
+.compdetails .subtitle{
+    font-family: 'Satoshi';
+font-style: normal;
+font-weight: 500;
+font-size: 14px;
+line-height: 151.4%;
+/* or 21px */
+
+
+color: #6A6A6A;
+}
+
+
+
+
+
+
+// * {
+//     margin: 0;
+//     padding: 0;
+//    ;
+// } box-sizing: border-box
+
+// html,
+// body {
+//     height: 100%;
+// }
+
+.compdetails main {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    
+    // min-height: 100vh;
+    /* border: solid green 5px; */
+}
+
+.compdetails #main {
+    width: 50%;
+    background-color: #fff;
+    margin-top: 0;
+
+}
+
+// section {
+
+//     width: 60%;
+//     margin-left: 4rem;
+
+
+// }
+
+.compdetails .form-container {
+    display: flex;
+    align-items:flex-start;
+    // margin:-0 30px 0 30px;
+    flex-direction: row;
+    align-items:center;
+    // flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+// .form-container>div {
+//     flex: 1 1 calc(33.33% - 10px);
+//     margin-right: 20px;
+//     margin-bottom: 20px;
+
+// }
+
+// .form-container>div:last-child {
+//     margin-right: 0;
+// }
+
+// .company {
+//     display: block;
+//     padding-top: 10px;
+// }
+
+.compdetails  .company-input[type="text"],
+select {
+    display: block;
+    width: 174px;
+    height: 46px;
+    padding: 8px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 17px;
+    margin-top: 0px;
+
+}
+
+.compdetails  #Business-input [type="select"] {
+    width: 174px;
+    height: 47px;
+}
+.compdetails  .new-line {
+    flex-basis: 100%;
+    margin: 20px 0 20px 0;
+    font-family: 'Satoshi';
+font-style: normal;
+font-weight: 400;
+font-size: 12px;
+line-height: 16px;
+// display: flex;
+// align-items: center;
+// text-align: center;
+
+color: #3E3E3E;
+}
+
+.compdetails .new-line label {
+    margin-top: 0px;
+    
+}
+
+.compdetails .new-line input[type="email"] {
+    display: block;
+    width: 360px;
+height: 46px;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 16px;
+    padding-right: 30px;
+    margin-top: 5px;
+}
+
+.compdetails .third-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 0;
+    margin: 20px 0 20px 0;
+    font-family: 'Satoshi';
+font-style: normal;
+font-weight: 400;
+font-size: 12px;
+line-height: 16px;
+
+}
+
+.compdetails .third-container label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.compdetails .third-container select {
+    display: block;
+    padding: 9.4px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 185px;
+    font-size: 16px;
+
+}
+
+.compdetails .state {
+    margin-left: 20px;
+}
+
+.compdetails .select-state {
+    margin-left: 0;
+}
+
+
+.compdetails .fourth-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 20px 0 20px 0;
+    font-family: 'Satoshi';
+font-style: normal;
+font-weight: 400;
+font-size: 12px;
+line-height: 16px;
+}
+
+.compdetails  .third-container label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.compdetails .fourth-container select {
+    display: block;
+    width: 174px;
+height: 47px;
+    padding: 9.4px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.compdetails .state2 {
+    margin-left: 20px;
+
+}
+
+.compdetails .select-state2 {
+    margin-left: 0;
+}
+
+// .back-Button {
+//     background-color: #b3b3b3;
+// }
+
+// .submit-Button {
+//     background-color: #f0f0f0;
+// }
+
+// .last_text {
+//     margin-top: 2rem;
+// }
+
+// .last_text span {
+//     font-weight: bold;
+// }
+
+// .text-back {
+//     display: block;
+//     margin-top: 2rem;
+// }
+
+
+// .buttons {
+//     display: flex;
+//     flex-direction: row;
+//     justify-content: center;
+//     align-items: center;
+//     margin-top: 1.4rem;
+//     padding: 0 1rem;
+
+// }
+
+
+// .submit-Button {
+//     padding: 10px 29px;
+//     width: 85px;
+//     height: auto;
+//     cursor: pointer;
+//     transition: background-color 0.3s;
+//     background: #E7E8FF;
+//     border-radius: 4px;
+//     margin-right: 7px;
+//     margin-left: 9px;
+//     border: none;
+//     outline: none;
+// }
+
+
+// .back-Button {
+//     margin-left: 200px;
+//     padding: 10px 28px;
+//     width: 85px;
+//     height: auto;
+//     cursor: pointer;
+//     transition: background-color 0.3s;
+//     background: #E7E8FF;
+//     border-radius: 4px;
+//     border: none;
+//     outline: none;
+
+// }
+
+// .submit-Button {
+//     background: #3E45EB;
+// }
+
+.compdetails button:hover {
+    background-color: #4145a8;
+}
+
+// .last_text {
+//     font-family: "Satoshi";
+//     font-style: normal;
+//     font-weight: 400;
+//     font-size: 18px;
+//     line-height: 18px;
+//     color: #2f2f2f;
+//     margin-top: 26px;
+//     text-align: center;
+// }
+
+// .last_text span a {
+//     margin: 0 4px;
+//     color: #3e79eb;
+//     font-size: 20px;
+//     text-align: left;
+//     text-decoration: none;
+// }
+
+// .text-back {
+//     text-align: left;
+//     text-decoration: none;
+//     margin-top: 1rem;
+//     color: #3e79eb;
+// }
+
+.compdetails h2 {
+    width: 205px;
+    height: 20px;
+    font-family: 'Satoshi';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 32px;
+    margin-bottom: 11px;
+}
+
+// // .signup-image {
+// //     width: 50%;
+// //     margin-left: 0.01rem;
+// //     margin-top: 0;
+// //     background-image: url('./images/Image-holder.svg');
+// //     background-size: cover;
+// //     background-position: bottom;
+// // }

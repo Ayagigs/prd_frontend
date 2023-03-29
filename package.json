@@ -1,0 +1,66 @@
+{
+  "name": "registerpage",
+  "version": "0.1.0",
+  "private": true,
+  "proxy": "https://pms-jq9o.onrender.com/",
+  "dependencies": {
+    "@emotion/react": "^11.8.1",
+    "@emotion/styled": "^11.8.1",
+    "@mantine/core": "^6.0.4",
+    "@mantine/hooks": "^6.0.4",
+    "@mui/icons-material": "^5.4.4",
+    "@mui/material": "^5.4.4",
+    "@mui/x-data-grid": "^5.5.1",
+    "@react-oauth/google": "^0.9.0",
+    "@testing-library/jest-dom": "^5.16.2",
+    "@testing-library/react": "^12.1.3",
+    "@testing-library/user-event": "^13.5.0",
+    "axios": "^1.3.4",
+    "core-js-pure": "^3.29.1",
+    "firebase": "^9.18.0",
+    "http-proxy-middleware": "^2.0.6",
+    "iconsax-react": "^0.0.8",
+    "js-cookie": "^3.0.1",
+    "jwt-decode": "^3.1.2",
+    "react": "^17.0.2",
+    "react-card-slider-component": "^1.0.9",
+    "react-circular-progressbar": "^2.0.4",
+    "react-dom": "^17.0.2",
+    "react-google-login": "^5.2.2",
+    "react-icons": "^4.8.0",
+    "react-otp-input": "^3.0.0",
+    "react-router-dom": "^6.2.2",
+    "react-scripts": "^5.0.1",
+    "react-toastify": "^9.1.2",
+    "recharts": "^2.1.9",
+    "sass": "^1.59.3",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "webpack": "^5.76.2"
+  }
+}

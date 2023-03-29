@@ -1,0 +1,118 @@
+.perfrev {
+    flex: 2;
+    -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+    box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+    // 
+    
+  box-sizing: border-box;
+  // padding: 10px;
+  width: 700px;
+  min-height: 300px;
+  max-height: 360px;
+  margin-left: 30px;
+  background-color: #F5F5F5 ;
+  // border: 1px solid #F3F3F3;
+  border-radius: 8px;
+  
+  /* Inside auto layout */
+  
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+  
+    .minitop {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: gray;
+      padding: 10px;
+      padding-bottom: -10px;
+      margin-bottom: -15px;
+      // background-color: #F7F7F9;
+  
+      .titles {
+        display: flex;
+        flex-direction: row;
+        width:400px;
+        font-size: 16px;
+        font-weight: 700;
+        color: black;
+        margin-right: 210px;
+      }
+    }
+  
+    .picker{
+      // width: 140px;
+      display: flex;
+      flex-direction: row;
+      margin-left: 287px;
+    }
+  
+    .select{
+      // margin-left: 20px;
+      //     font-weight: 400;
+          border: none;
+          display: flex;
+          width: 20px;
+          background-color: transparent;
+          justify-content: flex-start;
+    }
+    .bottom {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+  
+      .featuredChart {
+        width: 100px;
+        height: 100px;
+      }
+  
+ 
+  
+      .amount {
+        font-size: 30px;
+      }
+  
+      .desc {
+        font-weight: 300;
+        font-size: 12px;
+        color: gray;
+        text-align: center;
+      }
+  
+      .summary {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+  
+        .item {
+          text-align: center;
+  
+          .itemTitle {
+            font-size: 14px;
+            color: gray;
+          }
+  
+          .itemResult {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+            font-size: 14px;
+  
+            &.positive {
+              color: green;
+            }
+  
+            &.negative {
+              color: red;
+            }
+          }
+        }
+      }
+    }
+  }
+  

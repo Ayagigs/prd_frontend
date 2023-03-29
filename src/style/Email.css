@@ -1,0 +1,82 @@
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    width: 450px;
+    border-radius: 6px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    margin: 40px auto;
+    background-color: white;
+    text-align: center;
+    position: fixed;
+    top: 20%;
+    left: 30%;
+    z-index: 40;
+}
+.hide{
+    display: none;
+}
+.instructions {
+    margin-top: 20px;
+    font-size: 18px;
+    text-align: center;
+    width: 276px;
+}
+
+.code-input {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.code-input input {
+    width: 50px !important;
+    height: 50px;
+    font-size: 24px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.code-input input:focus {
+    outline: none;
+    border-color: #007aff;
+}
+
+.form-container button {
+    margin-top: 20px;
+    padding: 10px 80px;
+    background-color: #007aff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.form-container button:hover {
+    background-color: #0062cc;
+}
+
+.resend-link {
+    margin-top: 20px;
+    font-size: 16px;
+    color: #007aff;
+    cursor: pointer;
+}
+.form-container .signinDiv{
+    position: fixed;
+    width: 100%;
+    top: 0px;
+    height: 100vh;
+    background-color: rgba(173, 173, 173, 0.611);
+    backdrop-filter: blur(2px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 20;
+  }
+  .form-container   .hide{
+    display: none;
+  }

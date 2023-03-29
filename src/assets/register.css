@@ -1,0 +1,224 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+.wrapper {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+    overflow-y: hidden;
+    font-family: 'Poppins', sans-serif;
+  display: flex;
+  height: 100vh;
+}
+.wrapper .leftWrapper{
+  width: 55%;
+  height: 100%;
+  padding: 60px 200px;
+  padding-left: 100px;
+}
+
+.wrapper .stepperWrapper{
+  display: flex;
+  flex-direction: column;
+  row-gap: 30px;
+}
+.wrapper .stepperCardWrapper{
+  display: flex;
+  align-items: center;
+  column-gap: 20px;
+}
+.wrapper .formWrapper h1{
+  font-size: 30px;
+}
+.wrapper .formWrapper p{
+  font-size: 15px;
+}
+.wrapper .stepperCard{
+  display: flex;
+  column-gap: 5px;
+  align-items: center;
+}
+.wrapper .number{
+  display: flex;
+  align-items: center;
+}
+.wrapper .line{
+  width: 25px;
+  height: 2px;
+  background-color: gray;
+}
+.wrapper .number p{
+  background-color: white;
+  color: gray;
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border-radius: 100%;
+  font-size: 13px;
+  border: 1.5px solid gray;
+}
+
+.wrapper .active .number p{
+  border: 1.5px solid #3E45EB;
+  background-color: #3E45EB;
+  color: white;
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border-radius: 100%;
+}
+.wrapper .active .line{
+  width: 20px;
+  height: 2px;
+  background-color: #3E45EB;
+}
+.wrapper .active p{
+  color: #3E45EB;
+}
+.wrapper .stepperCard p{
+  font-size: 13px;
+}
+.wrapper .formWrapper{
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  width: 100%;
+}
+.wrapper .formWrapper form{
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+}
+.wrapper .inputWrapper{
+  display: flex;
+  flex-direction: column;
+  row-gap: 3px;
+  width: 100%;
+}
+.wrapper .inputWrapper label{
+  font-size: 13px;
+}
+.wrapper .inputWrapper input{
+  padding: 8px 10px;
+  border-radius: 7px;
+  border:  1px solid gray;
+  outline: none;
+}
+.wrapper .inputWrapper input:focus{
+  border: 1.5px solid #3E45EB;
+}
+.wrapper .inputWrapper select{
+  padding: 6px 10px !important;
+  border-radius: 7px;
+  border:  1px solid gray;
+  outline: none;
+  width: 100%;
+  height: fit-content;
+}
+.wrapper .inputWrapper select:focus{
+  border: 1.5px solid #3E45EB;
+}
+.wrapper .buttonWrapper{
+  display: flex;
+  width: 100%;
+  margin-top: 30px;
+  justify-content: right;
+  column-gap: 10px;
+}
+.wrapper .buttonWrapper button{
+  cursor: pointer;
+}
+.wrapper .buttonWrapper button:nth-child(1){
+  padding: 12px 24px;
+  color: #3E45EB;
+  font-size: 14px;
+  width: 120px;
+  height: 43px;
+  background: #E7E8FF;
+  border-radius: 8px;
+  border: 0px;
+
+}
+.wrapper .buttonWrapper button:nth-child(2){
+  width: 120px;
+  height: 43px;
+  background: #3E45EB;
+  border-radius: 8px;
+  color: white;
+  font-size: 14px;
+  border: 0px;
+}
+.wrapper .signin{
+  text-align: center;
+  font-size: 13px;
+}
+.wrapper .signin a{
+  text-decoration: none;
+  font-size: 13.5px;
+  color: #3E45EB;
+}
+.wrapper .backhome{
+  text-decoration: none;
+  font-size: 14px;
+  color: #3E45EB;
+  display: flex;
+  align-items: center;
+}
+.wrapper .backhome svg{
+  font-size: 20px;
+}
+.wrapper .rightWrapper{
+  width: 45%;
+  background-color: #3E45EB;
+}
+.wrapper .rightWrapper img{
+  width: 100%;
+  height: 100%;
+}
+.wrapper .hide{
+  display: none;
+}
+.wrapper .inputHolder{
+  display: flex;
+  column-gap: 8px;
+}
+.wrapper .inputHolder .inputWrapper{
+  width: 50%;
+}
+.wrapper .formWrapper .terms{
+  margin-bottom: 40px;
+}
+.wrapper .formWrapper .terms{
+  font-size: 14px;
+}
+.wrapper .terms a{
+  text-decoration: none;
+  color: #3E45EB;
+}
+
+.wrapper form .checkboxWrapper{
+  display: flex;
+  column-gap: 5px;
+  font-size: 14px;
+  margin-bottom: 108px;
+}
+
+.wrapper .signinDiv{
+  position: fixed;
+  width: 100%;
+  top: 0px;
+  height: 100vh;
+  background-color: rgba(173, 173, 173, 0.611);
+  backdrop-filter: blur(2px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 20;
+}
+.wrapper .signin{
+  margin-top: 20px;
+}
+.wrapper   .hide{
+  display: none;
+}

@@ -1,0 +1,93 @@
+.emphome {
+    display: flex;
+    margin-top: 80px;
+    width: 100%;
+    padding-top: 10px;
+    margin-left: 250px;
+  
+    .emphomeContainer {
+      flex: 6;
+      background-color: #F5F5F5 ;
+   
+  
+      .empwidgets {
+        display: flex;
+        padding: 10px 20px;
+        gap: 20px;
+      }
+      .charts {
+        display: flex;
+        padding: 20px;
+        gap: 20px;
+      }
+  
+      .leftdiv{
+        display: flex;
+        flex-direction: row;
+      }
+      .charts {
+        padding: 5px 20px;
+      }
+  
+      .emplistContainer {
+        display: flex;
+        // flex-direction: row;
+        
+      
+        -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+        box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+        padding: 20px;
+        margin: 40px 20px 20px 20px;
+        // justify-content: space;
+        
+  
+        .listTitle {
+          font-weight: 500;
+          color: gray;
+          margin-bottom: 15px;
+        }
+      }
+    }
+  }
+  
+  .empmiddlecont{
+    display: flex;
+    flex-direction: row;
+  }
+  
+  h1{
+    font-size: 16px;
+          font-weight: 700;
+          color: black;
+  }
+  
+  .tabs{
+    display: flex;
+    margin-left: 35px;
+    width: 500px;
+    justify-content: space-between;
+    
+   
+  }
+  
+  .viewtab{
+  display: flex;
+  width: 95vw;
+  display:flex;
+  flex-direction: column;
+  justify-content:space-between;
+  margin: 10px 40px 20px 40px;
+  }
+  
+  
+
+  .perfreview{
+    height: 30px;
+    // background-color: #ffffff;
+    border: #2c2a2aa4 2px;
+    border-style: dashed ;
+    border-top: 0;
+    border-right: 0;
+    border-left: 0;
+  }
+  

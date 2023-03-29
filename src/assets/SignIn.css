@@ -1,0 +1,184 @@
+ /* ==== This is the general container for signIn==== */
+
+ .signInContainer {
+     display: flex;
+     flex-direction: column;
+     margin: 40px auto;
+     max-width: 320px;
+     height: fit-content;
+     padding: 20px;
+     border-radius: 6px;
+     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+     text-align: center;
+     box-sizing: content-box;
+     background-color: white;
+     position: fixed;
+     left: 37%;
+     z-index: 30;
+     top: 10%;
+ }
+
+ /* the text content for the first button */
+.signInContainer .text {
+     /* width: 166px;
+height: 32px; */
+     font-family: 'Satoshi';
+     font-style: normal;
+     font-weight: 700;
+     font-size: 25px;
+     line-height: 32px;
+     margin: 10px auto;
+     color: #000000;
+     box-sizing: content-box;
+
+ }
+
+ .signInContainer  .text_2 {
+     /* width: 220px;
+     height: 19px; */
+     color: #4F4F4F;
+     font-family: 'Satoshi';
+     font-style: normal;
+     font-weight: 500;
+     margin: 0 auto;
+     font-size: 21px;
+     box-sizing: content-box;
+     /* border: 5px solid blue; */
+
+     line-height: 19px;
+ }
+
+ .signInContainer  .text_3, .signInContainer 
+ a {
+     color: #3E79EB;
+     width: 117px;
+     height: 19px;
+     font-family: 'Satoshi';
+     font-style: normal;
+     font-weight: 700;
+     font-size: 14px;
+     line-height: 19px;
+     text-decoration: none;
+     box-sizing: content-box;
+ }
+
+ .signInContainer .last_text {
+     font-family: 'Satoshi';
+     font-style: normal;
+     font-weight: 400;
+     font-size: 18px;
+     line-height: 18px;
+     color: #2F2F2F;
+     margin-top: 26px;
+     box-sizing: content-box;
+ }
+
+ .signInContainer .last_text span a {
+     margin: 0 4px;
+     color: #3E79EB;
+     font-size: 20px;
+     box-sizing: content-box;
+     font-size: 15px;
+
+     /* border: 5px solid blue; */
+ }
+
+ /* the button content for the first button */
+
+ .signInContainer .googleSignInButton {
+     background-color: #fff;
+     color: #312d2d;
+     border: 0.02px solid gray;
+     padding: 7px 80px;
+     width: 100%;
+     border-radius: 5px;
+     outline: none;
+     font-size: 14px;
+     font-family: 'Satoshi';
+     margin: 26px 0;
+     cursor: pointer;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+ }
+
+ .signInContainer .googleSignInButton:hover {
+     background-color: #db4437;
+     color: #fff;
+ }
+
+ .signInContainer .googleSignInButton img {
+     width: 22px;
+     height: 20px;
+     margin-right: 10px;
+ }
+
+ .signInContainer .or {
+     display: flex;
+     align-items: center;
+     column-gap: 5px;
+     margin-top: -20px;
+     margin-top: -10px;
+     /* border: 5px solid blue; */
+ }
+
+ .signInContainer .or div {
+     height: 0.2px;
+     background-color: gray;
+     width: 100%;
+ }
+
+
+ .signInContainer .inputLabel {
+     display: block;
+     margin-bottom: 10px;
+     font-size: 16px;
+     font-weight: bold;
+     text-align: left;
+     box-sizing: content-box;
+     width: 100%;
+ }
+.choice{
+    display: flex;
+    column-gap: 10px;
+}
+.choice span{
+    cursor: pointer;
+}
+.choice span:hover{
+    color: dodgerblue;
+}
+.show{
+    display: contents;
+}
+.hide{
+    display: none;
+}
+ .signInContainer  .inputField {
+     display: block;
+     width: 92%;
+     padding: 10px;
+     font-size: 16px;
+     border-radius: 5px;
+     border: 1px solid #CCC;
+     margin-bottom: 20px;
+     text-align: left;
+     box-sizing: content-box;
+ }
+
+ .signInContainer .signInButton {
+     background-color: #035cec;
+     color: white;
+     border: none;
+     width: 93%;
+     padding: 10px 126px;
+     border-radius: 5px;
+     font-size: 16px;
+     margin: 22px auto 0;
+     cursor: pointer;
+     transition: background-color 0.3s ease;
+ }
+
+ .signInContainer .signInButton:hover {
+     background-color: #4285F4;
+ }

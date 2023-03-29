@@ -1,0 +1,171 @@
+.newContainer {
+  flex: 6;
+
+}
+.singleaddcontainer {
+  margin-top:110px;
+  margin-left: 250px;
+}
+
+.singleaddcont{
+  flex-direction: column;
+display: flex;
+position: relative;
+padding: 30px;
+margin: 30px;
+  width: 578px;
+height: 553px;
+  display: flex;
+  background: #FFFFFF;
+box-shadow: 3px 6px 28px rgba(0, 0, 0, 0.25);
+border-radius: 4px;
+
+}
+
+.closebtn{
+  cursor: pointer;
+      position: absolute;
+      border-color: transparent;
+      width: 30px;
+      height: 30px;
+    //   left: -20px;
+      display: flex;
+      background-color: #EEEFF7;
+    //   flex-direction: row-reverse;
+    //   justify-content: flex-end;
+      align-items: center;
+    //   right: 80px;
+    padding: 10px;
+      margin-left:500px;
+      border-radius: 1e+08px;
+      
+}
+
+.topcont{
+  padding: 20px;
+  font-family: 'Satoshi';
+font-style: normal;
+font-weight: 500;
+font-size: 24px;
+line-height: 32px;
+display: flex;
+align-items: center;
+text-align: center;
+
+color: #000000;
+
+}
+
+label{
+  font-family: 'Satoshi';
+font-style: normal;
+font-weight: 400;
+font-size: 12px;
+line-height: 16px;
+display: flex;
+align-items: center;
+text-align: center;
+
+color: #3E3E3E;
+}
+
+.first-container {
+  padding-bottom:13px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.second-container {
+  display: flex;
+  padding-bottom:13px;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.third-container {
+  display: flex;
+  padding-bottom:13px;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.fourth-container {
+  display: flex;
+  padding-bottom:13px;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.input {
+  flex-direction: row;
+align-items: flex-start;
+padding: 12px 10px;
+gap: 10px;
+
+width: 250px;
+height: 46px;
+
+background: #FFFFFF;
+border: 0.1px;
+box-shadow: 0px 0px 0px 2px #EEEFF7;
+border-radius: 8px;
+}
+
+select{
+  cursor: pointer;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 12px 10px;
+  gap: 10px;
+  
+  width: 250px;
+  height: 46px;
+  
+  background: #FFFFFF;
+  border: 0.2px;
+  box-shadow: 0px 0px 0px 2px #EEEFF7;
+  border-radius: 8px;
+}
+
+
+.formbuttons{
+  display: flex;
+  padding-bottom:13px;
+  flex-direction: row;
+  justify-content:end;
+  margin: 50px 20px 4px 0px;
+  // width: 100%;
+}
+.cancelbtn{
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 24px;
+  gap: 10px;
+  border-color: transparent;
+  margin-right: 10px;
+  
+  width: 120px;
+  height: 43px;
+  color: #030BC3;
+  background: #E7E8FF;
+  border-radius: 8px;
+}
+.addempbtn{
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border-color: transparent;
+  padding: 12px 24px;
+  gap: 10px;
+  
+  width: 140px;
+  height: 43px;
+  color: #E7E8FF;
+  background: #030BC3;
+  border-radius: 8px;
+}
+

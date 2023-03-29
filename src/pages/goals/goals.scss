@@ -1,0 +1,33 @@
+.homeContainer {
+    flex: 6;
+    background-color: #F5F5F5 ;
+    height: 1500px;
+}
+
+.goalstablecont {
+    display: flex;
+    margin-top: 32px;
+    margin-left: 40px;
+    width: 100%;
+    z-index: 0;}
+
+.goalstablebox{
+    display: flex;
+    margin-top: 12px;
+    width: 100%;
+}
+
+.goalstitlebox{
+    padding-bottom: 25px;
+    width: 169px;
+    height: 29px;
+    color: #171717;
+    font-family: 'Satoshi';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 25px;
+    // display: flex;
+    // align-items: center;
+    
+  }

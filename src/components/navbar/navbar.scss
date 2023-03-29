@@ -1,0 +1,124 @@
+.navbar1 {
+  position: fixed;
+  height: 93px;
+  width: 1440px;
+  top: 0px;
+  border-bottom: 0.5px solid rgb(231, 228, 228);
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: #555;
+  background-color: #FFFFFF;
+  z-index: 1;
+
+  .wrap {
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .search {
+      display: flex;
+      align-items: center;
+      align-items: flex-start;
+      padding: 10px 10px;
+      gap: 10px;
+      width: 800px;
+      left: 253px;
+      top: 14px;
+      background: #FFFFFF;
+      border: 0.5px solid #BDBDBD;
+      border-radius: 8px;
+      
+
+      input {
+        border: none;
+        outline: none;
+        background: transparent;
+        width: 308px;
+        height: 22px;
+        font-family: 'Satoshi';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 22px;
+
+        &::placeholder {
+          font-size: 16px;
+        }
+      }
+    }
+    // .owner{
+    //   color: black;
+    // }
+
+   
+    .items {
+      display: flex;
+      align-items: center;
+
+      .userconts{
+        width: 190px;
+        margin-left:-390px;
+        display: flex;
+        flex-direction: row;
+        // justify-content: space-between;
+        padding-left: 0px;
+        align-items: center;
+      }
+    
+      .namecontainer{
+        margin-left: 10px;
+      }
+      .realnames{
+        width: 100%;
+        color: black;
+        font-size: 17px;
+        font-family: 'Satoshi';
+      }      
+
+          .passport {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+          }
+      // // .item {
+      // //   display: flex;
+      // //   align-items: center;
+      //   // margin-right: 80px;
+      //   // position: relative;
+
+      //   .profile {
+      //     padding-left: 10px;
+      //   }
+
+      //   .icon {
+      //     font-size: 20px;
+      //   }
+
+      //   .avatar {
+      //     width: 30px;
+      //     height: 30px;
+      //     border-radius: 50%;
+      //   }
+        
+        // .counter {
+        //   width: 15px;
+        //   height: 15px;
+        //   background-color: red;
+        //   border-radius: 50%;
+        //   color: white;
+        //   display: flex;
+        //   align-items: center;
+        //   justify-content: center;
+        //   font-size: 10px;
+        //   font-weight: bold;
+        //   position: absolute;
+        //   top: -5px;
+        //   right: -5px;
+        // }
+        
+      }
+    }
+  }
