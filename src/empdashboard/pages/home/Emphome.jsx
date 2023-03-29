@@ -59,6 +59,12 @@ const Emphome = () => {
           </div>
           </Link>
 
+          <Link to="/emp-dashboard/maingoalreview" style={{ textDecoration: "none" }}>
+          <div className="undomaingoalreview">
+          <h1>Goal Review</h1>
+          </div>
+          </Link>
+
           </div>
           <br />
           

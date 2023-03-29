@@ -8,7 +8,7 @@
 }
     .appraisalcontainer {
       flex: 6;
-
+ 
     }
       
     .appraisalbox{
@@ -30,10 +30,11 @@
       // position: absolute;
         display: flex;
         flex-direction: row;
+        // width:
     }
 
     .appraisalprofile{
-      margin-top: 30px;
+      margin-top: 0px;
     }
     .appraisalproftab{
       width: 100%;
@@ -47,19 +48,36 @@
 
       .bodytext{
         font-size:15px;
-        margin-top: 35px;
+        margin-top: 0px;
         text-align: justify;
       }
 
       .firstline{
         justify-content: space-between;
       }
-      
+
+      .typetext{
+        width:600px;
+        height: 25px;
+        border-style:dashed;
+        // height: 2px;
+      }
+      .singleform{
+        // margin-left:20px;
+        width: 650px;
+        height: 310px;
+        position: relative;
+        overflow-x:hidden;
+        margin-left: 0px;
+        // margin-right: 20px;
+        // flex-wrap: wrap;
+        // box-sizing: border-box;
+      }      
       .form-question {
         font-size:15px;
         color: black;
         margin: 10px -2px;
-        padding: 5px 15px 5px 15px;
+        padding: 5px 15px 5px 1px;
         font-family: 'Satoshi';
         font-style: normal;
         font-weight: 400;
@@ -71,9 +89,7 @@
         padding: 0px 15px 0px 15px;
       }
 
-      .singleform{
-        margin-left: -15px;
-      }
+
      
     .buttons{
         display: flex;
@@ -99,7 +115,7 @@
       .appduedate{
         display: flex;
       justify-content: end;
-      margin-left: 495px;
+      margin-left: 465px;
       font-family: 'Satoshi';
       font-style: normal;
       font-weight: 400;

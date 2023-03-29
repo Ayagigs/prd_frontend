@@ -46,6 +46,8 @@ import { DarkModeContext } from './context/darkModeContext';
 
 import ForgotPasswordPage from './pages/forgotPassword/ForgotPasswordPage';
 import ResetPasswordPage from './pages/resetPassword/ResetPasswordPage';
+import Maingoalreview from './empdashboard/pages/maingoalreview/Maingoalreview';
+import Goalreviewapp from './empdashboard/pages/goalreviewapp/Goalreviewapp';
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
@@ -118,8 +120,10 @@ function App() {
               <Route path="/emp-dashboard/appraisal" element={<Emphome />} />
               <Route path="/emp-dashboard/goalreview" element={<Goalreview />}/>
               <Route path="/emp-dashboard/performancereview" element={<Homeperf />}/>
+              <Route path="/emp-dashboard/maingoalreview" element={<Maingoalreview />}/>
               <Route path="/emp-dashboard/goalreview/appraisalform" element={<Appraisal />}/>
-              <Route path="/emp-dashboard/appraisal/appraisal360" element={<Appraisal360 />}/>              
+              <Route path="/emp-dashboard/appraisal/appraisal360" element={<Appraisal360 />}/>
+              <Route path="/emp-dashboard/maingoalreview/goalreviewapp" element={<Goalreviewapp />}/>              
             </Route>
             <Route path="empgoals">
               <Route index element={<Empgoals />} />

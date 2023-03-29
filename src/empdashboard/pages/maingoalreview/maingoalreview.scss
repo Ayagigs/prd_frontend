@@ -72,16 +72,14 @@
   
   .viewtab{
   display: flex;
-  width: 95vw;
+  // width: 100%;
   display:flex;
   flex-direction: column;
   justify-content:space-between;
   margin: 10px 40px 20px 40px;
   }
   
-  
-
-  .perfreview{
+  .undoappraisal2{
     height: 30px;
     // background-color: #ffffff;
     border: #2c2a2aa4 2px;
@@ -89,5 +87,16 @@
     border-top: 0;
     border-right: 0;
     border-left: 0;
+  
   }
   
+  .maingoalrev{
+    height: 30px;
+    // background-color: #ffffff;
+    border: #2c2a2aa4 2px;
+    border-style: dashed ;
+    border-top: 0;
+    border-right: 0;
+    border-left: 0;
+  
+  }
