@@ -26,7 +26,6 @@ const Widget = () => {
 
         axios.get(url2, {headers: {Authorization: `Bearer ${Cookies.get('Token')}`}})
         .then(res => {
-            console.log(res.data.data)
             setPrBar({...prBar, got: res.data.data.got})
             setPrBar({...prBar, total: res.data.data.expected})
         })
@@ -35,7 +34,6 @@ const Widget = () => {
 
         axios.get(url3, {headers: {Authorization: `Bearer ${Cookies.get('Token')}`}})
         .then(res => {
-            console.log(res.data.data)
             setAppraisalBar({...appraisalBar, got: res.data.data.got})
             setAppraisalBar({...appraisalBar, total: res.data.data.expected})
         })
@@ -44,12 +42,10 @@ const Widget = () => {
 
         axios.get(url4, {headers: {Authorization: `Bearer ${Cookies.get('Token')}`}})
         .then(res => {
-            console.log(res.data.data)
             setSelfAppraised({...selfAppraised, got: res.data.data.got})
             setSelfAppraised({...selfAppraised, total: res.data.data.expected})
-            console.log(res)
         })
-    }, [prBar, appraisalBar, selfAppraised]);
+    }, []);
   // let data;
 
   //temporary
