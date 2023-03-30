@@ -17,8 +17,8 @@ const GoalDetails = ({goal}) => {
                                     <img src={goal.profilePhoto} alt="" />
                                     <h3>{goal.owner.firstName + " " + goal.owner.lastName}</h3>
                                 </div>
+                                <p className={goal.status === 'Completed' ? 'completed' : goal.status === 'Overdue' ? 'overdue ': 'others'}><AiOutlineClockCircle/>{goal.status}</p>
 
-                                <p className={goal.status == 'Completed' ? 'completed' : goal.status == 'Overdue' ? 'overdue ': 'others'}><AiOutlineClockCircle/>{goal.status}</p>
                             </div>
 
                             <p>{goal.description}</p>

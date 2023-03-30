@@ -29,12 +29,17 @@ const Widget = () => {
 
     const url2 = `https://pms-jq9o.onrender.com/api/v1/review/performancereviewbar`;
 
+    axios.get(url2, {
+      headers: { Authorization: `Bearer ${Cookies.get('Token')}` },
+    });
+
+    // const url2 = `https://pms-jq9o.onrender.com/api/v1/review/performancereviewbar`;
+
     axios
       .get(url2, {
         headers: { Authorization: `Bearer ${Cookies.get('Token')}` },
       })
       .then(res => {
-        console.log(res.data.data);
         setPrBar({ ...prBar, got: res.data.data.got });
         setPrBar({ ...prBar, total: res.data.data.expected });
       });
@@ -46,7 +51,6 @@ const Widget = () => {
         headers: { Authorization: `Bearer ${Cookies.get('Token')}` },
       })
       .then(res => {
-        console.log(res.data.data);
         setAppraisalBar({ ...appraisalBar, got: res.data.data.got });
         setAppraisalBar({ ...appraisalBar, total: res.data.data.expected });
       });
@@ -58,12 +62,10 @@ const Widget = () => {
         headers: { Authorization: `Bearer ${Cookies.get('Token')}` },
       })
       .then(res => {
-        console.log(res.data.data);
         setSelfAppraised({ ...selfAppraised, got: res.data.data.got });
         setSelfAppraised({ ...selfAppraised, total: res.data.data.expected });
-        console.log(res);
       });
-  }, [prBar, appraisalBar, selfAppraised]);
+  }, []);
   // let data;
 
   //temporary

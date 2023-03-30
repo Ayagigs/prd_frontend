@@ -153,7 +153,7 @@ function SignIn() {
             <div></div>
             <p className="choice">
               <span onClick={() => setChoice('Employee')}>Employee</span> or{' '}
-              <span onClick={() => setChoice('Admin')}>Admin</span>
+              <span onClick={() => setChoice('Admin')}>Ceo</span>
             </p>
             <div></div>
           </div>
