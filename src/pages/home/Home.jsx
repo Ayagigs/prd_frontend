@@ -12,9 +12,9 @@ const Home = () => {
       <Sidebar />
       <div className="homeContainer">
         <Navbar />
-        {/* <div className="widgets">
+        <div className="widgets">
           <Widget />
-        </div> */}
+        </div>
         <div className="charts">
           <Featured />
           <Chart title="Performance Review" aspect={2 / 1} />

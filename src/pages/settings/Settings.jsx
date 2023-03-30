@@ -15,19 +15,14 @@ const Settings = () => {
   const [states, setStates] = useState([]);
   const [countries, setCountries] = useState([]);
   const [profile, setProfile] = useState(null);
-  const [data, setData] = useState({});
+  const [data, setData] = useState({
+    firstName: '',
+    lastName: '',
+    companyName: '',
+    profilePhoto: '',
+  });
+  const [initials, setInitials] = useState('');
 
-  useEffect(() => {
-    const url = `https://pms-jq9o.onrender.com/api/v1/admin/findme`;
-    axios
-      .get(url, {
-        headers: { Authorization: `Bearer ${Cookies.get('Token')}` },
-      })
-      .then(res => {
-        setData(res.data.data.adminUser);
-        // console.log(res.data.data.adminUser);
-      });
-  }, []);
 
   const [passwordData, setPasswordData] = useState({
     oldPassword: '',
@@ -42,6 +37,7 @@ const Settings = () => {
     country: '',
     state: '',
     numOfEmployees: '',
+    companyRegNo: '',
   });
 
   const [performanceReviewData, setPerformanceReviewData] = useState({
@@ -59,6 +55,43 @@ const Settings = () => {
     email: '',
     role: '',
   });
+
+  
+  useEffect(() => {
+    const url = `https://pms-jq9o.onrender.com/api/v1/admin/findme`;
+    axios
+      .get(url, {
+        headers: { Authorization: `Bearer ${Cookies.get('Token')}` },
+      })
+      .then(res => {
+        setPersonalFormData({
+          firstName: res.data.data.adminUser.firstName,
+          lastName: res.data.data.adminUser.lastName,
+          email: res.data.data.adminUser.email,
+          role: res.data.data.adminUser.role,
+        })
+        setPerformanceReviewData({
+          midYearStartDate: res.data.data.company[0].midYearStartDate,
+          midYearEndDate: res.data.data.company[0].midYearEndDate,
+          fullYearStartDate: res.data.data.company[0].fullYearStartDate,
+          fullYearEndDate: res.data.data.company[0].fullYearEndDate,
+          appraisalStartDate: res.data.data.company[0].appraisalStartDate,
+          appraisalEndDate: res.data.data.company[0].appraisalEndDate,
+        })
+        setCompanyFormData({
+          companyName: res.data.data.company[0].companyName,
+          businessType: res.data.data.company[0].businessType,
+          address: res.data.data.company[0].address,
+          companyPhone: res.data.data.company[0].companyPhone,
+          country: res.data.data.company[0].country,
+          state: res.data.data.company[0].state,
+          numOfEmployees: res.data.data.company[0].numOfEmployees,
+          companyRegNo: res.data.data.company[0].companyRegNo,
+        })
+        setData(res.data.data.adminUser)
+        setInitials(res.data.data.adminUser.firstName[0] + res.data.data.adminUser.lastName[0])
+      });
+  }, []);
 
   const submitPasswordChange = async event => {
     event.preventDefault();
@@ -101,6 +134,8 @@ const Settings = () => {
           },
         }
       );
+
+      setData({...data, companyName: res.data.data.updateCompany.companyName})
       setIsLoading(false);
 
       console.log(res.data);
@@ -159,9 +194,11 @@ const Settings = () => {
         }
       );
 
+      setData({...data, firstName: res.data.data.updateInfo.firstName, lastName: res.data.data.updateInfo.lastName})
+      setInitials(res.data.data.updateInfo.firstName[0] + res.data.data.updateInfo.lastName[0])
       setIsLoading(false);
 
-      console.log(res.data);
+      console.log(res.data.data);
 
       toast.success('Updated Successfully');
     } catch (error) {
@@ -272,7 +309,7 @@ const Settings = () => {
                 radius={100}
                 size={150}
               >
-                VR
+                {initials}
               </Avatar>
             ) : (
               <Avatar
@@ -282,7 +319,7 @@ const Settings = () => {
                 radius={100}
                 size={150}
               >
-                VR
+                {initials}
               </Avatar>
             )}
 
@@ -298,7 +335,7 @@ const Settings = () => {
           </div>
           <div className="settingsNameWrap">
             <h1>{data?.companyName}</h1>
-            <p>{data?.firstName} (Owner)</p>
+            <p>{data?.firstName +   " " + data?.lastName} (Owner)</p>
           </div>
         </div>
 

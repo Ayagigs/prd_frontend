@@ -23,11 +23,11 @@ const Goalreview = () => {
     const url = `https://pms-jq9o.onrender.com/api/v1/review/selfappraisal`
     axios.get(url, {headers: {Authorization: `Bearer ${Cookies.get('EmpToken')}`}})
     .then(res => {
-      console.log(res.data.data)
-      if(res.data.status === 'Success'){
-        setDataExists(true)
+      console.log(res.data)
+      if(res.data.message === 'It is not yet time for 360 appraisal'){
+        return setDataExists(false)
       }
-      console.log(dataExists)
+      setDataExists(true)
       setFirstName(res.data.data.firstName)
       setLastName(res.data.data.lastName)
       setJobTitle(res.data.data.jobTitle)
