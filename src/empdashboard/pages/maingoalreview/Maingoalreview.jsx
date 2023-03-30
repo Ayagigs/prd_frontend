@@ -17,7 +17,7 @@ const Maingoalreview = () => {
   const [data, setData] = useState({})
 
   useEffect(() => {
-    const url = `https://pms-jq9o.onrender.com/api/v1/review/appraisal`
+    const url = `https://pms-jq9o.onrender.com/api/v1/review/goalReview`
     axios.get(url, {headers: {Authorization: `Bearer ${Cookies.get('EmpToken')}`}})
     .then(res => {
       console.log(res.data)
