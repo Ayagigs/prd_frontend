@@ -47,8 +47,9 @@ const Widget = () => {
             console.log(res.data.data)
             setSelfAppraised({...selfAppraised, got: res.data.data.got})
             setSelfAppraised({...selfAppraised, total: res.data.data.expected})
+            console.log(res)
         })
-    }, []);
+    }, [prBar, appraisalBar, selfAppraised]);
   // let data;
 
   //temporary
@@ -102,11 +103,11 @@ const Widget = () => {
       <div className="left">
         <span className="title">Performance Review</span>
         
-        <div sx={{ width: '100%' }}><LinearDeterminate   value={(prBar.got / (prBar.total == 0 ? 1 : prBar.total)) * 100}/></div>
+        <div sx={{ width: '100%' }}><LinearDeterminate   value={(prBar.got / (prBar.total === 0 ? 1 : prBar.total)) * 100}/></div>
       </div>
       <div className="right">
         <div className="percentage positive">
-        <h1>{(prBar.got / (prBar.total == 0 ? 1 : prBar.total)) * 100}% Completed</h1>
+        <h1>{(prBar.got / (prBar.total === 0 ? 1 : prBar.total)) * 100}% Completed</h1>
         </div>
         {/* {data.icon} */}
       </div>
@@ -115,11 +116,11 @@ const Widget = () => {
       <div className="left">
         <span className="title">360 Appraisal</span>
         
-        <div sx={{ width: '100%' }}><LinearDeterminate  value={(appraisalBar.got / (appraisalBar.total == 0 ? 1 : appraisalBar.total)) * 100} /></div>
+        <div sx={{ width: '100%' }}><LinearDeterminate  value={(appraisalBar.got / (appraisalBar.total === 0 ? 1 : appraisalBar.total)) * 100} /></div>
       </div>
       <div className="right">
         <div className="percentage positive">
-        <h1>{(appraisalBar.got / (appraisalBar.total == 0 ? 1 : appraisalBar.total)) * 100}% Completed</h1>
+        <h1>{(appraisalBar.got / (appraisalBar.total === 0 ? 1 : appraisalBar.total)) * 100}% Completed</h1>
         </div>
         {/* {data.icon} */}
       </div>
@@ -128,11 +129,11 @@ const Widget = () => {
       <div className="left">
         <span className="title">Self Appraisal</span>
         
-        <div sx={{ width: '100%' }}><LinearDeterminate   value={(selfAppraised.got / (selfAppraised.total == 0 ? 1 : selfAppraised.total)) * 100}/></div>
+        <div sx={{ width: '100%' }}><LinearDeterminate   value={(selfAppraised.got / (selfAppraised.total === 0 ? 1 : selfAppraised.total)) * 100}/></div>
       </div>
       <div className="right">
         <div className="percentage positive">
-        <h1>{(selfAppraised.got / (selfAppraised.total == 0 ? 1 : selfAppraised.total)) * 100}% Completed</h1>
+        <h1>{(selfAppraised.got / (selfAppraised.total === 0 ? 1 : selfAppraised.total)) * 100}% Completed</h1>
         </div>
         {/* {data.icon} */}
       </div>

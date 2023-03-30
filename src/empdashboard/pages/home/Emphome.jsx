@@ -7,10 +7,25 @@ import Profiletab from "../../components/profiletab/Profiletab";
 import Side from "../../components/sidebar/Side";
 import { Link } from "react-router-dom";
 import ReactCardSlider from 'react-card-slider-component';
+import axios from "axios";
+import { useState, useEffect } from "react";
+import Cookies from "js-cookie";
 // import { Carousel } from '@trendyol-js/react-carousel';
 // import slides from "../../components/cardslider/Cardslider";
 
 const Emphome = () => {
+  const [data, setData] = useState({})
+
+  useEffect(() => {
+    const url = `https://pms-jq9o.onrender.com/api/v1/review/appraisal`
+    axios.get(url, {headers: {Authorization: `Bearer ${Cookies.get('EmpToken')}`}})
+    .then(res => {
+      console.log(res.data)
+      setData(res.data)
+    })
+  }, [])
+
+
   return (
     <div className="emphome">
       <Side />
@@ -44,6 +59,12 @@ const Emphome = () => {
           </div>
           </Link>
 
+          <Link to="/emp-dashboard/maingoalreview" style={{ textDecoration: "none" }}>
+          <div className="undomaingoalreview">
+          <h1>Goal Review</h1>
+          </div>
+          </Link>
+
           </div>
           <br />
           
@@ -51,7 +72,7 @@ const Emphome = () => {
         </div>
         <div className="viewtab">
      
-            <Profiletab  />
+            <Profiletab  data = {data}/>
             {/* <ReactCardSlider slides={slides}/> */}
          </div>
         

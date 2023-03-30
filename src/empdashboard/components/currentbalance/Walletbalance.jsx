@@ -1,14 +1,13 @@
 import React from 'react'
-import './currentbalance.scss';
+import './walletbalance.scss';
 import { ArrangeHorizontal } from 'iconsax-react';
 import { Wallet2 } from 'iconsax-react';
 import { Copy } from 'iconsax-react';
 
 
-const Currentbalance = () => {
+const Walletbalance = () => {
   return (
-    <div>
-        <div className="accountbalance">
+    <div className="accountbalance">
             <div className='accountdetailsbox'>
                 <p className='topdiv'>Current Balance</p>
                 <p className='currentamount'>223, 345.00 
@@ -52,8 +51,7 @@ const Currentbalance = () => {
             </div>
 
         </div>
-    </div>
   )
 }
 
-export default Currentbalance
+export default Walletbalance

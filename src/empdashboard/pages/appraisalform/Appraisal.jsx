@@ -41,12 +41,13 @@ const Appraisal = () => {
         </div>
    
           </div>
+          
+
+          <div className="singleform">
           <p className='bodytext'>This form will assist in preparing the performance evaluation for Frank Cortage. 
             As someone who works with Bob on a regular basis, your feedback regarding his 
             performance will be useful to the overall review process.
-          </p>
-
-          <div className="singleform">
+          </p> 
             <div className='firstline'></div>
             <label className='form-question'>
                 Motivates the team consistently?
@@ -78,6 +79,58 @@ const Appraisal = () => {
               <span className='check'>Strongly Agree</span>
               <input type="checkbox" onChange={() => {}} />  
             <br />
+
+            <div className='firstline'></div>
+            <label className='form-question'>
+                Motivates the team consistently?
+            </label>
+              <span className='check'>Strongly disagree</span>
+              <input type="checkbox" onChange={() => {}} />  
+              <span className='check'>Disagree</span>
+              <input type="checkbox" onChange={() => {}} />  
+              <span className='check'>Neutral</span>
+              <input type="checkbox" onChange={() => {}} />  
+              <span className='check'>Agree</span>
+              <input type="checkbox" onChange={() => {}} />  
+              <span className='check'>Strongly Agree</span>
+              <input type="checkbox" onChange={() => {}} />  
+            <br />
+
+            <div className='firstline'></div>
+            <label className='form-question'>
+                Motivates the team consistently?
+            </label>
+              <span className='check'>Strongly disagree</span>
+              <input type="checkbox" onChange={() => {}} />  
+              <span className='check'>Disagree</span>
+              <input type="checkbox" onChange={() => {}} />  
+              <span className='check'>Neutral</span>
+              <input type="checkbox" onChange={() => {}} />  
+              <span className='check'>Agree</span>
+              <input type="checkbox" onChange={() => {}} />  
+              <span className='check'>Strongly Agree</span>
+              <input type="checkbox" onChange={() => {}} />  
+            <br />
+
+            <label classname="form-question">
+              By the end of the first quarter, you should have achieved?
+            </label>
+           
+            <input
+                  className="typetext"
+                  type="text"
+                  width="500px"
+                />
+              <br />
+              <br />
+            <label classname="form-question">
+              These are your short-term goals and when to achieve them
+            </label>
+            <input
+                  className="typetext"
+                  type="text"
+                  width="500px"
+                />
 
             <div className='firstline'></div>
             <label className='form-question'>
@@ -111,6 +164,7 @@ const Appraisal = () => {
               <input type="checkbox" onChange={() => {}} />  
             <br />
            </div>
+
 
         </div>
         <button className="submitbtn">Submit Appraisal</button>

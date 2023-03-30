@@ -86,10 +86,11 @@ function SignIn() {
           { email: userInfo.email }
         );
 
-        if (user.data.data.admin.role === 'Admin') {
+        if (user.data.data.admin) {
           Cookies.set('companyID', user.data.data.admin._id);
           Cookies.set('Token', user.data.data.token);
           toast.success('Login successful');
+
           navigate('/dashboard');
         } else if (user.data.data.employee) {
           Cookies.set('EmpToken', user.data.data.token);

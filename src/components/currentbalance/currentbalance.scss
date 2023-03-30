@@ -1,16 +1,18 @@
 
-.balance{
+.accountbalance{
+
+    padding:20px;
     display: flex;
     flex-direction: row;
-    position: absolute;
-    width: 1123px;
+    // position: relative;
+    // width: 1173px;
     height: 149px;
     font-family: 'Satoshi';
         font-style: normal;
     justify-content: left;
     box-sizing:border-box;
     line-height: 40px;
-    width: 1123px;
+    width: 1173px;
     height: 149px;
     
     background: #F7F7F9;
@@ -18,7 +20,7 @@
     border-radius: 8px;
   }
 
-  .firstbox{
+  .accountdetailsbox{
  
     display: flex;
     box-sizing:border-box;
@@ -34,7 +36,7 @@ line-height: 22px;
 color: #000000;
     }
 
-    .middlediv{
+    .currentamount{
         // width: 400px;
         display: flex;
         flex-direction: row;
@@ -51,18 +53,18 @@ align-items: center;
 color: #515151;
     }
 
-    .select{
+    .selectcurrency{
         margin-left: 20px;
         font-family: 'Satoshi';
         font-style: normal;
         font-weight: 400;
         font-size: 14px;
         display: flex;
-        width: 70px;
+        width: 80px;
         height: 45px;
         background-color: transparent;
     }
-    .bottomdiv{
+    .fee{
         margin-top: 15px;
         font-family: 'Satoshi';
         font-style: normal;
@@ -76,28 +78,55 @@ color: #515151;
     }
   }
 
-  .secondbox{
-    margin-left: 200px;
+  .clickbox{
     display: flex;
-    position: relative;
-    box-sizing:border-box;
-    justify-content: flex-end;
+    width: 350px;
+    height: 129x;
+    margin-left: 500px;
+    justify-content: space-between;
     
-    .transbox{
-        width: 150px;
-        display: flex;
-        // box-sizing:border-box;
-        // justify-content: flex-end;
-        margin: 20px 37px;
+
+    .sendmoneybtn{
+        margin:10px ;
+        font-size: 16px;
+        border: none;
+        cursor:pointer;
     }
-
-
-    .send{
-        justify-content: center;
-
+    .recievemoneybtn{
+        margin:10px ;
+        font-size: 16px;
+        border: none;
+        cursor:pointer;
     }
-    
+    .copytransbtn{
+        margin:10px ;
+        font-size: 16px;
+        border: none;
+        cursor:pointer;
+    }
     .sendbox{
+   width: 100px;
+   justify-content: center;
+   padding: 20px;
+    }
+
+
+    .sendnow{
+        margin-top:0px;
+        justify-content: center;
+        color: #000000;
+        font-family: 'Satoshi';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 15px;
+        line-height: 43px;
+        display: flex;
+        align-items: center;
+
+
+    }
+    
+    .sendicon{
 padding: 15px 0 0 15px;
 width: 59.24px;
 align-items: center;
@@ -136,9 +165,12 @@ background: #ffffff;
 
     }
   }
-
-h2{
-    padding-left: 15px;
+  
+.sendnow{
+    margin-bottom: -20px;
+}
+.clickname{
+    // padding-left: 15px;
     font-family: 'Satoshi';
 font-style: normal;
 font-weight: 300;

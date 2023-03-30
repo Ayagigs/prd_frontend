@@ -1,15 +1,18 @@
-.wallet {
-  display: flex;
-  margin-top: 12px;
-  width: 100%;
+.adminwallet {
+  // display: flex;
+  // margin-top: 12px;
+  margin-top:110px;
+    margin-left: 250px;
+  // width: 100%;
 
   .walletContainer {
-        margin-top:110px;
-    margin-left: 250px;
+    
     flex: 6;
     background-color:#FFFFFF;
     // background-color: #F5F5F5 ;
-    border-left: 1px solid #E9E9E9;
+    // border-left: 1px solid #E9E9E9;
+    // z-index:-2222
+
   }
 }
 .balance{
@@ -30,5 +33,9 @@
 
 .transcontainer{
   display: flex;
-  margin: 200px 20px 20px 20px;
+  margin: 20px 20px 20px 20px;
+}
+
+.transactiontable{
+  width: 1140px;
 }

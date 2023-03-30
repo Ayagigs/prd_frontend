@@ -1,25 +1,24 @@
-.home1{
-  margin-top:100px;
+.home1 {
+  margin-top: 100px;
   margin-left: 270px;
-    display: flex;
-    margin-top: 12px;
-    width: 100%;
-    height: fit-content;
-    // margin-left: 250px;
+  display: flex;
+  margin-top: 12px;
+  width: 100%;
+  height: fit-content;
+  // margin-left: 250px;
 
-    .homeContainer {
-      flex: 6;
-      height: fit-content;
-      padding-bottom: 50px;
-      
-    }
+  .homeContainer {
+    flex: 6;
+    height: fit-content;
+    padding-bottom: 50px;
+  }
 }
 
-.settingsHeading{
+.settingsHeading {
   margin-left: 0px;
   margin-top: 80px;
   padding: 50px 60px;
-  background-color: rgb(245,245,245);
+  background-color: rgb(245, 245, 245);
   width: 100%;
   display: flex;
   align-items: center;
@@ -27,42 +26,42 @@
   position: sticky;
   top: 60px;
 
-  .settingsImgWrap{
+  .settingsImgWrap {
     display: flex;
     flex-direction: column;
     row-gap: 10px;
     align-items: center;
 
-    img{
-      width: 200px;
+    img {
+      // width: 200px;
       height: 150px;
       background-color: rgb(185, 185, 185);
       border-radius: 100%;
     }
   }
 
-  .settingsNameWrap{
+  .settingsNameWrap {
     display: flex;
     flex-direction: column;
     row-gap: 5px;
 
-    h1{
+    h1 {
       font-size: 40px;
     }
 
-    p{
+    p {
       font-size: 25px;
       color: #555555;
     }
   }
 }
 
-.settingBottom{
+.settingBottom {
   display: flex;
   flex-direction: column;
   row-gap: 80px;
 }
-.settingsContent{
+.settingsContent {
   background-color: white;
   border-radius: 30px;
   width: 70%;
@@ -74,13 +73,13 @@
   align-items: flex-start;
   justify-content: space-between;
 
-  .leftSettingsContent{
+  .leftSettingsContent {
     width: 40%;
     display: flex;
     flex-direction: column;
     row-gap: 15px;
 
-    h2{
+    h2 {
       color: black;
       padding: 0px;
       font-size: 30px;
@@ -88,71 +87,68 @@
       font-weight: 500;
     }
   }
-  form{
+  form {
     width: 50%;
     display: flex;
     flex-direction: column;
     align-items: center;
     row-gap: 10px;
 
-    .inputWrapper{
+    .inputWrapper {
       width: 100%;
 
-      input{
+      input {
         width: 100%;
         cursor: pointer;
         flex-direction: row;
         align-items: flex-start;
         padding: 12px 10px;
-        background: #FFFFFF;
+        background: #ffffff;
         border: 0.2px;
         box-shadow: 0px 0px 0px 2px #e5e5e5;
         border-radius: 8px;
         outline: none;
       }
-      select{
+      select {
         width: 100%;
         cursor: pointer;
         flex-direction: row;
         align-items: flex-start;
         height: fit-content !important;
         padding: 12px 10px;
-        background: #FFFFFF;
+        background: #ffffff;
         border: 0.2px;
         box-shadow: 0px 0px 0px 2px #e5e5e5;
         border-radius: 8px;
         font-size: 14px;
       }
-      label{
+      label {
         font-size: 14px;
       }
     }
-    .inputContainer{
+    .inputContainer {
       display: flex;
       column-gap: 10px;
       justify-content: space-between;
       width: 100%;
 
-      
-
-      .inputWrapper{
+      .inputWrapper {
         width: 50% !important;
 
-        input{
+        input {
           width: 100%;
         }
       }
     }
 
-    .buttonWrapper{
+    .buttonWrapper {
       width: 100%;
       display: flex;
       justify-content: right;
       column-gap: 10px;
       margin-top: 20px;
-      
     }
-    h2{
+    h2 {
       font-size: 25px;
       font-weight: 500;
       color: black;
@@ -163,37 +159,36 @@
       margin-bottom: 0px;
       margin-top: 20px;
     }
-    
   }
 }
 // color: #555555;
-.settingsContent input:focus{
+.settingsContent input:focus {
   box-shadow: 0px 0px 0px 2px rgb(128, 128, 234) !important;
 }
-.settingsContent select:focus{
+.settingsContent select:focus {
   box-shadow: 0px 0px 0px 2px rgb(128, 128, 234) !important;
 }
-.buttonWrapper button:nth-child(1){
+.buttonWrapper button:nth-child(1) {
   padding: 12px 40px;
-  background-color: rgb(231,232,255);
-  color: rgb(62,69,235);
+  background-color: rgb(231, 232, 255);
+  color: rgb(62, 69, 235);
   border-radius: 10px;
 }
-.buttonWrapper button:nth-child(2){
+.buttonWrapper button:nth-child(2) {
   padding: 12px 40px;
-  background-color: rgb(62,69,235);
+  background-color: rgb(62, 69, 235);
   color: white;
   border-radius: 10px;
 }
-.buttonWrapper button:nth-child(1):hover{
+.buttonWrapper button:nth-child(1):hover {
   background-color: rgb(211, 212, 222);
   cursor: pointer;
 }
-.buttonWrapper button:nth-child(2):hover{
+.buttonWrapper button:nth-child(2):hover {
   background-color: rgb(26, 32, 209);
   cursor: pointer;
 }
 
-.settingBottom form h2:nth-child(1){
+.settingBottom form h2:nth-child(1) {
   margin-top: 0px;
 }

@@ -1,22 +1,38 @@
 import Sidebar from '../../components/sidebar/Sidebar';
 import Navbar from '../../components/navbar/Navbar';
-import { BsUpload } from 'react-icons/bs';
 import { Avatar } from '@mantine/core';
-
 import './settings.scss';
-import Signup2 from '../../components/companydetails/Companydetails';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import axios from 'axios';
-// import Widget from "../../components/widget/Widget";
-// import Chart from "../../components/chart/Chart";
-// import Table from "../../components/table/Table";
+import Cookies from 'js-cookie';
+import { RxAvatar } from 'react-icons/rx';
+import { FaSpinner } from 'react-icons/fa';
+const { URL } = window;
 
 const Settings = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [states, setStates] = useState([]);
   const [countries, setCountries] = useState([]);
-  const [adminUser, setAdminUser] = useState([]);
+  const [profile, setProfile] = useState(null);
+  const [data, setData] = useState({});
+
+  useEffect(() => {
+    const url = `https://pms-jq9o.onrender.com/api/v1/admin/findme`;
+    axios
+      .get(url, {
+        headers: { Authorization: `Bearer ${Cookies.get('Token')}` },
+      })
+      .then(res => {
+        setData(res.data.data.adminUser);
+        // console.log(res.data.data.adminUser);
+      });
+  }, []);
+
+  const [passwordData, setPasswordData] = useState({
+    oldPassword: '',
+    password: '',
+  });
 
   const [conpanyFormData, setCompanyFormData] = useState({
     companyName: '',
@@ -26,6 +42,9 @@ const Settings = () => {
     country: '',
     state: '',
     numOfEmployees: '',
+  });
+
+  const [performanceReviewData, setPerformanceReviewData] = useState({
     midYearStartDate: '',
     midYearEndDate: '',
     fullYearStartDate: '',
@@ -38,19 +57,78 @@ const Settings = () => {
     firstName: '',
     lastName: '',
     email: '',
+    role: '',
   });
+
+  const submitPasswordChange = async event => {
+    event.preventDefault();
+
+    try {
+      setIsLoading(true);
+      const Token = Cookies.get('Token');
+      console.log(Token);
+      const res = await axios.patch(
+        'https://pms-jq9o.onrender.com/api/v1/admin/changePassword',
+        passwordData,
+        {
+          headers: {
+            Authorization: `Bearer ${Token}`,
+          },
+        }
+      );
+      setIsLoading(false);
+
+      toast.success('Password Successfully Changed');
+    } catch (error) {
+      setIsLoading(false);
+      toast.error(error.response.data.message);
+    }
+  };
 
   const submitCompanyDetails = async event => {
     event.preventDefault();
 
     try {
       setIsLoading(true);
+      const Token = Cookies.get('Token');
+      console.log(Token);
+      const res = await axios.patch(
+        'https://pms-jq9o.onrender.com/api/v1/admin/updatecompany',
+        conpanyFormData,
+        {
+          headers: {
+            Authorization: `Bearer ${Token}`,
+          },
+        }
+      );
+      setIsLoading(false);
 
+      console.log(res.data);
+
+      toast.success('Updated Successfully');
+      console.log(res.data);
+    } catch (error) {
+      setIsLoading(false);
+      toast.error(error.response.data.message);
+    }
+  };
+
+  const submitPerformanceReview = async event => {
+    event.preventDefault();
+
+    try {
+      setIsLoading(true);
+      const Token = Cookies.get('Token');
+      console.log(Token);
       const res = await axios.patch(
         'https://pms-jq9o.onrender.com/api/v1/admin/updatecompanydetails',
-        conpanyFormData
+        performanceReviewData,
+        {
+          headers: {
+            Authorization: `Bearer ${Token}`,
+          },
+        }
       );
-      // console.log(res.data.email);
       setIsLoading(false);
 
       console.log(res.data);
@@ -65,12 +143,20 @@ const Settings = () => {
 
   const submitPersonalInfo = async event => {
     event.preventDefault();
+    const token = Cookies.get('Token');
+    console.log(Cookies.get('Token'));
+    toast.success({ token });
     try {
       setIsLoading(true);
-
+      const Token = Cookies.get('Token');
       const res = await axios.patch(
         'https://pms-jq9o.onrender.com/api/v1/admin/updatepersonalinfo',
-        personalFormData
+        personalFormData,
+        {
+          headers: {
+            Authorization: `Bearer ${Token}`,
+          },
+        }
       );
 
       setIsLoading(false);
@@ -84,6 +170,10 @@ const Settings = () => {
       toast.error(error.response.data.message);
     }
   };
+  const handlePasswordChange = event => {
+    const { name, value } = event.target;
+    setPasswordData({ ...passwordData, [name]: value });
+  };
 
   const handlePersonalInputChange = event => {
     const { name, value } = event.target;
@@ -93,6 +183,39 @@ const Settings = () => {
   const handleCompanyInputChange = event => {
     const { name, value } = event.target;
     setCompanyFormData({ ...conpanyFormData, [name]: value });
+  };
+
+  const handlePerformanceReviewInputChange = event => {
+    const { name, value } = event.target;
+    setPerformanceReviewData({ ...performanceReviewData, [name]: value });
+  };
+
+  const handleImageUpload = event => {
+    const file = event.target.files[0];
+    setProfile(file);
+  };
+
+  const handleSubmitProfile = async event => {
+    event.preventDefault();
+
+    setIsLoading(true);
+    const Token = Cookies.get('Token');
+    await axios
+      .post('https://pms-jq9o.onrender.com/api/v1/admin/photoupload', profile, {
+        headers: {
+          Authorization: `Bearer ${Token}`,
+        },
+      })
+      .then(response => {
+        setIsLoading(false);
+        toast.success(response.data.message);
+        // Handle the response from the server
+      })
+      .catch(error => {
+        setIsLoading(false);
+        console.log(error);
+        // Handle any errors that occurred during the upload
+      });
   };
 
   useEffect(() => {
@@ -111,6 +234,7 @@ const Settings = () => {
     const fetchStates = async () => {
       try {
         setIsLoading(true);
+
         const response = await axios.post(
           'https://countriesnow.space/api/v0.1/countries/states',
           {
@@ -130,23 +254,9 @@ const Settings = () => {
     }
   }, [conpanyFormData.country]);
 
-  useEffect(() => {
-    const findUser = async () => {
-      try {
-        const response = await axios.get(
-          'https://pms-jq9o.onrender.com/api/v1/admin/findme'
-        );
+  //
 
-        console.log(response.data);
-        // setAdminUser(response.data.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    findUser();
-  });
-
+  // console.log(adminUser.data);
   return (
     <div className="home1">
       <Sidebar />
@@ -154,7 +264,29 @@ const Settings = () => {
         <Navbar />
         <div className="settingsHeading">
           <div className="settingsImgWrap">
-            <Avatar
+            {profile ? (
+              <Avatar
+                src={URL.createObjectURL(profile)}
+                alt="Vitaly Rtishchev"
+                color="blue"
+                radius={100}
+                size={150}
+              >
+                VR
+              </Avatar>
+            ) : (
+              <Avatar
+                src={''}
+                alt="Vitaly Rtishchev"
+                color="blue"
+                radius={100}
+                size={150}
+              >
+                VR
+              </Avatar>
+            )}
+
+            {/* <Avatar
               src={''}
               alt="Vitaly Rtishchev"
               color="blue"
@@ -162,15 +294,16 @@ const Settings = () => {
               size={150}
             >
               VR
-            </Avatar>
+            </Avatar> */}
           </div>
           <div className="settingsNameWrap">
-            <h1>Aya & Co Ltd</h1>
-            <p>Adebisi Akin (Owner)</p>
+            <h1>{data?.companyName}</h1>
+            <p>{data?.firstName} (Owner)</p>
           </div>
         </div>
 
         <div className="settingBottom">
+          {/* Company Details Settings */}
           <div className="settingsContent">
             <div className="leftSettingsContent">
               <h2>Company Details</h2>
@@ -186,7 +319,6 @@ const Settings = () => {
                   <label htmlFor="">Company Name</label>
                   <input
                     type="text"
-                    required
                     name="companyName"
                     id="companyName"
                     value={conpanyFormData.companyName}
@@ -214,7 +346,6 @@ const Settings = () => {
                 <label htmlFor="">Address</label>
                 <input
                   type="text"
-                  required
                   name="address"
                   id="address"
                   value={conpanyFormData.address}
@@ -287,7 +418,6 @@ const Settings = () => {
                   <label htmlFor="">Reg. no</label>
                   <input
                     type="text"
-                    required
                     name="companyRegNo"
                     id="companyRegNo"
                     value={conpanyFormData.companyRegNo}
@@ -317,7 +447,6 @@ const Settings = () => {
                 <label htmlFor="">First Name</label>
                 <input
                   type="text"
-                  required
                   name="firstName"
                   id="firstName"
                   value={personalFormData.firstName}
@@ -329,7 +458,6 @@ const Settings = () => {
                 <label htmlFor="">Last Name</label>
                 <input
                   type="text"
-                  required
                   name="lastName"
                   id="lastName"
                   value={personalFormData.lastName}
@@ -339,13 +467,19 @@ const Settings = () => {
               </div>
               <div disabled className="inputWrapper">
                 <label htmlFor="">Role</label>
-                <input type="text" />
+                <input
+                  type="text"
+                  readOnly
+                  name="role"
+                  id="role"
+                  value={personalFormData.role}
+                  onChange={handlePersonalInputChange}
+                />
               </div>
               <div className="inputWrapper">
                 <label htmlFor="">Work Email</label>
                 <input
                   type="text"
-                  required
                   name="email"
                   id="email"
                   value={personalFormData.email}
@@ -360,6 +494,7 @@ const Settings = () => {
             </form>
           </div>
 
+          {/* Profile Photo Settings */}
           <div className="settingsContent">
             <div className="leftSettingsContent">
               <h2>Profile Photo Upload</h2>
@@ -369,14 +504,63 @@ const Settings = () => {
               </p>
             </div>
 
-            <form action="">
+            <form onSubmit={handleSubmitProfile}>
               <div className="inputWrapper">
                 <label htmlFor="">Profile Picture</label>
-                <input type="file" name="" id="" />
+                <span style={{ display: 'flex', placeItems: 'center' }}>
+                  {profile ? (
+                    <img
+                      style={{
+                        borderRadius: '50%',
+                        width: '50px',
+                        height: '50px',
+                      }}
+                      src={URL.createObjectURL(profile)}
+                      alt="avatar"
+                    />
+                  ) : (
+                    <RxAvatar
+                      style={{
+                        borderRadius: '50%',
+                        width: '50px',
+                        height: '50px',
+                      }}
+                    />
+                  )}
+
+                  <label style={{ marginLeft: '50px' }} htmlFor="image-upload">
+                    <span
+                      style={{
+                        padding: '12px 40px',
+                        backgroundColor: 'rgb(62, 69, 235)',
+                        color: 'white',
+                        borderRadius: '10px',
+                      }}
+                    >
+                      Upload a file
+                    </span>
+                    <input
+                      type="file"
+                      name="profile"
+                      id="image-upload"
+                      className="sr-only"
+                      onChange={handleImageUpload}
+                    />
+                  </label>
+                </span>
               </div>
               <div className="buttonWrapper">
                 <button>Cancel</button>
-                <button type="submit">Upload</button>
+                <button type="submit">
+                  {isLoading ? (
+                    <>
+                      <FaSpinner className="fa-spin" />
+                      &nbsp;Submitting...
+                    </>
+                  ) : (
+                    'Submit'
+                  )}
+                </button>
               </div>
             </form>
           </div>
@@ -389,15 +573,14 @@ const Settings = () => {
               </p>
             </div>
 
-            <form onSubmit={submitPersonalInfo}>
+            <form onSubmit={submitPasswordChange}>
               <div className="inputWrapper">
                 <label htmlFor="oldPassword">Old Password</label>
                 <input
                   type="password"
-                  required
                   name="oldPassword"
-                  value={personalFormData.password}
-                  onChange={handlePersonalInputChange}
+                  value={passwordData.oldPassword}
+                  onChange={handlePasswordChange}
                   id="oldPassword"
                   placeholder="Please Enter Your oldPassword"
                 />
@@ -406,17 +589,25 @@ const Settings = () => {
                 <label htmlFor="password">New Password</label>
                 <input
                   type="password"
-                  required
                   name="password"
-                  value={personalFormData.password}
-                  onChange={handlePersonalInputChange}
+                  value={passwordData.password}
+                  onChange={handlePasswordChange}
                   id="password"
                   placeholder="Please Enter Your password"
                 />
               </div>
               <div className="buttonWrapper">
                 <button>Cancel</button>
-                <button type="submit">Save</button>
+                <button type="submit">
+                  {isLoading ? (
+                    <>
+                      <FaSpinner className="fa-spin" />
+                      &nbsp;Saving...
+                    </>
+                  ) : (
+                    'Save'
+                  )}
+                </button>
               </div>
             </form>
           </div>
@@ -429,18 +620,17 @@ const Settings = () => {
                 setting the required dates for each reviews
               </p>
             </div>
-            conpanyFormData
-            <form onSubmit={submitCompanyDetails}>
+
+            <form onSubmit={submitPerformanceReview}>
               <h2>Mid-Year Review</h2>
               <div className="inputContainer">
                 <div className="inputWrapper">
                   <label htmlFor="midYearStartDate">Start Date</label>
                   <input
                     type="datetime-local"
-                    required
                     name="midYearStartDate"
-                    value={conpanyFormData.midYearStartDate}
-                    onChange={handleCompanyInputChange}
+                    value={performanceReviewData.midYearStartDate}
+                    onChange={handlePerformanceReviewInputChange}
                     id="midYearStartDate"
                   />
                 </div>
@@ -448,10 +638,9 @@ const Settings = () => {
                   <label htmlFor="midYearEndDate">End Date</label>
                   <input
                     type="datetime-local"
-                    required
                     name="midYearEndDate"
-                    value={conpanyFormData.midYearEndDate}
-                    onChange={handleCompanyInputChange}
+                    value={performanceReviewData.midYearEndDate}
+                    onChange={handlePerformanceReviewInputChange}
                     id="midYearStartDate"
                   />
                 </div>
@@ -463,10 +652,9 @@ const Settings = () => {
                   <label htmlFor="fullYearStartDate">Start Date</label>
                   <input
                     type="datetime-local"
-                    required
                     name="fullYearStartDate"
-                    value={conpanyFormData.fullYearStartDate}
-                    onChange={handleCompanyInputChange}
+                    value={performanceReviewData.fullYearStartDate}
+                    onChange={handlePerformanceReviewInputChange}
                     id="fullYearStartDate"
                   />
                 </div>
@@ -474,10 +662,9 @@ const Settings = () => {
                   <label htmlFor="fullYearEndDate">End Date</label>
                   <input
                     type="datetime-local"
-                    required
                     name="fullYearEndDate"
-                    value={conpanyFormData.fullYearEndDate}
-                    onChange={handleCompanyInputChange}
+                    value={performanceReviewData.fullYearEndDate}
+                    onChange={handlePerformanceReviewInputChange}
                     id="fullYearEndDate"
                   />
                 </div>
@@ -489,10 +676,9 @@ const Settings = () => {
                   <label htmlFor="appraisalStartDate">Start Date</label>
                   <input
                     type="datetime-local"
-                    required
                     name="appraisalStartDate"
                     value={conpanyFormData.appraisalStartDate}
-                    onChange={handleCompanyInputChange}
+                    onChange={handlePerformanceReviewInputChange}
                     id="appraisalStartDate"
                   />
                 </div>
@@ -500,10 +686,9 @@ const Settings = () => {
                   <label htmlFor="appraisalEndDate">End Date</label>
                   <input
                     type="datetime-local"
-                    required
                     name="appraisalEndDate"
-                    value={conpanyFormData.appraisalEndDate}
-                    onChange={handleCompanyInputChange}
+                    value={performanceReviewData.appraisalEndDate}
+                    onChange={handlePerformanceReviewInputChange}
                     id="appraisalEndDate"
                   />
                 </div>
@@ -511,7 +696,16 @@ const Settings = () => {
 
               <div className="buttonWrapper">
                 <button>Cancel</button>
-                <button type="submit">Save</button>
+                <button type="submit">
+                  {isLoading ? (
+                    <>
+                      <FaSpinner className="fa-spin" />
+                      &nbsp;Saving...
+                    </>
+                  ) : (
+                    'Save'
+                  )}
+                </button>
               </div>
             </form>
           </div>
