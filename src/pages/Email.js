@@ -4,7 +4,7 @@ import OtpInput from 'react-otp-input';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { FaSpinner } from 'react-icons/fa';
-import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 
 function Form(props) {
@@ -15,8 +15,8 @@ function Form(props) {
   const handleSubmit = event => {
     event.preventDefault();
     setIsLoading(true);
-    console.log(otp);
-    const res = axios
+
+    axios
       .post('https://pms-jq9o.onrender.com/api/v1/admin/verifyotp', {
         OTP: otp,
       })
@@ -24,18 +24,16 @@ function Form(props) {
         if (response.data.status === 'Success') {
           setIsLoading(false);
           toast.success(response.data.message);
-          Cookies.set('companyID', res.data.data._id);
-          Cookies.set('Token', res.data.token);
-          navigate('/dashboard');
-          console.log(response.data)
-        }
 
-        console.log(response.data);
+          Cookies.set('companyID', response.data.data.admin._id);
+          Cookies.set('Token', response.data.data.token);
+          navigate('/dashboard');
+          console.log(response.data);
+        }
       })
       .catch(error => {
         setIsLoading(false);
-
-        console.log(error.message);
+        console.log(error);
         toast.error(error.response.data.message);
       });
   };
