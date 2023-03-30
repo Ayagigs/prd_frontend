@@ -67,22 +67,47 @@ const Empsettings = () => {
     const formData = new FormData(event.target);
 
     try {
+      setIsLoading(true);
+      const Token = Cookies.get('Token');
+
       // Send email notification preferences
-      await axios.post('https://pms-jq9o.onrender.com/api/v1/employee/', {
-        newsAndUpdates: formData.get('newsAndUpdates'),
-        comments: formData.get('comments'),
-        reminders: formData.get('reminders'),
-      });
+      const res1 = await axios.post(
+        'https://pms-jq9o.onrender.com/api/v1/employee/notifications',
+        {
+          emailNewsUpdateNotification: formData.get('newsAndUpdates'),
+          emailCommentNotification: formData.get('comments'),
+          emailReminderNotification: formData.get('reminders'),
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${Token}`,
+          },
+        }
+      );
 
       // Send push notification preferences
-      await axios.post('https://pms-jq9o.onrender.com/api/v1/employee/', {
-        comments: formData.get('pushComments'),
-        reminders: formData.get('pushReminders'),
-      });
+      const res2 = await axios.post(
+        'https://pms-jq9o.onrender.com/api/v1/employee/notifications',
+        {
+          pushCommentNotification: formData.get('pushComments'),
+          pushGoalDeadlineNotification: formData.get('pushReminders'),
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${Token}`,
+          },
+        }
+      );
 
+      setIsLoading(false);
+
+      console.log(res1.data.data, res2.data.data);
+
+      toast.success('Updated Successfully');
       // Handle success
       console.log('Form submitted successfully');
     } catch (error) {
+      setIsLoading(false);
       // Handle error
       console.error('Error submitting form:', error);
     }
