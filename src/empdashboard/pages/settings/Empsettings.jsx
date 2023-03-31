@@ -248,7 +248,7 @@ const Empsettings = () => {
 
                       <div className="rightNotificationContent">
                         <Switch
-                          color="violet"
+                          color="blue"
                           // checked={}
                           // onChange={}
                           size=""
@@ -263,7 +263,7 @@ const Empsettings = () => {
 
                       <div className="rightNotificationContent">
                         <Switch
-                          color="violet"
+                          color="blue"
                           // checked={}
                           // onChange={}
                           onLabel="ON"
@@ -278,7 +278,7 @@ const Empsettings = () => {
 
                       <div className="rightNotificationContent">
                         <Switch
-                          color="violet"
+                          color="blue"
                           // checked={}
                           // onChange={}
                           onLabel="ON"
@@ -301,7 +301,7 @@ const Empsettings = () => {
                     <div className="rightNotificationWrap">
                       <div className="rightNotificationContent">
                         <Switch
-                          color="violet"
+                          color="blue"
                           // checked={}
                           // onChange={}
                           onLabel="ON"
@@ -315,7 +315,7 @@ const Empsettings = () => {
 
                       <div className="rightNotificationContent">
                         <Switch
-                          color="violet"
+                          color="blue"
                           // checked={}
                           // onChange={}
                           onLabel="ON"
