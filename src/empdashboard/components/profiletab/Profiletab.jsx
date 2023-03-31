@@ -12,16 +12,17 @@ const Profiletab = ({ data }) => {
 
   useEffect(() => {
     setRows([]);
+
     if (data.data !== undefined) {
       setRows(data.data);
       setDue(data.due);
     }
-  }, [, data]);
+  }, [data]);
 
   return (
     <div className="proftabsScroll">
       <div className="tabb">
-        {rows.map(el => {
+        {rows.employeeNotReviewed?.map(el => {
           return (
             <Link
               to="/emp-dashboard/appraisal/appraisal360"

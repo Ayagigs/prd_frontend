@@ -68,10 +68,10 @@ const Empsettings = () => {
 
     try {
       setIsLoading(true);
-      const Token = Cookies.get('Token');
+      const Token = Cookies.get('EmpToken');
 
       // Send email notification preferences
-      const res1 = await axios.post(
+      const res1 = await axios.patch(
         'https://pms-jq9o.onrender.com/api/v1/employee/notifications',
         {
           emailNewsUpdateNotification: formData.get('newsAndUpdates'),
@@ -86,7 +86,7 @@ const Empsettings = () => {
       );
 
       // Send push notification preferences
-      const res2 = await axios.post(
+      const res2 = await axios.patch(
         'https://pms-jq9o.onrender.com/api/v1/employee/notifications',
         {
           pushCommentNotification: formData.get('pushComments'),
@@ -122,7 +122,7 @@ const Empsettings = () => {
   /*********************** SUBMIT EMPLOYEE PERSONAL INFORNATION ******************************/
   const submitInputs = async event => {
     event.preventDefault();
-    const token = Cookies.get('Token');
+    const token = Cookies.get('EmpToken');
     console.log(Cookies.get('Token'));
     toast.success({ token });
     try {
@@ -203,7 +203,7 @@ const Empsettings = () => {
 
     try {
       setIsLoading(true);
-      const Token = Cookies.get('Token');
+      const Token = Cookies.get('EmpToken');
       console.log(Token);
       const res = await axios.patch(
         'https://pms-jq9o.onrender.com/api/v1/admin/changePassword',
@@ -234,7 +234,7 @@ const Empsettings = () => {
     event.preventDefault();
 
     setIsLoading(true);
-    const Token = Cookies.get('Token');
+    const Token = Cookies.get('EmpToken');
     await axios
       .post('https://pms-jq9o.onrender.com/api/v1/employee/profile', profile, {
         headers: {
