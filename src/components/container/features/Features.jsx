@@ -10,7 +10,7 @@ const Features = () => {
         <section className='features-section'>
             <header className='features-heading'>
                 <h2 className='features'>Packed with amazing features just like you</h2>
-                <p>Lorem ipsum dolor sit amet consectetur. Morbi tellus metus turpis feugiat nec. Pellentesque dui scelerisque ut sit. Vulputate aliquet duis etiam in egestas auctor eu. Mi nisi vel parturient mattis.</p>
+                <p>Our performance management system is designed to meet the needs of modern HR professionals like you. We understand that you need a solution that is intuitive, easy to use, and packed with powerful features to help you streamline your HR processes and improve employee performance.</p>
             </header>
             <div className='features-container'>
                 {
