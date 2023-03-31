@@ -340,7 +340,7 @@ const Settings = () => {
 
   const handlePerformanceQuestions = (e) => {
     e.preventDefault()
-    const url = 'https://pms-jq9o.onrender.com/api/v1/question/setquestion'
+    const url = `https://pms-jq9o.onrender.com/api/v1/question/setquestion/${Cookies.get('companyID')}`
     setIsLoading(true)
 
     axios.post(url, {
@@ -385,7 +385,7 @@ const Settings = () => {
 
   const handleAppraisalQuestons = (e) => {
     e.preventDefault()
-    const url = 'https://pms-jq9o.onrender.com/api/v1/question/setquestion'
+    const url = `https://pms-jq9o.onrender.com/api/v1/question/setquestion/${Cookies.get('companyID')}`
     setIsLoading(true)
 
     axios.post(url, {
@@ -430,7 +430,7 @@ const Settings = () => {
 
   const handleSelfQuestions = (e) => {
     e.preventDefault()
-    const url = 'https://pms-jq9o.onrender.com/api/v1/question/setquestion'
+    const url = `https://pms-jq9o.onrender.com/api/v1/question/setquestion/${Cookies.get('companyID')}`
     setIsLoading(true)
 
     axios.post(url, {
@@ -475,7 +475,7 @@ const Settings = () => {
 
   const handleGoalQuestions = (e) => {
     e.preventDefault()
-    const url = 'https://pms-jq9o.onrender.com/api/v1/question/setquestion'
+    const url = `https://pms-jq9o.onrender.com/api/v1/question/setquestion/${Cookies.get('companyID')}`
     setIsLoading(true)
 
     axios.post(url, {
@@ -520,7 +520,7 @@ const Settings = () => {
 
   const handleCompetencyQuestions = (e) => {
     e.preventDefault()
-    const url = 'https://pms-jq9o.onrender.com/api/v1/question/setquestion'
+    const url = `https://pms-jq9o.onrender.com/api/v1/question/setquestion/${Cookies.get('companyID')}`
     setIsLoading(true)
 
     axios.post(url, {
@@ -578,21 +578,23 @@ const Settings = () => {
         question4: res.data.data.sortedQuestion[3].text,
         question5: res.data.data.sortedQuestion[4].text
       })
+      
 
-
-      setOption1({text: res.data.data.sortedOption[0].text, value: res.data.data.sortedOption[0].value})
-      setOption2({text: res.data.data.sortedOption[1].text, value: res.data.data.sortedOption[1].value})
-      setOption3({text: res.data.data.sortedOption[2].text, value: res.data.data.sortedOption[2].value})
-      setOption4({text: res.data.data.sortedOption[3].text, value: res.data.data.sortedOption[3].value})
-      setOption5({text: res.data.data.sortedOption[4].text, value: res.data.data.sortedOption[4].value})
+      if(res.data.data.sortedOption.length > 0){
+        setOption1({text: res.data.data.sortedOption[0].text, value: res.data.data.sortedOption[0].value})
+        setOption2({text: res.data.data.sortedOption[1].text, value: res.data.data.sortedOption[1].value})
+        setOption3({text: res.data.data.sortedOption[2].text, value: res.data.data.sortedOption[2].value})
+        setOption4({text: res.data.data.sortedOption[3].text, value: res.data.data.sortedOption[3].value})
+        setOption5({text: res.data.data.sortedOption[4].text, value: res.data.data.sortedOption[4].value})
+      }
     })
-
+    
     
     axios.get(`https://pms-jq9o.onrender.com/api/v1/question/getQuestions/${Cookies.get('companyID')}/360 Appraisal/Review`,  {
       headers: {
           Authorization: `Bearer ${Token}`,
         },
-    }).then(res => {
+      }).then(res => {
       setAppraisalQuestions({
         question1: res.data.data.sortedQuestion[0].text,
         question2: res.data.data.sortedQuestion[1].text,
@@ -600,21 +602,25 @@ const Settings = () => {
         question4: res.data.data.sortedQuestion[3].text,
         question5: res.data.data.sortedQuestion[4].text
       })
-
       
-      setOption1({text: res.data.data.sortedOption[0].text, value: res.data.data.sortedOption[0].value})
-      setOption2({text: res.data.data.sortedOption[1].text, value: res.data.data.sortedOption[1].value})
-      setOption3({text: res.data.data.sortedOption[2].text, value: res.data.data.sortedOption[2].value})
-      setOption4({text: res.data.data.sortedOption[3].text, value: res.data.data.sortedOption[3].value})
-      setOption5({text: res.data.data.sortedOption[4].text, value: res.data.data.sortedOption[4].value})
+      
+      
+
+      if(res.data.data.sortedOption.length > 0){
+        setOption1({text: res.data.data.sortedOption[0].text, value: res.data.data.sortedOption[0].value})
+        setOption2({text: res.data.data.sortedOption[1].text, value: res.data.data.sortedOption[1].value})
+        setOption3({text: res.data.data.sortedOption[2].text, value: res.data.data.sortedOption[2].value})
+        setOption4({text: res.data.data.sortedOption[3].text, value: res.data.data.sortedOption[3].value})
+        setOption5({text: res.data.data.sortedOption[4].text, value: res.data.data.sortedOption[4].value})
+      }
     })
-
-
+    
+    
     
     axios.get(`https://pms-jq9o.onrender.com/api/v1/question/getQuestions/${Cookies.get('companyID')}/Self Appraisal/Review`,  {
       headers: {
-          Authorization: `Bearer ${Token}`,
-        },
+        Authorization: `Bearer ${Token}`,
+      },
     }).then(res => {
       setSelfQuestions({
         question1: res.data.data.sortedQuestion[0].text,
@@ -623,13 +629,15 @@ const Settings = () => {
         question4: res.data.data.sortedQuestion[3].text,
         question5: res.data.data.sortedQuestion[4].text
       })
-
       
-      setOption1({text: res.data.data.sortedOption[0].text, value: res.data.data.sortedOption[0].value})
-      setOption2({text: res.data.data.sortedOption[1].text, value: res.data.data.sortedOption[1].value})
-      setOption3({text: res.data.data.sortedOption[2].text, value: res.data.data.sortedOption[2].value})
-      setOption4({text: res.data.data.sortedOption[3].text, value: res.data.data.sortedOption[3].value})
-      setOption5({text: res.data.data.sortedOption[4].text, value: res.data.data.sortedOption[4].value})
+
+      if(res.data.data.sortedOption.length > 0){
+        setOption1({text: res.data.data.sortedOption[0].text, value: res.data.data.sortedOption[0].value})
+        setOption2({text: res.data.data.sortedOption[1].text, value: res.data.data.sortedOption[1].value})
+        setOption3({text: res.data.data.sortedOption[2].text, value: res.data.data.sortedOption[2].value})
+        setOption4({text: res.data.data.sortedOption[3].text, value: res.data.data.sortedOption[3].value})
+        setOption5({text: res.data.data.sortedOption[4].text, value: res.data.data.sortedOption[4].value})
+      }
     })
 
     
@@ -637,21 +645,24 @@ const Settings = () => {
       headers: {
           Authorization: `Bearer ${Token}`,
         },
-    }).then(res => {
-      setGoalQuestions({
-        question1: res.data.data.sortedQuestion[0].text,
-        question2: res.data.data.sortedQuestion[1].text,
-        question3: res.data.data.sortedQuestion[2].text,
+      }).then(res => {
+        setGoalQuestions({
+          question1: res.data.data.sortedQuestion[0].text,
+          question2: res.data.data.sortedQuestion[1].text,
+          question3: res.data.data.sortedQuestion[2].text,
         question4: res.data.data.sortedQuestion[3].text,
         question5: res.data.data.sortedQuestion[4].text
       })
-
       
-      setOption1({text: res.data.data.sortedOption[0].text, value: res.data.data.sortedOption[0].value})
-      setOption2({text: res.data.data.sortedOption[1].text, value: res.data.data.sortedOption[1].value})
-      setOption3({text: res.data.data.sortedOption[2].text, value: res.data.data.sortedOption[2].value})
-      setOption4({text: res.data.data.sortedOption[3].text, value: res.data.data.sortedOption[3].value})
-      setOption5({text: res.data.data.sortedOption[4].text, value: res.data.data.sortedOption[4].value})
+      
+
+      if(res.data.data.sortedOption.length > 0){
+        setOption1({text: res.data.data.sortedOption[0].text, value: res.data.data.sortedOption[0].value})
+        setOption2({text: res.data.data.sortedOption[1].text, value: res.data.data.sortedOption[1].value})
+        setOption3({text: res.data.data.sortedOption[2].text, value: res.data.data.sortedOption[2].value})
+        setOption4({text: res.data.data.sortedOption[3].text, value: res.data.data.sortedOption[3].value})
+        setOption5({text: res.data.data.sortedOption[4].text, value: res.data.data.sortedOption[4].value})
+      }
     })
 
     
@@ -668,12 +679,14 @@ const Settings = () => {
         question5: res.data.data.sortedQuestion[4].text
       })
 
+      if(res.data.data.sortedOption.length > 0){
+        setOption1({text: res.data.data.sortedOption[0].text, value: res.data.data.sortedOption[0].value})
+        setOption2({text: res.data.data.sortedOption[1].text, value: res.data.data.sortedOption[1].value})
+        setOption3({text: res.data.data.sortedOption[2].text, value: res.data.data.sortedOption[2].value})
+        setOption4({text: res.data.data.sortedOption[3].text, value: res.data.data.sortedOption[3].value})
+        setOption5({text: res.data.data.sortedOption[4].text, value: res.data.data.sortedOption[4].value})
+      }
       
-      setOption1({text: res.data.data.sortedOption[0].text, value: res.data.data.sortedOption[0].value})
-      setOption2({text: res.data.data.sortedOption[1].text, value: res.data.data.sortedOption[1].value})
-      setOption3({text: res.data.data.sortedOption[2].text, value: res.data.data.sortedOption[2].value})
-      setOption4({text: res.data.data.sortedOption[3].text, value: res.data.data.sortedOption[3].value})
-      setOption5({text: res.data.data.sortedOption[4].text, value: res.data.data.sortedOption[4].value})
     })
 
 
@@ -1232,7 +1245,7 @@ const Settings = () => {
                 />
               </div>
               <div className="inputWrapper">
-                <label htmlFor="midYearStartDate">Question 3</label>
+                <label htmlFor="pquestion3">Question 3</label>
                 <input
                   type="text"
                   value={performanceQuestions.question3}
@@ -1241,21 +1254,21 @@ const Settings = () => {
                 />
               </div>
               <div className="inputWrapper">
-                <label htmlFor="midYearStartDate">Question 4</label>
+                <label htmlFor="pquestion4">Question 4</label>
                 <input
                   type="text"
                   value={performanceQuestions.question4}
                   onChange={(e) => setPerformanceQuestions({...performanceQuestions, question4: e.target.value})}
-                  id="pquestion3"
+                  id="pquestion4"
                 />
               </div>
               <div className="inputWrapper">
-                <label htmlFor="pquestion4">Question 5</label>
+                <label htmlFor="pquestion5">Question 5</label>
                 <input
                   type="text"
                   value={performanceQuestions.question5}
                   onChange={(e) => setPerformanceQuestions({...performanceQuestions, question5: e.target.value})}
-                  id="pquestion4"
+                  id="pquestion5"
                 />
               </div>
 
