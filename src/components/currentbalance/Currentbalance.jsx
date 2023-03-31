@@ -18,11 +18,9 @@ import {
 
 
 const Currentbalance = () => {
-    // const [show, setShow] = useState(true);
     const [account, setAccount] = useState('');
     const [myBalance, setMyBalance] = useState('');
     const [data, setData] = useState('');
-    // const [newLead, setNewLead] = useState('');
     const [chainError, setChainError] = useState(null);
     // const toast = useToast();
 
@@ -785,7 +783,8 @@ const Currentbalance = () => {
                   <option value="btc">BTC</option>
                 </select>
                 </p>
-                <p className='fee'>20.000 USD</p>
+                <h1 className="fee">{account}</h1>
+                {/* <p className='fee'>20.000 USD</p> */}
             </div>
             <div className='clickbox'>
                 <div classname="connectbox">
@@ -796,7 +795,7 @@ const Currentbalance = () => {
                         Please change to Polygon Mumbai testnet
                     </Alert>
                   )}
-                    <h1 className="walletaddress">{account}</h1>
+                    
                     {/* <h1>{myBalanc}</h1> */}
                 <button className="connectbtn" onClick={walletConnection} disabled={account}>
                     {account ? 'Connected' : 'Connect Wallet'}

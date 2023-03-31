@@ -58,6 +58,7 @@ const Singleadd = () => {
       <Sidebar />
       <div className="newContainer">
         <Navbar />
+        <div className="singleaddwrapper">
         <div className="singleaddcont">
           <button className='closebtn'>X</button>
         <div className="topcont">
@@ -180,7 +181,9 @@ const Singleadd = () => {
       </main>
     </div>
 
-    </div>
+        </div>
+        </div>
+        
     </div>
     </div>
   )

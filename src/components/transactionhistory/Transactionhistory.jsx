@@ -3,44 +3,21 @@ import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
+// import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { ArrangeHorizontal } from 'iconsax-react';
-import { Wallet2 } from 'iconsax-react';
+// import { Wallet2 } from 'iconsax-react';
 
 const Transactionhistory = () => {
   const rows = [
     {
-      transaction: "Sent to Kemik@gmail.com",
-      date: "March 6, 2023. 2:30 AM",
-      amount: "90,450.00 USD",
-      status: "pending",
+      transaction: "",
+      date: "",
+      amount: "",
+      status: "",
     },
-    {
-      transaction: "Sent to Kemik@gmail.com",
-      date: "March 6, 2023. 2:30 AM",
-      amount: "90,450.00 USD",
-      status: "cancelled",
-    },
-    {
-      transaction: "Sent to Kemik@gmail.com",
-      date: "March 6, 2023. 2:30 AM",
-      amount: "90,450.00 USD",
-      status: "successful",
-    },
-    {
-      transaction: "Sent to Kemik@gmail.com",
-      date: "March 6, 2023. 2:30 AM",
-      amount: "90,450.00 USD",
-      status: "pending",
-    },
-    {
-      transaction: "Sent to Kemik@gmail.com",
-      date: "March 6, 2023. 2:30 AM",
-      amount: "90,450.00 USD",
-      status: "successful",
-    },
+
 
   
   ];

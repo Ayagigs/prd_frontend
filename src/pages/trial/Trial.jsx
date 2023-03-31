@@ -13,6 +13,7 @@ const Trial = () => {
         <Sidebar />
         <div className="trialContainer">
           <Navbar />
+          <div className="trialwrapper">
           <div className="trialcont">
            <div className="trialdetails">
            
@@ -46,17 +47,21 @@ const Trial = () => {
             </Link>
             
             <button className="skipbtn"> 
-              <Link to="/employee" style={{ textDecoration: "none" }}>
+              <Link to="/wallet" style={{ textDecoration: "none" }}>
                 Skip free trial
               </Link>
-              </button>         
+              </button>
+                     
             </div>
           </div>
+          <div className="sideimage">
+            <img width="" height="577px" src={Image} alt="view logo" />
+          </div>  
         </div>
-        <div className="sideimage">
-        <img width="" height="577px" src={Image} alt="view logo" />
-        </div>
+       
         <div>
+          </div>
+        
           
         </div>
         </div>
