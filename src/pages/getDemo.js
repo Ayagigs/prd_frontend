@@ -12,16 +12,16 @@ function GetDemo() {
           {" "}
           <div className="left-style">
             {" "}
-            <h3>Book a demo with us</h3>{" "}
+            <h3 className="bookdemo">Book a demo with us</h3>{" "}
             <p className="first-text">Have a 30 minute chat with us</p>{" "}
             <div className="form-input">
               {" "}
               <label htmlFor="firstname">Fullname</label>{" "}
               <input type="text" id="firstname" name="firstname" />{" "}
             </div>{" "}
-            <div className="form-input">
+            <div className="form-input mainmail" >
               {" "}
-              <label htmlFor="email">Work email</label>{" "}
+              <label htmlFor="mail">Work email</label>{" "}
               <input type="email" id="email" name="email" />{" "}
             </div>{" "}
             <div className="form-input">

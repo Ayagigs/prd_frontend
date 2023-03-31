@@ -796,7 +796,7 @@ const Currentbalance = () => {
                         Please change to Polygon Mumbai testnet
                     </Alert>
                   )}
-                    <h1>{account}</h1>
+                    <h1 className="walletaddress">{account}</h1>
                     {/* <h1>{myBalanc}</h1> */}
                 <button className="connectbtn" onClick={walletConnection} disabled={account}>
                     {account ? 'Connected' : 'Connect Wallet'}
