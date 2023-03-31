@@ -315,7 +315,6 @@ const Settings = () => {
     event.preventDefault();
     const formdata = new FormData()
     formdata.append('profile', profile)
-    setUploading(false)
     
     setIsLoading(true);
     const Token = Cookies.get('Token');
@@ -327,13 +326,17 @@ const Settings = () => {
       })
       .then(response => {
         setIsLoading(false);
+        setUploading(false)
         toast.success("image Uploaded Successfully");
-        setData({...data, profilePhoto: response.data.data.profile})
+        setData({...data, profilePhoto: response.data.data.profilePhoto})
+        setProfile(response.data.data.profilePhoto)
+        console.log(response.data.data.profilePhoto)
         // Handle the response from the server
       })
       .catch(error => {
         setIsLoading(false);
         console.log(error);
+        setUploading(true)
         // Handle any errors that occurred during the upload
       });
   };
