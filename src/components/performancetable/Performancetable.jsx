@@ -26,6 +26,7 @@ const Performancetable = () => {
     axios.get(url, {headers: {Authorization: `Bearer ${Cookies.get('Token')}`}})
     .then(res => {
       setRows(res.data.data)
+      console.log(res.data.data)
     })
   }, []);
 

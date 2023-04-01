@@ -8,8 +8,12 @@ import { Setting2 } from 'iconsax-react';
 import { More2 } from 'iconsax-react';
 import { EmptyWallet } from 'iconsax-react';
 import { Link } from "react-router-dom";
+import { Logout } from 'iconsax-react';
 import Logo from './logo.png';
 import MoreVertIcon from "@mui/icons-material/MoreVert";
+import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
+import Swal from "sweetalert2";
 // import Swal from 'sweetalert2'
 
 // import { DarkModeContext } from "../../context/darkModeContext";
@@ -17,7 +21,28 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 // import Image from "./logo.png"
 
 const Sidebar = () => {
+  const navigate = useNavigate()
   // const { dispatch } = useContext(DarkModeContext);
+  const handleLogout = () => {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You will be logged out of the application',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, log me out',
+      cancelButtonText: 'No, cancel'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Clear the cookie that stores the user's login information
+        // removeCookie('auth_token');
+        // Redirect the user to the login page
+        Cookies.remove('Token')
+        Cookies.remove('companyID')
+        navigate("/")
+      }
+    });
+  };
+
   return (
     <div className="sidebar1">
       <div className="top">
@@ -63,6 +88,12 @@ const Sidebar = () => {
             <EmptyWallet className="icon" />
             <span>Wallet</span>
           </li>
+          </Link>
+          <Link style={{ textDecoration: 'none' }} onClick={handleLogout}>
+            <li>
+              <Logout className="icon" />
+              <span>Logout</span>
+            </li>
           </Link>
           
       </ul>

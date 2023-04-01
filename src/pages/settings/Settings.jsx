@@ -146,7 +146,6 @@ const Settings = () => {
           appraisalEndDate: res.data.data.company[0].appraisalEndDate,
         })
         setProfile( res.data.data.adminUser.profilePhoto)
-        console.log(res.data.data)
         setCompanyFormData({
           companyName: res.data.data.company[0].companyName,
           businessType: res.data.data.company[0].businessType,
@@ -168,7 +167,6 @@ const Settings = () => {
     try {
       setIsLoading(true);
       const Token = Cookies.get('Token');
-      console.log(Token);
       const res = await axios.patch(
         'https://pms-jq9o.onrender.com/api/v1/admin/changePassword',
         passwordData,
@@ -207,10 +205,8 @@ const Settings = () => {
       setData({...data, companyName: res.data.data.updateCompany.companyName})
       setIsLoading(false);
 
-      console.log(res.data);
 
       toast.success('Updated Successfully');
-      console.log(res.data);
     } catch (error) {
       setIsLoading(false);
       toast.error(error.response.data.message);
@@ -223,7 +219,6 @@ const Settings = () => {
     try {
       setIsLoading(true);
       const Token = Cookies.get('Token');
-      console.log(Token);
       const res = await axios.patch(
         'https://pms-jq9o.onrender.com/api/v1/admin/updatecompanydetails',
         performanceReviewData,
@@ -235,10 +230,8 @@ const Settings = () => {
       );
       setIsLoading(false);
 
-      console.log(res.data);
 
       toast.success('Updated Successfully');
-      console.log(res.data);
     } catch (error) {
       setIsLoading(false);
       toast.error(error.response.data.message);
@@ -267,11 +260,9 @@ const Settings = () => {
       setInitials(res.data.data.updateInfo.firstName[0] + res.data.data.updateInfo.lastName[0])
       setIsLoading(false);
 
-      console.log(res.data.data);
 
       toast.success('Updated Successfully');
     } catch (error) {
-      console.log(error.message);
       setIsLoading(false);
       toast.error(error.response.data.message);
     }
@@ -330,12 +321,10 @@ const Settings = () => {
         toast.success("image Uploaded Successfully");
         setData({...data, profilePhoto: response.data.data.profilePhoto})
         setProfile(response.data.data.profilePhoto)
-        console.log(response.data.data.profilePhoto)
         // Handle the response from the server
       })
       .catch(error => {
         setIsLoading(false);
-        console.log(error);
         setUploading(true)
         // Handle any errors that occurred during the upload
       });
@@ -582,7 +571,6 @@ const Settings = () => {
         question5: res.data.data.sortedQuestion[4].text
       })
 
-      console.log(res.data.data)
       
       
       if(res.data.data.sortedOption.length > 0){
