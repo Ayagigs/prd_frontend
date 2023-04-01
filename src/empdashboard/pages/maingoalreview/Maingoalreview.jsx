@@ -53,11 +53,16 @@ const Maingoalreview = () => {
           </div>
           </Link>
 
+          {
+            Cookies.get('Role') === 'Performance Manager' ? 
           <Link to="/emp-dashboard/performancereview" style={{ textDecoration: "none" }}>
           <div className="undoperfreview">
           <h1>Performance Review</h1>
           </div>
           </Link>
+          :
+          undefined
+          }
 
           <Link to="/emp-dashboard/maingoalreview" style={{ textDecoration: "none" }}>
           <div className="maingoalrev">

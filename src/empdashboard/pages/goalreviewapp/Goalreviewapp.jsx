@@ -10,7 +10,7 @@ import { toast } from 'react-toastify';
 
 
 
-const Goalreviewapp = ({profile, firstName, lastName, due, jobTitle, id}) => {
+const Goalreviewapp = ({profile, firstName, lastName, jobTitle, id, goal}) => {
   const [question, setQuestion] = useState([])
   const [competencyQuestion, setCompetencyQuestion] = useState([])
   const [feedback, setFeedback] = useState('')
@@ -64,10 +64,11 @@ const Goalreviewapp = ({profile, firstName, lastName, due, jobTitle, id}) => {
   const handleSubmit = (e) => {
     e.preventDefault()
     setIsLoading(true)
+    console.log(Cookies.get('EmpToken'))
     const url = `https://pms-jq9o.onrender.com/api/v1/review/goalreview/${id}`
     if(!score.score1 || !score.score2 || !score.score3 || !score.score4 || !score.score5 || !competencyScore.score1 || !competencyScore.score2 || !competencyScore.score3 || !competencyScore.score4 || !competencyScore.score5){
-      toast.error("Please input all scores")
       setIsLoading(false)
+      return toast.error("Please input all scores")
     }
     axios.post(url, {
       scores: [score.score1, score.score2, score.score3, score.score4, score.score5],
@@ -89,7 +90,7 @@ const Goalreviewapp = ({profile, firstName, lastName, due, jobTitle, id}) => {
   } 
 
   useEffect(() => {
-    const url = `https://pms-jq9o.onrender.com/api/v1/question/getQuestions/${Cookies.get('empCompanyID')}/360 Appraisal/Review`
+    const url = `https://pms-jq9o.onrender.com/api/v1/question/getQuestions/${Cookies.get('empCompanyID')}/Goal Review/Review`
 
     axios.get(url,  {headers: {Authorization: `Bearer ${Cookies.get('EmpToken')}`}})
     .then(res => {
@@ -117,10 +118,8 @@ const Goalreviewapp = ({profile, firstName, lastName, due, jobTitle, id}) => {
 
   return (
     <div className='appraisalhome'>
-         <Side />
          <div className="appraisalcontainer">
-        <Navbar />
-        <div className="appraisalbox">
+        <div className="appraisalbox" style={{height: '600px'}}>
           <div className="apptopbox">
             <h1>Goal Review Appraisal</h1>
           </div>
@@ -136,7 +135,9 @@ const Goalreviewapp = ({profile, firstName, lastName, due, jobTitle, id}) => {
       <div className="profdetails">
             <h1 className="emp">{firstName + " " + lastName}</h1>
             <p className="post">{jobTitle}</p>
-            <p className="appduedate">{new Date(due).toDateString()}</p>
+            <p className="post"><b>Goal Title: &nbsp;</b>  {goal.goaltitle}</p>
+            <p className="post"><b>Goal Description: &nbsp;</b> {goal.description}</p>
+            <p className="post"><b>Goal Status: &nbsp;</b> {goal.status}</p>
             <br />
             
       </div>
