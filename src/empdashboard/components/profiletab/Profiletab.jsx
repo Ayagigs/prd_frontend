@@ -25,13 +25,11 @@ const Profiletab = ({ data, reviewType }) => {
         return setRows(data.data)
       }
       setRows(data.data.employeeNotReviewed);
-      console.log(data.data.employeeNotReviewed)
       setDue(data.data.due);
     }
   }, [data]);
   
   const handleClick = (data) => {
-    console.log(data)
     setDetails(data)
     setGoalId(data._id)
     setModal(true)

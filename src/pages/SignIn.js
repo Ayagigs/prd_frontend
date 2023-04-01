@@ -13,7 +13,7 @@ function SignIn() {
     console.log(response);
   };
   const [isLoading, setIsLoading] = useState(false);
-  const [choice, setChoice] = useState('');
+  const [choice, setChoice] = useState('Admin');
   const navigate = useNavigate();
   const [popup, setPopup] = useState(false);
 
@@ -65,6 +65,7 @@ function SignIn() {
       Cookies.set('EmpToken', res.data.token);
       Cookies.set('empCompanyID', res.data.data.companyID);
       Cookies.set('Role', res.data.data.role)
+      console.log(res.data.data.selfAppraised)
       navigate('/emp-dashboard');
     } catch (error) {
       setIsLoading(false);
@@ -155,7 +156,7 @@ function SignIn() {
             <div></div>
             <p className="choice">
               <span onClick={() => setChoice('Employee')}>Employee</span> or{' '}
-              <span onClick={() => setChoice('Admin')}>Ceo</span>
+              <span onClick={() => setChoice('Admin')}>Admin</span>
             </p>
             <div></div>
           </div>
