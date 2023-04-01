@@ -26,6 +26,15 @@ const Empsettings = () => {
     newPassword: '',
     confirmPassword: '',
   });
+
+  const [notificationSettings, setNotificationSettings] = useState({
+    emailNewsUpdateNotification: false,
+    emailCommentNotification: false,
+    emailGoalDeadlineNotification: false,
+    pushCommentNotification: false,
+    pushGoalDeadlineNotification: false,
+  });
+
   const [inputFormData, setInputFormData] = useState({
     fullName: '',
     firstName: '',
@@ -62,9 +71,28 @@ const Empsettings = () => {
 
   /*********************** EMPLOYEE PUSH NOTIFICATIONS PREFERENCES ******************************/
 
+  const handleSwitchChange = event => {
+    const { name, checked } = event.target;
+    setNotificationSettings({ ...notificationSettings, [name]: checked });
+  };
+
   const handleSubmit = async event => {
     event.preventDefault();
-    const formData = new FormData(event.target);
+
+    const data = {
+      emailNewsUpdateNotification:
+        notificationSettings.emailNewsUpdateNotification ? true : false,
+      emailCommentNotification: notificationSettings.emailCommentNotification
+        ? true
+        : false,
+      emailGoalDeadlineNotification:
+        notificationSettings.emailGoalDeadlineNotification ? true : false,
+      pushCommentNotification: notificationSettings.pushCommentNotification
+        ? true
+        : false,
+      pushGoalDeadlineNotification:
+        notificationSettings.pushGoalDeadlineNotification ? true : false,
+    };
 
     try {
       setIsLoading(true);
@@ -73,35 +101,18 @@ const Empsettings = () => {
       // Send email notification preferences
       const res1 = await axios.patch(
         'https://pms-jq9o.onrender.com/api/v1/employee/notifications',
-        {
-          emailNewsUpdateNotification: formData.get('newsAndUpdates'),
-          emailCommentNotification: formData.get('comments'),
-          emailReminderNotification: formData.get('reminders'),
-        },
+
+        data,
+
         {
           headers: {
             Authorization: `Bearer ${Token}`,
           },
         }
       );
-
-      // Send push notification preferences
-      const res2 = await axios.patch(
-        'https://pms-jq9o.onrender.com/api/v1/employee/notifications',
-        {
-          pushCommentNotification: formData.get('pushComments'),
-          pushGoalDeadlineNotification: formData.get('pushReminders'),
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${Token}`,
-          },
-        }
-      );
-
       setIsLoading(false);
 
-      console.log(res1.data.data, res2.data.data);
+      console.log(res1.data.data);
 
       toast.success('Updated Successfully');
       // Handle success
@@ -204,7 +215,7 @@ const Empsettings = () => {
     try {
       setIsLoading(true);
       const Token = Cookies.get('EmpToken');
-      console.log(Token);
+
       const res = await axios.patch(
         'https://pms-jq9o.onrender.com/api/v1/admin/changePassword',
         passwordData,
@@ -696,8 +707,12 @@ const Empsettings = () => {
                     <div className="rightNotificationContent">
                       <Switch
                         color="violet"
-                        name="newsAndUpdates"
+                        name="emailNewsUpdateNotification"
+                        onChange={handleSwitchChange}
                         defaultChecked={false}
+                        checked={
+                          notificationSettings.emailNewsUpdateNotification
+                        }
                         onLabel="ON"
                         offLabel="OFF"
                       />
@@ -713,8 +728,10 @@ const Empsettings = () => {
                     <div className="rightNotificationContent">
                       <Switch
                         color="violet"
-                        name="comments"
+                        name="emailCommentNotification"
                         defaultChecked={false}
+                        onChange={handleSwitchChange}
+                        checked={notificationSettings.emailCommentNotification}
                         onLabel="ON"
                         offLabel="OFF"
                       />
@@ -727,8 +744,12 @@ const Empsettings = () => {
                     <div className="rightNotificationContent">
                       <Switch
                         color="violet"
-                        name="reminders"
+                        name="emailGoalDeadlineNotification"
                         defaultChecked={false}
+                        onChange={handleSwitchChange}
+                        checked={
+                          notificationSettings.emailGoalDeadlineNotification
+                        }
                         onLabel="ON"
                         offLabel="OFF"
                       />
@@ -753,8 +774,10 @@ const Empsettings = () => {
                     <div className="rightNotificationContent">
                       <Switch
                         color="violet"
-                        name="pushComments"
+                        name="pushCommentNotification"
                         defaultChecked={false}
+                        onChange={handleSwitchChange}
+                        checked={notificationSettings.pushCommentNotification}
                         onLabel="ON"
                         offLabel="OFF"
                       />
@@ -767,8 +790,12 @@ const Empsettings = () => {
                     <div className="rightNotificationContent">
                       <Switch
                         color="violet"
-                        name="pushReminders"
+                        name="pushGoalDeadlineNotification"
                         defaultChecked={false}
+                        onChange={handleSwitchChange}
+                        checked={
+                          notificationSettings.pushGoalDeadlineNotification
+                        }
                         onLabel="ON"
                         offLabel="OFF"
                       />
