@@ -8,6 +8,18 @@
 }
     .appraisalcontainer {
       flex: 6;
+      background-color: rgba(87, 87, 87, 0.559);
+      width: 100vw;
+      height: 100vh;
+      position: fixed;
+      top: 0px;
+      left: 250px;
+      // display: flex;
+      // justify-content: center;
+      // align-items: center;
+      backdrop-filter: blur(2px);
+      padding-top: 8%;
+      padding-left: 20%;
  
     }
       
@@ -72,6 +84,14 @@
         // margin-right: 20px;
         // flex-wrap: wrap;
         // box-sizing: border-box;
+
+        textarea{
+          width: 100%;
+          border-radius: 10px;
+          border: 1px dashed black;
+          padding: 10px;
+          margin-top: 10px;
+        }
       }      
       .form-question {
         font-size:15px;

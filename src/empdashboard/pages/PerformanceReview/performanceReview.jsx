@@ -1,16 +1,17 @@
-import React, { useState } from 'react'
-import "./appraisal.scss";
+import React from 'react'
+// import "./appraisal360.scss";
 import Navbar from "../../components/navbar/Navbar";
 import Side from "../../components/sidebar/Side";
 import { Link } from "react-router-dom";
+import { useState } from 'react';
 import { useEffect } from 'react';
-import axios from 'axios';
 import Cookies from 'js-cookie';
+import axios from 'axios';
 import { toast } from 'react-toastify';
 
 
 
-const Appraisal = ({profile, firstName, lastName, jobTitle, due}) => {
+const PerformanceReview = ({profile, firstName, lastName, jobTitle, due, id}) => {
   const [question, setQuestion] = useState([])
   const [competencyQuestion, setCompetencyQuestion] = useState([])
   const [feedback, setFeedback] = useState('')
@@ -64,7 +65,8 @@ const Appraisal = ({profile, firstName, lastName, jobTitle, due}) => {
   const handleSubmit = (e) => {
     e.preventDefault()
     setIsLoading(true)
-    const url = `https://pms-jq9o.onrender.com/api/v1/review/selfappraisal`
+    console.log(Cookies.get('EmpToken'))
+    const url = `https://pms-jq9o.onrender.com/api/v1/review/performancereview/${id}`
     if(!score.score1 || !score.score2 || !score.score3 || !score.score4 || !score.score5 || !competencyScore.score1 || !competencyScore.score2 || !competencyScore.score3 || !competencyScore.score4 || !competencyScore.score5){
       toast.error("Please input all scores")
       setIsLoading(false)
@@ -89,12 +91,14 @@ const Appraisal = ({profile, firstName, lastName, jobTitle, due}) => {
   } 
 
   useEffect(() => {
-    const url = `https://pms-jq9o.onrender.com/api/v1/question/getQuestions/${Cookies.get('empCompanyID')}/Self Appraisal/Review`
+    const url = `https://pms-jq9o.onrender.com/api/v1/question/getQuestions/${Cookies.get('empCompanyID')}/Performance Review/Review`
 
     axios.get(url,  {headers: {Authorization: `Bearer ${Cookies.get('EmpToken')}`}})
     .then(res => {
       setQuestion(res.data.data.sortedQuestion)
       setOption(res.data.data.sortedOption)
+      console.log(res.data.data.sortedOption)
+      console.log(res.data.data.sortedQuestion)
     }).catch(err => {
       console.log(err)
     })
@@ -105,17 +109,21 @@ const Appraisal = ({profile, firstName, lastName, jobTitle, due}) => {
     .then(res => {
       setCompetencyQuestion(res.data.data.sortedQuestion)
       setOption(res.data.data.sortedOption)
+      console.log(res.data.data.sortedOption)
+      console.log(res.data.data.sortedQuestion)
     }).catch(err => {
       console.log(err)
     })
   }, [])
+
+
 
   return (
     <div className='appraisalhome'>
          <div className="appraisalcontainer">
         <div className="appraisalbox">
           <div className="apptopbox">
-            <h1>Self Appraisal</h1>
+            <h1>Performance Review</h1>
           </div>
             <hr />
           <div className='appraisalprofile'>
@@ -129,7 +137,7 @@ const Appraisal = ({profile, firstName, lastName, jobTitle, due}) => {
       <div className="profdetails">
             <h1 className="emp">{firstName + " " + lastName}</h1>
             <p className="post">{jobTitle}</p>
-            <p className="appduedate">{due}</p>
+            <p className="appduedate">{new Date(due).toDateString()}</p>
             <br />
             
       </div>
@@ -138,7 +146,6 @@ const Appraisal = ({profile, firstName, lastName, jobTitle, due}) => {
    
           </div>
           
-
           <div className="singleform">
           <p className='bodytext'>This form will assist in preparing the performance evaluation for Frank Cortage. 
             As someone who works with Bob on a regular basis, your feedback regarding his 
@@ -158,7 +165,7 @@ const Appraisal = ({profile, firstName, lastName, jobTitle, due}) => {
                         <input type="radio" name={el.text} value={eloption.value} onChange={() => handleChange(index, eloption.value)}/> 
                       </>
                     })
-                  }
+                  } 
                     <br />
                     <br />
                 </>
@@ -181,15 +188,14 @@ const Appraisal = ({profile, firstName, lastName, jobTitle, due}) => {
                         <input type="radio" name={el.text} value={eloption.value} onChange={() => handleCompetencyChange(index, eloption.value)}/> 
                       </>
                     })
-                  }
+                  } 
                     <br />
                     <br />
                 </>
               })
             }
-            <textarea name="" id="" cols="30" rows="5" placeholder='Feedback' onChange={(e) => setFeedback(e.target.value)}></textarea>
+            <textarea name="" id="" cols="30" rows="5" placeholder='Feedback'  onChange={(e) => setFeedback(e.target.value)}></textarea>
            </div>
-
 
         </div>
         <button className="submitbtn" onClick={(e) => handleSubmit(e)}>{isLoading ? "Submitting..." :  "Submit Appraisal"}</button>
@@ -199,4 +205,4 @@ const Appraisal = ({profile, firstName, lastName, jobTitle, due}) => {
   )
 }
 
-export default Appraisal
+export default PerformanceReview

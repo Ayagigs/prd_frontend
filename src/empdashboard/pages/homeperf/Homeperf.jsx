@@ -69,7 +69,7 @@ const Homeperf = () => {
         </div>
         <div className="viewtab">
      
-            <Profiletab  data = {data}/>
+            <Profiletab  data = {data} reviewType={'Performance Review'}/>
           
          </div>
         
