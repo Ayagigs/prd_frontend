@@ -10,11 +10,13 @@ import ReactCardSlider from 'react-card-slider-component';
 import axios from "axios";
 import { useState, useEffect } from "react";
 import Cookies from "js-cookie";
+import Appraisal360 from "../appriasal360/Appraisal360";
 // import { Carousel } from '@trendyol-js/react-carousel';
 // import slides from "../../components/cardslider/Cardslider";
 
 const Emphome = () => {
   const [data, setData] = useState({})
+  const [modal, setModal] = useState(false)
 
   useEffect(() => {
     const url = `https://pms-jq9o.onrender.com/api/v1/review/appraisal`
@@ -26,7 +28,7 @@ const Emphome = () => {
   }, [])
 
 
-  return (
+  return <>
     <div className="emphome">
       <Side />
       <div className="emphomeContainer">
@@ -72,13 +74,15 @@ const Emphome = () => {
         </div>
         <div className="viewtab">
      
-            <Profiletab  data = {data}/>
+            <Profiletab  data = {data} reviewType={'360 Appraisal'}/>
             {/* <ReactCardSlider slides={slides}/> */}
          </div>
         
       </div>
     </div>
-  );
+    
+    
+  </>;
 };
 
 export default Emphome;

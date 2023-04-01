@@ -581,8 +581,10 @@ const Settings = () => {
         question4: res.data.data.sortedQuestion[3].text,
         question5: res.data.data.sortedQuestion[4].text
       })
-      
 
+      console.log(res.data.data)
+      
+      
       if(res.data.data.sortedOption.length > 0){
         setOption1({text: res.data.data.sortedOption[0].text, value: res.data.data.sortedOption[0].value})
         setOption2({text: res.data.data.sortedOption[1].text, value: res.data.data.sortedOption[1].value})

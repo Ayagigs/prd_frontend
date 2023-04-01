@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import Cookies from "js-cookie";
+import Appraisal from "../appraisalform/Appraisal";
 
 
 const Goalreview = () => {
@@ -18,6 +19,7 @@ const Goalreview = () => {
   const [profile, setProfile] = useState('')
   const [dataExists, setDataExists] = useState(false)
   const [due, setDue] = useState('')
+  const [modal, setModal] = useState(false)
 
   useEffect(() => {
     const url = `https://pms-jq9o.onrender.com/api/v1/review/selfappraisal`
@@ -34,10 +36,11 @@ const Goalreview = () => {
       setProfile(res.data.data.profilePhoto)
       setDue(res.data.due)
     })
+
   }, [])
   
 
-  return (
+  return <>
     <div className="emphome">
       <Side />
       <div className="goalreviewContainer">
@@ -82,8 +85,8 @@ const Goalreview = () => {
         
         </div>
         <div className="viewtabs">
-        <Link to="/emp-dashboard/goalreview/appraisalform" style={{ textDecoration: "none" }}>
-       <div className={dataExists ? 'appraisalproftab' : 'hide'}>
+        <Link  style={{ textDecoration: "none" }}>
+       <div className={dataExists ? 'appraisalproftab' : 'hide'} onClick={() => setModal(true)}>
       <img 
       className="profimg"
       src={profile}
@@ -101,7 +104,12 @@ const Goalreview = () => {
         
       </div>
     </div>
-  );
+
+    <p className={modal ? "closePModal" : "hide"} onClick={() => setModal(false)}>x</p>
+    {
+      modal ? <Appraisal profile={profile} firstName={firstName} lastName={lastName} jobTitle ={jobTitle} due={due ? new Date(due).toDateString() : '---'}/> : undefined
+    }
+  </>;
 };
 
 export default Goalreview;
