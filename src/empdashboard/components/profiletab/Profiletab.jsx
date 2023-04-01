@@ -13,19 +13,27 @@ const Profiletab = ({ data, reviewType }) => {
   const [rows, setRows] = useState([]);
   const [due, setDue] = useState('');
   const [modal, setModal] = useState(false)
+  const [goalId, setGoalId] = useState(false)
   const [details, setDetails] = useState({})
 
   useEffect(() => {
     setRows([]);
     if (data.data !== undefined) {
+
+      if(reviewType === 'Goal Review'){
+        console.log(data.data)
+        return setRows(data.data)
+      }
       setRows(data.data.employeeNotReviewed);
+      console.log(data.data.employeeNotReviewed)
       setDue(data.data.due);
     }
-  }, [, data]);
+  }, [data]);
   
   const handleClick = (data) => {
     console.log(data)
     setDetails(data)
+    setGoalId(data._id)
     setModal(true)
   }
 
@@ -50,7 +58,7 @@ const Profiletab = ({ data, reviewType }) => {
                   <p className="duedate">
                     {'---'}
                   </p>
-                  <h1 className="emp">{el.owner.firstName + ' ' + el.owner.lastName}</h1>
+                  <h1 className="emp">{el.owner.firstName + ' ' + el.owner.lastName }</h1>
                   <p className="post">{el.owner.jobTitle ? el.owner.jobTitle : '---'}</p>
                 </div>
                 <div className="revbutton">
@@ -89,7 +97,7 @@ const Profiletab = ({ data, reviewType }) => {
     {
       modal ? 
       reviewType === '360 Appraisal' ? <Appraisal360 profile={details.profilePhoto} firstName={details.firstName} lastName={details.lastName} jobTitle ={details.jobTitle} due={due} id={details._id}/> : 
-      reviewType === 'Goal Review' ? <Goalreviewapp profile={details.owner.profilePhoto} firstName={details.owner.firstName} lastName={details.owner.lastName} jobTitle ={details.owner.jobTitle} id={details._id}/> :  reviewType === 'Perfomance Review' ? <PerformanceReview profile={details.profilePhoto} firstName={details.firstName} lastName={details.lastName} jobTitle ={details.jobTitle} id={details._id}/>  : undefined
+      reviewType === 'Goal Review' ? <Goalreviewapp profile={details.owner.profilePhoto} firstName={details.owner.firstName} lastName={details.owner.lastName} jobTitle ={details.owner.jobTitle} id={goalId} goal={details}/> :  reviewType === 'Perfomance Review' ? <PerformanceReview profile={details.profilePhoto} firstName={details.firstName} lastName={details.lastName} jobTitle ={details.jobTitle} id={details._id}/>  : undefined
     : undefined}
   </>;
 };
