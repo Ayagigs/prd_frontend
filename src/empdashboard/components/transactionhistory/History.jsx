@@ -12,34 +12,10 @@ import { ArrangeHorizontal } from 'iconsax-react';
 const History = () => {
 const rows = [
   {
-    transaction: "Sent to Kemik@gmail.com",
-    date: "March 6, 2023. 2:30 AM",
-    amount: "90,450.00 USD",
-    status: "pending",
-  },
-  {
-    transaction: "Sent to Kemik@gmail.com",
-    date: "March 6, 2023. 2:30 AM",
-    amount: "90,450.00 USD",
-    status: "cancelled",
-  },
-  {
-    transaction: "Sent to Kemik@gmail.com",
-    date: "March 6, 2023. 2:30 AM",
-    amount: "90,450.00 USD",
-    status: "successful",
-  },
-  {
-    transaction: "Sent to Kemik@gmail.com",
-    date: "March 6, 2023. 2:30 AM",
-    amount: "90,450.00 USD",
-    status: "pending",
-  },
-  {
-    transaction: "Sent to Kemik@gmail.com",
-    date: "March 6, 2023. 2:30 AM",
-    amount: "90,450.00 USD",
-    status: "successful",
+    transaction: "",
+    date: "",
+    amount: "",
+    status: "",
   },
 ];
 

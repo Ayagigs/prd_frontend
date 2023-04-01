@@ -15,6 +15,7 @@ const Settings = () => {
   const [states, setStates] = useState([]);
   const [countries, setCountries] = useState([]);
   const [profile, setProfile] = useState(null);
+  const [uploading, setUploading] = useState(false)
   const [data, setData] = useState({
     firstName: '',
     lastName: '',
@@ -55,6 +56,72 @@ const Settings = () => {
     email: '',
     role: '',
   });
+  const [option1, setOption1] = useState({
+    text: '',
+    value: ''
+  })
+  const [option2, setOption2] = useState({
+    text: '',
+    value: ''
+  })
+  const [option3, setOption3] = useState({
+    text: '',
+    value: ''
+  })
+  const [option4, setOption4] = useState({
+    text: '',
+    value: ''
+  })
+  const [option5, setOption5] = useState({
+    text: '',
+    value: ''
+  })
+  const [performanceQuestions, setPerformanceQuestions] = useState({
+    question1: '',
+    question2: '',
+    question3: '',
+    question4: '',
+    question5: '',
+    // category: "Review",
+    // reviewType: "Performance Review"
+  })
+  const [appraisalQuestions, setAppraisalQuestions] = useState({
+    question1: '',
+    question2: '',
+    question3: '',
+    question4: '',
+    question5: '',
+    // category: "Review",
+    // reviewType: "Performance Review"
+  })
+  const [selfQuestions, setSelfQuestions] = useState({
+    question1: '',
+    question2: '',
+    question3: '',
+    question4: '',
+    question5: '',
+    // category: "Review",
+    // reviewType: "Performance Review"
+  })
+  const [competencyQuestions, setCompetencyQuestions] = useState({
+    question1: '',
+    question2: '',
+    question3: '',
+    question4: '',
+    question5: '',
+    // category: "Review",
+    // reviewType: "Performance Review"
+  })
+  const [goalQuestions, setGoalQuestions] = useState({
+    question1: '',
+    question2: '',
+    question3: '',
+    question4: '',
+    question5: '',
+    // category: "Review",
+    // reviewType: "Performance Review"
+  })
+  
 
   
   useEffect(() => {
@@ -78,6 +145,8 @@ const Settings = () => {
           appraisalStartDate: res.data.data.company[0].appraisalStartDate,
           appraisalEndDate: res.data.data.company[0].appraisalEndDate,
         })
+        setProfile( res.data.data.adminUser.profilePhoto)
+        console.log(res.data.data)
         setCompanyFormData({
           companyName: res.data.data.company[0].companyName,
           businessType: res.data.data.company[0].businessType,
@@ -228,32 +297,447 @@ const Settings = () => {
   };
 
   const handleImageUpload = event => {
-    const file = event.target.files[0];
-    setProfile(file);
+    setUploading(true)
+    setProfile(event.target.files[0])
+
+    // const url = `https://pms-jq9o.onrender.com/api/v1/admin/photoupload`
+
+    // axios.post(url, formdata, {headers: {Authorization: `Bearer ${Cookies.get('Token')}`}})
+    // .then(res => {
+    //   toast.success('Image Uploaded Successfully')
+    //   console.log(res.data.data)
+    // }).catch(err => {
+    //   toast.error(err.response.data.message)
+    // })
   };
 
   const handleSubmitProfile = async event => {
     event.preventDefault();
-
+    const formdata = new FormData()
+    formdata.append('profile', profile)
+    
     setIsLoading(true);
     const Token = Cookies.get('Token');
     await axios
-      .post('https://pms-jq9o.onrender.com/api/v1/admin/photoupload', profile, {
-        headers: {
+    .post('https://pms-jq9o.onrender.com/api/v1/admin/photoupload', formdata, {
+      headers: {
           Authorization: `Bearer ${Token}`,
         },
       })
       .then(response => {
         setIsLoading(false);
-        toast.success(response.data.message);
+        setUploading(false)
+        toast.success("image Uploaded Successfully");
+        setData({...data, profilePhoto: response.data.data.profilePhoto})
+        setProfile(response.data.data.profilePhoto)
+        console.log(response.data.data.profilePhoto)
         // Handle the response from the server
       })
       .catch(error => {
         setIsLoading(false);
         console.log(error);
+        setUploading(true)
         // Handle any errors that occurred during the upload
       });
   };
+
+  const handlePerformanceQuestions = (e) => {
+    e.preventDefault()
+    const url = `https://pms-jq9o.onrender.com/api/v1/question/setquestion/${Cookies.get('companyID')}`
+    setIsLoading(true)
+
+    axios.post(url, {
+      questions: [
+        {
+          text: performanceQuestions.question1,
+          order: 1
+        },
+        {
+          text: performanceQuestions.question2,
+          order: 2
+        },
+        {
+          text: performanceQuestions.question3,
+          order: 3
+        },
+        {
+          text: performanceQuestions.question4,
+          order: 4
+        },
+        {
+          text: performanceQuestions.question5,
+          order: 5
+        },
+      ],
+      category: 'Review',
+      reviewType: 'Performance Review'
+    }, {
+      headers: {
+        Authorization: `Bearer ${Cookies.get('Token')}`,
+      },
+    }).then(res => {
+      console.log(res.data.data)
+      setIsLoading(false)
+      toast.success("Questions Updated Successfully");
+    }).catch(error => {
+      setIsLoading(false);
+      console.log(error);
+      // Handle any errors that occurred during the upload
+    });
+  }
+
+  const handleAppraisalQuestons = (e) => {
+    e.preventDefault()
+    const url = `https://pms-jq9o.onrender.com/api/v1/question/setquestion/${Cookies.get('companyID')}`
+    setIsLoading(true)
+
+    axios.post(url, {
+      questions: [
+        {
+          text: appraisalQuestions.question1,
+          order: 1
+        },
+        {
+          text: appraisalQuestions.question2,
+          order: 2
+        },
+        {
+          text: appraisalQuestions.question3,
+          order: 3
+        },
+        {
+          text: appraisalQuestions.question4,
+          order: 4
+        },
+        {
+          text: appraisalQuestions.question5,
+          order: 5
+        },
+      ],
+      category: 'Review',
+      reviewType: '360 Appraisal'
+    }, {
+      headers: {
+        Authorization: `Bearer ${Cookies.get('Token')}`,
+      },
+    }).then(res => {
+      console.log(res.data.data)
+      setIsLoading(false)
+      toast.success("Questions Updated Successfully");
+    }).catch(error => {
+      setIsLoading(false);
+      console.log(error);
+      // Handle any errors that occurred during the upload
+    });
+  }
+
+  const handleSelfQuestions = (e) => {
+    e.preventDefault()
+    const url = `https://pms-jq9o.onrender.com/api/v1/question/setquestion/${Cookies.get('companyID')}`
+    setIsLoading(true)
+
+    axios.post(url, {
+      questions: [
+        {
+          text: selfQuestions.question1,
+          order: 1
+        },
+        {
+          text: selfQuestions.question2,
+          order: 2
+        },
+        {
+          text: selfQuestions.question3,
+          order: 3
+        },
+        {
+          text: selfQuestions.question4,
+          order: 4
+        },
+        {
+          text: selfQuestions.question5,
+          order: 5
+        },
+      ],
+      category: 'Review',
+      reviewType: 'Self Appraisal'
+    }, {
+      headers: {
+        Authorization: `Bearer ${Cookies.get('Token')}`,
+      },
+    }).then(res => {
+      console.log(res.data.data)
+      setIsLoading(false)
+      toast.success("Questions Updated Successfully");
+    }).catch(error => {
+      setIsLoading(false);
+      console.log(error);
+      // Handle any errors that occurred during the upload
+    });
+  }
+
+  const handleGoalQuestions = (e) => {
+    e.preventDefault()
+    const url = `https://pms-jq9o.onrender.com/api/v1/question/setquestion/${Cookies.get('companyID')}`
+    setIsLoading(true)
+
+    axios.post(url, {
+      questions: [
+        {
+          text: goalQuestions.question1,
+          order: 1
+        },
+        {
+          text: goalQuestions.question2,
+          order: 2
+        },
+        {
+          text: goalQuestions.question3,
+          order: 3
+        },
+        {
+          text: goalQuestions.question4,
+          order: 4
+        },
+        {
+          text: goalQuestions.question5,
+          order: 5
+        },
+      ],
+      category: 'Review',
+      reviewType: 'Goal Review'
+    }, {
+      headers: {
+        Authorization: `Bearer ${Cookies.get('Token')}`,
+      },
+    }).then(res => {
+      console.log(res.data.data)
+      setIsLoading(false)
+      toast.success("Questions Updated Successfully");
+    }).catch(error => {
+      setIsLoading(false);
+      console.log(error);
+      // Handle any errors that occurred during the upload
+    });
+  }
+
+  const handleCompetencyQuestions = (e) => {
+    e.preventDefault()
+    const url = `https://pms-jq9o.onrender.com/api/v1/question/setquestion/${Cookies.get('companyID')}`
+    setIsLoading(true)
+
+    axios.post(url, {
+      questions: [
+        {
+          text: competencyQuestions.question1,
+          order: 1
+        },
+        {
+          text: competencyQuestions.question2,
+          order: 2
+        },
+        {
+          text: competencyQuestions.question3,
+          order: 3
+        },
+        {
+          text: competencyQuestions.question4,
+          order: 4
+        },
+        {
+          text: competencyQuestions.question5,
+          order: 5
+        },
+      ],
+      category: 'Competency',
+      reviewType: 'Competency'
+    }, {
+      headers: {
+        Authorization: `Bearer ${Cookies.get('Token')}`,
+      },
+    }).then(res => {
+      console.log(res.data.data)
+      setIsLoading(false)
+      toast.success("Questions Updated Successfully");
+    }).catch(error => {
+      setIsLoading(false);
+      console.log(error);
+      // Handle any errors that occurred during the upload
+    });
+  }
+
+  useEffect(() => {
+    const Token = Cookies.get('Token');
+
+    axios.get(`https://pms-jq9o.onrender.com/api/v1/question/getQuestions/${Cookies.get('companyID')}/Performance Review/Review`,  {
+      headers: {
+          Authorization: `Bearer ${Token}`,
+        },
+    }).then(res => {
+      setPerformanceQuestions({
+        question1: res.data.data.sortedQuestion[0].text,
+        question2: res.data.data.sortedQuestion[1].text,
+        question3: res.data.data.sortedQuestion[2].text,
+        question4: res.data.data.sortedQuestion[3].text,
+        question5: res.data.data.sortedQuestion[4].text
+      })
+
+      console.log(res.data.data)
+      
+      
+      if(res.data.data.sortedOption.length > 0){
+        setOption1({text: res.data.data.sortedOption[0].text, value: res.data.data.sortedOption[0].value})
+        setOption2({text: res.data.data.sortedOption[1].text, value: res.data.data.sortedOption[1].value})
+        setOption3({text: res.data.data.sortedOption[2].text, value: res.data.data.sortedOption[2].value})
+        setOption4({text: res.data.data.sortedOption[3].text, value: res.data.data.sortedOption[3].value})
+        setOption5({text: res.data.data.sortedOption[4].text, value: res.data.data.sortedOption[4].value})
+      }
+    })
+    
+    
+    axios.get(`https://pms-jq9o.onrender.com/api/v1/question/getQuestions/${Cookies.get('companyID')}/360 Appraisal/Review`,  {
+      headers: {
+          Authorization: `Bearer ${Token}`,
+        },
+      }).then(res => {
+      setAppraisalQuestions({
+        question1: res.data.data.sortedQuestion[0].text,
+        question2: res.data.data.sortedQuestion[1].text,
+        question3: res.data.data.sortedQuestion[2].text,
+        question4: res.data.data.sortedQuestion[3].text,
+        question5: res.data.data.sortedQuestion[4].text
+      })
+      
+      
+      
+
+      if(res.data.data.sortedOption.length > 0){
+        setOption1({text: res.data.data.sortedOption[0].text, value: res.data.data.sortedOption[0].value})
+        setOption2({text: res.data.data.sortedOption[1].text, value: res.data.data.sortedOption[1].value})
+        setOption3({text: res.data.data.sortedOption[2].text, value: res.data.data.sortedOption[2].value})
+        setOption4({text: res.data.data.sortedOption[3].text, value: res.data.data.sortedOption[3].value})
+        setOption5({text: res.data.data.sortedOption[4].text, value: res.data.data.sortedOption[4].value})
+      }
+    })
+    
+    
+    
+    axios.get(`https://pms-jq9o.onrender.com/api/v1/question/getQuestions/${Cookies.get('companyID')}/Self Appraisal/Review`,  {
+      headers: {
+        Authorization: `Bearer ${Token}`,
+      },
+    }).then(res => {
+      setSelfQuestions({
+        question1: res.data.data.sortedQuestion[0].text,
+        question2: res.data.data.sortedQuestion[1].text,
+        question3: res.data.data.sortedQuestion[2].text,
+        question4: res.data.data.sortedQuestion[3].text,
+        question5: res.data.data.sortedQuestion[4].text
+      })
+      
+
+      if(res.data.data.sortedOption.length > 0){
+        setOption1({text: res.data.data.sortedOption[0].text, value: res.data.data.sortedOption[0].value})
+        setOption2({text: res.data.data.sortedOption[1].text, value: res.data.data.sortedOption[1].value})
+        setOption3({text: res.data.data.sortedOption[2].text, value: res.data.data.sortedOption[2].value})
+        setOption4({text: res.data.data.sortedOption[3].text, value: res.data.data.sortedOption[3].value})
+        setOption5({text: res.data.data.sortedOption[4].text, value: res.data.data.sortedOption[4].value})
+      }
+    })
+
+    
+    axios.get(`https://pms-jq9o.onrender.com/api/v1/question/getQuestions/${Cookies.get('companyID')}/Goal Review/Review`,  {
+      headers: {
+          Authorization: `Bearer ${Token}`,
+        },
+      }).then(res => {
+        setGoalQuestions({
+          question1: res.data.data.sortedQuestion[0].text,
+          question2: res.data.data.sortedQuestion[1].text,
+          question3: res.data.data.sortedQuestion[2].text,
+        question4: res.data.data.sortedQuestion[3].text,
+        question5: res.data.data.sortedQuestion[4].text
+      })
+      
+      
+
+      if(res.data.data.sortedOption.length > 0){
+        setOption1({text: res.data.data.sortedOption[0].text, value: res.data.data.sortedOption[0].value})
+        setOption2({text: res.data.data.sortedOption[1].text, value: res.data.data.sortedOption[1].value})
+        setOption3({text: res.data.data.sortedOption[2].text, value: res.data.data.sortedOption[2].value})
+        setOption4({text: res.data.data.sortedOption[3].text, value: res.data.data.sortedOption[3].value})
+        setOption5({text: res.data.data.sortedOption[4].text, value: res.data.data.sortedOption[4].value})
+      }
+    })
+
+    
+    axios.get(`https://pms-jq9o.onrender.com/api/v1/question/competencyQuestions/${Cookies.get('companyID')}/Competency`,  {
+      headers: {
+          Authorization: `Bearer ${Token}`,
+        },
+    }).then(res => {
+      setCompetencyQuestions({
+        question1: res.data.data.sortedQuestion[0].text,
+        question2: res.data.data.sortedQuestion[1].text,
+        question3: res.data.data.sortedQuestion[2].text,
+        question4: res.data.data.sortedQuestion[3].text,
+        question5: res.data.data.sortedQuestion[4].text
+      })
+
+      if(res.data.data.sortedOption.length > 0){
+        setOption1({text: res.data.data.sortedOption[0].text, value: res.data.data.sortedOption[0].value})
+        setOption2({text: res.data.data.sortedOption[1].text, value: res.data.data.sortedOption[1].value})
+        setOption3({text: res.data.data.sortedOption[2].text, value: res.data.data.sortedOption[2].value})
+        setOption4({text: res.data.data.sortedOption[3].text, value: res.data.data.sortedOption[3].value})
+        setOption5({text: res.data.data.sortedOption[4].text, value: res.data.data.sortedOption[4].value})
+      }
+      
+    })
+
+
+  }, [])
+
+  const handleOptions = (e) => {
+    e.preventDefault()
+    setIsLoading(true)
+
+    axios.patch(`https://pms-jq9o.onrender.com/api/v1/question/setoptions/${Cookies.get('companyID')}`, {
+      options: [
+        {
+            "text": option1.text,
+            "value": option1.value
+        },
+        {
+            "text": option2.text,
+            "value": option2.value
+        },
+        {
+            "text": option3.text,
+            "value": option3.value
+        },
+        {
+            "text": option4.text,
+            "value": option4.value
+        },
+        {
+            "text": option5.text,
+            "value": option5.value
+        },
+    ]
+    }, {
+      headers: {
+          Authorization: `Bearer ${Cookies.get('Token')}`,
+        },
+    }).then(res => {
+      toast.success("Options Saved Successfully")
+      setIsLoading(false)
+    }).catch(error => {
+      setIsLoading(false);
+      console.log(error);
+    });
+     
+    
+  }
 
   useEffect(() => {
     const fetchCountries = async () => {
@@ -301,27 +785,17 @@ const Settings = () => {
         <Navbar />
         <div className="settingsHeading">
           <div className="settingsImgWrap">
-            {profile ? (
-              <Avatar
-                src={URL.createObjectURL(profile)}
-                alt="Vitaly Rtishchev"
-                color="blue"
-                radius={100}
-                size={150}
-              >
-                {initials}
-              </Avatar>
-            ) : (
-              <Avatar
-                src={''}
-                alt="Vitaly Rtishchev"
-                color="blue"
-                radius={100}
-                size={150}
-              >
-                {initials}
-              </Avatar>
-            )}
+            
+            <Avatar
+              src={profile}
+              alt={initials}
+              color="blue"
+              radius={100}
+              size={150}
+            >
+              {initials}
+            </Avatar>
+            
 
             {/* <Avatar
               src={''}
@@ -552,7 +1026,7 @@ const Settings = () => {
                         width: '50px',
                         height: '50px',
                       }}
-                      src={URL.createObjectURL(profile)}
+                      src={uploading ? URL.createObjectURL(profile) : profile}
                       alt="avatar"
                     />
                   ) : (
@@ -648,6 +1122,7 @@ const Settings = () => {
               </div>
             </form>
           </div>
+
 
           <div className="settingsContent">
             <div className="leftSettingsContent">
@@ -746,6 +1221,541 @@ const Settings = () => {
               </div>
             </form>
           </div>
+
+          <div className="settingsContent">
+            <div className="leftSettingsContent">
+              <h2>Performance Review Questions</h2>
+              <p>
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatibus, aperiam.
+              </p>
+            </div>
+
+            <form onSubmit={handlePerformanceQuestions}>
+              <div className="inputWrapper">
+                <label htmlFor="pquestion1">Question 1</label>
+                <input
+                  type="text"
+                  value={performanceQuestions.question1}
+                  onChange={(e) => setPerformanceQuestions({...performanceQuestions, question1: e.target.value})}
+                  id="pquestion1"
+                />
+              </div>
+              <div className="inputWrapper">
+                <label htmlFor="pquestion2">Question 2</label>
+                <input
+                  type="text"
+                  value={performanceQuestions.question2}
+                  onChange={(e) => setPerformanceQuestions({...performanceQuestions, question2: e.target.value})}
+                  id="pquestion2"
+                />
+              </div>
+              <div className="inputWrapper">
+                <label htmlFor="pquestion3">Question 3</label>
+                <input
+                  type="text"
+                  value={performanceQuestions.question3}
+                  onChange={(e) => setPerformanceQuestions({...performanceQuestions, question3: e.target.value})}
+                  id="pquestion3"
+                />
+              </div>
+              <div className="inputWrapper">
+                <label htmlFor="pquestion4">Question 4</label>
+                <input
+                  type="text"
+                  value={performanceQuestions.question4}
+                  onChange={(e) => setPerformanceQuestions({...performanceQuestions, question4: e.target.value})}
+                  id="pquestion4"
+                />
+              </div>
+              <div className="inputWrapper">
+                <label htmlFor="pquestion5">Question 5</label>
+                <input
+                  type="text"
+                  value={performanceQuestions.question5}
+                  onChange={(e) => setPerformanceQuestions({...performanceQuestions, question5: e.target.value})}
+                  id="pquestion5"
+                />
+              </div>
+
+              <div className="buttonWrapper">
+                <button>Cancel</button>
+                <button type="submit">
+                  {isLoading ? (
+                    <>
+                      <FaSpinner className="fa-spin" />
+                      &nbsp;Saving...
+                    </>
+                  ) : (
+                    'Save'
+                  )}
+                </button>
+              </div>
+            </form>
+          </div>
+
+
+          <div className="settingsContent">
+            <div className="leftSettingsContent">
+              <h2>360 Appraisal Questions</h2>
+              <p>
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatibus, aperiam.
+              </p>
+            </div>
+
+            <form onSubmit={handleAppraisalQuestons}>
+              <div className="inputWrapper">
+                <label htmlFor="appraisal1">Question 1</label>
+                <input
+                  type="text"
+                  value={appraisalQuestions.question1}
+                  onChange={(e) => setAppraisalQuestions({...appraisalQuestions, question1: e.target.value})}
+                  id="appraisal1"
+                />
+              </div>
+              <div className="inputWrapper">
+                <label htmlFor="appraisal2">Question 2</label>
+                <input
+                  type="text"
+                  value={appraisalQuestions.question2}
+                  onChange={(e) => setAppraisalQuestions({...appraisalQuestions, question2: e.target.value})}
+                  id="appraisal2"
+                />
+              </div>
+              <div className="inputWrapper">
+                <label htmlFor="appraisal3">Question 3</label>
+                <input
+                  type="text"
+                  value={appraisalQuestions.question3}
+                  onChange={(e) => setAppraisalQuestions({...appraisalQuestions, question3: e.target.value})}
+                  id="appraisal3"
+                />
+              </div>
+              <div className="inputWrapper">
+                <label htmlFor="appraisal4">Question 4</label>
+                <input
+                  type="text"
+                  value={appraisalQuestions.question4}
+                  onChange={(e) => setAppraisalQuestions({...appraisalQuestions, question4: e.target.value})}
+                  id="appraisal4"
+                />
+              </div>
+              <div className="inputWrapper">
+                <label htmlFor="appraisal5">Question 5</label>
+                <input
+                  type="text"
+                  value={appraisalQuestions.question5}
+                  onChange={(e) => setAppraisalQuestions({...appraisalQuestions, question5: e.target.value})}
+                  id="appraisla5"
+                />
+              </div>
+
+              <div className="buttonWrapper">
+                <button>Cancel</button>
+                <button type="submit">
+                  {isLoading ? (
+                    <>
+                      <FaSpinner className="fa-spin" />
+                      &nbsp;Saving...
+                    </>
+                  ) : (
+                    'Save'
+                  )}
+                </button>
+              </div>
+            </form>
+          </div>
+
+
+
+          <div className="settingsContent">
+            <div className="leftSettingsContent">
+              <h2>Self Appraisal Questions</h2>
+              <p>
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatibus, aperiam.
+              </p>
+            </div>
+
+            <form onSubmit={handleSelfQuestions}>
+              <div className="inputWrapper">
+                <label htmlFor="self1">Question 1</label>
+                <input
+                  type="text"
+                  value={selfQuestions.question1}
+                  onChange={(e) => setSelfQuestions({...selfQuestions, question1: e.target.value})}
+                  id="self1"
+                />
+              </div>
+              <div className="inputWrapper">
+                <label htmlFor="self2">Question 2</label>
+                <input
+                  type="text"
+                  value={selfQuestions.question2}
+                  onChange={(e) => setSelfQuestions({...selfQuestions, question2: e.target.value})}
+                  id="self2"
+                />
+              </div>
+              <div className="inputWrapper">
+                <label htmlFor="midYearStartDate">Question 3</label>
+                <input
+                  type="self3"
+                  value={selfQuestions.question3}
+                  onChange={(e) => setSelfQuestions({...selfQuestions, question3: e.target.value})}
+                  id="self3"
+                />
+              </div>
+              <div className="inputWrapper">
+                <label htmlFor="midYearStartDate">Question 4</label>
+                <input
+                  type="self4"
+                  value={selfQuestions.question4}
+                  onChange={(e) => setSelfQuestions({...selfQuestions, question4: e.target.value})}
+                  id="self4"
+                />
+              </div>
+              <div className="inputWrapper">
+                <label htmlFor="midYearStartDate">Question 5</label>
+                <input
+                  type="self5"
+                  value={selfQuestions.question5}
+                  onChange={(e) => setSelfQuestions({...selfQuestions, question5: e.target.value})}
+                  id="self5"
+                />
+              </div>
+
+              <div className="buttonWrapper">
+                <button>Cancel</button>
+                <button type="submit">
+                  {isLoading ? (
+                    <>
+                      <FaSpinner className="fa-spin" />
+                      &nbsp;Saving...
+                    </>
+                  ) : (
+                    'Save'
+                  )}
+                </button>
+              </div>
+            </form>
+          </div>
+
+
+
+          <div className="settingsContent">
+            <div className="leftSettingsContent">
+              <h2>Goal Review Questions</h2>
+              <p>
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatibus, aperiam.
+              </p>
+            </div>
+
+            <form onSubmit={handleGoalQuestions}>
+              <div className="inputWrapper">
+                <label htmlFor="goal1">Question 1</label>
+                <input
+                  type="text"
+                  value={goalQuestions.question1}
+                  onChange={(e) => setGoalQuestions({...goalQuestions, question1: e.target.value})}
+                  id="goal1"
+                />
+              </div>
+              <div className="inputWrapper">
+                <label htmlFor="goal2">Question 2</label>
+                <input
+                  type="text"
+                  value={goalQuestions.question2}
+                  onChange={(e) => setGoalQuestions({...goalQuestions, question2: e.target.value})}
+                  id="goal2"
+                />
+              </div>
+              <div className="inputWrapper">
+                <label htmlFor="goal3">Question 3</label>
+                <input
+                  type="text"
+                  value={goalQuestions.question3}
+                  onChange={(e) => setGoalQuestions({...goalQuestions, question3: e.target.value})}
+                  id="goal3"
+                />
+              </div>
+              <div className="inputWrapper">
+                <label htmlFor="goal4">Question 4</label>
+                <input
+                  type="text"
+                  value={goalQuestions.question4}
+                  onChange={(e) => setGoalQuestions({...goalQuestions, question4: e.target.value})}
+                  id="goal4"
+                />
+              </div>
+              <div className="inputWrapper">
+                <label htmlFor="goal5">Question 5</label>
+                <input
+                  type="text"
+                  value={goalQuestions.question5}
+                  onChange={(e) => setGoalQuestions({...goalQuestions, question5: e.target.value})}
+                  id="goal5"
+                />
+              </div>
+
+              <div className="buttonWrapper">
+                <button>Cancel</button>
+                <button type="submit">
+                  {isLoading ? (
+                    <>
+                      <FaSpinner className="fa-spin" />
+                      &nbsp;Saving...
+                    </>
+                  ) : (
+                    'Save'
+                  )}
+                </button>
+              </div>
+            </form>
+          </div>
+
+
+
+          <div className="settingsContent">
+            <div className="leftSettingsContent">
+              <h2>Competency Questions</h2>
+              <p>
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatibus, aperiam.
+              </p>
+            </div>
+
+            <form onSubmit={handleCompetencyQuestions}>
+              <div className="inputWrapper">
+                <label htmlFor="comp1">Question 1</label>
+                <input
+                  type="text"
+                  value={competencyQuestions.question1}
+                  onChange={(e) => setCompetencyQuestions({...competencyQuestions, question1: e.target.value})}
+                  id="comp1"
+                />
+              </div>
+              <div className="inputWrapper">
+                <label htmlFor="comp2">Question 2</label>
+                <input
+                  type="text"
+                  value={competencyQuestions.question2}
+                  onChange={(e) => setCompetencyQuestions({...competencyQuestions, question2: e.target.value})}
+                  id="comp2"
+                />
+              </div>
+              <div className="inputWrapper">
+                <label htmlFor="comp3">Question 3</label>
+                <input
+                  type="text"
+                  value={competencyQuestions.question3}
+                  onChange={(e) => setCompetencyQuestions({...competencyQuestions, question3: e.target.value})}
+                  id="comp3"
+                />
+              </div>
+              <div className="inputWrapper">
+                <label htmlFor="comp4">Question 4</label>
+                <input
+                  type="text"
+                  value={competencyQuestions.question4}
+                  onChange={(e) => setCompetencyQuestions({...competencyQuestions, question4: e.target.value})}
+                  id="comp4"
+                />
+              </div>
+              <div className="inputWrapper">
+                <label htmlFor="comp5">Question 5</label>
+                <input
+                  type="text"
+                  value={competencyQuestions.question5}
+                  onChange={(e) => setCompetencyQuestions({...competencyQuestions, question5: e.target.value})}
+                  id="comp5"
+                />
+              </div>
+
+              <div className="buttonWrapper">
+                <button>Cancel</button>
+                <button type="submit">
+                  {isLoading ? (
+                    <>
+                      <FaSpinner className="fa-spin" />
+                      &nbsp;Saving...
+                    </>
+                  ) : (
+                    'Save'
+                  )}
+                </button>
+              </div>
+            </form>
+          </div>
+
+          
+
+          <div className="settingsContent">
+            <div className="leftSettingsContent">
+              <h2>Options</h2>
+              <p>
+                Manage the performance review and appraisal of your employees by
+                setting the required dates for each reviews
+              </p>
+            </div>
+
+            <form onSubmit={handleOptions}>
+              <div className="inputContainer">
+                <div className="inputWrapper">
+                  <label htmlFor="option1q">Option 1</label>
+                  <input
+                    type="text"
+                    value={option1.text}
+                    onChange={(e) => setOption1({...option1, text: e.target.value})}
+                    id="option1q"
+                  />
+                </div>
+                <div className="inputWrapper">
+                  <label htmlFor="option1">Value</label>
+                  <select name="" id="option1" value={option1.value} onChange={(e) => setOption1({...option1, value: e.target.value})}>
+                    <option value="">--Select--</option>
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                  </select>
+                </div>
+              </div>
+              <div className="inputContainer">
+                <div className="inputWrapper">
+                  <label htmlFor="option2q">Option 2</label>
+                  <input
+                    type="text"
+                    value={option2.text}
+                    onChange={(e) => setOption2({...option2, text: e.target.value})}
+                    id="option2q"
+                  />
+                </div>
+                <div className="inputWrapper">
+                  <label htmlFor="option2">Value</label>
+                  <select name="" id="option2" value={option2.value} onChange={(e) => setOption2({...option2, value: e.target.value})}>
+                    <option value="">--Select--</option>
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                  </select>
+                </div>
+              </div>
+              <div className="inputContainer">
+                <div className="inputWrapper">
+                  <label htmlFor="option3q">Option 3</label>
+                  <input
+                    type="text"
+                    value={option3.text}
+                    onChange={(e) => setOption3({...option3, text: e.target.value})}
+                    id="option3q"
+                  />
+                </div>
+                <div className="inputWrapper">
+                  <label htmlFor="option3">Value</label>
+                  <select name="" id="option3" value={option3.value} onChange={(e) => setOption3({...option3, value: e.target.value})}>
+                    <option value="">--Select--</option>
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                  </select>
+                </div>
+              </div>
+              <div className="inputContainer">
+                <div className="inputWrapper">
+                  <label htmlFor="option4q">Option 4</label>
+                  <input
+                    type="text"
+                    value={option4.text}
+                    onChange={(e) => setOption4({...option4, text: e.target.value})}
+                    id="option4q"
+                  />
+                </div>
+                <div className="inputWrapper">
+                  <label htmlFor="option4">Value</label>
+                  <select name="" id="option4" value={option4.value} onChange={(e) => setOption4({...option4, value: e.target.value})}>
+                    <option value="">--Select--</option>
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                  </select>
+                </div>
+              </div>
+              <div className="inputContainer">
+                <div className="inputWrapper">
+                  <label htmlFor="option5q">Option 5</label>
+                  <input
+                    type="text"
+                    name="option5q"
+                    value={option5.text}
+                    onChange={(e) => setOption5({...option5, text: e.target.value})}
+                    id="midYearStartDate"
+                  />
+                </div>
+                <div className="inputWrapper">
+                  <label htmlFor="option5">Value</label>
+                  <select name="" id="option5" value={option5.value} onChange={(e) => setOption5({...option5, value: e.target.value})}>
+                    <option value="">--Select--</option>
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                  </select>
+                </div>
+              </div>
+
+              <div className="buttonWrapper">
+                <button>Cancel</button>
+                <button type="submit">
+                  {isLoading ? (
+                    <>
+                      <FaSpinner className="fa-spin" />
+                      &nbsp;Saving...
+                    </>
+                  ) : (
+                    'Save'
+                  )}
+                </button>
+              </div>
+            </form>
+          </div>
+
+          
+
         </div>
       </div>
     </div>

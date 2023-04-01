@@ -72,7 +72,7 @@ const Maingoalreview = () => {
         </div>
         <div className="viewtab">
      
-            <Profiletab  data = {data}/>
+            <Profiletab  data = {data} reviewType={'Goal Review'}/>
             {/* <ReactCardSlider slides={slides}/> */}
          </div>
         

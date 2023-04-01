@@ -7,12 +7,27 @@
     width: 578px;
     height: 553px;
     z-index: -2;
+
+    .bulkwrapper{
+      background-color: rgba(144, 144, 144, 0.542);
+      width: 90vw;
+      height: 90vh;
+      margin-top: 90px;
+      overflow-y: hidden;
+      position: fixed;
+      top: 2px;
+      left: 10vw;
+      display: grid;
+      place-items: center;
+      box-sizing: border-box;
+      z-index: 20;
+  }
   
     .bulkbox{
         -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
         box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
         padding: 30px 10px 20px 10px;
-
+        background-color: #fff;
         width: 578px;
         height: 553px;
         margin: 20px 20px 50px 80px;

@@ -10,6 +10,7 @@ const Goals = () => {
       <Sidebar />
       <div className="homeContainer">
         <Navbar />
+        <div className="goalsmaincont">
         <div className="widgets">
           <Goalswidget/>
         </div>
@@ -18,9 +19,9 @@ const Goals = () => {
             <h1 className="goalstitlebox">Goals</h1>
             <Goalstable/>
           </div>
-
-          
         </div>
+        </div>
+        
       </div>
     </div>
   );

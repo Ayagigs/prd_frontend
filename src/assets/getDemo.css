@@ -5,6 +5,9 @@
 		height: 100vh;
 	}
 
+	.bookdemo{
+	margin-left: 150px;
+	}
 	.body .container {
 	    display: flex;
 
@@ -113,6 +116,7 @@
 	    margin-bottom: 20px;
 
 	}
+	
 
 	.form-input label {
 	    margin-bottom: 5px;
@@ -128,6 +132,20 @@
 	    font-size: 16px;
 	    width: 320px;
 	    height: 23px;
+	}
+
+	.mainmail {
+		width: 360px;
+	    height: 23px;
+	    display: flex;
+	    flex-direction: column;
+		margin-bottom: 30px;
+		margin-left:37px;
+		/* border: 1px solid #ccc; */
+		/* padding: 5px;
+	    
+		 */
+		
 	}
 
 	.btn {

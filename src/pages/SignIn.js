@@ -63,6 +63,7 @@ function SignIn() {
       setIsLoading(false);
       toast.success('Login Successfully');
       Cookies.set('EmpToken', res.data.token);
+      Cookies.set('empCompanyID', res.data.data.companyID);
       navigate('/emp-dashboard');
     } catch (error) {
       setIsLoading(false);

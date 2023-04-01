@@ -19,7 +19,14 @@
     border: 0.5px solid #F0F0F0;
     border-radius: 8px;
   }
+.connectbox{
+    width: 400px;
+    display: flex;
+}
 
+  .redalert{
+    width: 300%;
+  }
   .accountdetailsbox{
  
     display: flex;
@@ -82,8 +89,9 @@ color: #515151;
     display: flex;
     width: 350px;
     height: 129x;
-    margin-left: 500px;
-    justify-content: space-between;
+    margin-left: 20px;
+    // margin-left: 300px;
+    // justify-content: space-between;
     
 
     .sendmoneybtn{
@@ -91,6 +99,29 @@ color: #515151;
         font-size: 16px;
         border: none;
         cursor:pointer;
+    }
+
+    .walletaddress{
+        display: flex;
+        margin-left: -200px;
+    }
+    .connectbtn{
+        display: flex;
+        cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-color: transparent;
+    padding: 12px 14px;
+    gap: 10px;
+    margin-top:-10px;
+    margin-left: -190px;
+    width: 170px;
+    height: 43px;
+    color: #E7E8FF;
+    background: #030BC3;
+    border-radius: 8px;
     }
     .recievemoneybtn{
         margin:10px ;
