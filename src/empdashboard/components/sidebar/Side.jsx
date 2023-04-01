@@ -5,13 +5,42 @@ import { Cup } from 'iconsax-react';
 import { Chart1 } from 'iconsax-react';
 import { Setting2 } from 'iconsax-react';
 import { EmptyWallet } from 'iconsax-react';
+import { Logout } from 'iconsax-react';
 import { Link } from 'react-router-dom';
 // import { DarkModeContext } from "../../context/darkModeContext";
 // import { useContext } from "react";
+import Swal from 'sweetalert2';
 import Logo from './logo.png';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
+
+
 
 const Side = () => {
+  const navigate = useNavigate()
+
+
+const handleLogout = () => {
+  Swal.fire({
+    title: 'Are you sure?',
+    text: 'You will be logged out of the application',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'Yes, log me out',
+    cancelButtonText: 'No, cancel'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      // Clear the cookie that stores the user's login information
+      // removeCookie('auth_token');
+      // Redirect the user to the login page
+      Cookies.remove('EmpToken')
+      Cookies.remove('empCompanyID')
+      Cookies.remove('Role')
+      navigate("/")
+    }
+  });
+};
   // const { dispatch } = useContext(DarkModeContext);
   return (
     <div className="side">
@@ -53,9 +82,12 @@ const Side = () => {
               <span>Wallet</span>
             </li>
           </Link>
-          <div>
-            <button>Logout</button>
-          </div>
+          <Link style={{ textDecoration: 'none' }} onClick={handleLogout}>
+            <li>
+              <Logout className="icon" />
+              <span>Logout</span>
+            </li>
+          </Link>
         </ul>
       </div>
       <div className="sidebottom">
