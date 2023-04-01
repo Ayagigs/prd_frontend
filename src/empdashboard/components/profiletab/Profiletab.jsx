@@ -18,6 +18,7 @@ const Profiletab = ({ data, reviewType }) => {
 
   useEffect(() => {
     setRows([]);
+
     if (data.data !== undefined) {
 
       if(reviewType === 'Goal Review'){
@@ -35,61 +36,63 @@ const Profiletab = ({ data, reviewType }) => {
     setModal(true)
   }
 
-  return <>
-    <div className="proftabsScroll">
-      <div className="tabb">
-        {rows?.map(el => {
-          return (
-            <Link
-              style={{ textDecoration: 'none' }}
-            >
-            {
-              reviewType === 'Goal Review' ? 
-              <div className="proftabs" onClick={() => handleClick(el)}>
-                <img
-                  className="profimg"
-                  src={el.owner.profilePhoto}
-                  alt="profilepicture"
-                />
 
-                <div className="profdetails">
-                  <p className="duedate">
-                    {'---'}
-                  </p>
-                  <h1 className="emp">{el.owner.firstName + ' ' + el.owner.lastName }</h1>
-                  <p className="post">{el.owner.jobTitle ? el.owner.jobTitle : '---'}</p>
-                </div>
-                <div className="revbutton">
-                  <button>Review Now</button>
-                </div>
-              </div> :
-            
-            
-              <div className="proftabs" onClick={() => handleClick(el)}>
-                <img
-                  className="profimg"
-                  src={el.profilePhoto}
-                  alt="profilepicture"
-                />
+  return<>
+      <div className="proftabsScroll">
+        <div className="tabb">
+          {rows?.map(el => {
+            return (
+              <Link style={{ textDecoration: 'none' }}>
+                {reviewType === 'Goal Review' ? (
+                  <div className="proftabs" onClick={() => handleClick(el)}>
+                    <img
+                      className="profimg"
+                      src={el.owner.profilePhoto}
+                      alt="profilepicture"
+                    />
 
-                <div className="profdetails">
-                  <p className="duedate">
-                    {due ? new Date(due).toDateString() : '---'}
-                  </p>
-                  <h1 className="emp">{el.firstName + ' ' + el.lastName}</h1>
-                  <p className="post">{el.jobTitle ? el.jobTitle : '---'}</p>
-                </div>
-                <div className="revbutton">
-                  <button>Review Now</button>
-                </div>
-              </div>
+                    <div className="profdetails">
+                      <p className="duedate">{'---'}</p>
+                      <h1 className="emp">
+                        {el.owner.firstName + ' ' + el.owner.lastName}
+                      </h1>
+                      <p className="post">
+                        {el.owner.jobTitle ? el.owner.jobTitle : '---'}
+                      </p>
+                    </div>
+                    <div className="revbutton">
+                      <button>Review Now</button>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="proftabs" onClick={() => handleClick(el)}>
+                    <img
+                      className="profimg"
+                      src={el.profilePhoto}
+                      alt="profilepicture"
+                    />
 
-            }
-            </Link>
-          );
-        })}
+                    <div className="profdetails">
+                      <p className="duedate">
+                        {due ? new Date(due).toDateString() : '---'}
+                      </p>
+                      <h1 className="emp">
+                        {el.firstName + ' ' + el.lastName}
+                      </h1>
+                      <p className="post">
+                        {el.jobTitle ? el.jobTitle : '---'}
+                      </p>
+                    </div>
+                    <div className="revbutton">
+                      <button>Review Now</button>
+                    </div>
+                  </div>
+                )}
+              </Link>
+            );
+          })}
+        </div>
       </div>
-    </div>
 
     <p className={modal ? "closePModal" : "hide"} onClick={() => setModal(false)}>x</p>
     {
