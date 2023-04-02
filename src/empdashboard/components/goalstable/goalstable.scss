@@ -15,6 +15,7 @@ justify-content: flex-start;
         margin-right: 10px;
         object-fit: cover;
       }
+
     }
     
     .tablehead{
@@ -41,3 +42,6 @@ justify-content: flex-start;
     }
   }
   
+  .tablecellmodal{
+    cursor: pointer;
+  }

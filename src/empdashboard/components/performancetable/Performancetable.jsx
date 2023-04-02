@@ -17,7 +17,9 @@ const Performancetable = () => {
   useEffect(() => {
     axios.get(url, {headers: {Authorization: `Bearer ${Cookies.get('EmpToken')}`}})
     .then(res => {
-      setRows(res.data.data)
+      setRows(res.data.data.sort((a,b) => 
+        new Date(b.date) - new Date(a.date)
+      ))
     })
   }, []);
 

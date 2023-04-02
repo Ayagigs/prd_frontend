@@ -706,7 +706,7 @@ const Empsettings = () => {
                   <div className="rightNotificationWrap">
                     <div className="rightNotificationContent">
                       <Switch
-                        color="violet"
+                        color="blue"
                         name="emailNewsUpdateNotification"
                         onChange={handleSwitchChange}
                         defaultChecked={false}
@@ -727,7 +727,7 @@ const Empsettings = () => {
 
                     <div className="rightNotificationContent">
                       <Switch
-                        color="violet"
+                        color="blue"
                         name="emailCommentNotification"
                         defaultChecked={false}
                         onChange={handleSwitchChange}
@@ -743,7 +743,7 @@ const Empsettings = () => {
 
                     <div className="rightNotificationContent">
                       <Switch
-                        color="violet"
+                        color="blue"
                         name="emailGoalDeadlineNotification"
                         defaultChecked={false}
                         onChange={handleSwitchChange}
@@ -773,7 +773,7 @@ const Empsettings = () => {
                   <div className="rightNotificationWrap">
                     <div className="rightNotificationContent">
                       <Switch
-                        color="violet"
+                        color="blue"
                         name="pushCommentNotification"
                         defaultChecked={false}
                         onChange={handleSwitchChange}
@@ -789,7 +789,7 @@ const Empsettings = () => {
 
                     <div className="rightNotificationContent">
                       <Switch
-                        color="violet"
+                        color="blue"
                         name="pushGoalDeadlineNotification"
                         defaultChecked={false}
                         onChange={handleSwitchChange}

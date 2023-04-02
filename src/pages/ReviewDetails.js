@@ -5,11 +5,6 @@ const ReviewDetails = ({user, fullyear, midyear, appraisal}) => {
     const [reviewType, setReviewType] = useState('fullyear')
 
 
-    useEffect(() => {
-        console.log(midyear[0].reviewer.lastName)
-    }, [])
-
-
     return (
           <div className = {"reviewDetailsWrapper"}>
             <div className = "reviewDetails">
