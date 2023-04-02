@@ -14,11 +14,24 @@ import Logo from './logo.png';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
+import axios from "axios";
+import { useState, useEffect } from "react";
+
 
 
 
 const Side = () => {
+  const [data, setData] = useState({})
   const navigate = useNavigate()
+
+  useEffect(() => {
+    const url = `https://pms-jq9o.onrender.com/api/v1/employee/findme`
+    axios.get(url, {headers: {Authorization: `Bearer ${Cookies.get('EmpToken')}`}})
+    .then(res => {
+      setData(res.data.data)
+    })
+
+  }, [])
 
 
 const handleLogout = () => {
@@ -44,6 +57,8 @@ const handleLogout = () => {
   // const { dispatch } = useContext(DarkModeContext);
   return (
     <div className="side">
+    <div className="sidebartop">
+
       <div className="top">
         <img width="100px" src={Logo} alt="view logo" />
       </div>
@@ -90,19 +105,20 @@ const handleLogout = () => {
           </Link>
         </ul>
       </div>
+    </div>
       <div className="sidebottom">
         <div className="usercontainer">
           <div>
             <img
               width={40}
-              src="https://m.media-amazon.com/images/I/71kr3WAj1FL._AC_UY327_FMwebp_QL65_.jpg"
+              src={data.profilePhoto}
               alt=""
               className="avatar"
             />
           </div>
           <div className="namecontainer">
-            <span className="realname">Charles Godfrey</span>
-            <h1 className="userrole">Employee</h1>
+            <span className="realname">{data.firstName + ' ' + data.lastName}</span>
+            <h1 className="userrole">{data.role}</h1>
           </div>
           <div>
             <Link to="" style={{ textDecoration: 'none' }}>
