@@ -14,6 +14,8 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import Swal from "sweetalert2";
+import { useState, useEffect } from "react";
+import axios from "axios";
 // import Swal from 'sweetalert2'
 
 // import { DarkModeContext } from "../../context/darkModeContext";
@@ -22,6 +24,19 @@ import Swal from "sweetalert2";
 
 const Sidebar = () => {
   const navigate = useNavigate()
+  const [data, setData] = useState({})
+  const [profile, setProfile] = useState({})
+
+  useEffect(() => {
+    const url = `https://pms-jq9o.onrender.com/api/v1/admin/findme`
+    axios.get(url, {headers: {Authorization: `Bearer ${Cookies.get('Token')}`}})
+    .then(res => {
+      setData(res.data.data.company[0])
+      setProfile(res.data.data.adminUser.profilePhoto)
+      console.log(res.data.data.company[0])
+    })
+
+  }, [])
   // const { dispatch } = useContext(DarkModeContext);
   const handleLogout = () => {
     Swal.fire({
@@ -45,6 +60,8 @@ const Sidebar = () => {
 
   return (
     <div className="sidebar1">
+    <div className="adminSidebartop">
+
       <div className="top">
       <img width="100px" src={Logo} alt="view logo" />
       </div>
@@ -98,18 +115,19 @@ const Sidebar = () => {
           
       </ul>
       </div>
+    </div>
       <div className="bottom">
           <div className="usercontainer">
         <div>
           <img
             width={40}
-              src="https://m.media-amazon.com/images/I/81hH5vK-MCL._AC_UY327_FMwebp_QL65_.jpg"
+              src={profile}
               alt=""
               className="avatar"
             />
         </div>
         <div className="namecontainer">
-          <span className="realname">Aya & Co. Ltd</span>
+          <span className="realname">{data.companyName}</span>
           <h1 className="userrole">Admin</h1>
         </div>
         <div>

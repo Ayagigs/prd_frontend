@@ -61,10 +61,10 @@ const Performancetable = () => {
                   {row.firstName + " " + row.lastName}
                 </div>
               </TableCell>
-              <TableCell className="tableCell">{row.score > 0 ? row.score : '--'}</TableCell>
-              <TableCell className="tableCell">{row.competency > 0 ? row.competency : '--'}</TableCell>
-              <TableCell className="tableCell">{row.finalScore > 0 ? row.ratings : '--'}</TableCell>
-              <TableCell className="tableCell">{row.finalScore > 0 ? row.finalScore : '--'}</TableCell>
+              <TableCell className="tableCell">{row.score > 0 ? parseFloat(row.score).toFixed(1) : '--'}</TableCell>
+              <TableCell className="tableCell">{row.competency > 0 ? parseFloat(row.competency).toFixed(1) : '--'}</TableCell>
+              <TableCell className="tableCell">{row.finalScore > 0 ? row.rating : '--'}</TableCell>
+              <TableCell className="tableCell">{row.finalScore > 0 ? parseFloat(row.finalScore).toFixed(1) : '--'}</TableCell>
               <TableCell className="tableCell">
                 <Link className={`status ${row.reviews}`} onClick={() => Details(row)} >reviews {'>'}</Link>
               </TableCell>
