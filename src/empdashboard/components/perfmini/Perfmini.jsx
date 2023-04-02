@@ -19,7 +19,7 @@ const Perfmini = ({reviewType}) => {
   useEffect(() => {
     axios.get(url, {headers: {Authorization: `Bearer ${Cookies.get('EmpToken')}`}})
     .then(res => {
-      setRows(res.data.data.filter((el) => el.reviewTime === reviewType && el.reviewType === 'Performance Review'))
+      setRows(res.data.data.filter((el) => el.reviewType === 'Performance Review'))
     })
   }, []);
 

@@ -23,13 +23,13 @@ const Goalreviewapp = ({profile, firstName, lastName, jobTitle, id, goal}) => {
     score4: '',
     score5: ''
   })
-  const [competencyScore, setCompetencyScore] = useState({
-    score1: '',
-    score2: '',
-    score3: '',
-    score4: '',
-    score5: ''
-  })
+  // const [competencyScore, setCompetencyScore] = useState({
+  //   score1: '',
+  //   score2: '',
+  //   score3: '',
+  //   score4: '',
+  //   score5: ''
+  // })
 
   const handleChange = (index, value) => {
     if(index === 0){
@@ -47,32 +47,32 @@ const Goalreviewapp = ({profile, firstName, lastName, jobTitle, id, goal}) => {
 
   }
 
-  const handleCompetencyChange = (index, value) => {
-    if(index === 0){
-      setCompetencyScore({...competencyScore, score1: value})
-    }else if(index === 1){
-      setCompetencyScore({...competencyScore, score2: value})
-    }else if(index === 2){
-      setCompetencyScore({...competencyScore, score3: value})
-    }else if(index === 3){
-      setCompetencyScore({...competencyScore, score4: value})
-    }else if(index === 4){
-      setCompetencyScore({...competencyScore, score5: value})
-    }
-  }
+  // const handleCompetencyChange = (index, value) => {
+  //   if(index === 0){
+  //     setCompetencyScore({...competencyScore, score1: value})
+  //   }else if(index === 1){
+  //     setCompetencyScore({...competencyScore, score2: value})
+  //   }else if(index === 2){
+  //     setCompetencyScore({...competencyScore, score3: value})
+  //   }else if(index === 3){
+  //     setCompetencyScore({...competencyScore, score4: value})
+  //   }else if(index === 4){
+  //     setCompetencyScore({...competencyScore, score5: value})
+  //   }
+  // }
 
   const handleSubmit = (e) => {
     e.preventDefault()
     setIsLoading(true)
     console.log(Cookies.get('EmpToken'))
     const url = `https://pms-jq9o.onrender.com/api/v1/review/goalreview/${id}`
-    if(!score.score1 || !score.score2 || !score.score3 || !score.score4 || !score.score5 || !competencyScore.score1 || !competencyScore.score2 || !competencyScore.score3 || !competencyScore.score4 || !competencyScore.score5){
+    if(!score.score1 || !score.score2 || !score.score3 || !score.score4 || !score.score5){
       setIsLoading(false)
       return toast.error("Please input all scores")
     }
     axios.post(url, {
       scores: [score.score1, score.score2, score.score3, score.score4, score.score5],
-      competencyScores: [competencyScore.score1, competencyScore.score2, competencyScore.score3, competencyScore.score4, competencyScore.score5],
+      // competencyScores: [competencyScore.score1, competencyScore.score2, competencyScore.score3, competencyScore.score4, competencyScore.score5],
       feedback: feedback
     },  {headers: {Authorization: `Bearer ${Cookies.get('EmpToken')}`}}
     ).then(res => {
@@ -175,7 +175,7 @@ const Goalreviewapp = ({profile, firstName, lastName, jobTitle, id, goal}) => {
 
             <br />
             <br />
-            <h3>Competency Questions</h3>
+            {/* <h3>Competency Questions</h3>
             {
               competencyQuestion.map((el, index) => {
                 return<>
@@ -194,7 +194,7 @@ const Goalreviewapp = ({profile, firstName, lastName, jobTitle, id, goal}) => {
                     <br />
                 </>
               })
-            }
+            } */}
             <textarea name="" id="" cols="30" rows="5" placeholder='Feedback'  onChange={(e) => setFeedback(e.target.value)}></textarea>
             
            </div>
