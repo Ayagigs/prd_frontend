@@ -17,14 +17,12 @@ const Performancewidget = () => {
         axios.get(url, {headers: {Authorization: `Bearer ${Cookies.get('Token')}`}})
         .then(res => {
             setRating(res.data.data.finalScore)
-            console.log(res.data.data)
         })
 
         const url2 = `https://pms-jq9o.onrender.com/api/v1/review/performancereviewbar`
 
         axios.get(url2, {headers: {Authorization: `Bearer ${Cookies.get('Token')}`}})
         .then(res => {
-            console.log(res.data.data)
             setPrBar({got: res.data.data.got, total: res.data.data.expected})
         })
 
@@ -32,7 +30,6 @@ const Performancewidget = () => {
 
         axios.get(url3, {headers: {Authorization: `Bearer ${Cookies.get('Token')}`}})
         .then(res => {
-            console.log(res.data.data)
             setAppraisalBar({got: res.data.data.got, total: res.data.data.expected})
         })
 
@@ -40,7 +37,6 @@ const Performancewidget = () => {
 
         axios.get(url4, {headers: {Authorization: `Bearer ${Cookies.get('Token')}`}})
         .then(res => {
-            console.log(res.data.data)
             setSelfAppraised({got: res.data.data.got, total: res.data.data.expected})
         })
     }, [])
