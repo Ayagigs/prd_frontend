@@ -1,7 +1,10 @@
 .side {
   position:fixed;
 width: 250px;
-height: 100vh;
+height: 99vh;
+display: flex;
+flex-direction: column;
+justify-content: space-between;
 left: 0px;
 top: 10px;
 background: #ffffff;
@@ -108,7 +111,8 @@ z-index: 111;
   .sidebottom{
     display: flex;
     flex-direction: row;
-    margin: 255px 10px 0px ;
+    // margin: 255px 10px 0px ;
+    padding-bottom: 30px;
     width: 235px;
     // border: 2px 0 0 0;
     // border-color: #f80a0a;
@@ -141,7 +145,7 @@ z-index: 111;
   .userrole{
     color: black;
     font-weight: 300px;
-    font-size: 18px;
+    font-size: 16px;
   }
   
       .owner{

@@ -44,6 +44,12 @@ const Profiletab = ({ data, reviewType }) => {
     setModal(true)
   }
 
+  const close = () => {
+    setModal(false)
+    setTimeout(() => [
+      window.location.reload()
+    ], 1000)
+  }
 
   return<>
       <div className="proftabsScroll">
@@ -102,11 +108,11 @@ const Profiletab = ({ data, reviewType }) => {
         </div>
       </div>
 
-    <p className={modal ? "closePModal" : "hide"} onClick={() => setModal(false)}>x</p>
+    <p className={modal ? "closePModal" : "hide"} onClick={() => close()}>x</p>
     {
       modal ? 
       reviewType === '360 Appraisal' ? <Appraisal360 profile={details.profilePhoto} firstName={details.firstName} lastName={details.lastName} jobTitle ={details.jobTitle} due={due} id={details._id}/> : 
-      reviewType === 'Goal Review' ? <Goalreviewapp profile={details.owner.profilePhoto} firstName={details.owner.firstName} lastName={details.owner.lastName} jobTitle ={details.owner.jobTitle} id={goalId} goal={details}/> :  reviewType === 'Perfomance Review' ? <PerformanceReview profile={details.profilePhoto} firstName={details.firstName} lastName={details.lastName} jobTitle ={details.jobTitle} id={details._id}/>  : undefined
+      reviewType === 'Goal Review' ? <Goalreviewapp profile={details.owner.profilePhoto} firstName={details.owner.firstName} lastName={details.owner.lastName} jobTitle ={details.owner.jobTitle} id={goalId} goal={details}/> :  reviewType === 'Performance Review' ? <PerformanceReview profile={details.profilePhoto} firstName={details.firstName} lastName={details.lastName} jobTitle ={details.jobTitle} id={details._id}/>  : undefined
     : undefined}
   </>;
 };

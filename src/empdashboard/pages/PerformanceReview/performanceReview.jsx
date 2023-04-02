@@ -1,5 +1,5 @@
 import React from 'react'
-// import "./appraisal360.scss";
+import "./performanceReview.scss";
 import Navbar from "../../components/navbar/Navbar";
 import Side from "../../components/sidebar/Side";
 import { Link } from "react-router-dom";
@@ -68,8 +68,8 @@ const PerformanceReview = ({profile, firstName, lastName, jobTitle, due, id}) =>
     console.log(Cookies.get('EmpToken'))
     const url = `https://pms-jq9o.onrender.com/api/v1/review/performancereview/${id}`
     if(!score.score1 || !score.score2 || !score.score3 || !score.score4 || !score.score5 || !competencyScore.score1 || !competencyScore.score2 || !competencyScore.score3 || !competencyScore.score4 || !competencyScore.score5){
-      toast.error("Please input all scores")
       setIsLoading(false)
+      return toast.error("Please input all scores")
     }
     axios.post(url, {
       scores: [score.score1, score.score2, score.score3, score.score4, score.score5],
@@ -77,12 +77,9 @@ const PerformanceReview = ({profile, firstName, lastName, jobTitle, due, id}) =>
       feedback: feedback
     },  {headers: {Authorization: `Bearer ${Cookies.get('EmpToken')}`}}
     ).then(res => {
-      toast.success('Appraisal Sent Successfully')
+      toast.success('Review Sent Successfully')
       console.log(res.data.data)
       setIsLoading(false)
-      setTimeout(() => {
-        window.location.reload()
-      }, 1500)
     }).catch(err => {
       setIsLoading(false)
       toast.error(err.response.data.message)

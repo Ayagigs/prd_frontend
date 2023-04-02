@@ -1,7 +1,7 @@
 .empnavbar {
   position: fixed;
   height: 92px;
-  width: 1440px;
+  width: 86%;
   top: 0px;
   border-bottom: 0.5px solid rgb(231, 228, 228);
   display: flex;
@@ -62,13 +62,15 @@
       //   position: relative;
 
         .usercont{
-          width: 190px;
-          margin-left:-390px;
+          // width: 190px;
+          // margin-left:-490px;
           display: flex;
           flex-direction: row;
           justify-content: space-between;
           padding-left: 0px;
+          padding-right: 30px;
           align-items: center;
+          column-gap: 10px;
         }
       
         .namecontainer{
