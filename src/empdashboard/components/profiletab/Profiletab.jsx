@@ -8,6 +8,7 @@ import Appraisal360 from '../../pages/appriasal360/Appraisal360';
 import { useState, useEffect } from 'react';
 import Goalreviewapp from '../../pages/goalreviewapp/Goalreviewapp';
 import PerformanceReview from '../../pages/PerformanceReview/performanceReview';
+import Cookies from 'js-cookie';
 
 const Profiletab = ({ data, reviewType }) => {
   const [rows, setRows] = useState([]);
@@ -16,13 +17,20 @@ const Profiletab = ({ data, reviewType }) => {
   const [goalId, setGoalId] = useState(false)
   const [details, setDetails] = useState({})
 
+  const role = Cookies.get('Role')
+
   useEffect(() => {
     setRows([]);
 
     if (data.data !== undefined) {
-
+      
       if(reviewType === 'Goal Review'){
         console.log(data.data)
+        if(role == 'Performance Manager'){
+          return setRows(data.data.filter((el) => el.owner.role !== 'Performance Manager'))
+        }else if(role == 'HR Manager'){
+          return setRows(data.data.filter((el) => el.owner.role !== 'HR Manager'))
+        }
         return setRows(data.data)
       }
       setRows(data.data.employeeNotReviewed);

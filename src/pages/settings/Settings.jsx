@@ -365,7 +365,7 @@ const Settings = () => {
         Authorization: `Bearer ${Cookies.get('Token')}`,
       },
     }).then(res => {
-      console.log(res.data.data)
+      console.log(res.data)
       setIsLoading(false)
       toast.success("Questions Updated Successfully");
     }).catch(error => {
