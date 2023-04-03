@@ -34,9 +34,15 @@ const Performancetable = () => {
   const Details = (row) => {
     setReviewPopup(true)
     setDetails({fullname: row.firstName + " " + row.lastName, photo: row.profilePhoto})
-    setFullyear(row.reviews.filter((el) => el.reviewTime == 'Full-Year'))
-    setMidyear(row.reviews.filter((el) => el.reviewTime == 'Mid-Year'))
-    setAppraisal(row.reviews.filter((el) => el.reviewType == '360 Appraisal'))
+    setFullyear(row.reviews.filter((el) => el.reviewTime == 'Full-Year').sort((a,b) => 
+    new Date(b.date) - new Date(a.date)
+  ))
+    setMidyear(row.reviews.filter((el) => el.reviewTime == 'Mid-Year').sort((a,b) => 
+    new Date(b.date) - new Date(a.date)
+  ))
+    setAppraisal(row.reviews.filter((el) => el.reviewType == '360 Appraisal').sort((a,b) => 
+    new Date(b.date) - new Date(a.date)
+  ))
     
   }
   return <>

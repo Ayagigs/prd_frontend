@@ -9,6 +9,7 @@ import { More2 } from 'iconsax-react';
 import { EmptyWallet } from 'iconsax-react';
 import { Link } from "react-router-dom";
 import { Logout } from 'iconsax-react';
+import { Message } from 'iconsax-react';
 import Logo from './logo.png';
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { useNavigate } from 'react-router-dom';
@@ -98,6 +99,12 @@ const Sidebar = () => {
           <li>
             <Setting2 className="icon" />
             <span>Settings</span>
+          </li>
+          </Link>
+          <Link to="/message" style={{ textDecoration: "none" }}>
+          <li>
+            <Message className="icon" />
+            <span>Messaging</span>
           </li>
           </Link>
           <Link to="/wallet" style={{ textDecoration: "none" }}>

@@ -52,7 +52,7 @@ const Performancewidget = () => {
         </div>
       <div className="right">
             <div className="percentage positive">
-            <h1>{prBar.got}/{prBar.total} Performance Review ({(prBar.got / (prBar.total == 0 ? 1 : prBar.total)) * 100}%)</h1>
+            <h1>{prBar.got}/{prBar.total} Performance Review ({parseFloat(prBar.got / (prBar.total == 0 ? 1 : prBar.total)).toFixed(2) * 100}%)</h1>
                 </div>
             </div>
        </div>
@@ -60,12 +60,12 @@ const Performancewidget = () => {
             <div className="left">
                 <span className="title">360 Appraisal</span>
         
-            <div sx={{ width: '100%' }}><LinearDeterminate  value={(appraisalBar.got / (appraisalBar.total == 0 ? 1 : appraisalBar.total)) * 100}/></div>
+            <div sx={{ width: '100%' }}><LinearDeterminate  value={parseFloat(appraisalBar.got / (appraisalBar.total == 0 ? 1 : appraisalBar.total)).toFixed(2) * 100}/></div>
             <span className="link"></span>
         </div>
       <div className="right">
             <div className="percentage positive">
-            <h1>{appraisalBar.got}/{appraisalBar.total} 360 Appraisal ({(appraisalBar.got / (appraisalBar.total == 0 ? 1 : appraisalBar.total)) * 100}%)</h1>
+            <h1>{appraisalBar.got}/{appraisalBar.total} 360 Appraisal ({parseFloat((appraisalBar.got / (appraisalBar.total == 0 ? 1 : appraisalBar.total))).toFixed(2) * 100} %)</h1>
                 </div>
             </div>
        </div>
@@ -73,12 +73,12 @@ const Performancewidget = () => {
             <div className="left">
                 <span className="title">Self Appraisal</span>
         
-            <div sx={{ width: '100%' }}><LinearDeterminate  value={(selfAppraised.got / (selfAppraised.total == 0 ? 1 : selfAppraised.total)) * 100}/></div>
+            <div sx={{ width: '100%' }}><LinearDeterminate  value={parseFloat((selfAppraised.got / (selfAppraised.total == 0 ? 1 : selfAppraised.total))).toFixed(2) * 100}/></div>
             <span className="link"></span>
         </div>
       <div className="right">
             <div className="percentage positive">
-            <h1>{selfAppraised.got}/{selfAppraised.total} Self Appraisal ({(selfAppraised.got / (selfAppraised.total == 0 ? 1 : selfAppraised.total)) * 100}%)</h1>
+            <h1>{selfAppraised.got}/{selfAppraised.total} Self Appraisal ({parseFloat(selfAppraised.got / (selfAppraised.total == 0 ? 1 : selfAppraised.total)).toFixed(2) * 100}%)</h1>
                 </div>
             </div>
        </div>

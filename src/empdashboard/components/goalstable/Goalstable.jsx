@@ -9,10 +9,13 @@ import Paper from "@mui/material/Paper";
 import { TickCircle } from 'iconsax-react';
 import { useState, useEffect } from "react";
 import axios from "axios";
+import EmpGoalDetails from "../../pages/EmpGoalDetails";
 import Cookies from "js-cookie"
 
 const Goalstable = () => {
   const [rows, setRows] = useState([])
+  const [details, setDetails] = useState({})
+  const [goalPopup, setGoalPopup] = useState(false)
 
   const url = `https://pms-jq9o.onrender.com/api/v1/goal/goals`
   useEffect(() => {
@@ -22,8 +25,13 @@ const Goalstable = () => {
     })
   }, []);
 
+  const Details = (row) => {
+    setGoalPopup(true)
+    setDetails(row)
+  }
+
   
-  return (
+  return <>
     <TableContainer component={Paper} className="goalstable">
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead className="tablehead">
@@ -38,7 +46,7 @@ const Goalstable = () => {
         <TableBody>
           {rows.map((row) => (
             <TableRow>
-              <TableCell className="tableCell">
+              <TableCell className="tableCell tablecellmodal"  onClick={() => Details(row)}>
               <TickCircle size="22" color="#474750d6"/> 
                 {row.goaltitle}</TableCell>
               <TableCell className="tableCell">{row.category}</TableCell>
@@ -46,7 +54,14 @@ const Goalstable = () => {
               <TableCell className="tableCell">{new Date(row.enddate).toDateString()}</TableCell>
               <TableCell className="tableCell">
                 <div className="cellWrapper">
-                
+                {
+                  row.reviewers.map((el) => {
+                    return(
+                      <img src={el.profilePhoto} alt="" />
+
+                    )
+                  })
+                }
                 </div>
               </TableCell>
             </TableRow>
@@ -54,7 +69,9 @@ const Goalstable = () => {
         </TableBody>
       </Table>
     </TableContainer>
-  );
+    <p className={goalPopup ? "closeGoal" : "hide"} onClick={() => setGoalPopup(false)}>X</p>
+    {goalPopup ? <EmpGoalDetails goal={details}/> : undefined}
+  </>;
 };
 
 export default Goalstable;
