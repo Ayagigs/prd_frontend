@@ -70,8 +70,8 @@ const Profiletab = ({ data, reviewType }) => {
                       <h1 className="emp">
                         {el.owner.firstName + ' ' + el.owner.lastName}
                       </h1>
-                      <p className="post">
-                        {el.owner.jobTitle ? el.owner.jobTitle : '---'}
+                      <p className="post"> Goal Title: &nbsp;
+                        {el.goaltitle}
                       </p>
                     </div>
                     <div className="revbutton">
