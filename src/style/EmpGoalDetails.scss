@@ -16,12 +16,41 @@
     display: flex;
     padding: 30px 20px;
     height: 530px;
+    position: relative;
 }
 .leftGoalDetails{
     width: 420px;
     overflow-y: scroll;
     padding-right: 20px;
     overflow-x: hidden;
+    position: relative;
+
+    .buttonWrap{
+        width: 100%;
+        display: flex;
+        justify-content: right;
+        position: sticky;
+        padding-top: 5px;
+        bottom: 0px;
+        z-index: 30;
+        // margin-bottom: -80px !important;
+        background-color: white;
+        height: fit-content;
+    }
+    button{
+        padding: 7px 20px;
+        background-color: blue;
+        color: white;
+        height: fit-content;
+        margin-bottom: -40px;
+        border-radius: 10px;
+        cursor: pointer;
+
+    }
+    button:hover{
+        background-color: darkblue;
+        transition: 500ms;
+    }
 }
 .leftGoalDetails::-webkit-scrollbar-thumb{
     width: 5px;
@@ -43,6 +72,7 @@
     display: flex;
     flex-direction: column;
     row-gap: 30px;
+    position: relative;
 
     .categoryWrapper{
         display: flex;
@@ -99,13 +129,18 @@
         }
 
         select{
-            padding: 8px 10px;
-            height: fit-content;
-            width: 100%;
+            padding: 8px 10px !important;
+            height: fit-content !important;
+            width: 100% !important;
             border-radius: 6px;
             border: 1px solid gray;
             font-size: 13.5px;
             outline: none;
+
+            > option{
+                display: flex;
+                flex-direction: column;
+            }
 
         }
         select:focus{

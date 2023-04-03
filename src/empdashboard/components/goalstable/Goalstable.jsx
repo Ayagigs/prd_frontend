@@ -54,7 +54,14 @@ const Goalstable = () => {
               <TableCell className="tableCell">{new Date(row.enddate).toDateString()}</TableCell>
               <TableCell className="tableCell">
                 <div className="cellWrapper">
-                
+                {
+                  row.reviewers.map((el) => {
+                    return(
+                      <img src={el.profilePhoto} alt="" />
+
+                    )
+                  })
+                }
                 </div>
               </TableCell>
             </TableRow>

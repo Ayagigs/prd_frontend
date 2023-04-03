@@ -46,6 +46,7 @@ import ForgotPasswordPage from './pages/forgotPassword/ForgotPasswordPage';
 import ResetPasswordPage from './pages/resetPassword/ResetPasswordPage';
 import Maingoalreview from './empdashboard/pages/maingoalreview/Maingoalreview';
 import Goalreviewapp from './empdashboard/pages/goalreviewapp/Goalreviewapp';
+import Messaging from './pages/Messaging/Messaging';
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
@@ -103,6 +104,9 @@ function App() {
             </Route>
             <Route path="performance">
               <Route index element={<Performance />} />
+            </Route>
+            <Route path="message">
+              <Route index element={<Messaging />} />
             </Route>
             <Route path="settings">
               <Route index element={<Settings />} />

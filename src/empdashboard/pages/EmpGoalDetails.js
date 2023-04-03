@@ -3,23 +3,41 @@ import {AiOutlineClockCircle} from 'react-icons/ai'
 import {BsCalendarWeek} from 'react-icons/bs'
 import {BsChevronDown} from 'react-icons/bs'
 import { useEffect, useState } from 'react'
+import axios from 'axios'
+import Cookies from 'js-cookie'
+import { toast } from 'react-toastify'
 
 const EmpGoalDetails = ({goal}) => {
     const [employees, setEmployees] = useState([])
+    const [object, setObject] = useState([])
     const [reviewers, setReviewers] = useState([])
     const [status, setStatus] = useState('')
+    const [fetching, setFetching] = useState(false)
+    const [loading, setLoading] = useState(false)
     const [showCompleted, setShowCompleted] = useState(false)
     useEffect(() => {
-        console.log(goal)
+        setFetching(true)
         setStatus(goal.status)
+        const url = 'https://pms-jq9o.onrender.com/api/v1/employee/getColleagues'
+        axios.get(url, {headers: {Authorization: `Bearer ${Cookies.get('EmpToken')}`}})
+        .then(res => {
+            setFetching(false)
+            setEmployees(res.data.data)
+        }).catch(err => {
+            console.log(err.response.data.message)
+        })
+
     }, [])
 
     const removeEmployee = (id) => {
-        setReviewers(reviewers.filter((el) => el._id !== id))
+        setObject(object.filter((el) => el._id !== id))
+        setReviewers(object.filter((el) => el._id !== id))
     }
 
-    const handleChange = (e) => {
-        setReviewers({...reviewers, e})
+    const handleChange = (id) => {
+        const employee = employees.find((el) => el._id === id)
+        object.push(employee)
+        setReviewers([...object])
     }
 
     const handleShowCompleted = () => {
@@ -32,6 +50,27 @@ const EmpGoalDetails = ({goal}) => {
     const handleStatusChange = () => {
         setStatus('Completed')
         setShowCompleted(false)
+    }
+
+    const handleSubmit = () => {
+        setLoading(true)
+        const idArray = []
+        for(let i = 0; i < reviewers.length; i++){
+            idArray.push(reviewers[i]._id)
+        }
+
+        const url = `https://pms-jq9o.onrender.com/api/v1/goal/edit/${goal._id}`
+        axios.patch(url, {
+            isCompleted: status === 'Completed' ? true : false,
+            status: 'status',
+            reviewers: idArray
+        }, {headers: {Authorization: `Bearer ${Cookies.get('EmpToken')}`}})
+        .then(res => {
+            setLoading(false)
+            toast.success('Goal Edited Successfully')
+        }).catch(err => {
+            toast.error(err.response.data.message)
+        })
     }
 
     return<>
@@ -71,15 +110,32 @@ const EmpGoalDetails = ({goal}) => {
                             <div className="reviewersWrapper">
                                 <h4>Reviewers</h4>
                                 <select name="" id="" onChange={(e) => handleChange(e.target.value)}>
-                                    <option value="">Search by name</option>
-                                    <option value="">Search by name</option>
-                                    <option value="">Search by name</option>
+                                <option value="">--Select--</option>
+                                    {
+                                        fetching ? <option value="">Fetching Employees...</option>
+                                        :
+                                        employees.map((el) => {
+                                            return(
+                                                <option value={el._id}>
+                                                    {el.firstName + ' ' + el.lastName}
+                                                </option>
+                                            )
+                                        })
+                                    }
                                 </select>
                                 <div className="reviewersDetails">
-                                    <div className="detcard">
-                                        <img src="" alt="" />
-                                        <p>Sophia Okosodo <span className='delete' onClick={() => removeEmployee()}>X</span></p>
-                                    </div>
+                                    {console.log(reviewers)}
+                                {
+                                    reviewers.map((el) => {
+                                        return(
+                                            <div className="detcard">
+                                                <img src={el.profilePhoto} alt="" />
+                                                <p>{el.firstName + ' ' + el.lastName} <span className='delete' onClick={() => removeEmployee(el._id)}>X</span></p>
+                                            </div>
+
+                                        )
+                                    })
+                                }
                                 </div>
                             </div>
 
@@ -99,6 +155,9 @@ const EmpGoalDetails = ({goal}) => {
                                 }
                                 </div>
                             </div>
+                    </div>
+                    <div className="buttonWrap">
+                        <button onClick={handleSubmit}>{loading ? 'Submitting...' : 'Submit'}</button>
                     </div>
                 </div>
 
