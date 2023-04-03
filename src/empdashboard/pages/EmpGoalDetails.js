@@ -62,7 +62,7 @@ const EmpGoalDetails = ({goal}) => {
         const url = `https://pms-jq9o.onrender.com/api/v1/goal/edit/${goal._id}`
         axios.patch(url, {
             isCompleted: status === 'Completed' ? true : false,
-            status: 'status',
+            status: {status},
             reviewers: idArray
         }, {headers: {Authorization: `Bearer ${Cookies.get('EmpToken')}`}})
         .then(res => {

@@ -12,7 +12,7 @@ import { toast } from 'react-toastify';
 
 const Goalreviewapp = ({profile, firstName, lastName, jobTitle, id, goal}) => {
   const [question, setQuestion] = useState([])
-  const [competencyQuestion, setCompetencyQuestion] = useState([])
+  // const [competencyQuestion, setCompetencyQuestion] = useState([])
   const [feedback, setFeedback] = useState('')
   const [option, setOption] = useState([])
   const [isLoading, setIsLoading] = useState(false)
@@ -64,14 +64,14 @@ const Goalreviewapp = ({profile, firstName, lastName, jobTitle, id, goal}) => {
   const handleSubmit = (e) => {
     e.preventDefault()
     setIsLoading(true)
-    console.log(Cookies.get('EmpToken'))
     const url = `https://pms-jq9o.onrender.com/api/v1/review/goalreview/${id}`
     if(!score.score1 || !score.score2 || !score.score3 || !score.score4 || !score.score5){
       setIsLoading(false)
       return toast.error("Please input all scores")
     }
+    let scores= [score.score1, score.score2, score.score3, score.score4, score.score5]
     axios.post(url, {
-      scores: [score.score1, score.score2, score.score3, score.score4, score.score5],
+      scores: scores.reduce((a, b) => a + b)/scores.length,
       // competencyScores: [competencyScore.score1, competencyScore.score2, competencyScore.score3, competencyScore.score4, competencyScore.score5],
       feedback: feedback
     },  {headers: {Authorization: `Bearer ${Cookies.get('EmpToken')}`}}
@@ -102,17 +102,17 @@ const Goalreviewapp = ({profile, firstName, lastName, jobTitle, id, goal}) => {
       console.log(err)
     })
 
-    const url2 = `https://pms-jq9o.onrender.com/api/v1/question/competencyQuestions/${Cookies.get('empCompanyID')}/Competency`
+    // const url2 = `https://pms-jq9o.onrender.com/api/v1/question/competencyQuestions/${Cookies.get('empCompanyID')}/Competency`
 
-    axios.get(url2,  {headers: {Authorization: `Bearer ${Cookies.get('EmpToken')}`}})
-    .then(res => {
-      setCompetencyQuestion(res.data.data.sortedQuestion)
-      setOption(res.data.data.sortedOption)
-      console.log(res.data.data.sortedOption)
-      console.log(res.data.data.sortedQuestion)
-    }).catch(err => {
-      console.log(err)
-    })
+    // axios.get(url2,  {headers: {Authorization: `Bearer ${Cookies.get('EmpToken')}`}})
+    // .then(res => {
+    //   setCompetencyQuestion(res.data.data.sortedQuestion)
+    //   setOption(res.data.data.sortedOption)
+    //   console.log(res.data.data.sortedOption)
+    //   console.log(res.data.data.sortedQuestion)
+    // }).catch(err => {
+    //   console.log(err)
+    // })
   }, [])
 
 
