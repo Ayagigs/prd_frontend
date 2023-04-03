@@ -17,7 +17,9 @@ const Performancetable = () => {
   useEffect(() => {
     axios.get(url, {headers: {Authorization: `Bearer ${Cookies.get('EmpToken')}`}})
     .then(res => {
-      setRows(res.data.data)
+      setRows(res.data.data.sort((a,b) => 
+        new Date(b.date) - new Date(a.date)
+      ))
     })
   }, []);
 
@@ -40,8 +42,8 @@ const Performancetable = () => {
             <TableRow key={row.name}>
               <TableCell className="tableCell">
                 <div className="cellWrapper">
-                  <img src={row.profilePhoto} alt="" className="image" />
-                  {row.firstName + " " + row.lastName}
+                  <img src={row.reviewer.profilePhoto} alt="" className="image" />
+                  {row.reviewer.firstName + " " + row.reviewer.lastName}
                 </div>
               </TableCell>
               <TableCell className="tableCell">{row.ratings}</TableCell>

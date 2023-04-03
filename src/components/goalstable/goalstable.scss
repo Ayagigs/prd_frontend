@@ -1,6 +1,7 @@
 .goalsmaintable {
-
-
+  width: 82vw !important;
+  
+  
     .cellWrapper {
       display: flex;
       align-items: center;
@@ -26,14 +27,14 @@
     .status {
       padding: 5px;
       border-radius: 5px;
-  
+      
       &.active {
         color: green;
         background-color: rgba(0, 128, 0, 0.151);
       }
       &.inactive {
         color: #FF0000;
-  
+        
         background-color: #FEE9E9;
       }
     }
@@ -56,4 +57,4 @@
   .hide{
     display: none;
   }
-    
+  

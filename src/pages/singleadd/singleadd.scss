@@ -2,6 +2,21 @@
   flex: 6;
 
 }
+
+.singleaddwrapper{
+  background-color: rgba(144, 144, 144, 0.542);
+  width: 90vw;
+  height: 90vh;
+  margin-top: 90px;
+  overflow-y: hidden;
+  position: fixed;
+  top: 2px;
+  left: 10vw;
+  display: grid;
+  place-items: center;
+  box-sizing: border-box;
+  z-index: 20;
+}
 .singleaddcontainer {
   margin-top:110px;
   margin-left: 250px;
@@ -132,7 +147,7 @@ select{
   padding-bottom:13px;
   flex-direction: row;
   justify-content:end;
-  margin: 50px 20px 4px 0px;
+  margin: 32px 20px 4px 0px;
   // width: 100%;
 }
 .cancelbtn{

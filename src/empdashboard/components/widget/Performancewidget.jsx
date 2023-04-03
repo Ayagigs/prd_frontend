@@ -23,27 +23,22 @@ const Performancewidget = () => {
 
         axios.get(url2, {headers: {Authorization: `Bearer ${Cookies.get('EmpToken')}`}})
         .then(res => {
+            setPrBar({got: res.data.data.got, total: res.data.data.expected})
             console.log(res.data.data)
-            setPrBar({...prBar, got: res.data.data.got})
-            setPrBar({...prBar, total: res.data.data.expected})
         })
 
         const url3 = `https://pms-jq9o.onrender.com/api/v1/review/appraisalbar`
 
         axios.get(url3, {headers: {Authorization: `Bearer ${Cookies.get('EmpToken')}`}})
         .then(res => {
-            console.log(res.data.data)
-            setAppraisalBar({...appraisalBar, got: res.data.data.got})
-            setAppraisalBar({...appraisalBar, total: res.data.data.expected})
+            setAppraisalBar({got: res.data.data.got, total: res.data.data.expected})
         })
 
         const url4 = `https://pms-jq9o.onrender.com/api/v1/review/selfappraisalbar`
 
         axios.get(url4, {headers: {Authorization: `Bearer ${Cookies.get('EmpToken')}`}})
         .then(res => {
-            console.log(res.data.data)
-            setSelfAppraised({...selfAppraised, got: res.data.data.got})
-            setSelfAppraised({...selfAppraised, total: res.data.data.expected})
+            setSelfAppraised({got: res.data.data.got, total: res.data.data.expected})
         })
     }, [])
 
@@ -52,7 +47,7 @@ const Performancewidget = () => {
     <div className="performancewidget">
         <div className="perfnumber">
             <div className="">
-            <h1 className="no">{rating}</h1>
+            <h1 className="no">{rating ? parseFloat(rating).toFixed(1) : 0}</h1>
             <span className="sub">Ratings</span>
             </div>  
         </div>

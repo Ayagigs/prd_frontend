@@ -26,6 +26,7 @@
     box-sizing:border-box;
     flex-direction: column;
     justify-content: flex-start;
+    width: 870px;
 
     .topdiv{
         font-family: 'Satoshi';
@@ -34,7 +35,7 @@ font-weight: 500;
 font-size: 16px;
 line-height: 22px;
 color: #000000;
-    }
+    };
 
     .currentamount{
         // width: 400px;
@@ -82,7 +83,7 @@ color: #515151;
     display: flex;
     width: 350px;
     height: 129x;
-    margin-left: 450px;
+    margin-left: 350px;
     justify-content: space-between;
     
 

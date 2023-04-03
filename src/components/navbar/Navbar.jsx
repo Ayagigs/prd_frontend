@@ -9,12 +9,14 @@ import Cookies from "js-cookie";
 const Navbar = () => {
   // const { dispatch } = useContext(DarkModeContext);
   const [data, setData] = useState({})
+  const [profile, setProfile] = useState({})
 
   useEffect(() => {
     const url = `https://pms-jq9o.onrender.com/api/v1/admin/findme`
     axios.get(url, {headers: {Authorization: `Bearer ${Cookies.get('Token')}`}})
     .then(res => {
       setData(res.data.data.company[0])
+      setProfile(res.data.data.adminUser.profilePhoto)
       console.log(res.data.data.company[0])
     })
 
@@ -35,7 +37,7 @@ const Navbar = () => {
         <div>
           <img
             width={40}
-              src={data.profilePhoto}
+              src={profile}
               alt=""
               className="passport"
             />

@@ -12,6 +12,7 @@ function ResetPasswordPage() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const { resetToken } = useParams();
+  console.log(resetToken);
   const navigate = useNavigate();
 
   const data = {
@@ -25,8 +26,8 @@ function ResetPasswordPage() {
     if (password === confirmPassword) {
       setIsLoading(true);
       axios
-        .put(
-          `https://pms-jq9o.onrender.com/api/v1/admin/resetpassword/${resetToken}`,
+        .post(
+          `https://pms-jq9o.onrender.com/api/v1/employee/resetpassword/${resetToken}`,
           {
             ...data,
           }

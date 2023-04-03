@@ -26,8 +26,7 @@ const Empwidget = () => {
       axios.get(url2, {headers: {Authorization: `Bearer ${Cookies.get('EmpToken')}`}})
       .then(res => {
           console.log(res.data.data)
-          setPrBar({...prBar, got: res.data.data.got})
-          setPrBar({...prBar, total: res.data.data.expected})
+          setPrBar({got: res.data.data.got, total: res.data.data.expected})
       }).catch(err => {
         console.log(err)
       })
@@ -41,12 +40,12 @@ const Empwidget = () => {
         <div className="widget"> 
             <div className="left">
                 <span className="title">Goals</span>
-            <div sx={{ width: '100%' }}><LinearDeterminate value={(completed / (total === 0 ? 1 : total)) * 100} /></div>
+            <div sx={{ width: '100%' }}><LinearDeterminate value={parseFloat(completed / (total === 0 ? 1 : total)).toFixed(2) * 100} /></div>
             <span className="link"></span>
         </div>
       <div className="right">
             <div className="percentage positive">
-              <h1 className="complete">{(completed / (total === 0 ? 1 : total)) * 100}% Completed </h1>
+              <h1 className="complete">{parseFloat(completed / (total === 0 ? 1 : total)).toFixed(2) * 100}% Completed </h1>
             </div>
             </div>
        </div>
@@ -54,12 +53,12 @@ const Empwidget = () => {
             <div className="left">
                 <span className="title">Performance Review</span>
         
-            <div sx={{ width: '100%' }}><LinearDeterminate value={(prBar.got /( prBar.total == 0 ? 1 : prBar.total)) * 100}/></div>
+            <div sx={{ width: '100%' }}><LinearDeterminate value={parseFloat(prBar.got /( prBar.total == 0 ? 1 : prBar.total)).toFixed(2) * 100}/></div>
             <span className="link"></span>
         </div>
       <div className="right">
             <div className="percentage positive">
-            <h1 className="complete">{(prBar.got / (prBar.total == 0 ? 1 : prBar.total)) * 100}% Completed</h1>
+            <h1 className="complete">{parseFloat(prBar.got / (prBar.total == 0 ? 1 : prBar.total)).toFixed(2) * 100}% Completed</h1>
                 </div>
             </div>
        </div>

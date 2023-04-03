@@ -93,3 +93,21 @@
     border-color: transparent;
     color: rgb(4, 49, 49);
 }
+
+.closePModal{
+    position: fixed;
+    top: 120px;
+    right: 50px;
+    z-index: 20;
+    width: 30px;
+    height: 30px;
+    display: grid;
+    font-size: 15px;
+    background-color: white;
+    cursor: pointer;
+    place-items: center;
+    border-radius: 100%;
+  }
+  .hide{
+    display: none;
+  }

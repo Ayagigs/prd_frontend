@@ -26,6 +26,7 @@ const Performancetable = () => {
     axios.get(url, {headers: {Authorization: `Bearer ${Cookies.get('Token')}`}})
     .then(res => {
       setRows(res.data.data)
+      console.log(res.data.data)
     })
   }, []);
 
@@ -33,9 +34,15 @@ const Performancetable = () => {
   const Details = (row) => {
     setReviewPopup(true)
     setDetails({fullname: row.firstName + " " + row.lastName, photo: row.profilePhoto})
-    setFullyear(row.reviews.filter((el) => el.reviewTime == 'Full-Year'))
-    setMidyear(row.reviews.filter((el) => el.reviewTime == 'Mid-Year'))
-    setAppraisal(row.reviews.filter((el) => el.reviewType == '360 Appraisal'))
+    setFullyear(row.reviews.filter((el) => el.reviewTime == 'Full-Year').sort((a,b) => 
+    new Date(b.date) - new Date(a.date)
+  ))
+    setMidyear(row.reviews.filter((el) => el.reviewTime == 'Mid-Year').sort((a,b) => 
+    new Date(b.date) - new Date(a.date)
+  ))
+    setAppraisal(row.reviews.filter((el) => el.reviewType == '360 Appraisal').sort((a,b) => 
+    new Date(b.date) - new Date(a.date)
+  ))
     
   }
   return <>
@@ -60,10 +67,10 @@ const Performancetable = () => {
                   {row.firstName + " " + row.lastName}
                 </div>
               </TableCell>
-              <TableCell className="tableCell">{row.score > 0 ? row.score : '--'}</TableCell>
-              <TableCell className="tableCell">{row.competency > 0 ? row.competency : '--'}</TableCell>
-              <TableCell className="tableCell">{row.finalScore > 0 ? row.ratings : '--'}</TableCell>
-              <TableCell className="tableCell">{row.finalScore > 0 ? row.finalScore : '--'}</TableCell>
+              <TableCell className="tableCell">{row.score > 0 ? parseFloat(row.score).toFixed(1) : '--'}</TableCell>
+              <TableCell className="tableCell">{row.competency > 0 ? parseFloat(row.competency).toFixed(1) : '--'}</TableCell>
+              <TableCell className="tableCell">{row.finalScore > 0 ? row.rating : '--'}</TableCell>
+              <TableCell className="tableCell">{row.finalScore > 0 ? parseFloat(row.finalScore).toFixed(1) : '--'}</TableCell>
               <TableCell className="tableCell">
                 <Link className={`status ${row.reviews}`} onClick={() => Details(row)} >reviews {'>'}</Link>
               </TableCell>

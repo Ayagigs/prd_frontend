@@ -2,9 +2,6 @@ import Side from "../../components/sidebar/Side";
 import Navbar from "../../components/navbar/Navbar";
 import { Link } from "react-router-dom";
 import "./addgoal.scss";
-import Goalstable from "../../components/goalstable/Goalstable";
-import Goalswidget from "../../components/widget/Goalswidget";
-import { CalendarAdd } from 'iconsax-react';
 import { useState } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
@@ -56,6 +53,7 @@ const Addgoal = () => {
       <div className="emphomeContainer">
         <Navbar />
         <div className="empgoalcontainer">
+        <div className="addgoalwrapper">
         <div className="addgoalbox">
           <div className="goaltopbox">
             <h1>New Goal</h1>
@@ -107,6 +105,8 @@ const Addgoal = () => {
         <button className="addgoal-btn" onClick={() => handleSubmit()}>Add Goal</button>
         </div>
         </div>
+        </div>
+        
       </div>
     </div>
   )

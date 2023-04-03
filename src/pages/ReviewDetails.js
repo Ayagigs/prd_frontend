@@ -1,11 +1,8 @@
 import '../style/ReviewDetails.css'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const ReviewDetails = ({user, fullyear, midyear, appraisal}) => {
     const [reviewType, setReviewType] = useState('fullyear')
-
-
-
 
 
     return (
@@ -31,7 +28,7 @@ const ReviewDetails = ({user, fullyear, midyear, appraisal}) => {
                                     <div className = "reviewDetailsCardHeading">
                                         <div className = "reviewDetailsCardProfile">
                                             <img src = {el.reviewer.profilePhoto} alt = "" />
-                                            <h3>{el.reviewer.firstName + " " + el.reviewer.lastname}<span className={el.role === 'Staff' ? "show" : "hide"}><span className="circle"></span>{el.role === 'Performance manager' ? 'PM' : el.role === 'HR Manager' ? 'HR' : ''}</span></h3>
+                                            <h3>{el.reviewer.firstName + " " + el.reviewer.lastName}<span className={el.role === 'Staff' ? "show" : "hide"}><span className="circle"></span>{el.role === 'Performance manager' ? 'PM' : el.role === 'HR Manager' ? 'HR' : ''}</span></h3>
                                         </div>
                                         <p>{new Date(el.date).toDateString()}</p>
                                         <h3>{el.finalScore}</h3>
@@ -51,7 +48,7 @@ const ReviewDetails = ({user, fullyear, midyear, appraisal}) => {
                                     <div className="reviewDetailsCardHeading">
                                         <div className="reviewDetailsCardProfile">
                                             <img src = {el.reviewer.profilePhoto} alt = "" />
-                                            <h3>{el.reviewer.firstName + " " + el.reviewer.lastname}<span className={el.role === 'Staff' ? "show" : "hide"}><span className="circle"></span>{el.role === 'Performance manager' ? 'PM' : el.role === 'HR Manager' ? 'HR' : ''}</span></h3>
+                                            <h3>{el.reviewer.firstName + " " + el.reviewer.lastName}<span className={el.role === 'Staff' ? "show" : "hide"}><span className="circle"></span>{el.role === 'Performance manager' ? 'PM' : el.role === 'HR Manager' ? 'HR' : ''}</span></h3>
                                         </div>
                                         <p>{new Date(el.date).toDateString()}</p>
                                         <h3>{el.finalScore}</h3>
@@ -71,7 +68,7 @@ const ReviewDetails = ({user, fullyear, midyear, appraisal}) => {
                                     <div className = "reviewDetailsCardHeading">
                                         <div className = "reviewDetailsCardProfile">
                                             <img src = {el.reviewer.profilePhoto} alt = "" />
-                                            <h3>{el.reviewer.firstName + " " + el.reviewer.lastname}<span className = {el.role === 'Staff' ? "show" : "hide"}><span className = "circle"></span>{el.role === 'Performance manager' ? 'PM' : el.role === 'HR Manager' ? 'HR' : ''}</span></h3>
+                                            <h3>{el.reviewer.firstName + " " + el.reviewer.lastName}<span className = {el.role === 'Staff' ? "show" : "hide"}><span className = "circle"></span>{el.role === 'Performance manager' ? 'PM' : el.role === 'HR Manager' ? 'HR' : ''}</span></h3>
                                         </div>
                                         <p>{new Date(el.date).toDateString()}</p>
                                         <h3>{el.finalScore}</h3>
