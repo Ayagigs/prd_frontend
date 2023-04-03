@@ -21,6 +21,13 @@ const Empsettings = () => {
   const [states, setStates] = useState([]);
   const [countries, setCountries] = useState([]);
   const [profile, setProfile] = useState(null);
+
+  const [data, setData] = useState({
+    firstName: '',
+    role: '',
+    profilePhoto: '',
+  });
+
   const [passwordData, setPasswordData] = useState({
     currentPassword: '',
     newPassword: '',
@@ -97,6 +104,7 @@ const Empsettings = () => {
     try {
       setIsLoading(true);
       const Token = Cookies.get('EmpToken');
+      console.log(Token);
 
       // Send email notification preferences
       const res1 = await axios.patch(
@@ -133,12 +141,9 @@ const Empsettings = () => {
   /*********************** SUBMIT EMPLOYEE PERSONAL INFORNATION ******************************/
   const submitInputs = async event => {
     event.preventDefault();
-    const token = Cookies.get('EmpToken');
-    console.log(Cookies.get('Token'));
-    toast.success({ token });
     try {
       setIsLoading(true);
-      const Token = Cookies.get('Token');
+      const Token = Cookies.get('EmpToken');
       const res = await axios.patch(
         'https://pms-jq9o.onrender.com/api/v1/employee/editdetails',
         inputFormData,
@@ -149,8 +154,12 @@ const Empsettings = () => {
         }
       );
 
-      // setInputFormData({...inputFormData, firstName: res.data.data.updateInfo.firstName, lastName: res.data.data.updateInfo.lastName})
-      // setInitials(res.data.data.updateInfo.firstName[0] + res.data.data.updateInfo.lastName[0])
+      setData({
+        ...data,
+        firstName: res.data.data.firstName,
+        role: res.data.data.role,
+      });
+      setInitials(res.data.data.firstName[0] + res.data.data.lastName[0]);
       setIsLoading(false);
 
       console.log(res.data.data);
@@ -215,9 +224,10 @@ const Empsettings = () => {
     try {
       setIsLoading(true);
       const Token = Cookies.get('EmpToken');
+      console.log(Token);
 
       const res = await axios.patch(
-        'https://pms-jq9o.onrender.com/api/v1/admin/changePassword',
+        'https://pms-jq9o.onrender.com/api/v1/employee/changePassword',
         passwordData,
         {
           headers: {
@@ -255,6 +265,7 @@ const Empsettings = () => {
       .then(response => {
         setIsLoading(false);
         toast.success(response.data.message);
+        setData({ ...data, firstName: response.data.data.profile });
         // Handle the response from the server
       })
       .catch(error => {
@@ -264,8 +275,40 @@ const Empsettings = () => {
         // Handle any errors that occurred during the upload
       });
   };
-  /******************************** END ****************************************/
 
+  /************************ FETCH EMPLOYEEE DETAILS *************************/
+
+  useEffect(() => {
+    const url = `https://pms-jq9o.onrender.com/api/v1/employee/findme`;
+    axios
+      .get(url, {
+        headers: { Authorization: `Bearer ${Cookies.get('EmpToken')}` },
+      })
+      .then(res => {
+        setInputFormData({
+          fullName: `${res.data.data.firstName} ${res.data.data.middleName} ${res.data.data.lastName}`,
+          firstName: res.data.data.firstName,
+          preferredName: res.data.data.preferredName,
+          employeeID: res.data.data.employeeID,
+          jobTitle: res.data.data.jobTitle,
+          employmentStatus: res.data.data.employmentStatus,
+          phoneNo: res.data.data.phoneNo,
+          workNo: res.data.data.workNo,
+          homeNo: res.data.data.homeNo,
+          address: res.data.data.address,
+          state: res.data.data.state,
+          country: res.data.data.country,
+          gender: res.data.data.gender,
+          maritalStatus: res.data.data.maritalStatus,
+          DOB: res.data.data.DOB,
+          role: res.data.data.role,
+        });
+        setData(res.data.data);
+        setInitials(res.data.data.firstName[0] + res.data.data.lastName[0]);
+      });
+  }, []);
+  /******************************** END ****************************************/
+  console.log(data);
   return (
     <>
       <div className="emphome">
@@ -276,18 +319,18 @@ const Empsettings = () => {
           <div className="empsettingsHeading">
             <div className="empsettingsImgWrap">
               <Avatar
-                src={''}
-                alt="Vitaly Rtishchev"
+                src={profile}
+                alt={initials}
                 color="blue"
                 radius={100}
                 size={150}
               >
-                AA
+                {initials}
               </Avatar>
             </div>
             <div className="empsettingsNameWrap">
-              <h1>Adebisi Akin</h1>
-              <p>Product Manager (PM)</p>
+              <h1>{data.firstName}</h1>
+              <p>{data.role} (PM)</p>
             </div>
           </div>
 
