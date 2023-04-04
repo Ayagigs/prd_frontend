@@ -99,6 +99,12 @@ const Sidebar = () => {
                 <span>Performance</span>
               </li>
             </Link>
+            <Link to="/message" style={{ textDecoration: 'none' }}>
+              <li>
+                <Message className="icon" />
+                <span>Messaging</span>
+              </li>
+            </Link>
             <Link to="/settings" style={{ textDecoration: 'none' }}>
               <li>
                 <Setting2 className="icon" />
