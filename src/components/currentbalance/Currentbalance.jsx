@@ -15,6 +15,7 @@ import {
   import view from './abi/view.json';
   import Alert from 'react-bootstrap/Alert';
 //   import Button from 'react-bootstrap/Button';
+// import Send from './Send';
 
 
 const Currentbalance = () => {
@@ -809,7 +810,10 @@ const Currentbalance = () => {
                             <div className='sendicon'>
                             <ArrangeHorizontal size="32" color="#5157ed" />
                             </div>
-                        <button className="sendmoneybtn">Send</button>
+                        <button className="sendmoneybtn">
+                    
+                            Send
+                            </button>
                         </div>
                     </div>
                     
