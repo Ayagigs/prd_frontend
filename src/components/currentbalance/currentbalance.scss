@@ -226,3 +226,22 @@ font-weight: 300;
 font-size: 16px;
 line-height: 22px;
 }
+
+.closeSendModal{
+    position: fixed;
+    top: 15%;
+    right: 5%;
+    z-index: 20;
+    padding: 0px 15px;
+    font-weight: 500;
+    margin: 0px;
+    border-radius: 100%;
+    background-color: white;
+    cursor: pointer;
+}
+.closeSendModal:hover{
+    color: rgb(229, 0, 0);
+}
+.hide{
+    display: none;
+}

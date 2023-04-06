@@ -24,11 +24,10 @@ const Performancewidget = () => {
         axios.get(url2, {headers: {Authorization: `Bearer ${Cookies.get('EmpToken')}`}})
         .then(res => {
             setPrBar({got: res.data.data.got, total: res.data.data.expected})
-            console.log(res.data.data)
         })
-
+        
         const url3 = `https://pms-jq9o.onrender.com/api/v1/review/appraisalbar`
-
+        
         axios.get(url3, {headers: {Authorization: `Bearer ${Cookies.get('EmpToken')}`}})
         .then(res => {
             setAppraisalBar({got: res.data.data.got, total: res.data.data.expected})

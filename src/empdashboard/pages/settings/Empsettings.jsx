@@ -24,7 +24,9 @@ const Empsettings = () => {
 
   const [data, setData] = useState({
     firstName: '',
+    lastName: '',
     role: '',
+    jobTitle: '',
     profilePhoto: '',
   });
 
@@ -153,10 +155,13 @@ const Empsettings = () => {
           },
         }
       );
+      console.log(res.data.data)
 
       setData({
         ...data,
         firstName: res.data.data.firstName,
+        lastName: res.data.data.lastName,
+        jobTitle: res.data.data.jobTitle,
         role: res.data.data.role,
       });
       setInitials(res.data.data.firstName[0] + res.data.data.lastName[0]);
@@ -253,11 +258,13 @@ const Empsettings = () => {
   /******************************** SUBMIT FILE UPLOAD ********************************/
   const handleSubmitProfile = async event => {
     event.preventDefault();
+    const formdata = new FormData()
+    formdata.append('profile', profile)
 
     setIsLoading(true);
     const Token = Cookies.get('EmpToken');
     await axios
-      .post('https://pms-jq9o.onrender.com/api/v1/employee/profile', profile, {
+      .post('https://pms-jq9o.onrender.com/api/v1/employee/profile', formdata, {
         headers: {
           Authorization: `Bearer ${Token}`,
         },
@@ -265,7 +272,7 @@ const Empsettings = () => {
       .then(response => {
         setIsLoading(false);
         toast.success(response.data.message);
-        setData({ ...data, firstName: response.data.data.profile });
+        setData({ ...data, profilePhoto: response.data.data.profilePhoto });
         // Handle the response from the server
       })
       .catch(error => {
@@ -286,7 +293,7 @@ const Empsettings = () => {
       })
       .then(res => {
         setInputFormData({
-          fullName: `${res.data.data.firstName} ${res.data.data.middleName} ${res.data.data.lastName}`,
+          fullName: `${res.data.data.firstName} ${res.data.data.middleName ? res.data.data.middleName : '-Middle Name-'} ${res.data.data.lastName}`,
           firstName: res.data.data.firstName,
           preferredName: res.data.data.preferredName,
           employeeID: res.data.data.employeeID,
@@ -302,13 +309,14 @@ const Empsettings = () => {
           maritalStatus: res.data.data.maritalStatus,
           DOB: res.data.data.DOB,
           role: res.data.data.role,
+          workEmail: res.data.data.workEmail
         });
+        console.log(res.data.data)
         setData(res.data.data);
         setInitials(res.data.data.firstName[0] + res.data.data.lastName[0]);
       });
   }, []);
   /******************************** END ****************************************/
-  console.log(data);
   return (
     <>
       <div className="emphome">
@@ -319,18 +327,18 @@ const Empsettings = () => {
           <div className="empsettingsHeading">
             <div className="empsettingsImgWrap">
               <Avatar
-                src={profile}
+                src={data.profilePhoto}
                 alt={initials}
                 color="blue"
                 radius={100}
-                size={150}
+                size={170}
               >
                 {initials}
               </Avatar>
             </div>
             <div className="empsettingsNameWrap">
-              <h1>{data.firstName}</h1>
-              <p>{data.role} (PM)</p>
+              <h1>{data.firstName + ' ' + data.lastName}</h1>
+              <p>{data.jobTitle} ({data.role === 'Performance Manager' ? 'PM' : data.role === 'Hr Manager' ? 'HR' : data.role})</p>
             </div>
           </div>
 
@@ -375,7 +383,7 @@ const Empsettings = () => {
                       type="text"
                       name="preferredName"
                       id="preferredName"
-                      value={inputFormData.companyName}
+                      value={inputFormData.preferredName}
                       onChange={handleFormChange}
                       placeholder="Preferred Name"
                     />
@@ -400,7 +408,7 @@ const Empsettings = () => {
                       type="text"
                       name="jobTitle"
                       id="jobTitle"
-                      value={inputFormData.companyName}
+                      value={inputFormData.jobTitle}
                       onChange={handleFormChange}
                       placeholder="jobTitle"
                     />
@@ -429,7 +437,7 @@ const Empsettings = () => {
                       type="email"
                       name="email"
                       id="email"
-                      value={inputFormData.email}
+                      value={inputFormData.workEmail}
                       onChange={handleFormChange}
                       placeholder="email"
                     />
@@ -531,7 +539,7 @@ const Empsettings = () => {
                 <div className="inputContainer">
                   <div className="inputWrapper">
                     <label htmlFor="gender">Gender</label>
-                    <select name="gender" id="" onChange={handleFormChange}>
+                    <select name="gender" id="" onChange={handleFormChange} value={inputFormData.gender}>
                       <option value="">--Select--</option>
                       <option value="Male">Male</option>
                       <option value="Female">Female</option>
@@ -543,6 +551,7 @@ const Empsettings = () => {
                       name="maritalStatus"
                       id="maritalStatus"
                       onChange={handleFormChange}
+                      value={inputFormData.maritalStatus}
                     >
                       <option value="">--Select--</option>
                       <option value="Married">Married</option>
