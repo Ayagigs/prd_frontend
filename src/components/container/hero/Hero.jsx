@@ -4,7 +4,8 @@ import heroDashboardImg from '../../../assets/img/chart-2.svg';
 import heroUserProfileImg from '../../../assets/img/Frame 165.svg';
 import heroGraphImg from '../../../assets/img/chart-4.svg';
 import { Link } from 'react-router-dom';
-import { useSpring, animated } from 'react-spring';
+import { useSpring } from '@react-spring/core'
+import {animated } from '@react-spring/web'
 import herodashboard from '../../../assets/img/landing-image-1.png';
 
 const Hero = () => {
@@ -47,8 +48,8 @@ const Hero = () => {
         </h3>
       </header>
       <div className="hero-links-container">
-        <Link className="get-started-link">Get started</Link>
-        <Link className="login-link">Request a demo</Link>
+        <Link to={'/register'} className="get-started-link">Get started</Link>
+        <Link to={'/demo'} className="login-link">Request a demo</Link>
       </div>
       <animated.img
         style={rotateProps}

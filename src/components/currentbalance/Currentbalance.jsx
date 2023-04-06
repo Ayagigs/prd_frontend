@@ -817,6 +817,7 @@ const Currentbalance = () => {
                             </button>
                             <div className={popup ? "sendmoneybtn" : "hide"} onClick={() => setPopup(false)}>
                             </div>
+            <p className={popup ? 'closeSendModal' : 'hide'} onClick={() => setPopup(false)}>X</p>
             {
                 popup ? <Send className="sendpopup"/> : undefined
             }

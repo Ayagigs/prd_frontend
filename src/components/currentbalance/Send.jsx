@@ -18,7 +18,7 @@ function Send() {
         <div className="sendpage"> 
             <div className="sendtopcont">
             <Link to="/wallet" style={{ textDecoration: "none" }}>
-          <button className="closesend-btn">X</button>
+          {/* <button className="closesend-btn">X</button> */}
           </Link>
           <div className='senderprofile'> 
           <img src={ProfileImg}  width={20} alt="" className="image" />
