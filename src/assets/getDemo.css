@@ -37,6 +37,11 @@
 	    height: auto;
 	}
 
+	.left-style h2{
+		color: black ;
+		margin-bottom: 0;
+	}
+
 	.body .first-text {
 	    width: 192px;
 	    height: 14px;
@@ -125,13 +130,15 @@
 
 	}
 
-	.form-input input {
+	.form-input input,.form-input select {
 	    padding: 5px;
 	    border-radius: 5px;
 	    border: 1px solid #ccc;
 	    font-size: 16px;
 	    width: 320px;
 	    height: 23px;
+		padding: 10px;
+		padding: 18px 10px;
 	}
 
 	.mainmail {
