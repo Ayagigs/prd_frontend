@@ -13,7 +13,7 @@ const Goalswidget = () => {
 
     const url = `https://pms-jq9o.onrender.com/api/v1/goal/employeegoals/${Cookies.get('companyID')}`
     useEffect(() => {
-      axios.get(url, {headers: {Authorization: `Bearer ${Cookies.get('EmpToken')}`}})
+      axios.get(url, {headers: {Authorization: `Bearer ${Cookies.get('Token')}`}})
       .then(res => {
         setCompleted(res.data.data.filter((el) => el.status === 'Completed').length)
         setInProgress(res.data.data.filter((el) => el.status === 'In Progress').length)

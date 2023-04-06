@@ -19,8 +19,6 @@ function GetDemo() {
               <label htmlFor="email">Work email</label>
               <input name="email" />
             </div>
-
-            
             <div className="form-input">
               <label htmlFor="location">Location</label>
               <input type="text" id="location" name="location" />

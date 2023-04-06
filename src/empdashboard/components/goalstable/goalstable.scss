@@ -15,6 +15,7 @@ justify-content: flex-start;
         margin-right: 10px;
         object-fit: cover;
       }
+
     }
     
     .tablehead{
@@ -23,6 +24,19 @@ justify-content: flex-start;
       // gap: 10px;
       // width: 297px;
       // height: 39px;
+    }
+    img{
+      width: 40px;
+      height: 40px;
+      border-radius: 100%;
+      background-color: gray;
+      margin-left: -25px;
+    }
+    img:nth-child(1){
+      margin-left: 0px;
+    }
+    .cellWrapper{
+      display: flex;
     }
 
     .status {
@@ -41,3 +55,6 @@ justify-content: flex-start;
     }
   }
   
+  .tablecellmodal{
+    cursor: pointer;
+  }

@@ -1,0 +1,220 @@
+.sendfundwrapper{
+    background-color: rgba(144, 144, 144, 0.542);
+    width: 90vw;
+    height: 90vh;
+    margin-top: 90px;
+    overflow-y: hidden;
+    position: fixed;
+    top: 2px;
+    left: 10vw;
+    display: grid;
+    place-items: center;
+    box-sizing: border-box;
+    z-index: 10;
+}
+
+.sendpage  {
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    width: 564px;
+    height: 594px;
+    padding: 25px;
+    background-color: #fff;
+    box-shadow: 3px 6px 28px rgba(0, 0, 0, 0.25);
+    border-radius: 4px;
+    overflow-y: scroll;
+    z-index: 444;
+}
+
+.senderprofile{
+    display: flex;
+    padding-right: 10px;
+    flex-direction: row;
+    // width: 70px;
+}
+
+.closesend-btn{
+    position: absolute;
+      border-color: transparent;
+      width: 30px;
+      height: 30px;
+    //   left: -20px;
+      display: flex;
+      background-color: #EEEFF7;
+      align-items: center;
+    //   right: 80px;
+    padding: 10px;
+      margin-left:490px;
+      border-radius: 1e+08px;
+    cursor: pointer;
+
+  }
+
+  .progressbox{
+    // border: ;
+    display: flex;
+    // width: 200px;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    width: 250px;
+    margin-left: 130px;
+    
+  }
+
+  .sendpro{
+    font-size: 13px;
+width: 59.24px;
+align-items: center;
+justify-content: center;
+padding: #ffffff;;
+height: 28px;
+border-radius: 4px;
+
+background: #EBEDFC;
+  }
+
+.confirmpro{
+padding: 15px 0 0 15px;
+width: 59.24px;
+align-items: center;
+justify-content: center;
+padding: #ffffff;;
+height: 59.24px;
+left: 5px;
+top: 5px;
+border-radius: 4px;
+
+background: #EBEDFC;
+  }
+
+
+
+  
+
+//   .wrapper {
+//     padding: 0px;
+//     margin: 0px;
+//     box-sizing: border-box;
+//     overflow-y: hidden;
+//     font-family: 'Poppins', sans-serif;
+//   display: flex;
+//   height: 100vh;
+// }
+.sendwrapper{
+    
+  width: 55%;
+  height: 100%;
+  padding: 60px 200px;
+  padding-left: 100px;
+}
+
+.sendwrapper .sendstepperWrapper{
+  display: flex;
+  flex-direction: column;
+  row-gap: 30px;
+}
+.sendwrapper .sendstepperCardWrapper{
+  display: flex;
+  align-items: center;
+  column-gap: 20px;
+}
+.sendwrapper .sendformWrapper h1{
+  font-size: 30px;
+}
+.sendwrapper .sendformWrapper p{
+  font-size: 15px;
+}
+.sendwrapper .sendstepperCard{
+  display: flex;
+  column-gap: 5px;
+  align-items: center;
+}
+
+.sendwrapper .sendinputWrapper{
+    display: flex;
+    flex-direction: column;
+    row-gap: 3px;
+    width: 100%;
+  }
+
+  .sendwrapper .sendinputWrapper label{
+    font-size: 13px;
+  }
+
+  .sendwrapper .sendinputWrapper input{
+    padding: 8px 10px;
+    border-radius: 7px;
+    border:  1px solid gray;
+    outline: none;
+  }
+
+  .sendwrapper .sendinputWrapper{
+    display: flex;
+    column-gap: 8px;
+  }
+
+//   .sendwrapper .sendinputHolder .sendinputWrapper{
+//     width: 50%;
+//   }
+
+  .sendwrapper   .hide{
+    display: none;
+  }
+
+  .sendcoinbtn{
+    display: flex;
+    cursor: pointer;
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+border-color: transparent;
+padding: 12px 14px;
+gap: 10px;
+margin-top:90px;
+// margin-left: -190px;
+width: 350px;
+height: 43px;
+color: #E7E8FF;
+background: #030BC3;
+border-radius: 8px;
+}
+
+.sendform{
+    margin-top: 30px;
+    align-items: center;
+    justify-content: center;
+}
+
+.sendlogo{
+    margin-left: 150px;
+    padding: 15px 0 0 15px;
+    width: 59.24px;
+    align-items: center;
+    justify-content: center;
+    padding: #ffffff;;
+    height: 59.24px;
+    left: 5px;
+    top: 5px;
+    border-radius: 50%;
+    
+    background: #EBEDFC;
+    
+        }
+
+.sendforminput{
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 12px 10px;
+    gap: 10px;
+    line-height: 15px;
+    width: 350px;
+    height: 46px;
+    
+    background: #FFFFFF;
+    border: 0.1px;
+    box-shadow: 0px 0px 0px 2px #EEEFF7;
+    border-radius: 8px;
+}

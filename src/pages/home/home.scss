@@ -7,6 +7,7 @@
   .homeContainer {
     flex: 6;
     background-color: #F5F5F5 ;
+    height: fit-content;
  
 
     .widgets,
@@ -25,6 +26,8 @@
       box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
       padding: 20px;
       margin: 20px;
+      width: 83vw;
+      box-sizing: border-box;
       
 
       .listTitle {
@@ -37,5 +40,5 @@
 }
 
 .hometablebox{
-  width: 1242px;
+  width: 100%;
 }

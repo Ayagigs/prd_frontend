@@ -7,7 +7,7 @@ import Transactionhistory from "../../components/transactionhistory/Transactionh
 // import Chart from "../../components/chart/Chart";
 // import Table from "../../components/table/Table";
 
-const Wallet = () => {
+const   Wallet = () => {
     return (
       <div className="adminwallet">
         <Sidebar />

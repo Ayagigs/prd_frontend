@@ -13,7 +13,7 @@ function SignIn() {
     console.log(response);
   };
   const [isLoading, setIsLoading] = useState(false);
-  const [choice, setChoice] = useState('');
+  const [choice, setChoice] = useState('Admin');
   const navigate = useNavigate();
   const [popup, setPopup] = useState(false);
 
@@ -63,6 +63,9 @@ function SignIn() {
       setIsLoading(false);
       toast.success('Login Successfully');
       Cookies.set('EmpToken', res.data.token);
+      Cookies.set('empCompanyID', res.data.data.companyID);
+      Cookies.set('Role', res.data.data.role)
+      console.log(res.data.data.selfAppraised)
       navigate('/emp-dashboard');
     } catch (error) {
       setIsLoading(false);

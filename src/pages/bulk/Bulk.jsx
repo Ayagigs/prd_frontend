@@ -43,6 +43,7 @@ const Bulk = ({ inputs, title }) => {
       <Sidebar />
       <div className="newContainer">
         <Navbar />
+        <div className='bulkwrapper'>
         <div className='bulkbox'>
         <Link to="/employee/trial/new" style={{ textDecoration: "none" }}>
         <button className="close-btn">X</button>
@@ -80,6 +81,8 @@ const Bulk = ({ inputs, title }) => {
         </div>
         
         </div>
+        </div>
+        
     </div>
     </div>
   )

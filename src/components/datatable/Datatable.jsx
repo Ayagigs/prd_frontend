@@ -34,10 +34,12 @@ const Datatable = () => {
 
     // console.log(Cookies.get('companyID'))
 
-    axios.patch(url2, {headers: {Authorization: `Bearer ${Cookies.get('Token')}`}})
+    axios.patch(url2, {}, {headers: {Authorization: `Bearer ${Cookies.get('Token')}`}})
     .then(res => {
+      toast.success("Accound Deactivated Successfully")
       setData(res.data.data)
-      console.log(res)
+    }).catch(err => {
+      toast.error(err.response.data.message)
     })
   };
   const handleView = (id) => {
@@ -52,7 +54,7 @@ const Datatable = () => {
         </Link>
       </div>
       <TableContainer component={Paper} className="table">
-      <Table sx={{ maxWidth: 1380, minWidth: 600  }} aria-label="simple table">
+      <Table sx={{ maxWidth: 1680, minWidth: 600  }} aria-label="simple table">
         <TableHead className="tablehead">
           <TableRow className="rowtitle">
             <TableCell className="tableCell">Employee Name</TableCell>

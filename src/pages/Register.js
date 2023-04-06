@@ -186,7 +186,7 @@ const Register = () => {
                 <div className="inputWrapper">
                   <label htmlFor="">Password</label>
                   <input
-                    type="text"
+                    type="password"
                     required
                     name="password"
                     value={formData.password}
@@ -198,7 +198,7 @@ const Register = () => {
                 <div className="inputWrapper">
                   <label htmlFor="">Password</label>
                   <input
-                    type="text"
+                    type="password"
                     required
                     name="confirmPassword"
                     value={formData.confirmPassword}

@@ -1,81 +1,426 @@
-import Side from "../../components/sidebar/Side";
-import Navbar from "../../components/navbar/Navbar";
-import "./empsettings.scss";
+import Side from '../../components/sidebar/Side';
+import Navbar from '../../components/navbar/Navbar';
+import './empsettings.scss';
 import { Avatar } from '@mantine/core';
 import { PasswordInput, Switch } from '@mantine/core';
 import OtpInput from 'react-otp-input';
-import { useState } from "react";
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import Cookies from 'js-cookie';
+import { FaSpinner } from 'react-icons/fa';
+import { RxAvatar } from 'react-icons/rx';
 
 const Empsettings = () => {
-  const [verificationMethod, setVerificationMethod] = useState('sms')
-  const [modal, setModal] = useState(false)
+  const [verificationMethod, setVerificationMethod] = useState('sms');
+  const [modal, setModal] = useState(false);
   const [otp, setOtp] = useState('');
   const [twoStepVerified, setTwoStepVerified] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [initials, setInitials] = useState('');
+  const [states, setStates] = useState([]);
+  const [countries, setCountries] = useState([]);
+  const [profile, setProfile] = useState(null);
 
-  const showModal = (e) => {
-    e.preventDefault()
-    setModal(true)
-  }
+  const [data, setData] = useState({
+    firstName: '',
+    lastName: '',
+    role: '',
+    jobTitle: '',
+    profilePhoto: '',
+  });
+
+  const [passwordData, setPasswordData] = useState({
+    currentPassword: '',
+    newPassword: '',
+    confirmPassword: '',
+  });
+
+  const [notificationSettings, setNotificationSettings] = useState({
+    emailNewsUpdateNotification: false,
+    emailCommentNotification: false,
+    emailGoalDeadlineNotification: false,
+    pushCommentNotification: false,
+    pushGoalDeadlineNotification: false,
+  });
+
+  const [inputFormData, setInputFormData] = useState({
+    fullName: '',
+    firstName: '',
+    middleName: '',
+    lastName: '',
+    preferredName: '',
+    employeeID: '',
+    jobTitle: '',
+    employmentStatus: '',
+    phoneNo: '',
+    workNo: '',
+    homeNo: '',
+    address: '',
+    state: '',
+    country: '',
+    gender: '',
+    maritalStatus: '',
+    DOB: '',
+  });
+
+  const showModal = e => {
+    e.preventDefault();
+    setModal(true);
+  };
 
   const handleVerify = () => {
-    setTwoStepVerified(true)
-  }
+    setTwoStepVerified(true);
+  };
 
   const resetModals = () => {
-    setTwoStepVerified(false)
-    setModal(false)
-  }
+    setTwoStepVerified(false);
+    setModal(false);
+  };
 
-    return <>
+  /*********************** EMPLOYEE PUSH NOTIFICATIONS PREFERENCES ******************************/
+
+  const handleSwitchChange = event => {
+    const { name, checked } = event.target;
+    setNotificationSettings({ ...notificationSettings, [name]: checked });
+  };
+
+  const handleSubmit = async event => {
+    event.preventDefault();
+
+    const data = {
+      emailNewsUpdateNotification:
+        notificationSettings.emailNewsUpdateNotification ? true : false,
+      emailCommentNotification: notificationSettings.emailCommentNotification
+        ? true
+        : false,
+      emailGoalDeadlineNotification:
+        notificationSettings.emailGoalDeadlineNotification ? true : false,
+      pushCommentNotification: notificationSettings.pushCommentNotification
+        ? true
+        : false,
+      pushGoalDeadlineNotification:
+        notificationSettings.pushGoalDeadlineNotification ? true : false,
+    };
+
+    try {
+      setIsLoading(true);
+      const Token = Cookies.get('EmpToken');
+      console.log(Token);
+
+      // Send email notification preferences
+      const res1 = await axios.patch(
+        'https://pms-jq9o.onrender.com/api/v1/employee/notifications',
+
+        data,
+
+        {
+          headers: {
+            Authorization: `Bearer ${Token}`,
+          },
+        }
+      );
+      setIsLoading(false);
+
+      console.log(res1.data.data);
+
+      toast.success('Updated Successfully');
+      // Handle success
+      console.log('Form submitted successfully');
+    } catch (error) {
+      setIsLoading(false);
+      // Handle error
+      console.error('Error submitting form:', error);
+    }
+  };
+
+  /*********************** HANDLE EMPLOYEE FORM INPUTS ******************************/
+  const handleFormChange = event => {
+    const { name, value } = event.target;
+    setInputFormData({ ...inputFormData, [name]: value });
+  };
+
+  /*********************** SUBMIT EMPLOYEE PERSONAL INFORNATION ******************************/
+  const submitInputs = async event => {
+    event.preventDefault();
+    try {
+      setIsLoading(true);
+      const Token = Cookies.get('EmpToken');
+      const res = await axios.patch(
+        'https://pms-jq9o.onrender.com/api/v1/employee/editdetails',
+        inputFormData,
+        {
+          headers: {
+            Authorization: `Bearer ${Token}`,
+          },
+        }
+      );
+      console.log(res.data.data)
+
+      setData({
+        ...data,
+        firstName: res.data.data.firstName,
+        lastName: res.data.data.lastName,
+        jobTitle: res.data.data.jobTitle,
+        role: res.data.data.role,
+      });
+      setInitials(res.data.data.firstName[0] + res.data.data.lastName[0]);
+      setIsLoading(false);
+
+      console.log(res.data.data);
+
+      toast.success('Updated Successfully');
+    } catch (error) {
+      console.log(error.message);
+      setIsLoading(false);
+      toast.error(error.response.data.message);
+    }
+  };
+
+  /*********************** FETCH LIST OF COUNTRIES ******************************/
+  useEffect(() => {
+    const fetchCountries = async () => {
+      try {
+        const response = await axios.get(
+          'https://countriesnow.space/api/v0.1/countries'
+        );
+
+        setCountries(response.data.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    /*********************** FETCH CORRESPONDING STATES ******************************/
+    const fetchStates = async () => {
+      try {
+        setIsLoading(true);
+
+        const response = await axios.post(
+          'https://countriesnow.space/api/v0.1/countries/states',
+          {
+            country: inputFormData.country,
+          }
+        );
+        setIsLoading(false);
+        setStates(response.data.data.states);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchCountries();
+    if (inputFormData.country !== '') {
+      fetchStates();
+    }
+  }, [inputFormData.country]);
+
+  /********************** HANDLE PASSWORD CHANGE **************************/
+  const handlePasswordChange = event => {
+    const { name, value } = event.target;
+    setPasswordData({ ...passwordData, [name]: value });
+  };
+
+  /****************************** SUBMIT PASSWORD *************************/
+
+  const submitPasswordChange = async event => {
+    event.preventDefault();
+
+    try {
+      setIsLoading(true);
+      const Token = Cookies.get('EmpToken');
+      console.log(Token);
+
+      const res = await axios.patch(
+        'https://pms-jq9o.onrender.com/api/v1/employee/changePassword',
+        passwordData,
+        {
+          headers: {
+            Authorization: `Bearer ${Token}`,
+          },
+        }
+      );
+      setIsLoading(false);
+
+      toast.success('Password Successfully Changed');
+    } catch (error) {
+      setIsLoading(false);
+      toast.error(error.response.data.message);
+    }
+  };
+
+  /******************************** FILE UPLOAD *****************************/
+  const handleImageUpload = event => {
+    const file = event.target.files[0];
+    setProfile(file);
+  };
+
+  /******************************** SUBMIT FILE UPLOAD ********************************/
+  const handleSubmitProfile = async event => {
+    event.preventDefault();
+    const formdata = new FormData()
+    formdata.append('profile', profile)
+
+    setIsLoading(true);
+    const Token = Cookies.get('EmpToken');
+    await axios
+      .post('https://pms-jq9o.onrender.com/api/v1/employee/profile', formdata, {
+        headers: {
+          Authorization: `Bearer ${Token}`,
+        },
+      })
+      .then(response => {
+        setIsLoading(false);
+        toast.success(response.data.message);
+        setData({ ...data, profilePhoto: response.data.data.profilePhoto });
+        // Handle the response from the server
+      })
+      .catch(error => {
+        setIsLoading(false);
+        toast.error(error.response.data.message);
+        console.log(error);
+        // Handle any errors that occurred during the upload
+      });
+  };
+
+  /************************ FETCH EMPLOYEEE DETAILS *************************/
+
+  useEffect(() => {
+    const url = `https://pms-jq9o.onrender.com/api/v1/employee/findme`;
+    axios
+      .get(url, {
+        headers: { Authorization: `Bearer ${Cookies.get('EmpToken')}` },
+      })
+      .then(res => {
+        setInputFormData({
+          fullName: `${res.data.data.firstName} ${res.data.data.middleName ? res.data.data.middleName : '-Middle Name-'} ${res.data.data.lastName}`,
+          firstName: res.data.data.firstName,
+          preferredName: res.data.data.preferredName,
+          employeeID: res.data.data.employeeID,
+          jobTitle: res.data.data.jobTitle,
+          employmentStatus: res.data.data.employmentStatus,
+          phoneNo: res.data.data.phoneNo,
+          workNo: res.data.data.workNo,
+          homeNo: res.data.data.homeNo,
+          address: res.data.data.address,
+          state: res.data.data.state,
+          country: res.data.data.country,
+          gender: res.data.data.gender,
+          maritalStatus: res.data.data.maritalStatus,
+          DOB: res.data.data.DOB,
+          role: res.data.data.role,
+          workEmail: res.data.data.workEmail
+        });
+        console.log(res.data.data)
+        setData(res.data.data);
+        setInitials(res.data.data.firstName[0] + res.data.data.lastName[0]);
+      });
+  }, []);
+  /******************************** END ****************************************/
+  return (
+    <>
       <div className="emphome">
-      <Side />
-      <div className="empsettingsContainer">
-        <Navbar />
+        <Side />
+        <div className="empsettingsContainer">
+          <Navbar />
 
-        <div className="empsettingsHeading">
+          <div className="empsettingsHeading">
             <div className="empsettingsImgWrap">
-            <Avatar src={''} alt="Vitaly Rtishchev" color="blue" radius={100} size={150}>AA</Avatar>
+              <Avatar
+                src={data.profilePhoto}
+                alt={initials}
+                color="blue"
+                radius={100}
+                size={170}
+              >
+                {initials}
+              </Avatar>
             </div>
             <div className="empsettingsNameWrap">
-              <h1>Adebisi Akin</h1>
-              <p>Product Manager (PM)</p>
+              <h1>{data.firstName + ' ' + data.lastName}</h1>
+              <p>{data.jobTitle} ({data.role === 'Performance Manager' ? 'PM' : data.role === 'Hr Manager' ? 'HR' : data.role})</p>
             </div>
           </div>
 
           <div className="empsettingBottom">
-
             {/* Company Details Settings */}
             <div className="empsettingsContent">
               <div className="empleftSettingsContent">
                 <h2>Profile Details</h2>
-                <p>Reset and update you rname, username, email and phone number</p>
+                <p>
+                  Reset and update you rname, username, email and phone number
+                </p>
               </div>
 
-              <form action="">
+              <form onSubmit={submitInputs}>
                 <div className="inputWrapper">
-                  <label htmlFor="">Full Name</label>
-                  <input type="text" placeholder="First name ----Middle name---- Last Name"/>
+                  <label htmlFor="fullName">FullName</label>
+                  <input
+                    type="text"
+                    name="fullName"
+                    id="fullName"
+                    placeholder="First name ----Middle name---- Last Name"
+                    value={inputFormData.fullName}
+                    onChange={e => {
+                      const fullName = e.target.value;
+                      const [firstName, middleName, lastName] =
+                        fullName.split(' ');
+                      setInputFormData({
+                        ...inputFormData,
+                        firstName,
+                        middleName,
+                        lastName,
+                        fullName, // Add this line to update the fullName key in the inputFormData state object
+                      });
+                    }}
+                  />
                 </div>
 
                 <div className="inputContainer">
                   <div className="inputWrapper">
-                    <label htmlFor="">Preferred Name</label>
-                    <input type="text" />
+                    <label htmlFor="preferredName">Preferred Name</label>
+                    <input
+                      type="text"
+                      name="preferredName"
+                      id="preferredName"
+                      value={inputFormData.preferredName}
+                      onChange={handleFormChange}
+                      placeholder="Preferred Name"
+                    />
                   </div>
                   <div className="inputWrapper">
-                    <label htmlFor="">Employee ID</label>
-                    <input type="text" />
+                    <label htmlFor="employeeID">Employee ID</label>
+                    <input
+                      type="text"
+                      name="employeeID"
+                      id="employeeID"
+                      value={inputFormData.employeeID}
+                      onChange={handleFormChange}
+                      placeholder="Employee ID"
+                    />
                   </div>
                 </div>
 
                 <div className="inputContainer">
                   <div className="inputWrapper">
-                    <label htmlFor="">Job Title</label>
-                    <input type="text" />
+                    <label htmlFor="jobTitle">Job Title</label>
+                    <input
+                      type="text"
+                      name="jobTitle"
+                      id="jobTitle"
+                      value={inputFormData.jobTitle}
+                      onChange={handleFormChange}
+                      placeholder="jobTitle"
+                    />
                   </div>
                   <div className="inputWrapper">
-                    <label htmlFor="">Employment Status</label>
-                    <select name="" id="">
+                    <label htmlFor="employmentStatus">Employment Status</label>
+                    <select
+                      name="employmentStatus"
+                      id="employmentStatus"
+                      onChange={handleFormChange}
+                      value={inputFormData.employmentStatus}
+                    >
                       <option value="">--Select--</option>
                       <option value="Full Time">Full Time</option>
                       <option value="Part Time">Part Time</option>
@@ -87,58 +432,127 @@ const Empsettings = () => {
 
                 <div className="inputContainer">
                   <div className="inputWrapper">
-                    <label htmlFor="">Email</label>
-                    <input type="email" name="" id="" />
+                    <label htmlFor="email">Email</label>
+                    <input
+                      type="email"
+                      name="email"
+                      id="email"
+                      value={inputFormData.workEmail}
+                      onChange={handleFormChange}
+                      placeholder="email"
+                    />
                   </div>
                   <div className="inputWrapper">
-                    <label htmlFor="">Phone Number</label>
-                    <input type="text" />
+                    <label htmlFor="phoneNo">Phone Number</label>
+                    <input
+                      type="number"
+                      name="phoneNo"
+                      id="phoneNo"
+                      value={inputFormData.phoneNo}
+                      onChange={handleFormChange}
+                      placeholder="phone Number"
+                    />
                   </div>
                 </div>
 
                 <div className="inputContainer">
                   <div className="inputWrapper">
-                    <label htmlFor="">Work Number</label>
-                    <input type="text" />
+                    <label htmlFor="workNo">Work Number</label>
+                    <input
+                      type="number"
+                      name="workNo"
+                      id="workNo"
+                      value={inputFormData.workNo}
+                      onChange={handleFormChange}
+                      placeholder="Work Number"
+                    />
                   </div>
                   <div className="inputWrapper">
                     <label htmlFor="">Home Number</label>
-                    <input type="text" />
+                    <input
+                      type="text"
+                      name="homeNo"
+                      id="homeNo"
+                      value={inputFormData.homeNo}
+                      onChange={handleFormChange}
+                      placeholder="Home Number"
+                    />
                   </div>
                 </div>
 
                 <div className="inputWrapper">
                   <label htmlFor="">Address</label>
-                  <input type="text" />
+                  <input
+                    type="text"
+                    name="address"
+                    id="address"
+                    value={inputFormData.address}
+                    onChange={handleFormChange}
+                    placeholder="Enter your Company Address"
+                  />
                 </div>
 
                 <div className="inputContainer">
                   <div className="inputWrapper">
                     <label htmlFor="">Country</label>
-                    <select name="" id="">
-                      <option value="">--Select--</option>
+                    <select
+                      name="country"
+                      id="country"
+                      value={inputFormData.country}
+                      onChange={handleFormChange}
+                    >
+                      <option value="">-- Select a country --</option>
+                      {countries.map(country => (
+                        <option
+                          key={country.country_iso2}
+                          value={country.country_iso2}
+                        >
+                          {country.country}
+                        </option>
+                      ))}
                     </select>
                   </div>
                   <div className="inputWrapper">
                     <label htmlFor="">State</label>
-                    <select name="" id="">
-                      <option value="">--Select--</option>
+                    <select
+                      name="state"
+                      id="state"
+                      value={inputFormData.state}
+                      onChange={handleFormChange}
+                    >
+                      <option value="">-- Select a state --</option>
+                      {isLoading && (
+                        <option disabled>
+                          Fetching states, please wait...
+                        </option>
+                      )}
+                      {!isLoading &&
+                        states.map(state => (
+                          <option key={state.id} value={state.name}>
+                            {state.name}
+                          </option>
+                        ))}
                     </select>
                   </div>
                 </div>
 
                 <div className="inputContainer">
                   <div className="inputWrapper">
-                    <label htmlFor="">Gender</label>
-                    <select name="" id="">
+                    <label htmlFor="gender">Gender</label>
+                    <select name="gender" id="" onChange={handleFormChange} value={inputFormData.gender}>
                       <option value="">--Select--</option>
                       <option value="Male">Male</option>
                       <option value="Female">Female</option>
                     </select>
                   </div>
                   <div className="inputWrapper">
-                    <label htmlFor="">Marital Status</label>
-                    <select name="" id="">
+                    <label htmlFor="maritalStatus">Marital Status</label>
+                    <select
+                      name="maritalStatus"
+                      id="maritalStatus"
+                      onChange={handleFormChange}
+                      value={inputFormData.maritalStatus}
+                    >
                       <option value="">--Select--</option>
                       <option value="Married">Married</option>
                       <option value="Single">Single</option>
@@ -149,18 +563,38 @@ const Empsettings = () => {
 
                 <div className="inputContainer">
                   <div className="inputWrapper">
-                    <label htmlFor="">Date of Birth</label>
-                    <input type="date" name="" id="" />
+                    <label htmlFor="DOB">Date of Birth</label>
+                    <input
+                      type="date"
+                      name="DOB"
+                      id="DOB"
+                      onChange={handleFormChange}
+                    />
                   </div>
                   <div className="inputWrapper">
                     <label htmlFor="">Role</label>
-                    <input type="text" name="" id="" disabled/>
+                    <input
+                      type="text"
+                      name="role"
+                      id="role"
+                      value={inputFormData.role}
+                      onChange={handleFormChange}
+                    />
                   </div>
                 </div>
-                
+
                 <div className="empbuttonWrapper">
                   <button>Cancel</button>
-                  <button>Save</button>
+                  <button>
+                    {isLoading ? (
+                      <>
+                        <FaSpinner className="fa-spin" />
+                        &nbsp;Saving...
+                      </>
+                    ) : (
+                      'Save'
+                    )}
+                  </button>
                 </div>
               </form>
             </div>
@@ -169,17 +603,73 @@ const Empsettings = () => {
             <div className="empsettingsContent">
               <div className="empleftSettingsContent">
                 <h2>Profile Photo Upload</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat ea molestias repudiandae necessitatibus asperiores dolores</p>
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Quaerat ea molestias repudiandae necessitatibus asperiores
+                  dolores
+                </p>
               </div>
 
-              <form action="">
+              <form onSubmit={handleSubmitProfile}>
                 <div className="inputWrapper">
                   <label htmlFor="">Profile Picture</label>
-                  <input type="file" name="" id="" />
+                  <span style={{ display: 'flex', placeItems: 'center' }}>
+                    {profile ? (
+                      <img
+                        style={{
+                          borderRadius: '50%',
+                          width: '50px',
+                          height: '50px',
+                        }}
+                        src={URL.createObjectURL(profile)}
+                        alt="avatar"
+                      />
+                    ) : (
+                      <RxAvatar
+                        style={{
+                          borderRadius: '50%',
+                          width: '50px',
+                          height: '50px',
+                        }}
+                      />
+                    )}
+
+                    <label
+                      style={{ marginLeft: '50px' }}
+                      htmlFor="image-upload"
+                    >
+                      <span
+                        style={{
+                          padding: '12px 40px',
+                          backgroundColor: 'rgb(62, 69, 235)',
+                          color: 'white',
+                          borderRadius: '10px',
+                        }}
+                      >
+                        Upload a file
+                      </span>
+                      <input
+                        type="file"
+                        name="profile"
+                        id="image-upload"
+                        className="sr-only"
+                        onChange={handleImageUpload}
+                      />
+                    </label>
+                  </span>
                 </div>
-                <div className="empbuttonWrapper">
+                <div className="buttonWrapper">
                   <button>Cancel</button>
-                  <button>Upload</button>
+                  <button type="submit">
+                    {isLoading ? (
+                      <>
+                        <FaSpinner className="fa-spin" />
+                        &nbsp;Submitting...
+                      </>
+                    ) : (
+                      'Submit'
+                    )}
+                  </button>
                 </div>
               </form>
             </div>
@@ -188,12 +678,15 @@ const Empsettings = () => {
             <div className="empsettingsContent">
               <div className="empleftSettingsContent">
                 <h2>Login & security settings</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat ea molestias repudiandae necessitatibus asperiores dolores</p>
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Quaerat ea molestias repudiandae necessitatibus asperiores
+                  dolores
+                </p>
               </div>
 
               <div className="formWrapper">
-
-                <form action="">
+                <form onSubmit={submitPasswordChange}>
                   <h3>Change Password</h3>
                   <div className="inputWrapper">
                     <PasswordInput
@@ -202,6 +695,8 @@ const Empsettings = () => {
                       className="pswinput"
                       size="md"
                       radius="md"
+                      name="currentPassword"
+                      onChange={handlePasswordChange}
                     />
                   </div>
                   <div className="inputWrapper">
@@ -211,6 +706,8 @@ const Empsettings = () => {
                       className="pswinput"
                       size="md"
                       radius="md"
+                      name="newPassword"
+                      onChange={handlePasswordChange}
                     />
                   </div>
                   <div className="inputWrapper">
@@ -220,172 +717,226 @@ const Empsettings = () => {
                       className="pswinput"
                       size="md"
                       radius="md"
+                      name="confirmPassword"
+                      onChange={handlePasswordChange}
                     />
                   </div>
                   <div className="empbuttonWrapper">
-                    <button>Save Password</button>
+                    <button>
+                      {isLoading ? (
+                        <>
+                          <FaSpinner className="fa-spin" />
+                          &nbsp;Saving...
+                        </>
+                      ) : (
+                        'Save Password'
+                      )}
+                    </button>
                   </div>
                 </form>
 
                 <form action="">
                   <div className="verificationWrapper">
                     <h3>Two-step verification</h3>
-                    <button onClick={(e) => showModal(e)}>Enable</button>
+                    <button onClick={e => showModal(e)}>Enable</button>
                   </div>
                 </form>
               </div>
             </div>
 
             <div className="notificationsWrapper">
-              <form action="">
-
+              <form onSubmit={handleSubmit}>
+                {/* Email Notifications */}
                 <div className="topnotificationSection">
                   <div className="leftNotificationWrap">
                     <h2>Email Notifications</h2>
-                    <p>Get email notifications about what is going on when you are offline</p>
+                    <p>
+                      Get email notifications about what is going on when you
+                      are offline
+                    </p>
                   </div>
                   <div className="rightNotificationWrap">
-
-                      <div className="rightNotificationContent">
-                        <Switch
-                          color="violet"
-                          // checked={}
-                          // onChange={}
-                          size=""
-                          onLabel="ON"
-                          offLabel="OFF"
-                        />
-                        <div className="rightformcontent">
-                          <h3>News and Updates</h3>
-                          <p>Get emails to find out what is going on when you are offline</p>
-                        </div>
+                    <div className="rightNotificationContent">
+                      <Switch
+                        color="blue"
+                        name="emailNewsUpdateNotification"
+                        onChange={handleSwitchChange}
+                        defaultChecked={false}
+                        checked={
+                          notificationSettings.emailNewsUpdateNotification
+                        }
+                        onLabel="ON"
+                        offLabel="OFF"
+                      />
+                      <div className="rightformcontent">
+                        <h3>News and Updates</h3>
+                        <p>
+                          Get emails to find out what is going on when you are
+                          offline
+                        </p>
                       </div>
+                    </div>
 
-                      <div className="rightNotificationContent">
-                        <Switch
-                          color="violet"
-                          // checked={}
-                          // onChange={}
-                          onLabel="ON"
-                          offLabel="OFF"
-                        />
-                        <div className="rightformcontent">
-                          <h3>Comments</h3>
-                          <p>Feedback on your wall by supervisors</p>
-                        </div>
-                        
+                    <div className="rightNotificationContent">
+                      <Switch
+                        color="blue"
+                        name="emailCommentNotification"
+                        defaultChecked={false}
+                        onChange={handleSwitchChange}
+                        checked={notificationSettings.emailCommentNotification}
+                        onLabel="ON"
+                        offLabel="OFF"
+                      />
+                      <div className="rightformcontent">
+                        <h3>Comments</h3>
+                        <p>Feedback on your wall by supervisors</p>
                       </div>
+                    </div>
 
-                      <div className="rightNotificationContent">
-                        <Switch
-                          color="violet"
-                          // checked={}
-                          // onChange={}
-                          onLabel="ON"
-                          offLabel="OFF"
-                        />
-                        <div className="rightformcontent">
-                          <h3>Reminders</h3>
-                          <p>Reminders on your goals deadline</p>
-                        </div>
-                        
+                    <div className="rightNotificationContent">
+                      <Switch
+                        color="blue"
+                        name="emailGoalDeadlineNotification"
+                        defaultChecked={false}
+                        onChange={handleSwitchChange}
+                        checked={
+                          notificationSettings.emailGoalDeadlineNotification
+                        }
+                        onLabel="ON"
+                        offLabel="OFF"
+                      />
+                      <div className="rightformcontent">
+                        <h3>Reminders</h3>
+                        <p>Reminders on your goals deadline</p>
                       </div>
+                    </div>
                   </div>
                 </div>
 
+                {/* Push Notifications */}
                 <div className="bottomnotificationsection">
-                    <div className="leftNotificationWrap">
-                      <h2>Push Notifications</h2>
-                      <p>Get in-app notifications about what is going on when you are online</p>
-                    </div>
-                    <div className="rightNotificationWrap">
-                      <div className="rightNotificationContent">
-                        <Switch
-                          color="violet"
-                          // checked={}
-                          // onChange={}
-                          onLabel="ON"
-                          offLabel="OFF"
-                        />
-                        <div className="rightformcontent">
-                          <h3>Comments</h3>
-                          <p>Feedback on your wall by supervisors</p>
-                        </div>
+                  <div className="leftNotificationWrap">
+                    <h2>Push Notifications</h2>
+                    <p>
+                      Get in-app notifications about what is going on when you
+                      are online
+                    </p>
+                  </div>
+                  <div className="rightNotificationWrap">
+                    <div className="rightNotificationContent">
+                      <Switch
+                        color="blue"
+                        name="pushCommentNotification"
+                        defaultChecked={false}
+                        onChange={handleSwitchChange}
+                        checked={notificationSettings.pushCommentNotification}
+                        onLabel="ON"
+                        offLabel="OFF"
+                      />
+                      <div className="rightformcontent">
+                        <h3>Comments</h3>
+                        <p>Feedback on your wall by supervisors</p>
                       </div>
+                    </div>
 
-                      <div className="rightNotificationContent">
-                        <Switch
-                          color="violet"
-                          // checked={}
-                          // onChange={}
-                          onLabel="ON"
-                          offLabel="OFF"
-                        />
-                        <div className="rightformcontent">
-                          <h3>Reminders</h3>
-                          <p>Reminders on your goals deadline</p>
-                        </div>
+                    <div className="rightNotificationContent">
+                      <Switch
+                        color="blue"
+                        name="pushGoalDeadlineNotification"
+                        defaultChecked={false}
+                        onChange={handleSwitchChange}
+                        checked={
+                          notificationSettings.pushGoalDeadlineNotification
+                        }
+                        onLabel="ON"
+                        offLabel="OFF"
+                      />
+                      <div className="rightformcontent">
+                        <h3>Reminders</h3>
+                        <p>Reminders on your goals deadline</p>
                       </div>
                     </div>
+                  </div>
                 </div>
                 <div className="empbuttonWrapper">
                   <button>Cancel</button>
-                  <button>Save</button>
+                  <button>
+                    {isLoading ? (
+                      <>
+                        <FaSpinner className="fa-spin" />
+                        &nbsp;Saving...
+                      </>
+                    ) : (
+                      'Save'
+                    )}
+                  </button>
                 </div>
               </form>
             </div>
-
-          </div> 
-              
-      <div className={modal ? "twoStepModalWrapper" : "hide"}>
-        <div className={twoStepVerified ?  "hide" : "twoStepModal"}>
-          <h2>Your two-step verification</h2>
-          <p className="closeverifying" onClick={() => setModal(false)}>x</p>
-
-          <div className="verificationType">
-            <p>Choose verification method</p>
-            <div className="inputWrapper" onClick={() => setVerificationMethod('sms')} >
-              <input 
-                type="radio" 
-                checked={verificationMethod === 'sms' ? true : false}
-              />
-              <p>SMS</p>
-            </div>
-            <div className="inputWrapper" onClick={() => setVerificationMethod('email')} >
-              <input 
-                type="radio" 
-                checked={verificationMethod === 'email' ? true : false}
-              />
-              <p>Email</p>
-            </div>
           </div>
 
-          <div className="otpCode">
-            <p>Enter 6-digit code sent to your {verificationMethod === 'sms' ? 'SMS' : 'Email'}</p>
-            <OtpInput
-              value={otp}
-              numInputs={6}
-              renderSeparator={<span>&nbsp; &nbsp;</span>}
-              renderInput={props => <input {...props} />}
-              onChange={setOtp}
-            />
-          </div>
+          <div className={modal ? 'twoStepModalWrapper' : 'hide'}>
+            <div className={twoStepVerified ? 'hide' : 'twoStepModal'}>
+              <h2>Your two-step verification</h2>
+              <p className="closeverifying" onClick={() => setModal(false)}>
+                x
+              </p>
 
-          <button onClick={handleVerify}>Verify</button>
-        </div>
-        <div className={twoStepVerified ? "modalCongrats" : "hide"}>
-          <p className="closeverifying" onClick={() => resetModals()}>x</p>
-          <img src={require('../../../assets/img/copysuccess.png')} alt="" />
-          <h3>You have successfully
-          set up a two-step
-          Verification</h3>
-        </div>
+              <div className="verificationType">
+                <p>Choose verification method</p>
+                <div
+                  className="inputWrapper"
+                  onClick={() => setVerificationMethod('sms')}
+                >
+                  <input
+                    type="radio"
+                    checked={verificationMethod === 'sms' ? true : false}
+                  />
+                  <p>SMS</p>
+                </div>
+                <div
+                  className="inputWrapper"
+                  onClick={() => setVerificationMethod('email')}
+                >
+                  <input
+                    type="radio"
+                    checked={verificationMethod === 'email' ? true : false}
+                  />
+                  <p>Email</p>
+                </div>
+              </div>
+
+              <div className="otpCode">
+                <p>
+                  Enter 6-digit code sent to your{' '}
+                  {verificationMethod === 'sms' ? 'SMS' : 'Email'}
+                </p>
+                <OtpInput
+                  value={otp}
+                  numInputs={6}
+                  renderSeparator={<span>&nbsp; &nbsp;</span>}
+                  renderInput={props => <input {...props} />}
+                  onChange={setOtp}
+                />
+              </div>
+
+              <button onClick={handleVerify}>Verify</button>
+            </div>
+            <div className={twoStepVerified ? 'modalCongrats' : 'hide'}>
+              <p className="closeverifying" onClick={() => resetModals()}>
+                x
+              </p>
+              <img
+                src={require('../../../assets/img/copysuccess.png')}
+                alt=""
+              />
+              <h3>You have successfully set up a two-step Verification</h3>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+    </>
+  );
+};
 
-    </>;
-  };
-  
-  export default Empsettings;
-  
+export default Empsettings;

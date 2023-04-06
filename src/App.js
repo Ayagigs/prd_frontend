@@ -46,6 +46,7 @@ import ForgotPasswordPage from './pages/forgotPassword/ForgotPasswordPage';
 import ResetPasswordPage from './pages/resetPassword/ResetPasswordPage';
 import Maingoalreview from './empdashboard/pages/maingoalreview/Maingoalreview';
 import Goalreviewapp from './empdashboard/pages/goalreviewapp/Goalreviewapp';
+import Messaging from './pages/Messaging/Messaging';
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
@@ -104,6 +105,9 @@ function App() {
             <Route path="performance">
               <Route index element={<Performance />} />
             </Route>
+            <Route path="message">
+              <Route index element={<Messaging />} />
+            </Route>
             <Route path="settings">
               <Route index element={<Settings />} />
             </Route>
@@ -128,14 +132,17 @@ function App() {
                 path="/emp-dashboard/maingoalreview"
                 element={<Maingoalreview />}
               />
+              {/* self appraisal form */}
               <Route
                 path="/emp-dashboard/goalreview/appraisalform"
                 element={<Appraisal />}
               />
+              {/* 360 appaisal form */}
               <Route
                 path="/emp-dashboard/appraisal/appraisal360"
                 element={<Appraisal360 />}
               />
+              {/* Goal Review Form */}
               <Route
                 path="/emp-dashboard/maingoalreview/goalreviewapp"
                 element={<Goalreviewapp />}

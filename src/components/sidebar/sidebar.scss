@@ -2,7 +2,10 @@
   
   position:fixed;
   width: 250px;
-  height: 1000px;
+  height: 99vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   left: 0px;
   top: 10px;
   background: #ffffff;
@@ -109,8 +112,7 @@
    .bottom{
     display: flex;
     flex-direction: row;
-    margin: 180px 10px 0px ;
-    width: 235px;
+    width: 100%;
     // border: 2px 0 0 0;
     // border-color: #f80a0a;
     // border: 0.2px solid rgb(230, 227, 227);
@@ -120,6 +122,7 @@
     // border-top: 0;
     padding-top: 10px;
     padding-left: 30px;
+    padding-bottom: 30px;
     border-right: 0;
     border-left: 0;
     border-bottom: 0;
@@ -130,6 +133,14 @@
     justify-content: space-between;
     padding-left: 0px;
     align-items: center;
+
+    img{
+      border: 1px solid rgb(173, 173, 173);
+      height: 40px;
+      width: 40px;
+      border-radius: 100%;
+      object-fit: cover;
+    }
   }
 
   .namecontainer{
