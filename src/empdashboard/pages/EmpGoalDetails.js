@@ -62,7 +62,7 @@ const EmpGoalDetails = ({goal}) => {
         const url = `https://pms-jq9o.onrender.com/api/v1/goal/edit/${goal._id}`
         axios.patch(url, {
             isCompleted: status === 'Completed' ? true : false,
-            status: {status},
+            status: status === 'Completed' ? 'Completed' : new Date() >goal.enddate ? 'Overdue' : new Date() < goal.startdate ? 'Not Started' : 'In Progress',
             reviewers: idArray
         }, {headers: {Authorization: `Bearer ${Cookies.get('EmpToken')}`}})
         .then(res => {
@@ -124,7 +124,6 @@ const EmpGoalDetails = ({goal}) => {
                                     }
                                 </select>
                                 <div className="reviewersDetails">
-                                    {console.log(reviewers)}
                                 {
                                     reviewers.map((el) => {
                                         return(
