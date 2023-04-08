@@ -21,8 +21,6 @@ const Empsettings = () => {
   const [states, setStates] = useState([]);
   const [countries, setCountries] = useState([]);
   const [profile, setProfile] = useState(null);
-  const [playerId, setPlayerId] = useState(null);
-  const [uploading, setUploading] = useState(false);
 
   const [data, setData] = useState({
     firstName: '',
@@ -81,71 +79,10 @@ const Empsettings = () => {
   };
 
   /*********************** EMPLOYEE PUSH NOTIFICATIONS PREFERENCES ******************************/
-  window.OneSignal = window.OneSignal || [];
-  const OneSignal = window.OneSignal;
+
   const handleSwitchChange = event => {
     const { name, checked } = event.target;
-
-    setNotificationSettings(prevSettings => ({
-      ...prevSettings,
-      [name]: checked,
-    }));
-
-    const isPushNotification =
-      name === 'pushCommentNotification' ||
-      name === 'pushGoalDeadlineNotification';
-
-    if (isPushNotification) {
-      if (checked) {
-        console.log('Enabling push notifications...');
-        initializeOneSignal();
-        OneSignalSubscription();
-
-        OneSignal.getUserId().then(playerId => {
-          console.log('OneSignal Player ID:', playerId);
-          setPlayerId(playerId);
-        });
-      } else {
-        console.log('Disabling push notifications...');
-        disableOneSignalSubscription();
-      }
-    }
-  };
-  const initializeOneSignal = () => {
-    if (!OneSignal.initialized) {
-      OneSignal.push(() => {
-        OneSignal.init({
-          appId: 'e91c23cb-7385-464c-9c4d-9abd2e0fd10e',
-          safari_web_id:
-            'web.onesignal.auto.0f5ba526-5606-4a7b-90fa-69fc66b30a70',
-          notifyButton: {
-            enable: true,
-          },
-          allowLocalhostAsSecureOrigin: true,
-        });
-
-        // Check if push notifications are enabled for the user
-        OneSignal.isPushNotificationsEnabled(enabled => {
-          if (!enabled) {
-            console.log('Enabled');
-            OneSignal.showHttpPrompt();
-          }
-          console.log('Not Enabled');
-        });
-      });
-    }
-  };
-
-  const disableOneSignalSubscription = () => {
-    OneSignal.push(() => {
-      OneSignal.setSubscription(false);
-    });
-  };
-
-  const OneSignalSubscription = () => {
-    OneSignal.push(() => {
-      OneSignal.setSubscription(true);
-    });
+    setNotificationSettings({ ...notificationSettings, [name]: checked });
   };
 
   const handleSubmit = async event => {
@@ -172,9 +109,11 @@ const Empsettings = () => {
       console.log(Token);
 
       // Send email notification preferences
-      const response = await axios.patch(
-        `https://pms-jq9o.onrender.com/api/v1/employee/notifications/${playerId}`,
+      const res1 = await axios.patch(
+        'https://pms-jq9o.onrender.com/api/v1/employee/notifications',
+
         data,
+
         {
           headers: {
             Authorization: `Bearer ${Token}`,
@@ -183,7 +122,7 @@ const Empsettings = () => {
       );
       setIsLoading(false);
 
-      console.log(response.data);
+      console.log(res1.data.data);
 
       toast.success('Updated Successfully');
       // Handle success
@@ -191,7 +130,6 @@ const Empsettings = () => {
     } catch (error) {
       setIsLoading(false);
       // Handle error
-      toast.error(error.response.data.message);
       console.error('Error submitting form:', error);
     }
   };
@@ -313,7 +251,6 @@ const Empsettings = () => {
 
   /******************************** FILE UPLOAD *****************************/
   const handleImageUpload = event => {
-    setUploading(true);
     const file = event.target.files[0];
     setProfile(file);
   };
@@ -321,8 +258,8 @@ const Empsettings = () => {
   /******************************** SUBMIT FILE UPLOAD ********************************/
   const handleSubmitProfile = async event => {
     event.preventDefault();
-    const formdata = new FormData();
-    formdata.append('profile', profile);
+    const formdata = new FormData()
+    formdata.append('profile', profile)
 
     setIsLoading(true);
     const Token = Cookies.get('EmpToken');
@@ -333,20 +270,14 @@ const Empsettings = () => {
         },
       })
       .then(response => {
-        console.log(response.data);
         setIsLoading(false);
-
-        setUploading(false);
-        toast.success('image Uploaded Successfully');
+        toast.success(response.data.message);
         setData({ ...data, profilePhoto: response.data.data.profilePhoto });
-        setProfile(response.data.data.profilePhoto);
-
         // Handle the response from the server
       })
       .catch(error => {
         setIsLoading(false);
-        setUploading(false);
-        // toast.error(error.response.data.message);
+        toast.error(error.response.data.message);
         console.log(error);
         // Handle any errors that occurred during the upload
       });
@@ -395,32 +326,19 @@ const Empsettings = () => {
 
           <div className="empsettingsHeading">
             <div className="empsettingsImgWrap">
-              {uploading ? (
-                <Avatar
-                  src={data.profilePhoto}
-                  alt={initials}
-                  color="blue"
-                  radius={100}
-                  size={150}
-                >
-                  {initials}
-                </Avatar>
-              ) : (
-                <Avatar
-                  src={profile}
-                  alt={initials}
-                  color="blue"
-                  radius={100}
-                  size={150}
-                >
-                  {initials}
-                </Avatar>
-              )}
+              <Avatar
+                src={data.profilePhoto}
+                alt={initials}
+                color="blue"
+                radius={100}
+                size={170}
+              >
+                {initials}
+              </Avatar>
             </div>
             <div className="empsettingsNameWrap">
-              <h1 style={{ color: '#3e45eb' }}>{data.firstName}</h1>
-              <p>{data.role} (PM)</p>
-
+              <h1>{data.firstName + ' ' + data.lastName}</h1>
+              <p>{data.jobTitle} ({data.role === 'Performance Manager' ? 'PM' : data.role === 'Hr Manager' ? 'HR' : data.role})</p>
             </div>
           </div>
 
@@ -703,7 +621,7 @@ const Empsettings = () => {
                           width: '50px',
                           height: '50px',
                         }}
-                        src={uploading ? URL.createObjectURL(profile) : profile}
+                        src={URL.createObjectURL(profile)}
                         alt="avatar"
                       />
                     ) : (
