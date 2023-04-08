@@ -15,7 +15,7 @@ const Settings = () => {
   const [states, setStates] = useState([]);
   const [countries, setCountries] = useState([]);
   const [profile, setProfile] = useState(null);
-  const [uploading, setUploading] = useState(false)
+  const [uploading, setUploading] = useState(false);
   const [data, setData] = useState({
     firstName: '',
     lastName: '',
@@ -23,7 +23,6 @@ const Settings = () => {
     profilePhoto: '',
   });
   const [initials, setInitials] = useState('');
-
 
   const [passwordData, setPasswordData] = useState({
     oldPassword: '',
@@ -58,24 +57,24 @@ const Settings = () => {
   });
   const [option1, setOption1] = useState({
     text: '',
-    value: ''
-  })
+    value: '',
+  });
   const [option2, setOption2] = useState({
     text: '',
-    value: ''
-  })
+    value: '',
+  });
   const [option3, setOption3] = useState({
     text: '',
-    value: ''
-  })
+    value: '',
+  });
   const [option4, setOption4] = useState({
     text: '',
-    value: ''
-  })
+    value: '',
+  });
   const [option5, setOption5] = useState({
     text: '',
-    value: ''
-  })
+    value: '',
+  });
   const [performanceQuestions, setPerformanceQuestions] = useState({
     question1: '',
     question2: '',
@@ -84,7 +83,7 @@ const Settings = () => {
     question5: '',
     // category: "Review",
     // reviewType: "Performance Review"
-  })
+  });
   const [appraisalQuestions, setAppraisalQuestions] = useState({
     question1: '',
     question2: '',
@@ -93,7 +92,7 @@ const Settings = () => {
     question5: '',
     // category: "Review",
     // reviewType: "Performance Review"
-  })
+  });
   const [selfQuestions, setSelfQuestions] = useState({
     question1: '',
     question2: '',
@@ -102,7 +101,7 @@ const Settings = () => {
     question5: '',
     // category: "Review",
     // reviewType: "Performance Review"
-  })
+  });
   const [competencyQuestions, setCompetencyQuestions] = useState({
     question1: '',
     question2: '',
@@ -111,7 +110,7 @@ const Settings = () => {
     question5: '',
     // category: "Review",
     // reviewType: "Performance Review"
-  })
+  });
   const [goalQuestions, setGoalQuestions] = useState({
     question1: '',
     question2: '',
@@ -120,10 +119,8 @@ const Settings = () => {
     question5: '',
     // category: "Review",
     // reviewType: "Performance Review"
-  })
-  
+  });
 
-  
   useEffect(() => {
     const url = `https://pms-jq9o.onrender.com/api/v1/admin/findme`;
     axios
@@ -131,12 +128,13 @@ const Settings = () => {
         headers: { Authorization: `Bearer ${Cookies.get('Token')}` },
       })
       .then(res => {
+        console.log(res.data.data);
         setPersonalFormData({
           firstName: res.data.data.adminUser.firstName,
           lastName: res.data.data.adminUser.lastName,
           email: res.data.data.adminUser.email,
           role: res.data.data.adminUser.role,
-        })
+        });
         setPerformanceReviewData({
           midYearStartDate: res.data.data.company[0].midYearStartDate,
           midYearEndDate: res.data.data.company[0].midYearEndDate,
@@ -144,8 +142,8 @@ const Settings = () => {
           fullYearEndDate: res.data.data.company[0].fullYearEndDate,
           appraisalStartDate: res.data.data.company[0].appraisalStartDate,
           appraisalEndDate: res.data.data.company[0].appraisalEndDate,
-        })
-        setProfile( res.data.data.adminUser.profilePhoto)
+        });
+        setProfile(res.data.data.adminUser.profilePhoto);
         setCompanyFormData({
           companyName: res.data.data.company[0].companyName,
           businessType: res.data.data.company[0].businessType,
@@ -155,9 +153,12 @@ const Settings = () => {
           state: res.data.data.company[0].state,
           numOfEmployees: res.data.data.company[0].numOfEmployees,
           companyRegNo: res.data.data.company[0].companyRegNo,
-        })
-        setData(res.data.data.adminUser)
-        setInitials(res.data.data.adminUser.firstName[0] + res.data.data.adminUser.lastName[0])
+        });
+        setData(res.data.data.adminUser);
+        setInitials(
+          res.data.data.adminUser.firstName[0] +
+            res.data.data.adminUser.lastName[0]
+        );
       });
   }, []);
 
@@ -202,9 +203,11 @@ const Settings = () => {
         }
       );
 
-      setData({...data, companyName: res.data.data.updateCompany.companyName})
+      setData({
+        ...data,
+        companyName: res.data.data.updateCompany.companyName,
+      });
       setIsLoading(false);
-
 
       toast.success('Updated Successfully');
     } catch (error) {
@@ -229,7 +232,6 @@ const Settings = () => {
         }
       );
       setIsLoading(false);
-
 
       toast.success('Updated Successfully');
     } catch (error) {
@@ -256,10 +258,16 @@ const Settings = () => {
         }
       );
 
-      setData({...data, firstName: res.data.data.updateInfo.firstName, lastName: res.data.data.updateInfo.lastName})
-      setInitials(res.data.data.updateInfo.firstName[0] + res.data.data.updateInfo.lastName[0])
+      setData({
+        ...data,
+        firstName: res.data.data.updateInfo.firstName,
+        lastName: res.data.data.updateInfo.lastName,
+      });
+      setInitials(
+        res.data.data.updateInfo.firstName[0] +
+          res.data.data.updateInfo.lastName[0]
+      );
       setIsLoading(false);
-
 
       toast.success('Updated Successfully');
     } catch (error) {
@@ -288,8 +296,8 @@ const Settings = () => {
   };
 
   const handleImageUpload = event => {
-    setUploading(true)
-    setProfile(event.target.files[0])
+    setUploading(true);
+    setProfile(event.target.files[0]);
 
     // const url = `https://pms-jq9o.onrender.com/api/v1/admin/photoupload`
 
@@ -304,428 +312,578 @@ const Settings = () => {
 
   const handleSubmitProfile = async event => {
     event.preventDefault();
-    const formdata = new FormData()
-    formdata.append('profile', profile)
-    
+    const formdata = new FormData();
+    formdata.append('profile', profile);
+
     setIsLoading(true);
     const Token = Cookies.get('Token');
     await axios
-    .post('https://pms-jq9o.onrender.com/api/v1/admin/photoupload', formdata, {
-      headers: {
-          Authorization: `Bearer ${Token}`,
-        },
-      })
+      .post(
+        'https://pms-jq9o.onrender.com/api/v1/admin/photoupload',
+        formdata,
+        {
+          headers: {
+            Authorization: `Bearer ${Token}`,
+          },
+        }
+      )
       .then(response => {
         setIsLoading(false);
-        setUploading(false)
-        toast.success("image Uploaded Successfully");
-        setData({...data, profilePhoto: response.data.data.profilePhoto})
-        setProfile(response.data.data.profilePhoto)
+        setUploading(false);
+        toast.success('image Uploaded Successfully');
+        setData({ ...data, profilePhoto: response.data.data.profilePhoto });
+        setProfile(response.data.data.profilePhoto);
         // Handle the response from the server
       })
       .catch(error => {
         setIsLoading(false);
-        setUploading(true)
+        setUploading(true);
         // Handle any errors that occurred during the upload
       });
   };
 
-  const handlePerformanceQuestions = (e) => {
-    e.preventDefault()
-    const url = `https://pms-jq9o.onrender.com/api/v1/question/setquestion/${Cookies.get('companyID')}`
-    setIsLoading(true)
+  const handlePerformanceQuestions = e => {
+    e.preventDefault();
+    const url = `https://pms-jq9o.onrender.com/api/v1/question/setquestion/${Cookies.get(
+      'companyID'
+    )}`;
+    setIsLoading(true);
 
-    axios.post(url, {
-      questions: [
+    axios
+      .post(
+        url,
         {
-          text: performanceQuestions.question1,
-          order: 1
+          questions: [
+            {
+              text: performanceQuestions.question1,
+              order: 1,
+            },
+            {
+              text: performanceQuestions.question2,
+              order: 2,
+            },
+            {
+              text: performanceQuestions.question3,
+              order: 3,
+            },
+            {
+              text: performanceQuestions.question4,
+              order: 4,
+            },
+            {
+              text: performanceQuestions.question5,
+              order: 5,
+            },
+          ],
+          category: 'Review',
+          reviewType: 'Performance Review',
         },
         {
-          text: performanceQuestions.question2,
-          order: 2
-        },
-        {
-          text: performanceQuestions.question3,
-          order: 3
-        },
-        {
-          text: performanceQuestions.question4,
-          order: 4
-        },
-        {
-          text: performanceQuestions.question5,
-          order: 5
-        },
-      ],
-      category: 'Review',
-      reviewType: 'Performance Review'
-    }, {
-      headers: {
-        Authorization: `Bearer ${Cookies.get('Token')}`,
-      },
-    }).then(res => {
-      console.log(res.data)
-      setIsLoading(false)
-      toast.success("Questions Updated Successfully");
-    }).catch(error => {
-      setIsLoading(false);
-      console.log(error);
-      // Handle any errors that occurred during the upload
-    });
-  }
+          headers: {
+            Authorization: `Bearer ${Cookies.get('Token')}`,
+          },
+        }
+      )
+      .then(res => {
+        console.log(res.data);
+        setIsLoading(false);
+        toast.success('Questions Updated Successfully');
+      })
+      .catch(error => {
+        setIsLoading(false);
+        console.log(error);
+        // Handle any errors that occurred during the upload
+      });
+  };
 
-  const handleAppraisalQuestons = (e) => {
-    e.preventDefault()
-    const url = `https://pms-jq9o.onrender.com/api/v1/question/setquestion/${Cookies.get('companyID')}`
-    setIsLoading(true)
+  const handleAppraisalQuestons = e => {
+    e.preventDefault();
+    const url = `https://pms-jq9o.onrender.com/api/v1/question/setquestion/${Cookies.get(
+      'companyID'
+    )}`;
+    setIsLoading(true);
 
-    axios.post(url, {
-      questions: [
+    axios
+      .post(
+        url,
         {
-          text: appraisalQuestions.question1,
-          order: 1
+          questions: [
+            {
+              text: appraisalQuestions.question1,
+              order: 1,
+            },
+            {
+              text: appraisalQuestions.question2,
+              order: 2,
+            },
+            {
+              text: appraisalQuestions.question3,
+              order: 3,
+            },
+            {
+              text: appraisalQuestions.question4,
+              order: 4,
+            },
+            {
+              text: appraisalQuestions.question5,
+              order: 5,
+            },
+          ],
+          category: 'Review',
+          reviewType: '360 Appraisal',
         },
         {
-          text: appraisalQuestions.question2,
-          order: 2
-        },
-        {
-          text: appraisalQuestions.question3,
-          order: 3
-        },
-        {
-          text: appraisalQuestions.question4,
-          order: 4
-        },
-        {
-          text: appraisalQuestions.question5,
-          order: 5
-        },
-      ],
-      category: 'Review',
-      reviewType: '360 Appraisal'
-    }, {
-      headers: {
-        Authorization: `Bearer ${Cookies.get('Token')}`,
-      },
-    }).then(res => {
-      console.log(res.data.data)
-      setIsLoading(false)
-      toast.success("Questions Updated Successfully");
-    }).catch(error => {
-      setIsLoading(false);
-      console.log(error);
-      // Handle any errors that occurred during the upload
-    });
-  }
+          headers: {
+            Authorization: `Bearer ${Cookies.get('Token')}`,
+          },
+        }
+      )
+      .then(res => {
+        console.log(res.data.data);
+        setIsLoading(false);
+        toast.success('Questions Updated Successfully');
+      })
+      .catch(error => {
+        setIsLoading(false);
+        console.log(error);
+        // Handle any errors that occurred during the upload
+      });
+  };
 
-  const handleSelfQuestions = (e) => {
-    e.preventDefault()
-    const url = `https://pms-jq9o.onrender.com/api/v1/question/setquestion/${Cookies.get('companyID')}`
-    setIsLoading(true)
+  const handleSelfQuestions = e => {
+    e.preventDefault();
+    const url = `https://pms-jq9o.onrender.com/api/v1/question/setquestion/${Cookies.get(
+      'companyID'
+    )}`;
+    setIsLoading(true);
 
-    axios.post(url, {
-      questions: [
+    axios
+      .post(
+        url,
         {
-          text: selfQuestions.question1,
-          order: 1
+          questions: [
+            {
+              text: selfQuestions.question1,
+              order: 1,
+            },
+            {
+              text: selfQuestions.question2,
+              order: 2,
+            },
+            {
+              text: selfQuestions.question3,
+              order: 3,
+            },
+            {
+              text: selfQuestions.question4,
+              order: 4,
+            },
+            {
+              text: selfQuestions.question5,
+              order: 5,
+            },
+          ],
+          category: 'Review',
+          reviewType: 'Self Appraisal',
         },
         {
-          text: selfQuestions.question2,
-          order: 2
-        },
-        {
-          text: selfQuestions.question3,
-          order: 3
-        },
-        {
-          text: selfQuestions.question4,
-          order: 4
-        },
-        {
-          text: selfQuestions.question5,
-          order: 5
-        },
-      ],
-      category: 'Review',
-      reviewType: 'Self Appraisal'
-    }, {
-      headers: {
-        Authorization: `Bearer ${Cookies.get('Token')}`,
-      },
-    }).then(res => {
-      console.log(res.data.data)
-      setIsLoading(false)
-      toast.success("Questions Updated Successfully");
-    }).catch(error => {
-      setIsLoading(false);
-      console.log(error);
-      // Handle any errors that occurred during the upload
-    });
-  }
+          headers: {
+            Authorization: `Bearer ${Cookies.get('Token')}`,
+          },
+        }
+      )
+      .then(res => {
+        console.log(res.data.data);
+        setIsLoading(false);
+        toast.success('Questions Updated Successfully');
+      })
+      .catch(error => {
+        setIsLoading(false);
+        console.log(error);
+        // Handle any errors that occurred during the upload
+      });
+  };
 
-  const handleGoalQuestions = (e) => {
-    e.preventDefault()
-    const url = `https://pms-jq9o.onrender.com/api/v1/question/setquestion/${Cookies.get('companyID')}`
-    setIsLoading(true)
+  const handleGoalQuestions = e => {
+    e.preventDefault();
+    const url = `https://pms-jq9o.onrender.com/api/v1/question/setquestion/${Cookies.get(
+      'companyID'
+    )}`;
+    setIsLoading(true);
 
-    axios.post(url, {
-      questions: [
+    axios
+      .post(
+        url,
         {
-          text: goalQuestions.question1,
-          order: 1
+          questions: [
+            {
+              text: goalQuestions.question1,
+              order: 1,
+            },
+            {
+              text: goalQuestions.question2,
+              order: 2,
+            },
+            {
+              text: goalQuestions.question3,
+              order: 3,
+            },
+            {
+              text: goalQuestions.question4,
+              order: 4,
+            },
+            {
+              text: goalQuestions.question5,
+              order: 5,
+            },
+          ],
+          category: 'Review',
+          reviewType: 'Goal Review',
         },
         {
-          text: goalQuestions.question2,
-          order: 2
-        },
-        {
-          text: goalQuestions.question3,
-          order: 3
-        },
-        {
-          text: goalQuestions.question4,
-          order: 4
-        },
-        {
-          text: goalQuestions.question5,
-          order: 5
-        },
-      ],
-      category: 'Review',
-      reviewType: 'Goal Review'
-    }, {
-      headers: {
-        Authorization: `Bearer ${Cookies.get('Token')}`,
-      },
-    }).then(res => {
-      console.log(res.data.data)
-      setIsLoading(false)
-      toast.success("Questions Updated Successfully");
-    }).catch(error => {
-      setIsLoading(false);
-      console.log(error);
-      // Handle any errors that occurred during the upload
-    });
-  }
+          headers: {
+            Authorization: `Bearer ${Cookies.get('Token')}`,
+          },
+        }
+      )
+      .then(res => {
+        console.log(res.data.data);
+        setIsLoading(false);
+        toast.success('Questions Updated Successfully');
+      })
+      .catch(error => {
+        setIsLoading(false);
+        console.log(error);
+        // Handle any errors that occurred during the upload
+      });
+  };
 
-  const handleCompetencyQuestions = (e) => {
-    e.preventDefault()
-    const url = `https://pms-jq9o.onrender.com/api/v1/question/setquestion/${Cookies.get('companyID')}`
-    setIsLoading(true)
+  const handleCompetencyQuestions = e => {
+    e.preventDefault();
+    const url = `https://pms-jq9o.onrender.com/api/v1/question/setquestion/${Cookies.get(
+      'companyID'
+    )}`;
+    setIsLoading(true);
 
-    axios.post(url, {
-      questions: [
+    axios
+      .post(
+        url,
         {
-          text: competencyQuestions.question1,
-          order: 1
+          questions: [
+            {
+              text: competencyQuestions.question1,
+              order: 1,
+            },
+            {
+              text: competencyQuestions.question2,
+              order: 2,
+            },
+            {
+              text: competencyQuestions.question3,
+              order: 3,
+            },
+            {
+              text: competencyQuestions.question4,
+              order: 4,
+            },
+            {
+              text: competencyQuestions.question5,
+              order: 5,
+            },
+          ],
+          category: 'Competency',
+          reviewType: 'Competency',
         },
         {
-          text: competencyQuestions.question2,
-          order: 2
-        },
-        {
-          text: competencyQuestions.question3,
-          order: 3
-        },
-        {
-          text: competencyQuestions.question4,
-          order: 4
-        },
-        {
-          text: competencyQuestions.question5,
-          order: 5
-        },
-      ],
-      category: 'Competency',
-      reviewType: 'Competency'
-    }, {
-      headers: {
-        Authorization: `Bearer ${Cookies.get('Token')}`,
-      },
-    }).then(res => {
-      console.log(res.data.data)
-      setIsLoading(false)
-      toast.success("Questions Updated Successfully");
-    }).catch(error => {
-      setIsLoading(false);
-      console.log(error);
-      // Handle any errors that occurred during the upload
-    });
-  }
+          headers: {
+            Authorization: `Bearer ${Cookies.get('Token')}`,
+          },
+        }
+      )
+      .then(res => {
+        console.log(res.data.data);
+        setIsLoading(false);
+        toast.success('Questions Updated Successfully');
+      })
+      .catch(error => {
+        setIsLoading(false);
+        console.log(error);
+        // Handle any errors that occurred during the upload
+      });
+  };
 
   useEffect(() => {
     const Token = Cookies.get('Token');
 
-    axios.get(`https://pms-jq9o.onrender.com/api/v1/question/getQuestions/${Cookies.get('companyID')}/Performance Review/Review`,  {
-      headers: {
-          Authorization: `Bearer ${Token}`,
-        },
-    }).then(res => {
-      setPerformanceQuestions({
-        question1: res.data.data.sortedQuestion[0].text,
-        question2: res.data.data.sortedQuestion[1].text,
-        question3: res.data.data.sortedQuestion[2].text,
-        question4: res.data.data.sortedQuestion[3].text,
-        question5: res.data.data.sortedQuestion[4].text
-      })
+    axios
+      .get(
+        `https://pms-jq9o.onrender.com/api/v1/question/getQuestions/${Cookies.get(
+          'companyID'
+        )}/Performance Review/Review`,
+        {
+          headers: {
+            Authorization: `Bearer ${Token}`,
+          },
+        }
+      )
+      .then(res => {
+        setPerformanceQuestions({
+          question1: res.data.data.sortedQuestion[0].text,
+          question2: res.data.data.sortedQuestion[1].text,
+          question3: res.data.data.sortedQuestion[2].text,
+          question4: res.data.data.sortedQuestion[3].text,
+          question5: res.data.data.sortedQuestion[4].text,
+        });
 
-      
-      
-      if(res.data.data.sortedOption.length > 0){
-        setOption1({text: res.data.data.sortedOption[0].text, value: res.data.data.sortedOption[0].value})
-        setOption2({text: res.data.data.sortedOption[1].text, value: res.data.data.sortedOption[1].value})
-        setOption3({text: res.data.data.sortedOption[2].text, value: res.data.data.sortedOption[2].value})
-        setOption4({text: res.data.data.sortedOption[3].text, value: res.data.data.sortedOption[3].value})
-        setOption5({text: res.data.data.sortedOption[4].text, value: res.data.data.sortedOption[4].value})
-      }
-    })
-    
-    
-    axios.get(`https://pms-jq9o.onrender.com/api/v1/question/getQuestions/${Cookies.get('companyID')}/360 Appraisal/Review`,  {
-      headers: {
-          Authorization: `Bearer ${Token}`,
-        },
-      }).then(res => {
-      setAppraisalQuestions({
-        question1: res.data.data.sortedQuestion[0].text,
-        question2: res.data.data.sortedQuestion[1].text,
-        question3: res.data.data.sortedQuestion[2].text,
-        question4: res.data.data.sortedQuestion[3].text,
-        question5: res.data.data.sortedQuestion[4].text
-      })
-      
-      
-      
+        if (res.data.data.sortedOption.length > 0) {
+          setOption1({
+            text: res.data.data.sortedOption[0].text,
+            value: res.data.data.sortedOption[0].value,
+          });
+          setOption2({
+            text: res.data.data.sortedOption[1].text,
+            value: res.data.data.sortedOption[1].value,
+          });
+          setOption3({
+            text: res.data.data.sortedOption[2].text,
+            value: res.data.data.sortedOption[2].value,
+          });
+          setOption4({
+            text: res.data.data.sortedOption[3].text,
+            value: res.data.data.sortedOption[3].value,
+          });
+          setOption5({
+            text: res.data.data.sortedOption[4].text,
+            value: res.data.data.sortedOption[4].value,
+          });
+        }
+      });
 
-      if(res.data.data.sortedOption.length > 0){
-        setOption1({text: res.data.data.sortedOption[0].text, value: res.data.data.sortedOption[0].value})
-        setOption2({text: res.data.data.sortedOption[1].text, value: res.data.data.sortedOption[1].value})
-        setOption3({text: res.data.data.sortedOption[2].text, value: res.data.data.sortedOption[2].value})
-        setOption4({text: res.data.data.sortedOption[3].text, value: res.data.data.sortedOption[3].value})
-        setOption5({text: res.data.data.sortedOption[4].text, value: res.data.data.sortedOption[4].value})
-      }
-    })
-    
-    
-    
-    axios.get(`https://pms-jq9o.onrender.com/api/v1/question/getQuestions/${Cookies.get('companyID')}/Self Appraisal/Review`,  {
-      headers: {
-        Authorization: `Bearer ${Token}`,
-      },
-    }).then(res => {
-      setSelfQuestions({
-        question1: res.data.data.sortedQuestion[0].text,
-        question2: res.data.data.sortedQuestion[1].text,
-        question3: res.data.data.sortedQuestion[2].text,
-        question4: res.data.data.sortedQuestion[3].text,
-        question5: res.data.data.sortedQuestion[4].text
-      })
-      
+    axios
+      .get(
+        `https://pms-jq9o.onrender.com/api/v1/question/getQuestions/${Cookies.get(
+          'companyID'
+        )}/360 Appraisal/Review`,
+        {
+          headers: {
+            Authorization: `Bearer ${Token}`,
+          },
+        }
+      )
+      .then(res => {
+        setAppraisalQuestions({
+          question1: res.data.data.sortedQuestion[0].text,
+          question2: res.data.data.sortedQuestion[1].text,
+          question3: res.data.data.sortedQuestion[2].text,
+          question4: res.data.data.sortedQuestion[3].text,
+          question5: res.data.data.sortedQuestion[4].text,
+        });
 
-      if(res.data.data.sortedOption.length > 0){
-        setOption1({text: res.data.data.sortedOption[0].text, value: res.data.data.sortedOption[0].value})
-        setOption2({text: res.data.data.sortedOption[1].text, value: res.data.data.sortedOption[1].value})
-        setOption3({text: res.data.data.sortedOption[2].text, value: res.data.data.sortedOption[2].value})
-        setOption4({text: res.data.data.sortedOption[3].text, value: res.data.data.sortedOption[3].value})
-        setOption5({text: res.data.data.sortedOption[4].text, value: res.data.data.sortedOption[4].value})
-      }
-    })
+        if (res.data.data.sortedOption.length > 0) {
+          setOption1({
+            text: res.data.data.sortedOption[0].text,
+            value: res.data.data.sortedOption[0].value,
+          });
+          setOption2({
+            text: res.data.data.sortedOption[1].text,
+            value: res.data.data.sortedOption[1].value,
+          });
+          setOption3({
+            text: res.data.data.sortedOption[2].text,
+            value: res.data.data.sortedOption[2].value,
+          });
+          setOption4({
+            text: res.data.data.sortedOption[3].text,
+            value: res.data.data.sortedOption[3].value,
+          });
+          setOption5({
+            text: res.data.data.sortedOption[4].text,
+            value: res.data.data.sortedOption[4].value,
+          });
+        }
+      });
 
-    
-    axios.get(`https://pms-jq9o.onrender.com/api/v1/question/getQuestions/${Cookies.get('companyID')}/Goal Review/Review`,  {
-      headers: {
-          Authorization: `Bearer ${Token}`,
-        },
-      }).then(res => {
+    axios
+      .get(
+        `https://pms-jq9o.onrender.com/api/v1/question/getQuestions/${Cookies.get(
+          'companyID'
+        )}/Self Appraisal/Review`,
+        {
+          headers: {
+            Authorization: `Bearer ${Token}`,
+          },
+        }
+      )
+      .then(res => {
+        setSelfQuestions({
+          question1: res.data.data.sortedQuestion[0].text,
+          question2: res.data.data.sortedQuestion[1].text,
+          question3: res.data.data.sortedQuestion[2].text,
+          question4: res.data.data.sortedQuestion[3].text,
+          question5: res.data.data.sortedQuestion[4].text,
+        });
+
+        if (res.data.data.sortedOption.length > 0) {
+          setOption1({
+            text: res.data.data.sortedOption[0].text,
+            value: res.data.data.sortedOption[0].value,
+          });
+          setOption2({
+            text: res.data.data.sortedOption[1].text,
+            value: res.data.data.sortedOption[1].value,
+          });
+          setOption3({
+            text: res.data.data.sortedOption[2].text,
+            value: res.data.data.sortedOption[2].value,
+          });
+          setOption4({
+            text: res.data.data.sortedOption[3].text,
+            value: res.data.data.sortedOption[3].value,
+          });
+          setOption5({
+            text: res.data.data.sortedOption[4].text,
+            value: res.data.data.sortedOption[4].value,
+          });
+        }
+      });
+
+    axios
+      .get(
+        `https://pms-jq9o.onrender.com/api/v1/question/getQuestions/${Cookies.get(
+          'companyID'
+        )}/Goal Review/Review`,
+        {
+          headers: {
+            Authorization: `Bearer ${Token}`,
+          },
+        }
+      )
+      .then(res => {
         setGoalQuestions({
           question1: res.data.data.sortedQuestion[0].text,
           question2: res.data.data.sortedQuestion[1].text,
           question3: res.data.data.sortedQuestion[2].text,
-        question4: res.data.data.sortedQuestion[3].text,
-        question5: res.data.data.sortedQuestion[4].text
+          question4: res.data.data.sortedQuestion[3].text,
+          question5: res.data.data.sortedQuestion[4].text,
+        });
+
+        if (res.data.data.sortedOption.length > 0) {
+          setOption1({
+            text: res.data.data.sortedOption[0].text,
+            value: res.data.data.sortedOption[0].value,
+          });
+          setOption2({
+            text: res.data.data.sortedOption[1].text,
+            value: res.data.data.sortedOption[1].value,
+          });
+          setOption3({
+            text: res.data.data.sortedOption[2].text,
+            value: res.data.data.sortedOption[2].value,
+          });
+          setOption4({
+            text: res.data.data.sortedOption[3].text,
+            value: res.data.data.sortedOption[3].value,
+          });
+          setOption5({
+            text: res.data.data.sortedOption[4].text,
+            value: res.data.data.sortedOption[4].value,
+          });
+        }
+      });
+
+    axios
+      .get(
+        `https://pms-jq9o.onrender.com/api/v1/question/competencyQuestions/${Cookies.get(
+          'companyID'
+        )}/Competency`,
+        {
+          headers: {
+            Authorization: `Bearer ${Token}`,
+          },
+        }
+      )
+      .then(res => {
+        setCompetencyQuestions({
+          question1: res.data.data.sortedQuestion[0].text,
+          question2: res.data.data.sortedQuestion[1].text,
+          question3: res.data.data.sortedQuestion[2].text,
+          question4: res.data.data.sortedQuestion[3].text,
+          question5: res.data.data.sortedQuestion[4].text,
+        });
+
+        if (res.data.data.sortedOption.length > 0) {
+          setOption1({
+            text: res.data.data.sortedOption[0].text,
+            value: res.data.data.sortedOption[0].value,
+          });
+          setOption2({
+            text: res.data.data.sortedOption[1].text,
+            value: res.data.data.sortedOption[1].value,
+          });
+          setOption3({
+            text: res.data.data.sortedOption[2].text,
+            value: res.data.data.sortedOption[2].value,
+          });
+          setOption4({
+            text: res.data.data.sortedOption[3].text,
+            value: res.data.data.sortedOption[3].value,
+          });
+          setOption5({
+            text: res.data.data.sortedOption[4].text,
+            value: res.data.data.sortedOption[4].value,
+          });
+        }
+      });
+  }, []);
+
+  const handleOptions = e => {
+    e.preventDefault();
+    setIsLoading(true);
+
+    axios
+      .patch(
+        `https://pms-jq9o.onrender.com/api/v1/question/setoptions/${Cookies.get(
+          'companyID'
+        )}`,
+        {
+          options: [
+            {
+              text: option1.text,
+              value: option1.value,
+            },
+            {
+              text: option2.text,
+              value: option2.value,
+            },
+            {
+              text: option3.text,
+              value: option3.value,
+            },
+            {
+              text: option4.text,
+              value: option4.value,
+            },
+            {
+              text: option5.text,
+              value: option5.value,
+            },
+          ],
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${Cookies.get('Token')}`,
+          },
+        }
+      )
+      .then(res => {
+        toast.success('Options Saved Successfully');
+        setIsLoading(false);
       })
-      
-      
-
-      if(res.data.data.sortedOption.length > 0){
-        setOption1({text: res.data.data.sortedOption[0].text, value: res.data.data.sortedOption[0].value})
-        setOption2({text: res.data.data.sortedOption[1].text, value: res.data.data.sortedOption[1].value})
-        setOption3({text: res.data.data.sortedOption[2].text, value: res.data.data.sortedOption[2].value})
-        setOption4({text: res.data.data.sortedOption[3].text, value: res.data.data.sortedOption[3].value})
-        setOption5({text: res.data.data.sortedOption[4].text, value: res.data.data.sortedOption[4].value})
-      }
-    })
-
-    
-    axios.get(`https://pms-jq9o.onrender.com/api/v1/question/competencyQuestions/${Cookies.get('companyID')}/Competency`,  {
-      headers: {
-          Authorization: `Bearer ${Token}`,
-        },
-    }).then(res => {
-      setCompetencyQuestions({
-        question1: res.data.data.sortedQuestion[0].text,
-        question2: res.data.data.sortedQuestion[1].text,
-        question3: res.data.data.sortedQuestion[2].text,
-        question4: res.data.data.sortedQuestion[3].text,
-        question5: res.data.data.sortedQuestion[4].text
-      })
-
-      if(res.data.data.sortedOption.length > 0){
-        setOption1({text: res.data.data.sortedOption[0].text, value: res.data.data.sortedOption[0].value})
-        setOption2({text: res.data.data.sortedOption[1].text, value: res.data.data.sortedOption[1].value})
-        setOption3({text: res.data.data.sortedOption[2].text, value: res.data.data.sortedOption[2].value})
-        setOption4({text: res.data.data.sortedOption[3].text, value: res.data.data.sortedOption[3].value})
-        setOption5({text: res.data.data.sortedOption[4].text, value: res.data.data.sortedOption[4].value})
-      }
-      
-    })
-
-
-  }, [])
-
-  const handleOptions = (e) => {
-    e.preventDefault()
-    setIsLoading(true)
-
-    axios.patch(`https://pms-jq9o.onrender.com/api/v1/question/setoptions/${Cookies.get('companyID')}`, {
-      options: [
-        {
-            "text": option1.text,
-            "value": option1.value
-        },
-        {
-            "text": option2.text,
-            "value": option2.value
-        },
-        {
-            "text": option3.text,
-            "value": option3.value
-        },
-        {
-            "text": option4.text,
-            "value": option4.value
-        },
-        {
-            "text": option5.text,
-            "value": option5.value
-        },
-    ]
-    }, {
-      headers: {
-          Authorization: `Bearer ${Cookies.get('Token')}`,
-        },
-    }).then(res => {
-      toast.success("Options Saved Successfully")
-      setIsLoading(false)
-    }).catch(error => {
-      setIsLoading(false);
-      console.log(error);
-    });
-     
-    
-  }
+      .catch(error => {
+        setIsLoading(false);
+        console.log(error);
+      });
+  };
 
   useEffect(() => {
     const fetchCountries = async () => {
@@ -773,31 +931,31 @@ const Settings = () => {
         <Navbar />
         <div className="settingsHeading">
           <div className="settingsImgWrap">
-            
-            <Avatar
-              src={profile}
-              alt={initials}
-              color="blue"
-              radius={100}
-              size={150}
-            >
-              {initials}
-            </Avatar>
-            
-
-            {/* <Avatar
-              src={''}
-              alt="Vitaly Rtishchev"
-              color="blue"
-              radius={100}
-              size={150}
-            >
-              VR
-            </Avatar> */}
+            {uploading ? (
+              <Avatar
+                src={data.profilePhoto}
+                alt={initials}
+                color="blue"
+                radius={100}
+                size={150}
+              >
+                {initials}
+              </Avatar>
+            ) : (
+              <Avatar
+                src={profile}
+                alt={initials}
+                color="blue"
+                radius={100}
+                size={150}
+              >
+                {initials}
+              </Avatar>
+            )}
           </div>
           <div className="settingsNameWrap">
             <h1>{data?.companyName}</h1>
-            <p>{data?.firstName +   " " + data?.lastName} (Owner)</p>
+            <p>{data?.firstName + ' ' + data?.lastName} (Owner)</p>
           </div>
         </div>
 
@@ -1111,7 +1269,6 @@ const Settings = () => {
             </form>
           </div>
 
-
           <div className="settingsContent">
             <div className="leftSettingsContent">
               <h2>Performance Review</h2>
@@ -1214,7 +1371,8 @@ const Settings = () => {
             <div className="leftSettingsContent">
               <h2>Performance Review Questions</h2>
               <p>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatibus, aperiam.
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                Voluptatibus, aperiam.
               </p>
             </div>
 
@@ -1224,7 +1382,12 @@ const Settings = () => {
                 <input
                   type="text"
                   value={performanceQuestions.question1}
-                  onChange={(e) => setPerformanceQuestions({...performanceQuestions, question1: e.target.value})}
+                  onChange={e =>
+                    setPerformanceQuestions({
+                      ...performanceQuestions,
+                      question1: e.target.value,
+                    })
+                  }
                   id="pquestion1"
                 />
               </div>
@@ -1233,7 +1396,12 @@ const Settings = () => {
                 <input
                   type="text"
                   value={performanceQuestions.question2}
-                  onChange={(e) => setPerformanceQuestions({...performanceQuestions, question2: e.target.value})}
+                  onChange={e =>
+                    setPerformanceQuestions({
+                      ...performanceQuestions,
+                      question2: e.target.value,
+                    })
+                  }
                   id="pquestion2"
                 />
               </div>
@@ -1242,7 +1410,12 @@ const Settings = () => {
                 <input
                   type="text"
                   value={performanceQuestions.question3}
-                  onChange={(e) => setPerformanceQuestions({...performanceQuestions, question3: e.target.value})}
+                  onChange={e =>
+                    setPerformanceQuestions({
+                      ...performanceQuestions,
+                      question3: e.target.value,
+                    })
+                  }
                   id="pquestion3"
                 />
               </div>
@@ -1251,7 +1424,12 @@ const Settings = () => {
                 <input
                   type="text"
                   value={performanceQuestions.question4}
-                  onChange={(e) => setPerformanceQuestions({...performanceQuestions, question4: e.target.value})}
+                  onChange={e =>
+                    setPerformanceQuestions({
+                      ...performanceQuestions,
+                      question4: e.target.value,
+                    })
+                  }
                   id="pquestion4"
                 />
               </div>
@@ -1260,7 +1438,12 @@ const Settings = () => {
                 <input
                   type="text"
                   value={performanceQuestions.question5}
-                  onChange={(e) => setPerformanceQuestions({...performanceQuestions, question5: e.target.value})}
+                  onChange={e =>
+                    setPerformanceQuestions({
+                      ...performanceQuestions,
+                      question5: e.target.value,
+                    })
+                  }
                   id="pquestion5"
                 />
               </div>
@@ -1281,12 +1464,12 @@ const Settings = () => {
             </form>
           </div>
 
-
           <div className="settingsContent">
             <div className="leftSettingsContent">
               <h2>360 Appraisal Questions</h2>
               <p>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatibus, aperiam.
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                Voluptatibus, aperiam.
               </p>
             </div>
 
@@ -1296,7 +1479,12 @@ const Settings = () => {
                 <input
                   type="text"
                   value={appraisalQuestions.question1}
-                  onChange={(e) => setAppraisalQuestions({...appraisalQuestions, question1: e.target.value})}
+                  onChange={e =>
+                    setAppraisalQuestions({
+                      ...appraisalQuestions,
+                      question1: e.target.value,
+                    })
+                  }
                   id="appraisal1"
                 />
               </div>
@@ -1305,7 +1493,12 @@ const Settings = () => {
                 <input
                   type="text"
                   value={appraisalQuestions.question2}
-                  onChange={(e) => setAppraisalQuestions({...appraisalQuestions, question2: e.target.value})}
+                  onChange={e =>
+                    setAppraisalQuestions({
+                      ...appraisalQuestions,
+                      question2: e.target.value,
+                    })
+                  }
                   id="appraisal2"
                 />
               </div>
@@ -1314,7 +1507,12 @@ const Settings = () => {
                 <input
                   type="text"
                   value={appraisalQuestions.question3}
-                  onChange={(e) => setAppraisalQuestions({...appraisalQuestions, question3: e.target.value})}
+                  onChange={e =>
+                    setAppraisalQuestions({
+                      ...appraisalQuestions,
+                      question3: e.target.value,
+                    })
+                  }
                   id="appraisal3"
                 />
               </div>
@@ -1323,7 +1521,12 @@ const Settings = () => {
                 <input
                   type="text"
                   value={appraisalQuestions.question4}
-                  onChange={(e) => setAppraisalQuestions({...appraisalQuestions, question4: e.target.value})}
+                  onChange={e =>
+                    setAppraisalQuestions({
+                      ...appraisalQuestions,
+                      question4: e.target.value,
+                    })
+                  }
                   id="appraisal4"
                 />
               </div>
@@ -1332,7 +1535,12 @@ const Settings = () => {
                 <input
                   type="text"
                   value={appraisalQuestions.question5}
-                  onChange={(e) => setAppraisalQuestions({...appraisalQuestions, question5: e.target.value})}
+                  onChange={e =>
+                    setAppraisalQuestions({
+                      ...appraisalQuestions,
+                      question5: e.target.value,
+                    })
+                  }
                   id="appraisla5"
                 />
               </div>
@@ -1353,13 +1561,12 @@ const Settings = () => {
             </form>
           </div>
 
-
-
           <div className="settingsContent">
             <div className="leftSettingsContent">
               <h2>Self Appraisal Questions</h2>
               <p>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatibus, aperiam.
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                Voluptatibus, aperiam.
               </p>
             </div>
 
@@ -1369,7 +1576,12 @@ const Settings = () => {
                 <input
                   type="text"
                   value={selfQuestions.question1}
-                  onChange={(e) => setSelfQuestions({...selfQuestions, question1: e.target.value})}
+                  onChange={e =>
+                    setSelfQuestions({
+                      ...selfQuestions,
+                      question1: e.target.value,
+                    })
+                  }
                   id="self1"
                 />
               </div>
@@ -1378,7 +1590,12 @@ const Settings = () => {
                 <input
                   type="text"
                   value={selfQuestions.question2}
-                  onChange={(e) => setSelfQuestions({...selfQuestions, question2: e.target.value})}
+                  onChange={e =>
+                    setSelfQuestions({
+                      ...selfQuestions,
+                      question2: e.target.value,
+                    })
+                  }
                   id="self2"
                 />
               </div>
@@ -1387,7 +1604,12 @@ const Settings = () => {
                 <input
                   type="self3"
                   value={selfQuestions.question3}
-                  onChange={(e) => setSelfQuestions({...selfQuestions, question3: e.target.value})}
+                  onChange={e =>
+                    setSelfQuestions({
+                      ...selfQuestions,
+                      question3: e.target.value,
+                    })
+                  }
                   id="self3"
                 />
               </div>
@@ -1396,7 +1618,12 @@ const Settings = () => {
                 <input
                   type="self4"
                   value={selfQuestions.question4}
-                  onChange={(e) => setSelfQuestions({...selfQuestions, question4: e.target.value})}
+                  onChange={e =>
+                    setSelfQuestions({
+                      ...selfQuestions,
+                      question4: e.target.value,
+                    })
+                  }
                   id="self4"
                 />
               </div>
@@ -1405,7 +1632,12 @@ const Settings = () => {
                 <input
                   type="self5"
                   value={selfQuestions.question5}
-                  onChange={(e) => setSelfQuestions({...selfQuestions, question5: e.target.value})}
+                  onChange={e =>
+                    setSelfQuestions({
+                      ...selfQuestions,
+                      question5: e.target.value,
+                    })
+                  }
                   id="self5"
                 />
               </div>
@@ -1426,13 +1658,12 @@ const Settings = () => {
             </form>
           </div>
 
-
-
           <div className="settingsContent">
             <div className="leftSettingsContent">
               <h2>Goal Review Questions</h2>
               <p>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatibus, aperiam.
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                Voluptatibus, aperiam.
               </p>
             </div>
 
@@ -1442,7 +1673,12 @@ const Settings = () => {
                 <input
                   type="text"
                   value={goalQuestions.question1}
-                  onChange={(e) => setGoalQuestions({...goalQuestions, question1: e.target.value})}
+                  onChange={e =>
+                    setGoalQuestions({
+                      ...goalQuestions,
+                      question1: e.target.value,
+                    })
+                  }
                   id="goal1"
                 />
               </div>
@@ -1451,7 +1687,12 @@ const Settings = () => {
                 <input
                   type="text"
                   value={goalQuestions.question2}
-                  onChange={(e) => setGoalQuestions({...goalQuestions, question2: e.target.value})}
+                  onChange={e =>
+                    setGoalQuestions({
+                      ...goalQuestions,
+                      question2: e.target.value,
+                    })
+                  }
                   id="goal2"
                 />
               </div>
@@ -1460,7 +1701,12 @@ const Settings = () => {
                 <input
                   type="text"
                   value={goalQuestions.question3}
-                  onChange={(e) => setGoalQuestions({...goalQuestions, question3: e.target.value})}
+                  onChange={e =>
+                    setGoalQuestions({
+                      ...goalQuestions,
+                      question3: e.target.value,
+                    })
+                  }
                   id="goal3"
                 />
               </div>
@@ -1469,7 +1715,12 @@ const Settings = () => {
                 <input
                   type="text"
                   value={goalQuestions.question4}
-                  onChange={(e) => setGoalQuestions({...goalQuestions, question4: e.target.value})}
+                  onChange={e =>
+                    setGoalQuestions({
+                      ...goalQuestions,
+                      question4: e.target.value,
+                    })
+                  }
                   id="goal4"
                 />
               </div>
@@ -1478,7 +1729,12 @@ const Settings = () => {
                 <input
                   type="text"
                   value={goalQuestions.question5}
-                  onChange={(e) => setGoalQuestions({...goalQuestions, question5: e.target.value})}
+                  onChange={e =>
+                    setGoalQuestions({
+                      ...goalQuestions,
+                      question5: e.target.value,
+                    })
+                  }
                   id="goal5"
                 />
               </div>
@@ -1499,13 +1755,12 @@ const Settings = () => {
             </form>
           </div>
 
-
-
           <div className="settingsContent">
             <div className="leftSettingsContent">
               <h2>Competency Questions</h2>
               <p>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatibus, aperiam.
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                Voluptatibus, aperiam.
               </p>
             </div>
 
@@ -1515,7 +1770,12 @@ const Settings = () => {
                 <input
                   type="text"
                   value={competencyQuestions.question1}
-                  onChange={(e) => setCompetencyQuestions({...competencyQuestions, question1: e.target.value})}
+                  onChange={e =>
+                    setCompetencyQuestions({
+                      ...competencyQuestions,
+                      question1: e.target.value,
+                    })
+                  }
                   id="comp1"
                 />
               </div>
@@ -1524,7 +1784,12 @@ const Settings = () => {
                 <input
                   type="text"
                   value={competencyQuestions.question2}
-                  onChange={(e) => setCompetencyQuestions({...competencyQuestions, question2: e.target.value})}
+                  onChange={e =>
+                    setCompetencyQuestions({
+                      ...competencyQuestions,
+                      question2: e.target.value,
+                    })
+                  }
                   id="comp2"
                 />
               </div>
@@ -1533,7 +1798,12 @@ const Settings = () => {
                 <input
                   type="text"
                   value={competencyQuestions.question3}
-                  onChange={(e) => setCompetencyQuestions({...competencyQuestions, question3: e.target.value})}
+                  onChange={e =>
+                    setCompetencyQuestions({
+                      ...competencyQuestions,
+                      question3: e.target.value,
+                    })
+                  }
                   id="comp3"
                 />
               </div>
@@ -1542,7 +1812,12 @@ const Settings = () => {
                 <input
                   type="text"
                   value={competencyQuestions.question4}
-                  onChange={(e) => setCompetencyQuestions({...competencyQuestions, question4: e.target.value})}
+                  onChange={e =>
+                    setCompetencyQuestions({
+                      ...competencyQuestions,
+                      question4: e.target.value,
+                    })
+                  }
                   id="comp4"
                 />
               </div>
@@ -1551,7 +1826,12 @@ const Settings = () => {
                 <input
                   type="text"
                   value={competencyQuestions.question5}
-                  onChange={(e) => setCompetencyQuestions({...competencyQuestions, question5: e.target.value})}
+                  onChange={e =>
+                    setCompetencyQuestions({
+                      ...competencyQuestions,
+                      question5: e.target.value,
+                    })
+                  }
                   id="comp5"
                 />
               </div>
@@ -1572,8 +1852,6 @@ const Settings = () => {
             </form>
           </div>
 
-          
-
           <div className="settingsContent">
             <div className="leftSettingsContent">
               <h2>Options</h2>
@@ -1590,13 +1868,22 @@ const Settings = () => {
                   <input
                     type="text"
                     value={option1.text}
-                    onChange={(e) => setOption1({...option1, text: e.target.value})}
+                    onChange={e =>
+                      setOption1({ ...option1, text: e.target.value })
+                    }
                     id="option1q"
                   />
                 </div>
                 <div className="inputWrapper">
                   <label htmlFor="option1">Value</label>
-                  <select name="" id="option1" value={option1.value} onChange={(e) => setOption1({...option1, value: e.target.value})}>
+                  <select
+                    name=""
+                    id="option1"
+                    value={option1.value}
+                    onChange={e =>
+                      setOption1({ ...option1, value: e.target.value })
+                    }
+                  >
                     <option value="">--Select--</option>
                     <option value="0">0</option>
                     <option value="1">1</option>
@@ -1613,13 +1900,22 @@ const Settings = () => {
                   <input
                     type="text"
                     value={option2.text}
-                    onChange={(e) => setOption2({...option2, text: e.target.value})}
+                    onChange={e =>
+                      setOption2({ ...option2, text: e.target.value })
+                    }
                     id="option2q"
                   />
                 </div>
                 <div className="inputWrapper">
                   <label htmlFor="option2">Value</label>
-                  <select name="" id="option2" value={option2.value} onChange={(e) => setOption2({...option2, value: e.target.value})}>
+                  <select
+                    name=""
+                    id="option2"
+                    value={option2.value}
+                    onChange={e =>
+                      setOption2({ ...option2, value: e.target.value })
+                    }
+                  >
                     <option value="">--Select--</option>
                     <option value="0">0</option>
                     <option value="1">1</option>
@@ -1636,13 +1932,22 @@ const Settings = () => {
                   <input
                     type="text"
                     value={option3.text}
-                    onChange={(e) => setOption3({...option3, text: e.target.value})}
+                    onChange={e =>
+                      setOption3({ ...option3, text: e.target.value })
+                    }
                     id="option3q"
                   />
                 </div>
                 <div className="inputWrapper">
                   <label htmlFor="option3">Value</label>
-                  <select name="" id="option3" value={option3.value} onChange={(e) => setOption3({...option3, value: e.target.value})}>
+                  <select
+                    name=""
+                    id="option3"
+                    value={option3.value}
+                    onChange={e =>
+                      setOption3({ ...option3, value: e.target.value })
+                    }
+                  >
                     <option value="">--Select--</option>
                     <option value="0">0</option>
                     <option value="1">1</option>
@@ -1659,13 +1964,22 @@ const Settings = () => {
                   <input
                     type="text"
                     value={option4.text}
-                    onChange={(e) => setOption4({...option4, text: e.target.value})}
+                    onChange={e =>
+                      setOption4({ ...option4, text: e.target.value })
+                    }
                     id="option4q"
                   />
                 </div>
                 <div className="inputWrapper">
                   <label htmlFor="option4">Value</label>
-                  <select name="" id="option4" value={option4.value} onChange={(e) => setOption4({...option4, value: e.target.value})}>
+                  <select
+                    name=""
+                    id="option4"
+                    value={option4.value}
+                    onChange={e =>
+                      setOption4({ ...option4, value: e.target.value })
+                    }
+                  >
                     <option value="">--Select--</option>
                     <option value="0">0</option>
                     <option value="1">1</option>
@@ -1683,13 +1997,22 @@ const Settings = () => {
                     type="text"
                     name="option5q"
                     value={option5.text}
-                    onChange={(e) => setOption5({...option5, text: e.target.value})}
+                    onChange={e =>
+                      setOption5({ ...option5, text: e.target.value })
+                    }
                     id="midYearStartDate"
                   />
                 </div>
                 <div className="inputWrapper">
                   <label htmlFor="option5">Value</label>
-                  <select name="" id="option5" value={option5.value} onChange={(e) => setOption5({...option5, value: e.target.value})}>
+                  <select
+                    name=""
+                    id="option5"
+                    value={option5.value}
+                    onChange={e =>
+                      setOption5({ ...option5, value: e.target.value })
+                    }
+                  >
                     <option value="">--Select--</option>
                     <option value="0">0</option>
                     <option value="1">1</option>
@@ -1716,9 +2039,6 @@ const Settings = () => {
               </div>
             </form>
           </div>
-
-          
-
         </div>
       </div>
     </div>
