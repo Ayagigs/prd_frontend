@@ -25,32 +25,41 @@
   top: 60px;
   z-index: 1;
 
-  .empsettingsImgWrap {
-    display: flex;
-    flex-direction: column;
-    row-gap: 10px;
-    align-items: center;
+
+
 
     img {
       height: 150px;
       background-color: rgb(185, 185, 185);
       border-radius: 100%;
+
+    column-gap: 10px;
+    position: sticky;
+    top: 60px;
+    z-index: 1;
+  
+    .empsettingsImgWrap{
+      display: flex;
+      flex-direction: column;
+      row-gap: 10px;
+      align-items: center;
+    }
+  
+    .empsettingsNameWrap{
+      display: flex;
+      flex-direction: column;
+      row-gap: 5px;
+  
+      h1{
+        font-size: 40px;
+      }
+  
+      p{
+        font-size: 25px;
+        color: #555555;
+      }
     }
   }
-
-  .empsettingsNameWrap {
-    display: flex;
-    flex-direction: column;
-    row-gap: 5px;
-
-    h1 {
-      font-size: 40px;
-    }
-
-    p {
-      font-size: 25px;
-      color: #555555;
-    }
   }
 }
 

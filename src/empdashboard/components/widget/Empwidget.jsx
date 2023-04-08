@@ -15,8 +15,9 @@ const Empwidget = () => {
       const url = `https://pms-jq9o.onrender.com/api/v1/goal/goals`
       axios.get(url, {headers: {Authorization: `Bearer ${Cookies.get('EmpToken')}`}})
       .then(res => {
-        setCompleted(res.data.data.filter((el) => el.status === 'Completed'))
+        setCompleted(res.data.data.filter((el) => el.status === 'Completed').length)
         setTotal(res.data.data.length === 0 ? 1 : res.data.data.length)
+        console.log(res.data.data.length === 0 ? 1 : res.data.data.length)
       }).catch(err => {
         console.log(err)
       })

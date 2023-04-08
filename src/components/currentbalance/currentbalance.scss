@@ -20,12 +20,30 @@
     border-radius: 8px;
   }
 .connectbox{
-    width: 400px;
+    width: 500px;
     display: flex;
+}
+
+.sendpopup{
+    background-color: rgba(144, 144, 144, 0.542);
+    width: 90vw;
+    height: 90vh;
+    margin-top: 90px;
+    overflow-y: hidden;
+    position: fixed;
+    top: 2px;
+    left: 10vw;
+    display: grid;
+    place-items: center;
+    box-sizing: border-box;
+    z-index: 20;
 }
 
   .redalert{
     width: 300%;
+    display: flex;
+    position: absolute;
+    margin-top: -20px;
   }
   .accountdetailsbox{
  
@@ -87,7 +105,7 @@ color: #515151;
 
   .clickbox{
     display: flex;
-    width: 350px;
+    width: 450px; 
     height: 129x;
     margin-left: 20px;
     // margin-left: 300px;
@@ -115,7 +133,7 @@ color: #515151;
     border-color: transparent;
     padding: 12px 14px;
     gap: 10px;
-    margin-top:-10px;
+    margin-top:-15px;
     margin-left: -190px;
     width: 170px;
     height: 43px;
@@ -207,4 +225,23 @@ font-style: normal;
 font-weight: 300;
 font-size: 16px;
 line-height: 22px;
+}
+
+.closeSendModal{
+    position: fixed;
+    top: 15%;
+    right: 5%;
+    z-index: 20;
+    padding: 0px 15px;
+    font-weight: 500;
+    margin: 0px;
+    border-radius: 100%;
+    background-color: white;
+    cursor: pointer;
+}
+.closeSendModal:hover{
+    color: rgb(229, 0, 0);
+}
+.hide{
+    display: none;
 }

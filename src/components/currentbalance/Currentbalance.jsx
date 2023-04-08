@@ -1,9 +1,9 @@
 // import React from 'react'
 import React, { useEffect, useState } from 'react';
 import './currentbalance.scss';
-// import { ArrangeHorizontal } from 'iconsax-react';
-// import { Wallet2 } from 'iconsax-react';
-// import { Copy } from 'iconsax-react';
+import { ArrangeHorizontal } from 'iconsax-react';
+import { Wallet2 } from 'iconsax-react';
+import { Copy } from 'iconsax-react';
 import {
     connect,
     isMetaMaskInstalled,
@@ -15,7 +15,7 @@ import {
   import view from './abi/view.json';
   import Alert from 'react-bootstrap/Alert';
 //   import Button from 'react-bootstrap/Button';
-// import Send from './Send';
+import Send from './Send';
 
 
 const Currentbalance = () => {
@@ -23,6 +23,7 @@ const Currentbalance = () => {
     const [myBalance, setMyBalance] = useState('');
     const [data, setData] = useState('');
     const [chainError, setChainError] = useState(null);
+    const [popup, setPopup] = useState(false)
     // const toast = useToast();
 
     useEffect(() => {
@@ -793,7 +794,7 @@ const Currentbalance = () => {
                     <Alert className="redalert" status="error" variant="danger">
                         <Alert.Heading> Wrong Network!</Alert.Heading>
                       
-                        Please change to Polygon Mumbai testnet
+                        Please change to Mumbai 
                     </Alert>
                   )}
                     
@@ -805,15 +806,21 @@ const Currentbalance = () => {
                 <h1>{data}</h1>
                 </div>
                 
-                    {/* <div className='sendbox'>
+                    <div className='sendbox'>
                         <div className='sendmoney'>
                             <div className='sendicon'>
                             <ArrangeHorizontal size="32" color="#5157ed" />
                             </div>
-                        <button className="sendmoneybtn">
+                        <button onClick={()=> setPopup(true)} className="sendmoneybtn">
                     
                             Send
                             </button>
+                            <div className={popup ? "sendmoneybtn" : "hide"} onClick={() => setPopup(false)}>
+                            </div>
+            <p className={popup ? 'closeSendModal' : 'hide'} onClick={() => setPopup(false)}>X</p>
+            {
+                popup ? <Send className="sendpopup"/> : undefined
+            }
                         </div>
                     </div>
                     
@@ -832,7 +839,7 @@ const Currentbalance = () => {
                             </div>
                             <button className="copytransbtn">Copy</button>
                         </div>
-                    </div> */}
+                    </div>
 
                 
             </div>
