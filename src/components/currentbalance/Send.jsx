@@ -3,15 +3,35 @@ import React from 'react'
 import './send.scss';
 // import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import Cookies from "js-cookie"
+import { toast } from 'react-toastify';
+
 import ProfileImg from './profilelg.png';
 // import { BsCheck } from 'react-icons/bs';
 // import { FaSpinner } from 'react-icons/fa';
 import { ArrangeHorizontal } from 'iconsax-react'; 
+import { useState, useEffect } from 'react';
 
 function Send() {
   // const [sendPopup, setSendPopup] = useState(false)
   // const [currentpage, setCurrentPage] = useState(1);
   // const [isLoading, setIsLoading] = useState(false);
+
+  const [search, setSearch] = useState('')
+  const [rows, setRows] = useState([])
+
+  useEffect(() => {
+    const url = `https://pms-jq9o.onrender.com/api/v1/employee/search`
+    
+    axios.post(url,{
+      searchParams: search
+    }, {headers: {Authorization: `Bearer ${Cookies.get('Token')}`}})
+    .then(res => {
+    setRows(res.data.data)
+    console.log(rows)
+    })
+  }, [])
 
   const sendTransaction = async () => {
     //   async function sendTransaction () {
@@ -53,14 +73,18 @@ function Send() {
                 </div>
                 <div className="sendinputWrapper">
                   <label  htmlFor="">Recipient ID</label>
-                  <input
-                    className='sendforminput'
-                    type="text"
-                    required
-                    name="address"
-                    id="address"
-                    placeholder="Wallet Address"
-                  />
+                  <input type="text" list='data' style={{padding: "8px 10px", 'borderRadius': '7px',
+                  border:  '1px solid gray',
+                  outline: 'none', width: '100%'}}/>
+                  <datalist id='data' onChange={(e) => setSearch(e.target.value)} className='datalist'>
+                    {
+                      rows.map((el) => {
+                        return(
+                          <option value={el.walletAddress}>{el.firstName + ' ' + el.lastName}</option>
+                        )
+                      })
+                    }
+                  </datalist>
                 </div>
                 <div className="sendinputWrapper">
                     <label htmlFor="">Currency</label>

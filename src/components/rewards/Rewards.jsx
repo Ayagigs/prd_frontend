@@ -7,66 +7,41 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import axios from "axios";
+import Cookies from "js-cookie"
+import { useState, useEffect } from "react";
+import { toast } from 'react-toastify';
 const Rewards = () => {
+  const [rows, setRows] = useState([]);
+  const [isLoading, setIsLoading] = useState(false)
 
-    const rows = [
-        {
-          name: "Christian Apithy",
-          role: "Human Resource",
-          img: "https://m.media-amazon.com/images/I/81bc8mA3nKL._AC_UY327_FMwebp_QL65_.jpg",
-          wallet: "0xb8f21ca11a20e98e9bcb7638abf9d696be68b943",
-          reward: "",
-        },
-        {
-            name: "Damilola Fatai",
-            role: "Driver",
-            img: "https://m.media-amazon.com/images/I/81bc8mA3nKL._AC_UY327_FMwebp_QL65_.jpg",
-            wallet: "0xe9bcb7638abf9d696beb8f21ca11a20e9868b943",
-            reward: "",
-        },
-        {
-            name: "Adewale Rabiu",
-            role: "Surveyor",
-            img: "https://m.media-amazon.com/images/I/81bc8mA3nKL._AC_UY327_FMwebp_QL65_.jpg",
-            wallet: "0xe9bcb7638abf9d696beb8f21ca11a20e9868b943",
-            reward: "",
-        },
-        {
-            name: "Joseph Tunji",
-            role: "Lab Analyst",
-            img: "https://m.media-amazon.com/images/I/81bc8mA3nKL._AC_UY327_FMwebp_QL65_.jpg",
-            wallet: "0xe9bcb7638abf9d696beb8f21ca11a20e9868b943",
-            reward: "",
-        },
-        {
-            name: "Christian Apithy",
-            role: "Human Resource",
-            img: "https://m.media-amazon.com/images/I/81bc8mA3nKL._AC_UY327_FMwebp_QL65_.jpg",
-            wallet: "0xb8f21ca11a20e98e9bcb7638abf9d696be68b943",
-            reward: "",
-          },
-          {
-              name: "Damilola Fatai",
-              role: "Driver",
-              img: "https://m.media-amazon.com/images/I/81bc8mA3nKL._AC_UY327_FMwebp_QL65_.jpg",
-              wallet: "0xe9bcb7638abf9d696beb8f21ca11a20e9868b943",
-              reward: "",
-          },
-          {
-              name: "Adewale Rabiu",
-              role: "Surveyor",
-              img: "https://m.media-amazon.com/images/I/81bc8mA3nKL._AC_UY327_FMwebp_QL65_.jpg",
-              wallet: "0xe9bcb7638abf9d696beb8f21ca11a20e9868b943",
-              reward: "",
-          },
-          {
-              name: "Joseph Tunji",
-              role: "Lab Analyst",
-              img: "https://m.media-amazon.com/images/I/81bc8mA3nKL._AC_UY327_FMwebp_QL65_.jpg",
-              wallet: "0xe9bcb7638abf9d696beb8f21ca11a20e9868b943",
-              reward: "",
-          },            
-      ];
+  const url = `https://pms-jq9o.onrender.com/api/v1/employee/employees/${Cookies.get('companyID')}`
+  
+  useEffect(() => {
+    axios.get(url, {headers: {Authorization: `Bearer ${Cookies.get('Token')}`}})
+    .then(res => {
+      setRows(res.data.data)
+    })
+  }, []);
+
+  const sendreward = (wallet) => {
+    setIsLoading(true)
+    // change the url to the request url
+    const url = `https://pms-jq9o.onrender.com/api/v1/employee/employees/${Cookies.get('companyID')}`
+
+    axios.post(url, {
+      // what body are you sending
+    },  {headers: {Authorization: `Bearer ${Cookies.get('Token')}`}},
+    ).then(res => {
+      setIsLoading(false)
+      setRows(res.data.data)
+    }).catch(error=> {
+      setIsLoading(false)
+      console.log(error)
+    })
+
+  }
+    
 
 
   return (
@@ -84,18 +59,18 @@ const Rewards = () => {
         </TableHead>
         <TableBody>
           {rows.map((row) => (
-            <TableRow key={row.name}>
+            <TableRow key={row._id}>
               <TableCell className="tableCell">
                 <div className="cellWrapper">
-                  <img src={row.img} alt="" className="image" />
-                  {row.name}
+                  <img src={row.profilePhoto} alt="" className="image" />
+                  {row.firstName + " " + row.lastName}
                 </div>
               </TableCell>
               <TableCell className="tableCell">{row.role}</TableCell>
-              <TableCell className="tableCell">{row.wallet}</TableCell>
-              <TableCell className="tableCell">{row.reward}
+              <TableCell className="tableCell">{row.walletAddress ? row.walletAddress : '---'}</TableCell>
+              <TableCell className="tableCell">
                 <Gift size="20" color="#030bc3" /> 
-                <button className='rewardbtn'>Reward</button>
+                <button className='rewardbtn' onClick={() => sendreward(row.wallet)} disabled={isLoading ? true : false}>{isLoading ? 'Rewarding...' : 'Reward'}</button>
               </TableCell>
 
             </TableRow>
