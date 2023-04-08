@@ -1,38 +1,24 @@
 .emphome {
   display: flex;
   margin-top: 80px;
-  padding-top: 10px;
+  padding-top:10px;
   width: 100%;
-  margin-left: 250px;
-}
+  margin-left: 250px;}
 
-.empsettingsContainer {
-  flex: 6;
-  height: fit-content;
-  padding-bottom: 60px;
-  background-color: #f5f5f5;
-}
+  .empsettingsContainer {
+    flex: 6;
+    height: fit-content;
+    padding-bottom: 60px;
+    background-color: #F5F5F5 ;
+  }
 
-.empsettingsHeading {
-  margin-left: 0px;
-  padding: 50px 60px;
-  background-color: rgb(245, 245, 245);
-  width: 100%;
-  display: flex;
-  align-items: center;
-  column-gap: 10px;
-  position: sticky;
-  top: 60px;
-  z-index: 1;
-
-
-
-
-    img {
-      height: 150px;
-      background-color: rgb(185, 185, 185);
-      border-radius: 100%;
-
+  .empsettingsHeading{
+    margin-left: 0px;
+    padding: 50px 60px;
+    background-color: rgb(245,245,245);
+    width: 100%;
+    display: flex;
+    align-items: center;
     column-gap: 10px;
     position: sticky;
     top: 60px;
@@ -43,6 +29,13 @@
       flex-direction: column;
       row-gap: 10px;
       align-items: center;
+  
+      img{
+        width: 170px;
+        height: 170px;
+        background-color: rgb(185, 185, 185);
+        border-radius: 100%;
+      }
     }
   
     .empsettingsNameWrap{
@@ -60,353 +53,306 @@
       }
     }
   }
-  }
-}
-
-.empsettingBottom {
-  display: flex;
-  flex-direction: column;
-  row-gap: 80px;
-}
-.empsettingsContent {
-  background-color: white;
-  border-radius: 30px;
-  width: 70%;
-  margin: 0px 60px;
-  padding: 60px 40px;
-  display: flex;
-  column-gap: 30px;
-  row-gap: 40px;
-  align-items: flex-start;
-  justify-content: space-between;
-
-  .empleftSettingsContent {
-    width: 40%;
+  
+  .empsettingBottom{
     display: flex;
     flex-direction: column;
-    row-gap: 15px;
-
-    h2 {
-      color: black;
-      padding: 0px;
-      font-size: 30px;
-      margin: 0px;
-      font-weight: 500;
-    }
+    row-gap: 80px;
   }
-  form {
-    width: 50%;
+  .empsettingsContent{
+    background-color: white;
+    border-radius: 30px;
+    width: 70%;
+    margin: 0px 60px;
+    padding: 60px 40px;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    row-gap: 10px;
-
-    .inputWrapper {
-      width: 100%;
-
-      input {
-        width: 100%;
-        cursor: pointer;
-        flex-direction: row;
-        align-items: flex-start;
-        padding: 12px 10px;
-        background: #ffffff;
-        border: 0.2px;
-        box-shadow: 0px 0px 0px 2px #e5e5e5;
-        border-radius: 8px;
-        outline: none;
-      }
-      select {
-        width: 100%;
-        cursor: pointer;
-        flex-direction: row;
-        align-items: flex-start;
-        height: fit-content !important;
-        padding: 12px 10px;
-        background: #ffffff;
-        border: 0.2px;
-        box-shadow: 0px 0px 0px 2px #e5e5e5;
-        border-radius: 8px;
-        font-size: 14px;
-      }
-      label {
-        font-size: 14px;
-      }
-    }
-    .inputContainer {
+    column-gap: 30px;
+    row-gap: 40px;
+    align-items: flex-start;
+    justify-content: space-between;
+  
+    .empleftSettingsContent{
+      width: 40%;
       display: flex;
-      column-gap: 10px;
-      justify-content: space-between;
-      width: 100%;
-
-      .inputWrapper {
-        width: 50% !important;
-
-        input {
+      flex-direction: column;
+      row-gap: 15px;
+  
+      h2{
+        color: black;
+        padding: 0px;
+        font-size: 30px;
+        margin: 0px;
+        font-weight: 500;
+      }
+    }
+    form{
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      row-gap: 10px;
+  
+      .inputWrapper{
+        width: 100%;
+  
+        input{
           width: 100%;
+          cursor: pointer;
+          flex-direction: row;
+          align-items: flex-start;
+          padding: 12px 10px;
+          background: #FFFFFF;
+          border: 0.2px;
+          box-shadow: 0px 0px 0px 2px #e5e5e5;
+          border-radius: 8px;
+          outline: none;
+        }
+        select{
+          width: 100%;
+          cursor: pointer;
+          flex-direction: row;
+          align-items: flex-start;
+          height: fit-content !important;
+          padding: 12px 10px;
+          background: #FFFFFF;
+          border: 0.2px;
+          box-shadow: 0px 0px 0px 2px #e5e5e5;
+          border-radius: 8px;
+          font-size: 14px;
+        }
+        label{
+          font-size: 14px;
+        }
+      }
+      .inputContainer{
+        display: flex;
+        column-gap: 10px;
+        justify-content: space-between;
+        width: 100%;
+  
+        
+  
+        .inputWrapper{
+          width: 50% !important;
+  
+          input{
+            width: 100%;
+          }
+        }
+      }
+  
+      .empbuttonWrapper{
+        width: 100%;
+        display: flex;
+        justify-content: right;
+        column-gap: 10px;
+        margin-top: 20px;
+      }
+      h2{
+        font-size: 25px;
+        font-weight: 500;
+        color: black;
+        width: 100%;
+        text-align: left;
+        padding: 0px;
+        margin: 0px;
+        margin-bottom: 0px;
+        margin-top: 20px;
+      }
+      
+      
+    }
+
+    .formWrapper{
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      row-gap: 30px;
+
+      form{
+        width: 100% !important;
+      }
+
+      .verificationWrapper{
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        align-items: center;
+
+        button{
+          padding: 12px 40px;
+          background-color: rgb(231,232,255);
+          color: rgb(62,69,235);
+          border-radius: 10px;
         }
       }
     }
-
-    .empbuttonWrapper {
-      width: 100%;
-      display: flex;
-      justify-content: right;
-      column-gap: 10px;
-      margin-top: 20px;
-    }
-    h2 {
-      font-size: 25px;
-      font-weight: 500;
-      color: black;
-      width: 100%;
-      text-align: left;
+  }
+  // color: #555555;
+  .empsettingsContent input:focus{
+    box-shadow: 0px 0px 0px 2px rgb(128, 128, 234) !important;
+  }
+  .empsettingsContent select:focus{
+    box-shadow: 0px 0px 0px 2px rgb(128, 128, 234) !important;
+  }
+  .empbuttonWrapper button:nth-child(1){
+    padding: 12px 40px;
+    background-color: rgb(231,232,255);
+    color: rgb(62,69,235);
+    border-radius: 10px;
+  }
+  .empbuttonWrapper button:nth-child(2){
+    padding: 12px 40px;
+    background-color: rgb(62,69,235);
+    color: white;
+    border-radius: 10px;
+  }
+  .empbuttonWrapper button:nth-child(1):hover{
+    background-color: rgb(211, 212, 222);
+    cursor: pointer;
+  }
+  .empbuttonWrapper button:nth-child(2):hover{
+    background-color: rgb(26, 32, 209);
+    cursor: pointer;
+  }
+  
+  .empsettingBottom form h2:nth-child(1){
+    margin-top: 0px;
+  }
+  .empsettingBottom form h3:nth-child(1){
+    margin-top: 0px;
+  }
+  .empsettingBottom form{
+    h3{
       padding: 0px;
       margin: 0px;
       margin-bottom: 0px;
       margin-top: 20px;
-    }
-  }
-
-  .formWrapper {
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    row-gap: 30px;
-
-    form {
       width: 100% !important;
     }
-
-    .verificationWrapper {
-      display: flex;
-      justify-content: space-between;
-      width: 100%;
-      align-items: center;
-
-      button {
-        padding: 12px 40px;
-        background-color: rgb(231, 232, 255);
-        color: rgb(62, 69, 235);
-        border-radius: 10px;
-      }
-    }
   }
-}
-// color: #555555;
-.empsettingsContent input:focus {
-  box-shadow: 0px 0px 0px 2px rgb(128, 128, 234) !important;
-}
-.empsettingsContent select:focus {
-  box-shadow: 0px 0px 0px 2px rgb(128, 128, 234) !important;
-}
-.empbuttonWrapper button:nth-child(1) {
-  padding: 12px 40px;
-  background-color: rgb(231, 232, 255);
-  color: rgb(62, 69, 235);
-  border-radius: 10px;
-}
-.empbuttonWrapper button:nth-child(2) {
-  padding: 12px 40px;
-  background-color: rgb(62, 69, 235);
-  color: white;
-  border-radius: 10px;
-}
-.empbuttonWrapper button:nth-child(1):hover {
-  background-color: rgb(211, 212, 222);
-  cursor: pointer;
-}
-.empbuttonWrapper button:nth-child(2):hover {
-  background-color: rgb(26, 32, 209);
-  cursor: pointer;
-}
-
-.empsettingBottom form h2:nth-child(1) {
-  margin-top: 0px;
-}
-.empsettingBottom form h3:nth-child(1) {
-  margin-top: 0px;
-}
-.empsettingBottom form {
-  h3 {
-    padding: 0px;
-    margin: 0px;
-    margin-bottom: 0px;
-    margin-top: 20px;
-    width: 100% !important;
+  .verificationWrapper button:hover{
+    cursor: pointer;
+    background-color: rgb(212, 213, 218) !important;
   }
-}
-.verificationWrapper button:hover {
-  cursor: pointer;
-  background-color: rgb(212, 213, 218) !important;
-}
 
-.notificationsWrapper {
-  background-color: white;
-  border-radius: 30px;
-  width: 70%;
-  margin: 0px 60px;
-  padding: 60px 40px;
-  display: flex;
-  column-gap: 30px;
-  row-gap: 40px;
-  align-items: flex-start;
-  justify-content: space-between;
-
-  form {
+.notificationsWrapper{
+    background-color: white;
+    border-radius: 30px;
+    width: 70%;
+    margin: 0px 60px;
+    padding: 60px 40px;
     display: flex;
-    flex-direction: column;
-    row-gap: 100px;
-    width: 100%;
+    column-gap: 30px;
+    row-gap: 40px;
+    align-items: flex-start;
+    justify-content: space-between;
 
-    .topnotificationSection {
+    form{
       display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
+      flex-direction: column;
+      row-gap: 100px;
       width: 100%;
 
-      .leftNotificationWrap {
-        width: 40%;
+      .topnotificationSection{
         display: flex;
-        flex-direction: column;
-        row-gap: 4px;
+        justify-content: space-between;
+        align-items: flex-start;
+        width: 100%;
 
-        h2 {
-          color: black;
-          padding: 0px;
-          font-size: 30px;
-          margin: 0px;
-          font-weight: 500;
-        }
-      }
-
-      .rightNotificationWrap {
-        width: 50%;
-        display: flex;
-        flex-direction: column;
-        row-gap: 40px;
-
-        .rightNotificationContent {
+        .leftNotificationWrap{
+          width: 40%;
           display: flex;
-          align-items: flex-start;
-          column-gap: 20px;
-          width: 100%;
+          flex-direction: column;
+          row-gap: 4px;
 
-          .rightformcontent {
-            margin-top: -5px;
-            width: 100%;
-          }
-          p {
-            width: 100% !important;
+          h2{
+            color: black;
+            padding: 0px;
+            font-size: 30px;
+            margin: 0px;
+            font-weight: 500;
           }
         }
-      }
-    }
-    .bottomnotificationsection {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      width: 100%;
 
-      .leftNotificationWrap {
-        width: 40%;
-        display: flex;
-        flex-direction: column;
-        row-gap: 4px;
-
-        h2 {
-          color: black;
-          padding: 0px;
-          font-size: 30px;
-          margin: 0px;
-          font-weight: 500;
-        }
-      }
-
-      .rightNotificationWrap {
-        width: 50%;
-        display: flex;
-        flex-direction: column;
-        row-gap: 40px;
-
-        .rightNotificationContent {
+        .rightNotificationWrap{
+          width: 50%;
           display: flex;
-          width: 100%;
-          align-items: flex-start;
-          column-gap: 20px;
+          flex-direction: column;
+          row-gap: 40px;
 
-          .rightformcontent {
-            margin-top: -5px;
+          .rightNotificationContent{
+            display: flex;
+            align-items: flex-start;
+            column-gap: 20px;
             width: 100%;
+
+            .rightformcontent{
+              margin-top: -5px;
+              width: 100%;
+            }
+            p{
+              width: 100% !important;
+            }
           }
+          
         }
       }
-    }
+      .bottomnotificationsection{
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        width: 100%;
 
-    .empbuttonWrapper {
-      width: 100%;
-      display: flex;
-      column-gap: 10px;
-      justify-content: right;
+        .leftNotificationWrap{
+          width: 40%;
+          display: flex;
+          flex-direction: column;
+          row-gap: 4px;
+
+          h2{
+            color: black;
+            padding: 0px;
+            font-size: 30px;
+            margin: 0px;
+            font-weight: 500;
+          }
+        }
+
+        .rightNotificationWrap{
+          width: 50%;
+          display: flex;
+          flex-direction: column;
+          row-gap: 40px;
+
+          .rightNotificationContent{
+            display: flex;
+            width: 100%;
+            align-items: flex-start;
+            column-gap: 20px;
+
+            .rightformcontent{
+              margin-top: -5px;
+              width: 100%;
+            }
+          }
+          
+        }
+      }
+
+      .empbuttonWrapper{
+        width: 100%;
+        display: flex;
+        column-gap: 10px;
+        justify-content: right;
+      }
     }
-  }
 }
-.hide {
+.hide{
   display: none;
 }
-.modalCongrats {
-  width: 400px;
-  height: fit-content;
-  background-color: white;
-  padding: 60px 20px;
-  padding-top: 80px;
-  border-radius: 15px;
-  display: flex;
-  row-gap: 30px;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-
-  h3 {
-    color: black;
-    text-align: center;
-    padding: 0px 60px;
-    margin: 0px;
-  }
-
-  .closeverifying {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    padding: 2px 12px;
-    padding-bottom: 5px;
-    display: grid;
-    font-size: 20px;
-    place-items: center;
-    background-color: rgb(199, 199, 199);
-    border-radius: 100%;
-    cursor: pointer;
-  }
-  .closeverifying:hover {
-    color: red;
-  }
-}
-.twoStepModalWrapper {
-  margin-top: 80px;
-  margin-left: 250px;
-  width: 86vw;
-  height: 90vh;
-  background-color: rgba(144, 144, 144, 0.458);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-  top: 10px;
-  left: 0px;
-  z-index: 3;
-
-  .twoStepModal {
+.modalCongrats{
     width: 400px;
     height: fit-content;
     background-color: white;
@@ -419,14 +365,14 @@
     align-items: center;
     position: relative;
 
-    h2 {
-      padding: 0px;
-      margin: 0px;
+    h3{
       color: black;
-      font-weight: 500;
+      text-align: center;
+      padding: 0px 60px;
+      margin: 0px;
     }
 
-    .closeverifying {
+    .closeverifying{
       position: absolute;
       top: 20px;
       right: 20px;
@@ -439,18 +385,71 @@
       border-radius: 100%;
       cursor: pointer;
     }
-    .closeverifying:hover {
+    .closeverifying:hover{
+      color: red;
+    }
+}
+.twoStepModalWrapper{
+  margin-top: 80px;
+  margin-left: 250px;
+  width: 86vw;
+  height: 90vh;
+  background-color: rgba(144, 144, 144, 0.458);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 10px;
+  left: 0px;
+  z-index: 3;
+  
+  .twoStepModal{
+    width: 400px;
+    height: fit-content;
+    background-color: white;
+    padding: 60px 20px;
+    padding-top: 80px;
+    border-radius: 15px;
+    display: flex;
+    row-gap: 30px;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+
+    
+
+    h2{
+      padding: 0px;
+      margin: 0px;
+      color: black;
+      font-weight: 500;
+    }
+
+    .closeverifying{
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      padding: 2px 12px;
+      padding-bottom: 5px;
+      display: grid;
+      font-size: 20px;
+      place-items: center;
+      background-color: rgb(199, 199, 199);
+      border-radius: 100%;
+      cursor: pointer;
+    }
+    .closeverifying:hover{
       color: red;
     }
 
-    .verificationType {
+    .verificationType{
       display: flex;
       flex-direction: column;
       width: 100%;
       row-gap: 10px;
       align-items: center;
 
-      .inputWrapper {
+      .inputWrapper{
         padding: 10px 10px;
         border: 1px solid rgb(209, 209, 209);
         border-radius: 10px;
@@ -458,17 +457,17 @@
         width: 100%;
         cursor: pointer;
 
-        input[type='radio'] {
+        input[type=radio] {
           accent-color: gray;
         }
 
-        p {
+        p{
           margin-left: 40%;
         }
       }
     }
 
-    .otpCode {
+    .otpCode{
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -484,25 +483,25 @@
         border-radius: 5px;
         color: black !important;
       }
-
+    
       input:focus {
         outline: none;
         border-color: #007aff;
       }
     }
 
-    button {
+    button{
       padding: 10px 50px;
-      background-color: rgb(62, 69, 235);
+      background-color: rgb(62,69,235);
       color: white;
       border-radius: 10px;
     }
-    button:hover {
+    button:hover{
       background-color: rgb(26, 32, 209);
       cursor: pointer;
     }
   }
 }
-.verificationType .inputWrapper:hover {
+.verificationType .inputWrapper:hover{
   background-color: rgb(232, 232, 248);
 }
