@@ -70,7 +70,7 @@ const Goalstable = () => {
       </Table>
     </TableContainer>
     <p className={goalPopup ? "closeGoal" : "hide"} onClick={() => setGoalPopup(false)}>X</p>
-    {goalPopup ? <EmpGoalDetails goal={details}/> : undefined}
+    {goalPopup ? <EmpGoalDetails goal={details} /> : undefined}
   </>;
 };
 
