@@ -3,6 +3,7 @@ import Navbar from "../../components/navbar/Navbar";
 import "./wallet.scss";
 import Currentbalance from "../../components/currentbalance/Currentbalance";
 import Transactionhistory from "../../components/transactionhistory/Transactionhistory";
+import Rewards from "../../components/rewards/Rewards";
 // import Widget from "../../components/widget/Widget";
 // import Chart from "../../components/chart/Chart";
 // import Table from "../../components/table/Table";
@@ -15,9 +16,10 @@ const   Wallet = () => {
         <div className="walletContainer">
           <Currentbalance />
           <div>
-            <h1 className="transcontainer">Transaction History</h1>
+            <h1 className="transcontainer">Employee Rewards</h1>
             <div className="transactiontable">
-              <Transactionhistory />
+              {/* <Transactionhistory /> */}
+              <Rewards />
             </div>
           </div>
         </div>

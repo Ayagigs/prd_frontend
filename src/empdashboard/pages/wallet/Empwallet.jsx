@@ -3,6 +3,7 @@ import Navbar from "../../components/navbar/Navbar";
 import "./empwallet.scss";
 import Walletbalance from "../../components/currentbalance/Walletbalance";
 import History from "../../components/transactionhistory/History";
+import Currentbalance from "../../../components/currentbalance/Currentbalance";
 
 const Empwallet = () => {
     return (
@@ -10,7 +11,8 @@ const Empwallet = () => {
       <Side />
       <div className="empwalletContainer">
         <Navbar />
-        <Walletbalance />
+        {/* <Walletbalance /> */}
+        <Currentbalance/>
           <div>
             <h1 className="transcontainer">Transaction History</h1>
             <div className="transactiontable">
