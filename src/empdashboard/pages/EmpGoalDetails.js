@@ -18,6 +18,7 @@ const EmpGoalDetails = ({goal}) => {
     useEffect(() => {
         setFetching(true)
         setStatus(goal.status)
+        console.log(goal.reviews)
         const url = 'https://pms-jq9o.onrender.com/api/v1/employee/getColleagues'
         axios.get(url, {headers: {Authorization: `Bearer ${Cookies.get('EmpToken')}`}})
         .then(res => {
